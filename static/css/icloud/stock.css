@@ -294,3 +294,45 @@ tr {
     color: #0055A2;
     background-color: #f8f8f8;
 }
+/**
+* new 
+**/
+
+.first-nav {
+    border-left: 5px solid #0055a2;
+    border-left: none;
+    line-height: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.unfold .first-nav {
+    background: #eee;
+}
+.unfold .second-nav {
+    display: block;
+    background: white;
+}
+.second-nav {
+    background: white;
+    font-size: 13px;
+}
+.second-nav {
+    border-bottom: 1px solid #f1f1f1;
+}
+.second-nav li {
+    vertical-align: bottom;
+}
+.second-nav li {
+    line-height: 28px;
+    padding-left: 10px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+}
