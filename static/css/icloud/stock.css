@@ -304,8 +304,7 @@ tr {
     line-height: 30px;
     font-size: 14px;
     font-weight: bold;
-    padding-left: 10px;
-    cursor: pointer;
+    padding-left: 35px;
     border-radius: 3px;
     margin-top: 2px;
     margin-bottom: 2px;
@@ -329,8 +328,16 @@ tr {
 }
 .second-nav li {
     line-height: 28px;
-    padding-left: 10px;
-    cursor: pointer;
+    padding-left: 35px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+}
+
+.second-nav li {
+    line-height: 28px;
+    padding-left: 35px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -khtml-user-select: none;

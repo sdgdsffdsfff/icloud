@@ -1,0 +1,68 @@
+/** name*/
+
+.stockTitle {
+    margin-bottom: 5px;
+    overflow: hidden;
+    zoom: 1;
+}
+.topName {
+    height: 22px;
+}
+.stockName {
+    font-size: 20px;
+    color: #0055a2;
+    font-weight: bold;
+    float: left;
+}
+.stockOp {
+    float: right;
+    display: none;
+}
+.stockFollowRelation {
+    float: left;
+    line-height: 22px;
+    display: inline;
+    margin-right: 10px;
+}
+/** quote*/
+
+.stockQuote {
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.currentInfo {
+    float: left;
+    height: 40px;
+}
+.stockQuote strong {
+    font-size: 34px;
+    margin-right: 10px;
+}
+.stockDown,
+body.oppositeColor .stock_down td,
+body.oppositeColor span.stock_down {
+    color: #338833;
+}
+.stockInfo {
+    color: #676767;
+    font-size: 13px;
+    float: right;
+}
+.stockQuote table {
+    margin-top: 10px;
+    color: #676767;
+    width: 100%;
+    font-size: 13px;
+}
+.stockQuote table tr {
+    height: 23px;
+}
+.stockQuote td {
+    line-height: 26px;
+}
+/** chart*/
+
+.stockChart {
+    margin-bottom: 10px;
+    height: 388px;
+}
