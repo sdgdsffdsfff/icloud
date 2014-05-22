@@ -13,7 +13,6 @@ public class StockCurrentInfoHandler extends StockHandler<StockCurrentInfo> {
 			throws NoSuchFieldException, SecurityException,
 			NoSuchMethodException {
 		super(url, params);
-		// TODO Auto-generated constructor stub
 	}
 
 	public StockCurrentInfoHandler(String code, StockLocation location) {

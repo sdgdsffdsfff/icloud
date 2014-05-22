@@ -42,7 +42,6 @@ public class StockDateHistoryPaser implements
 	 * @return
 	 */
 	private StockDateHistory parser(String str, String stockCode, int stockId) {
-		// TODO Auto-generated method stub
 		if (checkIsIllega(str)) {
 			String[] tokens = str.split(",");
 			if (tokens.length == 7) {

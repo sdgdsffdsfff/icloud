@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -1647,9 +1648,12 @@ public class DateTimeUtil {
 	}
 
 	public static final int getDayOfWeek(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		return calendar.get(Calendar.DAY_OF_WEEK);
+		// Calendar calendar = Calendar.getInstance();
+		// calendar.setTime(date);
+		// return calendar.get(Calendar.DAY_OF_WEEK);
+		DateTime dateTime = new DateTime(date);
+		// System.out.println(dateTime.getDayOfWeek());
+		return dateTime.getDayOfWeek();
 	}
 
 	//
@@ -1658,6 +1662,18 @@ public class DateTimeUtil {
 	// new DateTime("2013-10-14").plusHours(23)));
 	// }
 	public static void main(String[] args) {
-		System.out.print(getDate("20MAR14", "ddMMMyy", Locale.US));
+		// System.out.print(getDate("20MAR14", "ddMMMyy", Locale.US));
+		Date date = new Date();
+		DateTime dateTime = new DateTime(date);
+		System.out.println(dateTime.getDayOfWeek());
+		System.out.println(getDayOfWeek(date));
+		date = DateUtils.addDays(date, -5);
+		int d = getDayOfWeek(date);
+		System.out.println("date = " + d);
+		if (d > 5) {
+			System.out.println(date + " " + (d - 5));
+			date = DateUtils.addDays(date, (5 - d));
+		}
+		System.out.println(getDayOfWeek(date));
 	}
 }

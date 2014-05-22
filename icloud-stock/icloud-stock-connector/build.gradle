@@ -1,12 +1,12 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
-group = 'com.icloud.stock'
-version = "1.0-SNAPSHOT"
+//group = 'com.icloud.stock'
+//version = "1.0-SNAPSHOT"
 
-jar {
- baseName =  'icloud-stock-connector'
-}
+//jar {
+// baseName =  'icloud-stock-connector'
+//}
 
 dependencies {
   compile project(':icloud-common:framework')

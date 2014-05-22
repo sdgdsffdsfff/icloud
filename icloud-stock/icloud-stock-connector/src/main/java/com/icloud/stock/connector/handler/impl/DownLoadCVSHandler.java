@@ -23,7 +23,7 @@ public class DownLoadCVSHandler extends
 		/**
 		 * 获得泛型参数类型
 		 */
-		System.out.println("此处千万不要删除哦");
+		LOGGER.info("此处千万不要删除哦");
 	}
 
 	private DownLoadCVSHandler(String url, Map<String, String> params)
@@ -55,6 +55,7 @@ public class DownLoadCVSHandler extends
 		StopWatch stopwatch = new StopWatch("获得cvs信息");
 		stopwatch.start("调用http接口");
 		Map<String, String> params = new HashMap<String, String>();
+		System.out.println(url);
 		TZHttpClient client = new TZHttpClient(url, params);
 		InputStream inputStreamCVS = client.downCVSFile();
 		stopwatch.stop();

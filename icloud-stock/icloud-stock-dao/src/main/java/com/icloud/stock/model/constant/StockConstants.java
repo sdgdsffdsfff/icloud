@@ -1,5 +1,7 @@
 package com.icloud.stock.model.constant;
 
+import com.icloud.framework.core.common.ReturnCode;
+import com.icloud.framework.core.exception.ICloudException;
 import com.icloud.framework.util.ICloudUtils;
 
 public final class StockConstants {
@@ -14,6 +16,20 @@ public final class StockConstants {
 
 		public String getLocation() {
 			return location;
+		}
+
+		public static StockLocation getStockLocation(String location) {
+			if (!ICloudUtils.isNotNull(location)) {
+				throw ICloudException.instance(
+						ReturnCode.E_STOCK_LOCATION_ERROR, "location不能为空,"
+								+ location);
+			}
+			if (location.equalsIgnoreCase(SHA.getLocation()))
+				return SHA;
+			if (location.equalsIgnoreCase(SZX.getLocation()))
+				return SZX;
+			throw ICloudException.instance(ReturnCode.E_STOCK_LOCATION_ERROR,
+					"location不全," + location);
 		}
 	}
 

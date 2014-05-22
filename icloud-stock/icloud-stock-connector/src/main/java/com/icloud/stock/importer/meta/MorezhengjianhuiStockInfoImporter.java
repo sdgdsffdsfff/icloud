@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.icloud.framework.file.TextFile;
+import com.icloud.stock.ctx.BaseServiceImporter;
 import com.icloud.stock.ctx.BeansUtil;
 import com.icloud.stock.model.Category;
 import com.icloud.stock.model.CategoryStock;

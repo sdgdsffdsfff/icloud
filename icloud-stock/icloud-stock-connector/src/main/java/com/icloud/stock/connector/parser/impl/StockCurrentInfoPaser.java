@@ -2,11 +2,9 @@ package com.icloud.stock.connector.parser.impl;
 
 import java.util.Date;
 
-import org.apache.commons.httpclient.util.DateUtil;
-
+import com.icloud.framework.util.DateUtils;
 import com.icloud.stock.connector.model.StockCurrentInfo;
 import com.icloud.stock.connector.parser.Parser;
-import com.icloud.framework.util.DateUtils;
 
 public class StockCurrentInfoPaser implements Parser<StockCurrentInfo> {
 

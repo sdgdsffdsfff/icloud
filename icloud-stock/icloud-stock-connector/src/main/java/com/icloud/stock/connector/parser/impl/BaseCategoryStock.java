@@ -4,10 +4,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.Page;
 import com.icloud.stock.http.HtmlUnit;
 
-public class baseCategoryStock {
+public class BaseCategoryStock {
 	public static void fetching() throws FailingHttpStatusCodeException,
 			MalformedURLException, IOException {
 		HtmlUnit htmlUnit = new HtmlUnit();

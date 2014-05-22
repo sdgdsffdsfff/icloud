@@ -16,12 +16,12 @@
   <property name="hbm2ddl.auto">update</property>
   <property name="jdbc.batch_size">110</property>
   <property name="connection.autocommit">true</property>
-  <mapping resource="com/icloud/stock/model/Stock.hbm.xml"/>
-  <mapping resource="com/icloud/stock/model/StockDateHistory.hbm.xml"/>
-  <mapping resource="com/icloud/stock/model/User.hbm.xml"/>
-  <mapping resource="com/icloud/stock/model/UserAccess.hbm.xml"/>
-  <mapping resource="com/icloud/stock/model/Session.hbm.xml"/>
-  <mapping resource="com/icloud/stock/model/CategoryStock.hbm.xml"/>
-  <mapping resource="com/icloud/stock/model/Category.hbm.xml"/>
+  <mapping resource="model/Stock.hbm.xml"/>
+  <mapping resource="model/StockDateHistory.hbm.xml"/>
+  <mapping resource="model/User.hbm.xml"/>
+  <mapping resource="model/UserAccess.hbm.xml"/>
+  <mapping resource="model/Session.hbm.xml"/>
+  <mapping resource="model/CategoryStock.hbm.xml"/>
+  <mapping resource="model/Category.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>
