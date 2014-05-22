@@ -29,7 +29,7 @@
         <property name="closePrice" type="java.lang.Double">
             <column name="close_price" precision="22" scale="0" />
         </property>
-        <property name="volume" type="java.lang.Integer">
+        <property name="volume" type="java.lang.Long">
             <column name="volume">
                 <comment>&#179;&#201;&#189;&#187;&#193;&#191;</comment>
             </column>

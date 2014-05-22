@@ -55,7 +55,7 @@ public class StockDateHistoryPaser implements
 				stockDateHistory.setHighPrice(Double.parseDouble(tokens[2]));
 				stockDateHistory.setLowPrice(Double.parseDouble(tokens[3]));
 				stockDateHistory.setClosePrice(Double.parseDouble(tokens[4]));
-				stockDateHistory.setVolume(Integer.parseInt(tokens[5]));
+				stockDateHistory.setVolume(Long.parseLong(tokens[5]));
 				stockDateHistory.setAdjPrice(Double.parseDouble(tokens[6]));
 				return stockDateHistory;
 			}

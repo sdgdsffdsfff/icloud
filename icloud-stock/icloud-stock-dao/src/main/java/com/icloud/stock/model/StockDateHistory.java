@@ -1,6 +1,6 @@
 package com.icloud.stock.model;
 
-// Generated 2014-5-6 20:46:25 by Hibernate Tools 3.4.0.CR1
+// Generated 2014-5-22 20:36:43 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 
@@ -17,7 +17,7 @@ public class StockDateHistory implements java.io.Serializable {
 	private Double highPrice;
 	private Double lowPrice;
 	private Double closePrice;
-	private Integer volume;
+	private Long volume;
 	private Double adjPrice;
 
 	public StockDateHistory() {
@@ -25,7 +25,7 @@ public class StockDateHistory implements java.io.Serializable {
 
 	public StockDateHistory(String stockCode, Integer stockId, Date createTime,
 			Double openPrice, Double highPrice, Double lowPrice,
-			Double closePrice, Integer volume, Double adjPrice) {
+			Double closePrice, Long volume, Double adjPrice) {
 		this.stockCode = stockCode;
 		this.stockId = stockId;
 		this.createTime = createTime;
@@ -101,11 +101,11 @@ public class StockDateHistory implements java.io.Serializable {
 		this.closePrice = closePrice;
 	}
 
-	public Integer getVolume() {
+	public Long getVolume() {
 		return this.volume;
 	}
 
-	public void setVolume(Integer volume) {
+	public void setVolume(Long volume) {
 		this.volume = volume;
 	}
 
