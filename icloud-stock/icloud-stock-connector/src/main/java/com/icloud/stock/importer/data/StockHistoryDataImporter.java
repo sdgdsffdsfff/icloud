@@ -44,6 +44,12 @@ public class StockHistoryDataImporter extends BaseServiceImporter {
 					stock.getId());
 			ArrayList<StockDateHistory> httpData = handler.getHttpData();
 			saveAllHttpData(httpData);
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else if (stockDataHistoryUpdateCriteria.getStatus() == StockDataHistoryTableStatus.UPDATE) {
 			/**
 			 * 進行更新
@@ -62,6 +68,12 @@ public class StockHistoryDataImporter extends BaseServiceImporter {
 					DateUtils.getYear(endDate));
 			ArrayList<StockDateHistory> httpData = handler.getHttpData();
 			saveAllHttpData(httpData);
+			try {
+				Thread.sleep(400);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			LOGGER.info("no update: {},{}", stock.getStockAllCode(),
 					stock.getStockName());
@@ -83,8 +95,14 @@ public class StockHistoryDataImporter extends BaseServiceImporter {
 
 	public void loadData() {
 		List<Stock> stockList = this.stockService.findAll();
-		for (Stock stock : stockList) {
-			processStockHistoryData(stock);
+		if (!ICloudUtils.isEmpty(stockList)) {
+			int size = stockList.size();
+			int count = 0;
+			for (Stock stock : stockList) {
+				processStockHistoryData(stock);
+				count++;
+				LOGGER.info("running, count={},size={}", count, size);
+			}
 		}
 		LOGGER.info("ok!");
 	}

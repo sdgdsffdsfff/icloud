@@ -11,7 +11,7 @@ apply plugin: 'eclipse'
 dependencies {
   compile project(':icloud-common:framework')
   compile project(':icloud-stock:icloud-stock-service')
-  compile project(':icloud-stock:icloud-stock-config')
+
   compile libraries.commons_lang
   compile libraries.xstream
   compile libraries.webdriver

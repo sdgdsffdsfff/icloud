@@ -10,7 +10,6 @@ jar {
 
 dependencies {
 	compile project(':icloud-stock:icloud-stock-service')
-    compile project(':icloud-stock:icloud-stock-config')
     compile project(':icloud-front:icloud-common-front')
 
 }

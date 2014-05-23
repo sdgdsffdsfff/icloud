@@ -24,7 +24,7 @@ public class DownLoadCVSHandler extends
 		/**
 		 * 获得泛型参数类型
 		 */
-		LOGGER.info("此处千万不要删除哦");
+//		LOGGER.info("此处千万不要删除哦");
 	}
 
 	private DownLoadCVSHandler(String url, Map<String, String> params)
