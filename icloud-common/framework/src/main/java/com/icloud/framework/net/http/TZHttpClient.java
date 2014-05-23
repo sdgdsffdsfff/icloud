@@ -8,6 +8,7 @@
 package com.icloud.framework.net.http;
 
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+
+import com.icloud.framework.util.ICloudUtils;
 
 public class TZHttpClient {
 
@@ -80,7 +83,7 @@ public class TZHttpClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(lvResponseString);
+//		System.out.println(lvResponseString);
 		return lvResponseString;
 	}
 
@@ -119,17 +122,22 @@ public class TZHttpClient {
 	public InputStream downCVSFile() {
 		HttpClient lvClient = new DefaultHttpClient();
 		HttpPost lvHttpPost = new HttpPost(this.url);
-		List<NameValuePair> lvParamsList = new ArrayList<NameValuePair>();
-		if (null != this.params) {
+		if (null != this.params && this.params.size() > 0) {
+			List<NameValuePair> lvParamsList = new ArrayList<NameValuePair>();
 			for (Entry<String, String> entry : this.params.entrySet()) {
 				NameValuePair tmNameValuePair = new BasicNameValuePair(
 						entry.getKey(), entry.getValue());
 				lvParamsList.add(tmNameValuePair);
 			}
+			try {
+				lvHttpPost.setEntity(new UrlEncodedFormEntity(lvParamsList,
+						HTTP.UTF_8));
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		try {
-			lvHttpPost.setEntity(new UrlEncodedFormEntity(lvParamsList,
-					HTTP.UTF_8));
 			HttpResponse response = lvClient.execute(lvHttpPost);
 			InputStream content = response.getEntity().getContent();
 			return content;

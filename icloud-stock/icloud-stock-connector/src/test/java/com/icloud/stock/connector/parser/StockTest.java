@@ -44,6 +44,23 @@ public class StockTest {
 			ArrayList<StockDateHistory> httpData = handler.getHttpData();
 			for (StockDateHistory stockDateHistory : httpData) {
 				System.out.println(stockDateHistory);
+				break;
+			}
+		}
+	}
+
+	@Test
+	public void parserStockHistoryDateHistoryInfo() {
+		String code = "000001";
+		int stock_id = 1;
+		DownLoadCVSHandler handler = null;
+		handler = new DownLoadCVSHandler(code, StockLocation.SZX, stock_id, 5,
+				22, 2014, 5, 22, 2014);
+
+		if (handler != null) {
+			ArrayList<StockDateHistory> httpData = handler.getHttpData();
+			for (StockDateHistory stockDateHistory : httpData) {
+				System.out.println(stockDateHistory);
 			}
 		}
 	}

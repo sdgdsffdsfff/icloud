@@ -17,6 +17,7 @@ public class DownLoadCVSHandler extends
 		StockHandler<ArrayList<StockDateHistory>> {
 	private String code;
 	private int stock_id;
+	private String type;
 
 	@Override
 	public void init() {
@@ -37,8 +38,15 @@ public class DownLoadCVSHandler extends
 		super(url);
 	}
 
+	/**
+	 * 所有数据
+	 *
+	 * @param code
+	 * @param location
+	 * @param stock_id
+	 */
 	public DownLoadCVSHandler(String code, StockLocation location, int stock_id) {
-		String type = "sz";
+		type = "sz";
 		if (location == StockLocation.SZX) {
 			type = "sz";
 		} else if (location == StockLocation.SHA) {
@@ -50,12 +58,30 @@ public class DownLoadCVSHandler extends
 		this.stock_id = stock_id;
 	}
 
+	/**
+	 * 某个时间段的数据
+	 *
+	 * @param code
+	 * @param location
+	 * @param stock_id
+	 */
+	public DownLoadCVSHandler(String code, StockLocation location,
+			int stock_id, int a, int b, int c, int d, int e, int f) {
+		this(code, location, stock_id);
+		a = a - 1;
+		d = d - 1;
+		this.url = "http://ichart.yahoo.com/table.csv?s=" + code + "." + type + "&a="
+				+ a + "&b=" + b + "&c=" + c + "&d=" + d + "&e=" + e + "&f=" + f
+				+ "&g=d";
+
+	}
+
 	@Override
 	public ArrayList<StockDateHistory> getHttpData() {
 		StopWatch stopwatch = new StopWatch("获得cvs信息");
 		stopwatch.start("调用http接口");
 		Map<String, String> params = new HashMap<String, String>();
-		System.out.println(url);
+		LOGGER.info(url);
 		TZHttpClient client = new TZHttpClient(url, params);
 		InputStream inputStreamCVS = client.downCVSFile();
 		stopwatch.stop();

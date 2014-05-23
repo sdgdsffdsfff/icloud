@@ -40,8 +40,10 @@ public class DateUtils {
 	}
 
 	/**
-	 * @param date 日期  format : yyyy-MM-dd
-	 * @param time 时间  format : hh:mm
+	 * @param date
+	 *            日期 format : yyyy-MM-dd
+	 * @param time
+	 *            时间 format : hh:mm
 	 * @return date
 	 */
 	public static Date getFlightDate(String date, String time) {
@@ -168,98 +170,98 @@ public class DateUtils {
 	public static SimpleDateFormat findFormat(int intFormat) {
 		String strFormat = "yyyy'??'MM'??'dd'??' H:mm:ss.S";
 		switch (intFormat) {
-			case 0: // '\0'
-				strFormat = "yyyy'??'MM'??'dd'??' H:mm:ss.S";
-				break;
+		case 0: // '\0'
+			strFormat = "yyyy'??'MM'??'dd'??' H:mm:ss.S";
+			break;
 
-			case 1: // '\001'
-				strFormat = "yyyy'-'MM'-'dd H:mm:ss.S";
-				break;
+		case 1: // '\001'
+			strFormat = "yyyy'-'MM'-'dd H:mm:ss.S";
+			break;
 
-			case 2: // '\002'
-				strFormat = "yyyy'??'MM'??'dd'??'";
-				break;
+		case 2: // '\002'
+			strFormat = "yyyy'??'MM'??'dd'??'";
+			break;
 
-			case 3: // '\003'
-				strFormat = "yyyy'-'MM'-'dd";
-				break;
+		case 3: // '\003'
+			strFormat = "yyyy'-'MM'-'dd";
+			break;
 
-			case 4: // '\004'
-				strFormat = "H:mm:ss";
-				break;
+		case 4: // '\004'
+			strFormat = "H:mm:ss";
+			break;
 
-			case 5: // '\005'
-				strFormat = "K:mm:ss a";
-				break;
+		case 5: // '\005'
+			strFormat = "K:mm:ss a";
+			break;
 
-			case 6: // '\006'
-				strFormat = "yyyy'??'MM'??'dd'??' H:mm:ss";
-				break;
+		case 6: // '\006'
+			strFormat = "yyyy'??'MM'??'dd'??' H:mm:ss";
+			break;
 
-			case 7: // '\007'
-				strFormat = "yyyy'??'MM'??'dd'??' K:mm:ss a";
-				break;
+		case 7: // '\007'
+			strFormat = "yyyy'??'MM'??'dd'??' K:mm:ss a";
+			break;
 
-			case 8: // '\b'
-				strFormat = "yyyy-MM-dd H:mm:ss";
-				break;
+		case 8: // '\b'
+			strFormat = "yyyy-MM-dd H:mm:ss";
+			break;
 
-			case 9: // '\t'
-				strFormat = "yyyy-MM-dd K:mm:ss a";
-				break;
+		case 9: // '\t'
+			strFormat = "yyyy-MM-dd K:mm:ss a";
+			break;
 
-			case 10: // '\n'
-				strFormat = "H:mm:ss.S";
-				break;
+		case 10: // '\n'
+			strFormat = "H:mm:ss.S";
+			break;
 
-			case 11: // '\013'
-				strFormat = "K:mm:ss.S a";
-				break;
+		case 11: // '\013'
+			strFormat = "K:mm:ss.S a";
+			break;
 
-			case 12: // '\f'
-				strFormat = "H:mm";
-				break;
+		case 12: // '\f'
+			strFormat = "H:mm";
+			break;
 
-			case 13: // '\r'
-				strFormat = "K:mm a";
-				break;
+		case 13: // '\r'
+			strFormat = "K:mm a";
+			break;
 
-			case 14: // '\r'
-				strFormat = "yyyy-MM-dd H:mm";
-				break;
+		case 14: // '\r'
+			strFormat = "yyyy-MM-dd H:mm";
+			break;
 
-			case 15: // '\r'
-				strFormat = "yyyyMMddHHmmssS";
-				break;
-			case 16: // '\r'
-				strFormat = "yyyyMMdd";
-				break;
+		case 15: // '\r'
+			strFormat = "yyyyMMddHHmmssS";
+			break;
+		case 16: // '\r'
+			strFormat = "yyyyMMdd";
+			break;
 
-			case 17: // '\r'
-				strFormat = "yyyy/MM/dd";
-				break;
+		case 17: // '\r'
+			strFormat = "yyyy/MM/dd";
+			break;
 
-			case 18: // '\r'
-				strFormat = "yyyy/MM/dd H:mm:ss";
-				break;
+		case 18: // '\r'
+			strFormat = "yyyy/MM/dd H:mm:ss";
+			break;
 
-			case 19: // '\r'
-				strFormat = "yyyy-MM-dd";
-				break;
-				
-			case 20:
-				strFormat= "yyyy-MM-dd HH:mm:ss";
-				break;
+		case 19: // '\r'
+			strFormat = "yyyy-MM-dd";
+			break;
 
-			default:
-				strFormat = "yyyy'??'MM'??'dd'??' H:mm:ss.S";
-				break;
+		case 20:
+			strFormat = "yyyy-MM-dd HH:mm:ss";
+			break;
+
+		default:
+			strFormat = "yyyy'??'MM'??'dd'??' H:mm:ss.S";
+			break;
 		}
 		return new SimpleDateFormat(strFormat);
 	}
 
 	public static String formatDateStr(String dateStr, int newtimestampType,
-	                                   int oldtimestampType) throws ParseException {
+			int oldtimestampType) throws ParseException {
 		Date oldDate = findFormat(oldtimestampType).parse(dateStr);
 		return format(oldDate, newtimestampType);
 	}
@@ -362,7 +364,7 @@ public class DateUtils {
 	 * @throws ParseException
 	 */
 	public static List<String> findDateScopeStandardFormat(String startTime,
-	                                                       String endTime, int divisor, String strFormat)
+			String endTime, int divisor, String strFormat)
 			throws ParseException {
 		List<String> returnValue = null;
 		if (startTime == null || startTime.length() <= 0) {
@@ -496,7 +498,8 @@ public class DateUtils {
 		return findFormat(intFormat).format(calendar.getTime());
 	}
 
-	public static Date toDate(String param, String format) throws ParseException {
+	public static Date toDate(String param, String format)
+			throws ParseException {
 		if (StringUtils.isEmpty(param)) {
 			return null;
 		}
@@ -532,7 +535,8 @@ public class DateUtils {
 		Calendar noewCal = Calendar.getInstance();
 
 		if (noewCal.before(birthDay)) {
-			throw new IllegalArgumentException("The birthDay is after Now.It's unbelievable!");
+			throw new IllegalArgumentException(
+					"The birthDay is after Now.It's unbelievable!");
 		}
 
 		int yearNow = noewCal.get(Calendar.YEAR);
@@ -560,8 +564,7 @@ public class DateUtils {
 	}
 
 	/**
-	 * 根据日期计算星期
-	 * 1->周日, 2->周一
+	 * 根据日期计算星期 1->周日, 2->周一
 	 *
 	 * @param date
 	 * @return
@@ -573,27 +576,72 @@ public class DateUtils {
 		weekIndex = calendar.get(Calendar.DAY_OF_WEEK);
 		return weekIndex;
 	}
-	
+
+	public static int getValueByParamater(Date date, int param) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		return calendar.get(param);
+	}
+
 	/**
-	 * 获取中文大写星期  DAY OF WEEK
+	 * 获得年
+	 *
 	 * @param date
 	 * @return
 	 */
-	public static String getDayOfWeek(Date date){
-		Calendar  cal = Calendar.getInstance();
+	public static int getYear(Date date) {
+		return getValueByParamater(date, Calendar.YEAR);
+	}
+
+	/**
+	 * 获得月份
+	 *
+	 * @param date
+	 * @return
+	 */
+	public static int getMonth(Date date) {
+		return getValueByParamater(date, Calendar.MONTH) + 1;
+	}
+
+	/**
+	 * 获得日
+	 *
+	 * @param date
+	 * @return
+	 */
+	public static int getDay(Date date) {
+		return getValueByParamater(date, Calendar.DATE);
+	}
+
+	/**
+	 * 获取中文大写星期 DAY OF WEEK
+	 *
+	 * @param date
+	 * @return
+	 */
+	public static String getDayOfWeek(Date date) {
+		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		String[] weekDays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+		String[] weekDays = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
 		return weekDays[cal.get(Calendar.DAY_OF_WEEK)];
 	}
-	
+
 	/**
-	 * 获取中文大写星期  DAY OF WEEK
+	 * 获取中文大写星期 DAY OF WEEK
+	 *
 	 * @param cal
 	 * @return
 	 */
-	public static String getDayOfWeek(Calendar cal){
-		String[] weekDays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
-		return weekDays[cal.get(Calendar.DAY_OF_WEEK)-1];
+	public static String getDayOfWeek(Calendar cal) {
+		String[] weekDays = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+		return weekDays[cal.get(Calendar.DAY_OF_WEEK) - 1];
+	}
+
+	public static void main(String[] args) {
+		Date date = new Date();
+		System.out.println("year = " + getYear(date));
+		System.out.println("month = " + getMonth(date));
+		System.out.println("day = " + getDay(date));
 	}
 
 }

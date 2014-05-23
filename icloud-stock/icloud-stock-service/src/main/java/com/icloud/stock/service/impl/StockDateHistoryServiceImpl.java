@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.springframework.stereotype.Service;
 
 import com.icloud.framework.core.common.ReturnCode;
@@ -11,8 +12,9 @@ import com.icloud.framework.core.exception.ICloudException;
 import com.icloud.framework.core.time.DateTimeUtil;
 import com.icloud.framework.dao.hibernate.IHibernateBaseDao;
 import com.icloud.framework.service.impl.SqlBaseService;
-import com.icloud.framework.util.DateUtils;
 import com.icloud.framework.util.ICloudUtils;
+import com.icloud.front.stock.entity.StockDataHistoryUpdateCriteria;
+import com.icloud.front.stock.entity.StockUpdateOperation.StockDataHistoryTableStatus;
 import com.icloud.stock.dao.IStockDateHistoryDao;
 import com.icloud.stock.model.StockDateHistory;
 import com.icloud.stock.service.IStockDateHistoryService;
@@ -37,17 +39,24 @@ public class StockDateHistoryServiceImpl extends
 	}
 
 	@Override
-	public boolean isUpdateNowInChinaStock(Integer id) {
+	public StockDataHistoryUpdateCriteria getChinaStockDataHistoryTableStatus(
+			Integer id) {
 		if (!ICloudUtils.isNotNull(id)) {
 			throw ICloudException.instance(ReturnCode.E_IS_NULL);
 		}
-		Date date = getMaxUpdateTime(id);
-		if (date == null)
-			return true;
+		Date startdate = getMaxUpdateTime(id);
+		if (startdate == null) {
+			return new StockDataHistoryUpdateCriteria(null, null,
+					StockDataHistoryTableStatus.NO);
+		}
+		Date endDate = ChinaStockUtil.getLastWorkDate(new Date());
 
-		Date lastWorkDate = ChinaStockUtil.getLastWorkDate(new Date());
-
-		return !DateTimeUtil.isSameDay(date, lastWorkDate);
+		if (DateTimeUtil.isSameDay(startdate, endDate)) {
+			return new StockDataHistoryUpdateCriteria(null, null,
+					StockDataHistoryTableStatus.OK);
+		}
+		return new StockDataHistoryUpdateCriteria(DateUtils.addDays(startdate,
+				1), endDate, StockDataHistoryTableStatus.UPDATE);
 	}
 
 	@Override
