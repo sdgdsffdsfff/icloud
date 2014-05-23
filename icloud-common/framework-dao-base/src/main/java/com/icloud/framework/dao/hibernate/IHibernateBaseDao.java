@@ -33,4 +33,6 @@ public interface IHibernateBaseDao<T> {
 	public List<T> findAll(int start, int limit);
 
 	public List<T> findByProperty(String hql, int start, int limit);
+
+	public List<T> findByProperty(String hql);
 }

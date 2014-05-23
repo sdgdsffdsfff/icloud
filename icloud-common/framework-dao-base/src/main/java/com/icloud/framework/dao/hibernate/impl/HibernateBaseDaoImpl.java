@@ -128,4 +128,10 @@ public class HibernateBaseDaoImpl<T> extends HibernateDaoSupport implements
 		String queryString = "from " + domainClass.getName() + " as model";
 		return findByProperty(queryString, start, limit);
 	}
+
+	@Override
+	public List<T> findByProperty(String hql) {
+		// TODO Auto-generated method stub
+		return getHibernateTemplate().find(hql);
+	}
 }

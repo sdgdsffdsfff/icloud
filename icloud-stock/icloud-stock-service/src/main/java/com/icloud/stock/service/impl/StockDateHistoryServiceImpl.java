@@ -1,6 +1,7 @@
 package com.icloud.stock.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -62,6 +63,21 @@ public class StockDateHistoryServiceImpl extends
 	@Override
 	public void deleteByStockId(Integer id) {
 		this.stockHistoryDao.deleteByStockId(id);
+	}
+
+	@Override
+	public List<StockDateHistory> findByStockId(Integer id) {
+		return this.stockHistoryDao.findByStockId(id);
+	}
+
+	@Override
+	public int countByStockId(Integer id) {
+		return (int) this.stockHistoryDao.countByProperty("stockId", id);
+	}
+
+	@Override
+	public List<StockDateHistory> findByStockId(Integer id, int start, int limit) {
+		return this.stockHistoryDao.findByStockId(id, start, limit);
 	}
 
 }

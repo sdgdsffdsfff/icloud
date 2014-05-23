@@ -110,6 +110,5 @@ public class StockHistoryDataImporter extends BaseServiceImporter {
 	public static void main(String[] args) {
 		StockHistoryDataImporter importer = new StockHistoryDataImporter();
 		importer.loadData();
-
 	}
 }

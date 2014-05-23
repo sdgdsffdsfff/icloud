@@ -48,4 +48,17 @@ public class StockDateHistoryDaoImpl extends StockBaseDaoImpl<StockDateHistory>
 				});
 	}
 
+	@Override
+	public List<StockDateHistory> findByStockId(Integer id) {
+		String hql = "from " + domainClass.getName()
+				+ " where stockId = " + id + " order by createTime desc";
+		return this.findByProperty(hql);
+	}
+
+	@Override
+	public List<StockDateHistory> findByStockId(Integer id, int start, int limit) {
+		String hql = "from " + domainClass.getName()
+				+ " where stockId = " + id + " order by createTime desc";
+		return this.findByProperty(hql, start, limit);
+	}
 }
