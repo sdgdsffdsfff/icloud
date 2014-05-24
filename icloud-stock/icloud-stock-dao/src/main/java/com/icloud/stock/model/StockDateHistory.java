@@ -1,6 +1,6 @@
 package com.icloud.stock.model;
 
-// Generated 2014-5-22 20:36:43 by Hibernate Tools 3.4.0.CR1
+// Generated 2014-5-24 17:00:25 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 
@@ -115,15 +115,6 @@ public class StockDateHistory implements java.io.Serializable {
 
 	public void setAdjPrice(Double adjPrice) {
 		this.adjPrice = adjPrice;
-	}
-
-	@Override
-	public String toString() {
-		return "StockDateHistory [id=" + id + ", stockCode=" + stockCode
-				+ ", stockId=" + stockId + ", createTime=" + createTime
-				+ ", openPrice=" + openPrice + ", highPrice=" + highPrice
-				+ ", lowPrice=" + lowPrice + ", closePrice=" + closePrice
-				+ ", volume=" + volume + ", adjPrice=" + adjPrice + "]";
 	}
 
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2014-5-6 20:46:25 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2014-5-24 17:00:26 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.icloud.stock.model.Stock" table="stock" catalog="icloud">
         <id name="id" type="java.lang.Integer">
@@ -28,6 +28,81 @@
         </property>
         <property name="stockAllCode" type="string">
             <column name="stock_all_code" length="500" />
+        </property>
+        <property name="currentPrice" type="java.lang.Double">
+            <column name="current_price" precision="22" scale="0">
+                <comment>&#181;&#177;&#199;&#176;&#188;&#219;</comment>
+            </column>
+        </property>
+        <property name="chg" type="java.lang.Double">
+            <column name="chg" precision="22" scale="0">
+                <comment>&#213;&#199;&#181;&#248;&#182;&#238;</comment>
+            </column>
+        </property>
+        <property name="percent" type="java.lang.Double">
+            <column name="percent" precision="22" scale="0">
+                <comment>&#213;&#199;&#181;&#248;&#183;&#249;</comment>
+            </column>
+        </property>
+        <property name="lastClose" type="java.lang.Double">
+            <column name="last_close" precision="22" scale="0">
+                <comment>&#201;&#207;&#184;&#246;&#189;&#187;&#210;&#215;&#177;&#213;&#188;&#219;</comment>
+            </column>
+        </property>
+        <property name="open" type="java.lang.Double">
+            <column name="open" precision="22" scale="0">
+                <comment>&#201;&#207;&#184;&#246;&#189;&#187;&#210;&#215;&#200;&#213;&#191;&#170;&#188;&#219;</comment>
+            </column>
+        </property>
+        <property name="high" type="java.lang.Double">
+            <column name="high" precision="22" scale="0">
+                <comment>&#181;&#177;&#200;&#213;&#215;&#238;&#184;&#223;&#188;&#219;</comment>
+            </column>
+        </property>
+        <property name="low" type="java.lang.Double">
+            <column name="low" precision="22" scale="0">
+                <comment>&#181;&#177;&#200;&#213;&#215;&#238;&#181;&#205;&#188;&#219;</comment>
+            </column>
+        </property>
+        <property name="volume" type="java.lang.Double">
+            <column name="volume" precision="22" scale="0">
+                <comment>&#179;&#201;&#189;&#187;&#193;&#191;</comment>
+            </column>
+        </property>
+        <property name="high52w" type="java.lang.Double">
+            <column name="high52w" precision="22" scale="0">
+                <comment>52&#214;&#220;&#215;&#238;&#184;&#223;</comment>
+            </column>
+        </property>
+        <property name="low52w" type="java.lang.Double">
+            <column name="low52w" precision="22" scale="0">
+                <comment>52&#214;&#220;&#215;&#238;&#181;&#205;</comment>
+            </column>
+        </property>
+        <property name="amount" type="java.lang.Double">
+            <column name="amount" precision="22" scale="0">
+                <comment>&#179;&#201;&#189;&#187;&#182;&#238;</comment>
+            </column>
+        </property>
+        <property name="preLow" type="java.lang.Double">
+            <column name="pre_low" precision="22" scale="0">
+                <comment>&#212;&#164;&#178;&#226;&#215;&#238;&#181;&#205;</comment>
+            </column>
+        </property>
+        <property name="preHigh" type="java.lang.Double">
+            <column name="pre_high" precision="22" scale="0">
+                <comment>&#212;&#164;&#178;&#226;&#215;&#238;&#184;&#223;</comment>
+            </column>
+        </property>
+        <property name="prePercent" type="java.lang.Integer">
+            <column name="pre_percent">
+                <comment>&#178;&#168;&#182;&#175;&#177;&#200;&#192;&#253;</comment>
+            </column>
+        </property>
+        <property name="preCare" type="java.lang.Integer">
+            <column name="pre_care">
+                <comment>&#212;&#164;&#178;&#226;&#185;&#216;&#215;&#162;&#182;&#200;</comment>
+            </column>
         </property>
         <set name="categoryStocks" table="category_stock" inverse="true" lazy="true" fetch="select">
             <key>

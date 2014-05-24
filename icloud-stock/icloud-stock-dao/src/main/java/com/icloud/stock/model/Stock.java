@@ -1,6 +1,6 @@
 package com.icloud.stock.model;
 
-// Generated 2014-5-22 20:36:43 by Hibernate Tools 3.4.0.CR1
+// Generated 2014-5-24 17:00:25 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -19,6 +19,21 @@ public class Stock implements java.io.Serializable {
 	private String stockLocation;
 	private String descrition;
 	private String stockAllCode;
+	private Double currentPrice;
+	private Double chg;
+	private Double percent;
+	private Double lastClose;
+	private Double open;
+	private Double high;
+	private Double low;
+	private Double volume;
+	private Double high52w;
+	private Double low52w;
+	private Double amount;
+	private Double preLow;
+	private Double preHigh;
+	private Integer prePercent;
+	private Integer preCare;
 	private Set categoryStocks = new HashSet(0);
 
 	public Stock() {
@@ -30,7 +45,11 @@ public class Stock implements java.io.Serializable {
 
 	public Stock(String stockName, String stockCode, Date createTime,
 			Date updateTime, String stockLocation, String descrition,
-			String stockAllCode, Set categoryStocks) {
+			String stockAllCode, Double currentPrice, Double chg,
+			Double percent, Double lastClose, Double open, Double high,
+			Double low, Double volume, Double high52w, Double low52w,
+			Double amount, Double preLow, Double preHigh, Integer prePercent,
+			Integer preCare, Set categoryStocks) {
 		this.stockName = stockName;
 		this.stockCode = stockCode;
 		this.createTime = createTime;
@@ -38,6 +57,21 @@ public class Stock implements java.io.Serializable {
 		this.stockLocation = stockLocation;
 		this.descrition = descrition;
 		this.stockAllCode = stockAllCode;
+		this.currentPrice = currentPrice;
+		this.chg = chg;
+		this.percent = percent;
+		this.lastClose = lastClose;
+		this.open = open;
+		this.high = high;
+		this.low = low;
+		this.volume = volume;
+		this.high52w = high52w;
+		this.low52w = low52w;
+		this.amount = amount;
+		this.preLow = preLow;
+		this.preHigh = preHigh;
+		this.prePercent = prePercent;
+		this.preCare = preCare;
 		this.categoryStocks = categoryStocks;
 	}
 
@@ -103,6 +137,126 @@ public class Stock implements java.io.Serializable {
 
 	public void setStockAllCode(String stockAllCode) {
 		this.stockAllCode = stockAllCode;
+	}
+
+	public Double getCurrentPrice() {
+		return this.currentPrice;
+	}
+
+	public void setCurrentPrice(Double currentPrice) {
+		this.currentPrice = currentPrice;
+	}
+
+	public Double getChg() {
+		return this.chg;
+	}
+
+	public void setChg(Double chg) {
+		this.chg = chg;
+	}
+
+	public Double getPercent() {
+		return this.percent;
+	}
+
+	public void setPercent(Double percent) {
+		this.percent = percent;
+	}
+
+	public Double getLastClose() {
+		return this.lastClose;
+	}
+
+	public void setLastClose(Double lastClose) {
+		this.lastClose = lastClose;
+	}
+
+	public Double getOpen() {
+		return this.open;
+	}
+
+	public void setOpen(Double open) {
+		this.open = open;
+	}
+
+	public Double getHigh() {
+		return this.high;
+	}
+
+	public void setHigh(Double high) {
+		this.high = high;
+	}
+
+	public Double getLow() {
+		return this.low;
+	}
+
+	public void setLow(Double low) {
+		this.low = low;
+	}
+
+	public Double getVolume() {
+		return this.volume;
+	}
+
+	public void setVolume(Double volume) {
+		this.volume = volume;
+	}
+
+	public Double getHigh52w() {
+		return this.high52w;
+	}
+
+	public void setHigh52w(Double high52w) {
+		this.high52w = high52w;
+	}
+
+	public Double getLow52w() {
+		return this.low52w;
+	}
+
+	public void setLow52w(Double low52w) {
+		this.low52w = low52w;
+	}
+
+	public Double getAmount() {
+		return this.amount;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
+	public Double getPreLow() {
+		return this.preLow;
+	}
+
+	public void setPreLow(Double preLow) {
+		this.preLow = preLow;
+	}
+
+	public Double getPreHigh() {
+		return this.preHigh;
+	}
+
+	public void setPreHigh(Double preHigh) {
+		this.preHigh = preHigh;
+	}
+
+	public Integer getPrePercent() {
+		return this.prePercent;
+	}
+
+	public void setPrePercent(Integer prePercent) {
+		this.prePercent = prePercent;
+	}
+
+	public Integer getPreCare() {
+		return this.preCare;
+	}
+
+	public void setPreCare(Integer preCare) {
+		this.preCare = preCare;
 	}
 
 	public Set getCategoryStocks() {
