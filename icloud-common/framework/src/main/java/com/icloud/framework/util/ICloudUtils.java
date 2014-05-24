@@ -32,4 +32,11 @@ public class ICloudUtils {
 		return object == null ? false : true;
 	}
 
+	public static boolean isNotNull(Object[] objects) {
+		if (objects == null || objects.length == 0)
+			return false;
+		return true;
+
+	}
+
 }

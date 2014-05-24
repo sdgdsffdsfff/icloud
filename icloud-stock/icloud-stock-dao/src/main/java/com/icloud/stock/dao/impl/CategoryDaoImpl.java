@@ -15,12 +15,20 @@ public class CategoryDaoImpl extends StockBaseDaoImpl<Category> implements
 
 	@Override
 	public Category getCategory(String categoryName, String type) {
-		// TODO Auto-generated method stub
-		List<Category> list = getHibernateTemplate()
-				.find("from "
-						+ domainClass.getName()
-						+ " as model where model.categoryName = ? and model.categoryCategoryType= ? ",
-						categoryName, type);
+		// List<Category> list = getHibernateTemplate()
+		// .find("from "
+		// + domainClass.getName()
+		// +
+		// " as model where model.categoryName = ? and model.categoryCategoryType= ? ",
+		// categoryName, type);
+		// .find("from "
+		// + domainClass.getName()
+		// +
+		// " as model where model.categoryName = ? and model.categoryCategoryType= ? ",
+		// categoryName, type);
+		String params[] = { "categoryName", "categoryCategoryType" };
+		String values[] = { categoryName, type };
+		List<Category> list = this.findByProperty(params, values, null, false);
 		if (ICloudUtils.isEmpty(list)) {
 			return null;
 		}

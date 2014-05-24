@@ -25,14 +25,26 @@ public interface IHibernateBaseDao<T> {
 
 	public long countByProperty(String paramname, Object value);
 
+	public List<T> findByProperty(String hql, Object[] values);
+
 	public List<T> findByProperty(String paramName, Object value);
 
 	public List<T> findByProperty(String paramName, Object value, int start,
 			int limit);
+
+	public List<T> findByProperty(String[] paramNames, Object[] values,
+			String sortParam, boolean isAsc, int start, int limit);
+
+	public List<T> findByProperty(String[] paramNames, Object[] values,
+			String sortParam, boolean isAsc);
+
+	public long countByProperty(String[] paramNames, Object[] values);
 
 	public List<T> findAll(int start, int limit);
 
 	public List<T> findByProperty(String hql, int start, int limit);
 
 	public List<T> findByProperty(String hql);
+
+	public void deleteByProperty(String param, Object value);
 }

@@ -131,7 +131,84 @@ public class HibernateBaseDaoImpl<T> extends HibernateDaoSupport implements
 
 	@Override
 	public List<T> findByProperty(String hql) {
-		// TODO Auto-generated method stub
 		return getHibernateTemplate().find(hql);
+	}
+
+	@Override
+	public List<T> findByProperty(String hql, Object[] values) {
+		return getHibernateTemplate().find(hql, values);
+	}
+
+	private String buildQuery(String[] paramNames, Object[] values,
+			String sortParam, boolean isAsc) {
+		if (ICloudUtils.isNotNull(paramNames) && ICloudUtils.isNotNull(values)
+				&& paramNames.length == values.length) {
+			StringBuffer sb = new StringBuffer();
+			sb.append("from " + domainClass.getName() + " as model where ");
+
+			int len = paramNames.length;
+			for (int i = 0; i < len; i++) {
+				sb.append("model." + paramNames[i] + "= ? ");
+				if (i != (len - 1)) {
+					sb.append(" and ");
+				}
+			}
+
+			if (ICloudUtils.isNotNull(sortParam)) {
+				String asc = "asc";
+				if (!isAsc) {
+					asc = "desc";
+				}
+				sb.append(" order by " + sortParam + " " + asc);
+			}
+			return sb.toString();
+		}
+		return null;
+	}
+
+	@Override
+	public List<T> findByProperty(String[] paramNames, Object[] values,
+			String sortParam, boolean isAsc, int start, int limit) {
+		String queryString = buildQuery(paramNames, values, sortParam, isAsc);
+		if (ICloudUtils.isNotNull(queryString)) {
+			return findByProperty(queryString, start, limit);
+		}
+		return null;
+	}
+
+	@Override
+	public List<T> findByProperty(String[] paramNames, Object[] values,
+			String sortParam, boolean isAsc) {
+		String queryString = buildQuery(paramNames, values, sortParam, isAsc);
+		if (ICloudUtils.isNotNull(queryString)) {
+			return findByProperty(queryString, values);
+		}
+		return null;
+	}
+
+	@Override
+	public long countByProperty(String[] paramNames, Object[] values) {
+		String queryString = buildQuery(paramNames, values, null, false);
+		if (ICloudUtils.isNotNull(queryString)) {
+			queryString = "select count(*) " + queryString;
+			return count(queryString);
+		}
+		return 0;
+	}
+
+	@Override
+	public void deleteByProperty(final String param, final Object value) {
+
+		getHibernateTemplate().execute(new HibernateCallback<T>() {
+			@Override
+			public T doInHibernate(Session session) throws HibernateException,
+					SQLException {
+				String hqlDelete = "delete " + domainClass.getName()
+						+ " where param = " + value;
+
+				session.createQuery(hqlDelete).executeUpdate();
+				return null;
+			}
+		});
 	}
 }

@@ -13,10 +13,10 @@ public class StockAnalysis extends BaseServiceImporter {
 		if (age <= 0) {
 			return;
 		}
-
 		List<StockDateHistory> list = this.stockDateHistoryService
 				.findByStockId(stock.getId(), 0, 100);
 
+//		this.stockService.update(stock);
 	}
 
 	/**

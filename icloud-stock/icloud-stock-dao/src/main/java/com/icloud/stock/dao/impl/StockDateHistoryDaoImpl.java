@@ -1,12 +1,8 @@
 package com.icloud.stock.dao.impl;
 
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.stereotype.Repository;
 
 import com.icloud.dao.impl.StockBaseDaoImpl;
@@ -33,32 +29,42 @@ public class StockDateHistoryDaoImpl extends StockBaseDaoImpl<StockDateHistory>
 
 	@Override
 	public void deleteByStockId(final Integer id) {
-		getHibernateTemplate().execute(
-				new HibernateCallback<StockDateHistory>() {
-					@Override
-					public StockDateHistory doInHibernate(Session session)
-							throws HibernateException, SQLException {
-						// TODO Auto-generated method stub
-						String hqlDelete = "delete " + domainClass.getName()
-								+ " where stockId = " + id;
-						session.createQuery(hqlDelete).executeUpdate();
-						return null;
-					}
-
-				});
+		this.deleteByProperty("stockId", id);
+//		getHibernateTemplate().execute(
+//				new HibernateCallback<StockDateHistory>() {
+//					@Override
+//					public StockDateHistory doInHibernate(Session session)
+//							throws HibernateException, SQLException {
+//						// TODO Auto-generated method stub
+//						String hqlDelete = "delete " + domainClass.getName()
+//								+ " where stockId = " + id;
+//						session.createQuery(hqlDelete).executeUpdate();
+//						return null;
+//					}
+//
+//				});
 	}
 
 	@Override
 	public List<StockDateHistory> findByStockId(Integer id) {
-		String hql = "from " + domainClass.getName()
-				+ " where stockId = " + id + " order by createTime desc";
-		return this.findByProperty(hql);
+		// String hql = "from " + domainClass.getName() + " where stockId = " +
+		// id
+		// + " order by createTime desc";
+		String[] params = { "stockId" };
+		Integer[] values = { id };
+		// return this.findByProperty(hql);
+		return this.findByProperty(params, values, "createTime", false);
 	}
 
 	@Override
 	public List<StockDateHistory> findByStockId(Integer id, int start, int limit) {
-		String hql = "from " + domainClass.getName()
-				+ " where stockId = " + id + " order by createTime desc";
-		return this.findByProperty(hql, start, limit);
+		// String hql = "from " + domainClass.getName() + " where stockId = " +
+		// id
+		// + " order by createTime desc";
+		String[] params = { "stockId" };
+		Integer[] values = { id };
+		return this.findByProperty(params, values, "createTime", false, start,
+				limit);
+		// return this.findByProperty(hql, start, limit);
 	}
 }

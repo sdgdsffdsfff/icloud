@@ -24,22 +24,4 @@ public class StockServiceImpl extends SqlBaseService<Stock> implements
 		// TODO Auto-generated method stub
 		return stockDao;
 	}
-
-	@Override
-	public void saveAll(List<Stock> list) {
-		// TODO Auto-generated method stub
-		if (list != null) {
-			int i = 0;
-			for (Stock stock : list) {
-				// this.stockDao.save(stock);
-				this.save(stock);
-				System.out.println("ok...." + stock.getId());
-				i++;
-				if (i > 1) {
-					int j = 0;
-					j = 3 / j;
-				}
-			}
-		}
-	}
 }
