@@ -7,12 +7,7 @@
 	http://www.springframework.org/schema/context				http://www.springframework.org/schema/context/spring-context-3.1.xsd
 	http://www.springframework.org/schema/mvc					http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd"
 	default-autowire="byName" default-lazy-init="true">
-
 	<import
-		resource="classpath*:/spring/applicationContext-stock-dao-component-scan.xml" />
-	<import resource="classpath*:/spring/applicationContext-stock-dao.xml" />
-	<import
-		resource="classpath*:/spring/applicationContext-stock-service-component-scan.xml" />
-	<import
-		resource="classpath*:/spring/applicationContext-stock-service-transaction.xml" />
+		resource="classpath*:/spring/icloud-stock-dao-component-scan.xml" />
+	<import resource="classpath*:/spring/icloud-stock-dao-placeholder.xml" />
 </beans>

@@ -23,20 +23,20 @@ public class StockServiceTest {
 	@Resource(name = "personService")
 	private PersonService personService;
 
-	@Test
-	public void updateStockTest() {
-		List<Stock> list = stockService.findAll();
-		if (list != null) {
-			Stock stock = list.get(0);
-			System.out.println(stock.getStockCode() + stock.getStockName());
-			stock.setStockCode("44444");
-			stockService.update(stock);
-
-			Stock stock2 = stockService.getById(stock.getId());
-			// System.out.println(stock2.getId());
-			System.out.println(stock2.getStockCode() + stock2.getStockName());
-		}
-	}
+//	@Test
+//	public void updateStockTest() {
+//		List<Stock> list = stockService.findAll();
+//		if (list != null) {
+//			Stock stock = list.get(0);
+//			System.out.println(stock.getStockCode() + stock.getStockName());
+//			stock.setStockCode("44444");
+//			stockService.update(stock);
+//
+//			Stock stock2 = stockService.getById(stock.getId());
+//			// System.out.println(stock2.getId());
+//			System.out.println(stock2.getStockCode() + stock2.getStockName());
+//		}
+//	}
 
 	@Test
 	public void testJoinCut() {

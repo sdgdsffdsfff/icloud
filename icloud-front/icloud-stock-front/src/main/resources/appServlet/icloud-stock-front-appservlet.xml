@@ -6,6 +6,6 @@
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
 	">
-	<import resource="classpath*:appServlet/applicationContext-config.xml" />
-	<import resource="classpath*:spring/applicationContext-icloud-action.xml" />
+	<import resource="classpath*:appServlet/icloud-common-front-config.xml" />
+	<import resource="classpath*:spring/icloud-stock-front-action.xml" />
 </beans>

@@ -13,7 +13,7 @@ public class BeansUtil {
 
 	static {
 		app = new ClassPathXmlApplicationContext(
-				"spring/applicationContext-stock.xml");
+				"spring/icloud-stock-service-ctx-min.xml");
 
 	}
 

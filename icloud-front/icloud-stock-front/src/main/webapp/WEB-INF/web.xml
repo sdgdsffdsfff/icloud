@@ -9,8 +9,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-		    classpath*:spring/applicationContext-stock.xml
-		    classpath*:spring/applicationContext-icloud-security.xml
+		    classpath*:spring/icloud-stock-service-ctx-min.xml
 		</param-value>
 	</context-param>
 
@@ -82,7 +81,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath*:appServlet/applicationContext-icloud-front.xml</param-value>
+			<param-value>classpath*:appServlet/icloud-stock-front-appservlet.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
