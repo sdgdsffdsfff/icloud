@@ -22,10 +22,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-
-import com.icloud.framework.util.ICloudUtils;
 
 public class TZHttpClient {
 
@@ -83,7 +82,7 @@ public class TZHttpClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		System.out.println(lvResponseString);
+		// System.out.println(lvResponseString);
 		return lvResponseString;
 	}
 
@@ -121,6 +120,11 @@ public class TZHttpClient {
 
 	public InputStream downCVSFile() {
 		HttpClient lvClient = new DefaultHttpClient();
+		lvClient.getParams().setParameter(
+				CoreConnectionPNames.CONNECTION_TIMEOUT, 15000);
+		lvClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT,
+				15000);
+
 		HttpPost lvHttpPost = new HttpPost(this.url);
 		if (null != this.params && this.params.size() > 0) {
 			List<NameValuePair> lvParamsList = new ArrayList<NameValuePair>();

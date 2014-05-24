@@ -36,20 +36,20 @@ public class StockHistoryDataImporter extends BaseServiceImporter {
 			/**
 			 * 進行爬取
 			 */
-			LOGGER.info("fetch data {},{}", stock.getStockAllCode(),
-					stock.getStockName());
-			DownLoadCVSHandler handler = null;
-			handler = new DownLoadCVSHandler(stock.getStockCode(),
-					StockLocation.getStockLocation(stock.getStockLocation()),
-					stock.getId());
-			ArrayList<StockDateHistory> httpData = handler.getHttpData();
-			saveAllHttpData(httpData);
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			LOGGER.info("fetch data {},{}", stock.getStockAllCode(),
+//					stock.getStockName());
+//			DownLoadCVSHandler handler = null;
+//			handler = new DownLoadCVSHandler(stock.getStockCode(),
+//					StockLocation.getStockLocation(stock.getStockLocation()),
+//					stock.getId());
+//			ArrayList<StockDateHistory> httpData = handler.getHttpData();
+//			saveAllHttpData(httpData);
+//			try {
+//				Thread.sleep(2000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		} else if (stockDataHistoryUpdateCriteria.getStatus() == StockDataHistoryTableStatus.UPDATE) {
 			/**
 			 * 進行更新
@@ -69,7 +69,7 @@ public class StockHistoryDataImporter extends BaseServiceImporter {
 			ArrayList<StockDateHistory> httpData = handler.getHttpData();
 			saveAllHttpData(httpData);
 			try {
-				Thread.sleep(400);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -110,5 +110,8 @@ public class StockHistoryDataImporter extends BaseServiceImporter {
 	public static void main(String[] args) {
 		StockHistoryDataImporter importer = new StockHistoryDataImporter();
 		importer.loadData();
+		LOGGER.info("第一轮结束");
+		importer.loadData();
+		LOGGER.info("第二轮结束");
 	}
 }
