@@ -17,6 +17,7 @@ import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.stock.entity.StockDataHistoryUpdateCriteria;
 import com.icloud.front.stock.entity.StockUpdateOperation.StockDataHistoryTableStatus;
 import com.icloud.stock.dao.IStockDateHistoryDao;
+import com.icloud.stock.dao.impl.StockDateHistoryDaoImpl;
 import com.icloud.stock.model.StockDateHistory;
 import com.icloud.stock.service.IStockDateHistoryService;
 import com.icloud.stock.util.ChinaStockUtil;
@@ -72,7 +73,8 @@ public class StockDateHistoryServiceImpl extends
 
 	@Override
 	public int countByStockId(Integer id) {
-		return (int) this.stockHistoryDao.countByProperty("stockId", id);
+		return (int) this.stockHistoryDao.countByProperty(
+				StockDateHistoryDaoImpl.STOCK_ID, id);
 	}
 
 	@Override

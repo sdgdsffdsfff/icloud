@@ -13,6 +13,8 @@ import com.icloud.stock.model.StockDateHistory;
 @Repository("stockDateHistoryDao")
 public class StockDateHistoryDaoImpl extends StockBaseDaoImpl<StockDateHistory>
 		implements IStockDateHistoryDao {
+	public static final String STOCK_ID = "stockId";
+	public static final String CREATE_TIME = "createTime";
 
 	@Override
 	public Date getMaxUpdateTime(Integer id) {
@@ -29,20 +31,20 @@ public class StockDateHistoryDaoImpl extends StockBaseDaoImpl<StockDateHistory>
 
 	@Override
 	public void deleteByStockId(final Integer id) {
-		this.deleteByProperty("stockId", id);
-//		getHibernateTemplate().execute(
-//				new HibernateCallback<StockDateHistory>() {
-//					@Override
-//					public StockDateHistory doInHibernate(Session session)
-//							throws HibernateException, SQLException {
-//						// TODO Auto-generated method stub
-//						String hqlDelete = "delete " + domainClass.getName()
-//								+ " where stockId = " + id;
-//						session.createQuery(hqlDelete).executeUpdate();
-//						return null;
-//					}
-//
-//				});
+		this.deleteByProperty(STOCK_ID, id);
+		// getHibernateTemplate().execute(
+		// new HibernateCallback<StockDateHistory>() {
+		// @Override
+		// public StockDateHistory doInHibernate(Session session)
+		// throws HibernateException, SQLException {
+		// // TODO Auto-generated method stub
+		// String hqlDelete = "delete " + domainClass.getName()
+		// + " where stockId = " + id;
+		// session.createQuery(hqlDelete).executeUpdate();
+		// return null;
+		// }
+		//
+		// });
 	}
 
 	@Override
@@ -50,10 +52,10 @@ public class StockDateHistoryDaoImpl extends StockBaseDaoImpl<StockDateHistory>
 		// String hql = "from " + domainClass.getName() + " where stockId = " +
 		// id
 		// + " order by createTime desc";
-		String[] params = { "stockId" };
+		String[] params = { STOCK_ID };
 		Integer[] values = { id };
 		// return this.findByProperty(hql);
-		return this.findByProperty(params, values, "createTime", false);
+		return this.findByProperty(params, values, CREATE_TIME, false);
 	}
 
 	@Override
@@ -61,10 +63,11 @@ public class StockDateHistoryDaoImpl extends StockBaseDaoImpl<StockDateHistory>
 		// String hql = "from " + domainClass.getName() + " where stockId = " +
 		// id
 		// + " order by createTime desc";
-		String[] params = { "stockId" };
+		String[] params = { STOCK_ID };
 		Integer[] values = { id };
-		return this.findByProperty(params, values, "createTime", false, start,
+		return this.findByProperty(params, values, CREATE_TIME, false, start,
 				limit);
 		// return this.findByProperty(hql, start, limit);
+
 	}
 }

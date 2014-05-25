@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -115,6 +116,24 @@ public class HibernateBaseDaoImpl<T> extends HibernateDaoSupport implements
 		return list;
 	}
 
+	public List<T> findByProperty(String hql, Object[] values, int start,
+			int limit) {
+		// List<T> list =
+		// this.getSession().createQuery(hql).setFirstResult(start)
+		// .setMaxResults(limit).list();
+		Query queryObject = this.getSession().createQuery(hql);
+		if (values != null) {
+			for (int i = 0; i < values.length; i++) {
+				queryObject.setParameter(i, values[i]);
+			}
+		}
+		return queryObject.setFirstResult(start).setMaxResults(limit).list();
+		// getHibernateTemplate().find(hql, values);
+		// List<T> list = this.getSession().createQuery(hql, values)
+		// .setFirstResult(start).setMaxResults(limit).list();
+		// return list;
+	}
+
 	@Override
 	public List<T> findByProperty(String paramName, Object value, int start,
 			int limit) {
@@ -148,7 +167,7 @@ public class HibernateBaseDaoImpl<T> extends HibernateDaoSupport implements
 
 			int len = paramNames.length;
 			for (int i = 0; i < len; i++) {
-				sb.append("model." + paramNames[i] + "= ? ");
+				sb.append("model." + paramNames[i] + " = ?");
 				if (i != (len - 1)) {
 					sb.append(" and ");
 				}
@@ -159,7 +178,7 @@ public class HibernateBaseDaoImpl<T> extends HibernateDaoSupport implements
 				if (!isAsc) {
 					asc = "desc";
 				}
-				sb.append(" order by " + sortParam + " " + asc);
+				sb.append(" order by model." + sortParam + " " + asc);
 			}
 			return sb.toString();
 		}
@@ -171,7 +190,7 @@ public class HibernateBaseDaoImpl<T> extends HibernateDaoSupport implements
 			String sortParam, boolean isAsc, int start, int limit) {
 		String queryString = buildQuery(paramNames, values, sortParam, isAsc);
 		if (ICloudUtils.isNotNull(queryString)) {
-			return findByProperty(queryString, start, limit);
+			return findByProperty(queryString, values, start, limit);
 		}
 		return null;
 	}
