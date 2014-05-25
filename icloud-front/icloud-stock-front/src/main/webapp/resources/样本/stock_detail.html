@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>必有股票-可能是最懂股票的网站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <link rel="stylesheet" href="../css/icloud/icloud_reset.css" media="all" />
+    <link rel="stylesheet" href="../css/icloud/icloud.css" media="screen" />
+    <link rel="stylesheet" href="../css/icloud/stock.css" media="screen" />
+    <link rel="stylesheet" href="../css/icloud/stock_detail.css" media="screen" />
+    <script type="text/javascript" src="../js/common/jquery.min.js"></script>
+    <!--[if IE]>
+    <script src="../js/common/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../js/common/echarts-plain-map.js"></script>
+    <script type="text/javascript" src="../js/icloud/icloud.js"></script>
+    <script type="text/javascript" src="../js/icloud/menu.js"></script>
+    <script type="text/javascript" src="../js/icloud/exampledata.js"></script>
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <header class="main-header">
+            <div class="header-wrapper" />
+            <div class="main-menu">
+                <a class="logo" href="/">
+                    <h1>必有股票</h1>
+                </a>
+                <nav class="main-nav">
+                    <ul class="clearfix">
+                        <li class="first active">
+                            <a herf="#">上海股票</a>
+                        </li>
+                        <li>
+                            <a herf="#">深圳股票</a>
+                        </li>
+                        <li>
+                            <a herf="#">历史记录</a>
+                        </li>
+                    </ul>
+                </nav>
+                <nav class="main-links">
+                    <ul class="clearfix">
+                        <li class="first">
+                            <a href="#">订单管理</a>
+                        </li>
+                        <li>
+                            <a href="#">分销管理</a>
+                        </li>
+                        <li>
+                            <span class="hyper-link">
+                                <u>崔江宁</u>
+                                <i class="arrow-down"></i>
+                                <div class="hyper-text">
+                                    <a href="#">我的应用</a>
+                                    <a href="#">退出</a>
+                                </div>
+                            </span>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </header>
+
+        <section class="main-body clearfix">
+            <div class="leftMenu">
+                <div class="nav-container unfold">
+                    <div class="first-nav nav1">
+                        <span class="name">股票分类</span>
+                    </div>
+                    <ul class="second-nav">
+                        <li>
+                            <a href="#exchange=CN&amp;firstName=沪深股市&amp;secondName=沪深一览" title="沪深一览">沪深一览</a>
+                        </li>
+                        <li>
+                            <i class="list-style"></i>科技频道
+                            <i class="expand"></i>
+                        </li>
+                </div>
+                <div class="nav-container unfold">
+                    <div class="first-nav nav1">
+                        <span class="name">股票详情</span>
+                    </div>
+                    <ul class="second-nav">
+                        <li>
+                            <a href="#exchange=CN&amp;firstName=沪深股市&amp;secondName=沪深一览" title="沪深一览">沪深一览</a>
+                        </li>
+                        <li>
+                            <i class="list-style"></i>基础分类
+                            <i class="expand"></i>
+                        </li>
+                        <li>
+                            <i class="list-style"></i>雪球行业
+                            <i class="expand"></i>
+                            <span class="fold"></span>
+                        </li>
+                </div>
+            </div>
+
+            <div class="mainPageContent">
+                <div class="stockTitle">
+                    <div class="topName">
+                        <span class="stockName">
+                            <strong title="" class="stockName">岭南园林(SZ:002717)</strong>
+                        </span>
+                        <span class="stockOp" style="display: inline;">
+                            <a href="/performance" class="stockTrade">买卖</a>
+                        </span>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="stockQuote">
+                    <div id="currentQuote">
+                        <div class="currentInfo">
+                            <strong class="stockDown" data-current="38.65">￥38.65</strong>
+                            <span class="stockDown">
+                                <span>-0.93</span>
+                                <span class="quote-percentage">&nbsp;&nbsp;(-2.35%)</span>
+                            </span>
+                        </div>
+                        <div class="stockInfo">
+                            <span id="timeInfo">2014-5-16 15:05:01 (北京时间)&nbsp;&nbsp;</span>
+                            <span>实时行情</span>
+                        </div>
+                    </div>
+                    <table class="topTable">
+                        <tbody>
+                            <tr>
+                                <td>今开：
+                                    <span>39.33</span>
+                                </td>
+                                <td>最高：
+                                    <span id="quote-high">39.67</span>
+                                </td>
+                                <td>52周最高：
+                                    <span>62.65</span>
+                                </td>
+                                <td title="当日成交量，单位：股">成交量：
+                                    <span id="quote-volume">119.19万</span>
+                                </td>
+                            </tr>
+                            <tr class="seperateTop">
+                                <td>昨收：
+                                    <span>39.58</span>
+                                </td>
+                                <td>最低：
+                                    <span id="quote-low">37.50</span>
+                                </td>
+                                <td>52周最低：
+                                    <span>26.78</span>
+                                </td>
+                                <td>成交额：
+                                    <span>4600.05万</span>
+                                </td>
+                            </tr>
+                            <tr class="seperateBottom">
+                                <td>涨停价：
+                                    <span>43.54</span>
+                                </td>
+                                <td>总市值：
+                                    <span>33.13亿</span>
+                                </td>
+                                <td title="最近报告期每股净资产，单位：美元">每股净资产：
+                                    <span>7.69</span>
+                                </td>
+                                <td>市盈率LYR/TTM：
+                                    <span>34.29/32.54</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>跌停价：
+                                    <span>35.62</span>
+                                </td>
+                                <td>总股本：
+                                    <span>8572.00万</span>
+                                </td>
+                                <td title="过去12个月每股收益，单位：美元">每股收益：
+                                    <span>0.29</span>
+                                </td>
+                                <td>市净率：
+                                    <span>5.03</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td title="过去30个交易日平均成交量，单位：股">30日均量：
+                                    <span>151.70万</span>
+                                </td>
+                                <td>流通股本：
+                                    <span>2143.00万</span>
+                                </td>
+                                <td title="股息/股票价格*100%">股息率：
+                                    <span>-</span>
+                                </td>
+                                <td>市销率：
+                                    <span>3.87</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="stockChart">
+                    <div class="stockTitle">
+                        <div class="topName">
+                            <span class="stockName">
+                                <strong title="" class="stockName">日曲线</strong>
+                            </span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div id="echartExample" style="height: 330px; border: 1px solid rgb(204, 204, 204);"></div>
+                </div>
+
+                <div class="stockChart">
+                    <div class="stockTitle">
+                        <div class="topName">
+                            <span class="stockName">
+                                <strong title="" class="stockName">周曲线</strong>
+                            </span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div id="echartExample2" style="height: 330px; border: 1px solid rgb(204, 204, 204);"></div>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="clear"></div>
+        <footer class="main-footer">
+            <center>
+                <a href="#">关于必有</a>
+                <i class="bar">|</i>
+                <a href="#">联系方式</a>
+                <i class="bar">|</i>
+                <a href="#">问题反馈</a>
+            </center>
+            <center>
+                Copyright &copy; 2014 必有网 All Rights Reserved.
+            </center>
+            <center class="copyright">
+                提示：投资有风险，入行需谨慎。
+            </center>
+        </footer>
+    </div>
+</body>
+
+</html>
