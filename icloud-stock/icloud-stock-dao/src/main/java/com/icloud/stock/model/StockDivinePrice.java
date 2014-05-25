@@ -1,6 +1,6 @@
 package com.icloud.stock.model;
 
-// Generated 2014-5-24 18:02:48 by Hibernate Tools 3.4.0.CR1
+// Generated 2014-5-25 12:07:58 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 
@@ -21,6 +21,8 @@ public class StockDivinePrice implements java.io.Serializable {
 	private Integer userId;
 	private String userName;
 	private String userComment;
+	private Integer prePercent;
+	private Integer preCare;
 
 	public StockDivinePrice() {
 	}
@@ -28,7 +30,7 @@ public class StockDivinePrice implements java.io.Serializable {
 	public StockDivinePrice(Integer stockId, String stockCode, Double preLow,
 			Double preHigh, Double resultLow, Double resultHigh,
 			Date preDateTime, Date createTime, Integer userId, String userName,
-			String userComment) {
+			String userComment, Integer prePercent, Integer preCare) {
 		this.stockId = stockId;
 		this.stockCode = stockCode;
 		this.preLow = preLow;
@@ -40,6 +42,8 @@ public class StockDivinePrice implements java.io.Serializable {
 		this.userId = userId;
 		this.userName = userName;
 		this.userComment = userComment;
+		this.prePercent = prePercent;
+		this.preCare = preCare;
 	}
 
 	public Integer getId() {
@@ -136,6 +140,22 @@ public class StockDivinePrice implements java.io.Serializable {
 
 	public void setUserComment(String userComment) {
 		this.userComment = userComment;
+	}
+
+	public Integer getPrePercent() {
+		return this.prePercent;
+	}
+
+	public void setPrePercent(Integer prePercent) {
+		this.prePercent = prePercent;
+	}
+
+	public Integer getPreCare() {
+		return this.preCare;
+	}
+
+	public void setPreCare(Integer preCare) {
+		this.preCare = preCare;
 	}
 
 }
