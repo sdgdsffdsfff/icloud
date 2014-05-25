@@ -95,6 +95,10 @@ public class DateUtils {
 		return dValue;
 	}
 
+	public static Date getDate(Date sDate, String sFormat) {
+		return getDate(formatDate(sDate, sFormat), sFormat);
+	}
+
 	public static String formatDate(long sDate, String sFormat) {
 		return formatDate(new Date(sDate), sFormat);
 	}
@@ -642,6 +646,8 @@ public class DateUtils {
 		System.out.println("year = " + getYear(date));
 		System.out.println("month = " + getMonth(date));
 		System.out.println("day = " + getDay(date));
+		Date date2 = getDate(date, "yyyy-MM-dd");
+		System.out.println(date2);
 	}
 
 }

@@ -1,11 +1,13 @@
 package com.icloud.stock.util;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang.time.DateUtils;
 
 import com.icloud.framework.core.time.DateTimeUtil;
 import com.icloud.framework.util.ICloudUtils;
+import com.icloud.stock.bean.StockPrice;
 
 public class ChinaStockUtil {
 	/**
@@ -31,12 +33,28 @@ public class ChinaStockUtil {
 		return date;
 	}
 
+	public static Date getNexStockDate(Date date) {
+		if (!ICloudUtils.isNotNull(date)) {
+			date = new Date();
+		}
+		date = DateUtils.addDays(date, 1);
+		int d = DateTimeUtil.getDayOfWeek(date);
+		if (d > 5) {
+			date = DateUtils.addDays(date, (8 - d));
+		}
+		return date;
+	}
+
 	public static void main(String[] args) {
 		Date date = new Date();
-		System.out.println(getLastWorkDate(date));
-		date = DateUtils.addDays(date, -5);
-		System.out.println(date);
-		System.out.println(getLastWorkDate(date));
+//		System.out.println(getLastWorkDate(date));
+		date = DateUtils.addDays(date, 1);
+		System.out.println("date : " + date);
+//		System.out.println(date);
+//		System.out.println(getLastWorkDate(date));
+
+		System.out.println(getNexStockDate(date));
+
 		// System.out.println(getDayOfWeek(date));
 		// date = DateUtils.addDays(date, -5);
 		//
@@ -47,4 +65,5 @@ public class ChinaStockUtil {
 		// }
 		// System.out.println(getDayOfWeek(date));
 	}
+
 }

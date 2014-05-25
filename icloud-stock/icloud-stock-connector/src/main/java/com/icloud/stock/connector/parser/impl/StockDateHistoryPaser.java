@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.icloud.stock.connector.parser.Parser;
+import com.icloud.stock.dict.StockConstants;
 import com.icloud.stock.model.StockDateHistory;
 import com.icloud.framework.file.TextFile;
 import com.icloud.framework.util.DateUtils;
@@ -49,7 +50,8 @@ public class StockDateHistoryPaser implements
 				stockDateHistory.setStockCode(stockCode);
 				stockDateHistory.setStockId(stockId);
 
-				Date date = DateUtils.getDate(tokens[0], "yyyy-MM-dd");
+				Date date = DateUtils.getDate(tokens[0],
+						StockConstants.STOCK_HISTORY_STRING);
 				stockDateHistory.setCreateTime(date);
 				stockDateHistory.setOpenPrice(Double.parseDouble(tokens[1]));
 				stockDateHistory.setHighPrice(Double.parseDouble(tokens[2]));

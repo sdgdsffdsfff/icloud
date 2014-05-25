@@ -8,4 +8,4 @@ if [ -z $1 ]; then
     lastarg=""
 fi
 
-$bin -t $tops -s /opt/fetchstock -w icloud-stock-connector -p icloud-stock/icloud-stock-connector -r dev --host www.buuyuu.com -u root -a eiyb4gxk -bin fetchstock.sh $lastarg
+$bin -t $tops -s /opt/fetchstock -w icloud-stock-connector -p icloud-stock/icloud-stock-connector -r dev --host www.buuyuu.com -u root -a eiyb4gxk -bin stock.sh $lastarg
