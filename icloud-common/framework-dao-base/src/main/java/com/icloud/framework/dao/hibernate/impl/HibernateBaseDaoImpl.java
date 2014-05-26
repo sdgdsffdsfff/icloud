@@ -138,8 +138,9 @@ public class HibernateBaseDaoImpl<T> extends HibernateDaoSupport implements
 	public List<T> findByProperty(String paramName, Object value, int start,
 			int limit) {
 		String queryString = "from " + domainClass.getName()
-				+ " as model where model." + paramName + "=" + value;
-		return findByProperty(queryString, start, limit);
+				+ " as model where model." + paramName + " = ? ";
+		Object[] values = { value };
+		return findByProperty(queryString, values, start, limit);
 	}
 
 	@Override

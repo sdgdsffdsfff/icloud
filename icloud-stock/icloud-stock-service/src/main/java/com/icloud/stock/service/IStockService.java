@@ -5,4 +5,6 @@ import com.icloud.stock.model.Stock;
 
 public interface IStockService extends ISqlBaseService<Stock> {
 
+	Stock getByStockAllCode(String stockCode);
+
 }
