@@ -107,4 +107,8 @@ public class StockHistoryDataImporter extends BaseServiceImporter {
 		LOGGER.info("ok!");
 	}
 
+	public static void main(String[] args) {
+		StockHistoryDataImporter importer = new StockHistoryDataImporter();
+		importer.loadData();
+	}
 }

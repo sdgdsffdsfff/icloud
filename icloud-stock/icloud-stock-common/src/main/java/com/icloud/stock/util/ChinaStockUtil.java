@@ -27,7 +27,12 @@ public class ChinaStockUtil {
 			// if (date.getHours() >= 20) {
 			//
 			// } else {
-			date = DateUtils.addDays(date, -1);
+			d = d - 1;
+			if (d > 0) {
+				date = DateUtils.addDays(date, -1);
+			}else{
+				date = DateUtils.addDays(date, -3);
+			}
 			// }
 		}
 		return date;
@@ -47,11 +52,11 @@ public class ChinaStockUtil {
 
 	public static void main(String[] args) {
 		Date date = new Date();
-//		System.out.println(getLastWorkDate(date));
+		// System.out.println(getLastWorkDate(date));
 		date = DateUtils.addDays(date, 1);
 		System.out.println("date : " + date);
-//		System.out.println(date);
-//		System.out.println(getLastWorkDate(date));
+		// System.out.println(date);
+		// System.out.println(getLastWorkDate(date));
 
 		System.out.println(getNexStockDate(date));
 
