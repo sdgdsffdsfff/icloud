@@ -39,4 +39,26 @@ public class ICloudUtils {
 
 	}
 
+	/**
+	 * 从字符串中获得内容
+	 *
+	 */
+	public static String getSubStringFromContent(String content,
+			String startIndexStr, String endIndexStr) {
+		if (ICloudUtils.isNotNull(content)
+				&& ICloudUtils.isNotNull(startIndexStr)
+				&& ICloudUtils.isNotNull(endIndexStr)) {
+			int startIndex = content.indexOf(startIndexStr);
+			if (startIndex != -1) {
+				content = content
+						.substring(startIndex + startIndexStr.length());
+				int endIndex = content.indexOf(endIndexStr);
+				if (endIndex != -1) {
+					return content.substring(0, endIndex).trim();
+				}
+			}
+		}
+		return null;
+	}
+
 }

@@ -217,6 +217,9 @@ table.portfolio {
 .new-portfolio .nocolor {
     color: #444;
 }
+.new-portfolio .stock-down {
+    color: #db3d3d;
+}
 /** 表格公共 **/
 
 table {

@@ -27,6 +27,14 @@ public class HtmlUnit {
 		webClient.setThrowExceptionOnScriptError(false);
 	}
 
+	public HtmlUnit(boolean flag) {
+		webClient = new WebClient(BrowserVersion.FIREFOX_3);
+		webClient.setJavaScriptEnabled(false);
+		webClient.setCssEnabled(false);
+		webClient.setTimeout(35000);
+		webClient.setThrowExceptionOnScriptError(false);
+	}
+
 	/**
 	 * @param args
 	 */
@@ -64,7 +72,9 @@ public class HtmlUnit {
 		return page;
 	}
 
-	public String getContentAsString(String url) throws FailingHttpStatusCodeException, MalformedURLException, IOException {
+	public String getContentAsString(String url)
+			throws FailingHttpStatusCodeException, MalformedURLException,
+			IOException {
 		Page page = getHtmlPage(url);
 		return page.getWebResponse().getContentAsString();
 	}

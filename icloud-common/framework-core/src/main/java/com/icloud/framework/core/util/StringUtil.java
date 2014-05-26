@@ -38,7 +38,6 @@ public class StringUtil {
 			return "";
 		}
 	}
-
 	/**
 	 * 格式化double类型值，使得其末尾保留两位小数
 	 *

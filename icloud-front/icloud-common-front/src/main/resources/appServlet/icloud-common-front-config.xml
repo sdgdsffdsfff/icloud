@@ -74,6 +74,10 @@
 					<bean
 						class="com.icloud.front.common.freemarker.StaticResourceVersionGetter"></bean>
 				</entry>
+				<entry key="getStockColor">
+					<bean
+						class="com.icloud.front.common.freemarker.StockColorPropertyGetter"></bean>
+				</entry>
 			</map>
 		</property>
 	</bean>

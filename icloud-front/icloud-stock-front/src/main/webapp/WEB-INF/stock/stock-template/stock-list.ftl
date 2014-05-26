@@ -30,9 +30,6 @@
                         <s></s>52周股价幅度</th>
                     <th class="sortable" data-key="marketcapital" style="min-width: 24px">
                         <s></s>市值</th>
-                    <th class="sortable" data-key="pe_ttm" style="min-width: 36px">
-                        <s></s>市盈率
-                    </th>
                     <th class="sortable" data-key="volume" style="min-width: 36px">
                         <s></s>成交量
                     </th>
@@ -53,15 +50,14 @@
                         <a target="_blank" href="${(stock.stockCode)!''}">${(stock.stockName)!''}</a>
                     </td>
                     <td>
-                        <a target="_blank" href="/S/SZ002387">${(stock.stockAllCode)!''}</a>
+                        <a target="_blank" href="${(stock.stockCode)!''}">${(stock.stockAllCode)!''}</a>
                     </td>
-                    <td class="stock-color">11.50</td>
-                    <td class="stock-color">+0.55</td>
-                    <td class="stock-color">+5.02%</td>
-                    <td class="stock-color">10.76 - 11.65</td>
-                    <td class="stock-color">6.63 - 11.64</td>
+                    <td class="stock-color">${(stock.currentPrice)!''}</td>
+                    <td class="${getStockColor('${(stock.chg)}')}">${(stock.chg)!''}</td>
+                    <td class="${getStockColor('${(stock.chg)}')}">${(stock.percent * 100)!''}%</td>
+                    <td class="${getStockColor('${(stock.chg)}')}">${(stock.low)!''} - ${(stock.high)!''}</td>
+                    <td class="${getStockColor('${(stock.chg)}')}">${(stock.low52w)!''} - ${(stock.high52w)!''}</td>
                     <td class="nocolor">35.99亿</td>
-                    <td class="stock-color">247.01</td>
                     <td class="nocolor">1317.03万</td>
                     <td class="nocolor">1.49亿</td>
                     <td>
