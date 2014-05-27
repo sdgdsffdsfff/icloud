@@ -1,6 +1,6 @@
 package com.icloud.stock.model;
 
-// Generated 2014-5-25 12:07:58 by Hibernate Tools 3.4.0.CR1
+// Generated 2014-5-27 9:46:21 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -34,6 +34,9 @@ public class Stock implements java.io.Serializable {
 	private Double preHigh;
 	private Integer prePercent;
 	private Integer preCare;
+	private Double flowStock;
+	private Double totalStock;
+	private Double totalMoney;
 	private Set categoryStocks = new HashSet(0);
 
 	public Stock() {
@@ -49,7 +52,8 @@ public class Stock implements java.io.Serializable {
 			Double percent, Double lastClose, Double open, Double high,
 			Double low, Double volume, Double high52w, Double low52w,
 			Double amount, Double preLow, Double preHigh, Integer prePercent,
-			Integer preCare, Set categoryStocks) {
+			Integer preCare, Double flowStock, Double totalStock,
+			Double totalMoney, Set categoryStocks) {
 		this.stockName = stockName;
 		this.stockCode = stockCode;
 		this.createTime = createTime;
@@ -72,6 +76,9 @@ public class Stock implements java.io.Serializable {
 		this.preHigh = preHigh;
 		this.prePercent = prePercent;
 		this.preCare = preCare;
+		this.flowStock = flowStock;
+		this.totalStock = totalStock;
+		this.totalMoney = totalMoney;
 		this.categoryStocks = categoryStocks;
 	}
 
@@ -257,6 +264,30 @@ public class Stock implements java.io.Serializable {
 
 	public void setPreCare(Integer preCare) {
 		this.preCare = preCare;
+	}
+
+	public Double getFlowStock() {
+		return this.flowStock;
+	}
+
+	public void setFlowStock(Double flowStock) {
+		this.flowStock = flowStock;
+	}
+
+	public Double getTotalStock() {
+		return this.totalStock;
+	}
+
+	public void setTotalStock(Double totalStock) {
+		this.totalStock = totalStock;
+	}
+
+	public Double getTotalMoney() {
+		return this.totalMoney;
+	}
+
+	public void setTotalMoney(Double totalMoney) {
+		this.totalMoney = totalMoney;
 	}
 
 	public Set getCategoryStocks() {

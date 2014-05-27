@@ -25,5 +25,6 @@
 		<mapping resource="model/User.hbm.xml" />
 		<mapping resource="model/UserAccess.hbm.xml" />
 		<mapping resource="model/UserStockFocus.hbm.xml" />
+		<mapping resource="model/StockDetail.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>
