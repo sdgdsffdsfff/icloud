@@ -18,6 +18,7 @@ public class StockHistoryDataImporter extends BaseServiceImporter {
 	public void saveAllHttpData(ArrayList<StockDateHistory> httpData) {
 		if (ICloudUtils.isEmpty(httpData)) {
 			LOGGER.info("httpData is null");
+			return;
 		}
 		for (StockDateHistory stockDateHistory : httpData) {
 			stockDateHistoryService.save(stockDateHistory);
@@ -69,7 +70,7 @@ public class StockHistoryDataImporter extends BaseServiceImporter {
 			ArrayList<StockDateHistory> httpData = handler.getHttpData();
 			saveAllHttpData(httpData);
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -78,19 +79,6 @@ public class StockHistoryDataImporter extends BaseServiceImporter {
 			LOGGER.info("no update: {},{}", stock.getStockAllCode(),
 					stock.getStockName());
 		}
-		// if (isNeedToUpdate) {
-		// LOGGER.info("fetch data {},{}", stock.getStockAllCode(),
-		// stock.getStockName());
-		// /**
-		// * 删除数据
-		// */
-		// // 删除过去的数据
-		// this.stockDateHistoryService.deleteByStockId(stock.getId());
-		//
-		// } else {
-		// LOGGER.info("no update: {},{}", stock.getStockAllCode(),
-		// stock.getStockName());
-		// }
 	}
 
 	public void loadData() {

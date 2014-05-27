@@ -9,8 +9,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.icloud.stock.business.PersonService;
 import com.icloud.stock.model.Category;
+import com.icloud.stock.model.StockDetail;
 import com.icloud.stock.service.ICategoryService;
 import com.icloud.stock.service.ICategoryStockService;
+import com.icloud.stock.service.IStockDetailService;
 import com.icloud.stock.service.IStockService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -28,6 +30,9 @@ public class StockServiceTest {
 	@Resource(name = "categoryService")
 	private ICategoryService catgoryService;
 
+	@Resource(name = "stockDetailService")
+	private IStockDetailService stockDetailService;
+
 	@Test
 	public void getAllStock() {
 		// List<Stock> list = this.stockService.findAll(0, 100);
@@ -38,40 +43,18 @@ public class StockServiceTest {
 		Category category = this.catgoryService.getCategory("创业板", "base");
 		System.out.println(category.getCategoryRank());
 	}
-	// @Test
-	// public void updateStockTest() {
-	// List<Stock> list = stockService.findAll();
-	// if (list != null) {
-	// Stock stock = list.get(0);
-	// System.out.println(stock.getStockCode() + stock.getStockName());
-	// stock.setStockCode("44444");
-	// stockService.update(stock);
-	//
-	// Stock stock2 = stockService.getById(stock.getId());
-	// // System.out.println(stock2.getId());
-	// System.out.println(stock2.getStockCode() + stock2.getStockName());
-	// }
-	// }
 
-	// @Test
-	// public void testJoinCut() {
-	// personService.getPersonName(11);
-	// }
+	@Test
+	public void getStockDetail() {
+		StockDetail stockDetail = this.stockDetailService.getById(2);
+		System.out.println(stockDetail.getStockCode());
+		stockDetail = stockDetailService.getStockByStockCode(stockDetail
+				.getStockCode());
+		System.out.println(stockDetail.getStockCode());
+		stockDetail = stockDetailService.getStockByStockId(stockDetail
+				.getStockId());
+		System.out.println(stockDetail.getStockCode());
+		System.out.println(stockDetail.getDetailContent());
 
-	// @Test
-	// public void testTd() {
-	// List<Stock> stocks = new ArrayList<Stock>();
-	// for (int i = 0; i < 5; i++) {
-	// Stock stock = new Stock();
-	// stock.setStockCode("xxxx" + i);
-	// stock.setStockName("NNNNN" + i);
-	// stocks.add(stock);
-	// }
-	// try {
-	// stockService.saveAll(stocks);
-	// } catch (Exception e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// }
+	}
 }

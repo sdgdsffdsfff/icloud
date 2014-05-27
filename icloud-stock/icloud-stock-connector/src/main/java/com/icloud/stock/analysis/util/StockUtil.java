@@ -31,6 +31,8 @@ public class StockUtil {
 			stock.setPrePercent(tmpStock.getPrePercent());// 波动比例
 			stock.setPreCare(tmpStock.getPreCare());// 预测关注度
 			stock.setUpdateTime(new Date());
+			double totalMoney = stock.getTotalStock() * stock.getCurrentPrice();
+			stock.setTotalMoney(totalMoney);
 		}
 	}
 

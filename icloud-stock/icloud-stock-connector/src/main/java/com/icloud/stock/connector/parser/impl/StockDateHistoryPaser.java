@@ -24,12 +24,17 @@ public class StockDateHistoryPaser implements
 
 			TextFile textFile = new TextFile(inputStreamCVS);
 			ArrayList<StockDateHistory> list = new ArrayList<StockDateHistory>();
-			for (String str : textFile) {
-				StockDateHistory stockDateHistory = parser(str, stockCode,
-						stockId);
-				if (stockDateHistory != null) {
-					list.add(stockDateHistory);
+			try {
+				for (String str : textFile) {
+					StockDateHistory stockDateHistory = parser(str, stockCode,
+							stockId);
+					if (stockDateHistory != null) {
+						list.add(stockDateHistory);
+					}
 				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
 			}
 			return list;
 		}

@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import com.icloud.stock.service.ICategoryService;
 import com.icloud.stock.service.ICategoryStockService;
+import com.icloud.stock.service.IStockDetailService;
 import com.icloud.stock.service.IStockService;
 
 public class BaseAction {
@@ -14,4 +15,6 @@ public class BaseAction {
 	@Resource(name = "categoryStockService")
 	protected ICategoryStockService categoryStockService;
 
+	@Resource(name = "stockDetailService")
+	protected IStockDetailService stockDetailService;
 }

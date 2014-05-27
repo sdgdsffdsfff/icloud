@@ -1,5 +1,6 @@
 package com.icloud.stock.importer.meta;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,6 +13,7 @@ import com.icloud.stock.ctx.BaseServiceImporter;
 import com.icloud.stock.importer.handler.CompanyInfoHandler;
 import com.icloud.stock.importer.handler.XueqiuStockDetail;
 import com.icloud.stock.model.Stock;
+import com.icloud.stock.model.StockDetail;
 
 public class XueQiuStockDetailImporter extends BaseServiceImporter {
 	String filePath = "/home/jiangningcui/workspace/mygithub/icloud/icloud-stock/icloud-stock-connector/src/main/resources/data/xueqiu_detail.txt";
@@ -39,9 +41,9 @@ public class XueQiuStockDetailImporter extends BaseServiceImporter {
 		for (String l : file) {
 			XueqiuStockDetail detail = gson
 					.fromJson(l, XueqiuStockDetail.class);
-			long flowStock = getNum(detail.getFlowStock());
-			long totalStock = getNum(detail.getTotalStock());
-			long totalMoney = getNum(detail.getTotalMoney());
+			double flowStock = getNum(detail.getFlowStock());
+			double totalStock = getNum(detail.getTotalStock());
+			double totalMoney = getNum(detail.getTotalMoney());
 
 			String companyInfoWork = detail.getCompanyInfoWork();
 			String detailContent = detail.getDetailContent();
@@ -52,8 +54,27 @@ public class XueQiuStockDetailImporter extends BaseServiceImporter {
 			String stockAllCode = detail.getStockCode();
 
 			Stock stock = this.stockService.getByStockAllCode(stockAllCode);
-			System.out.println(stock.getStockAllCode() + "  " + stock.getId()
-					+ " " + stockAllCode);
+
+			stock.setFlowStock(flowStock);
+			stock.setTotalMoney(totalMoney);
+			stock.setTotalStock(totalStock);
+
+			this.stockService.update(stock);
+
+			/**
+			 * 加入数据
+			 */
+			StockDetail stockDetail = new StockDetail();
+			stockDetail.setCompanyInfoWork(companyInfoWork);
+			stockDetail.setCreateTime(new Date());
+			stockDetail.setDetailContent(detailContent);
+			stockDetail.setStockCode(stock.getStockCode());
+			stockDetail.setStockId(stock.getId());
+			stockDetail.setStockName(stock.getStockName());
+			stockDetail.setUpdateTime(stockDetail.getUpdateTime());
+			this.stockDetailService.save(stockDetail);
+			// System.out.println(stock.getStockAllCode() + "  " + stock.getId()
+			// + " " + stockAllCode);
 		}
 	}
 

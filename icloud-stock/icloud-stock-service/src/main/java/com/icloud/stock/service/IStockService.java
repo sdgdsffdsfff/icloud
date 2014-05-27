@@ -7,4 +7,6 @@ public interface IStockService extends ISqlBaseService<Stock> {
 
 	Stock getByStockAllCode(String stockCode);
 
+	Stock getByStockCode(String stockCode);
+
 }

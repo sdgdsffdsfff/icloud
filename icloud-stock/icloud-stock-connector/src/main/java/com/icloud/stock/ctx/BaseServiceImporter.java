@@ -6,6 +6,7 @@ import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.stock.service.ICategoryService;
 import com.icloud.stock.service.ICategoryStockService;
 import com.icloud.stock.service.IStockDateHistoryService;
+import com.icloud.stock.service.IStockDetailService;
 import com.icloud.stock.service.IStockDivinePriceService;
 import com.icloud.stock.service.IStockService;
 
@@ -18,6 +19,7 @@ public class BaseServiceImporter {
 	protected ICategoryStockService categoryStockService;
 	protected IStockDateHistoryService stockDateHistoryService;
 	protected IStockDivinePriceService stockDivinePriceService;
+	protected IStockDetailService stockDetailService;
 
 	public BaseServiceImporter() {
 		stockService = BeansUtil.getStockService();
@@ -25,5 +27,6 @@ public class BaseServiceImporter {
 		categoryStockService = BeansUtil.getCategoryStockService();
 		stockDateHistoryService = BeansUtil.getStockDateHistoryService();
 		stockDivinePriceService = BeansUtil.getStockDivinePriceService();
+		stockDetailService = BeansUtil.getStockDetailService();
 	}
 }

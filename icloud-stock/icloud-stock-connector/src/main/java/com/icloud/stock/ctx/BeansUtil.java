@@ -6,6 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.icloud.stock.service.ICategoryService;
 import com.icloud.stock.service.ICategoryStockService;
 import com.icloud.stock.service.IStockDateHistoryService;
+import com.icloud.stock.service.IStockDetailService;
 import com.icloud.stock.service.IStockDivinePriceService;
 import com.icloud.stock.service.IStockService;
 
@@ -38,5 +39,9 @@ public class BeansUtil {
 	public static IStockDivinePriceService getStockDivinePriceService() {
 		return (IStockDivinePriceService) app
 				.getBean("stockDivinePriceService");
+	}
+
+	public static IStockDetailService getStockDetailService() {
+		return (IStockDetailService) app.getBean("stockDetailService");
 	}
 }

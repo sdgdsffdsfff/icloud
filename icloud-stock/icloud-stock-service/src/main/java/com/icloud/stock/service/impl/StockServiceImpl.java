@@ -29,11 +29,21 @@ public class StockServiceImpl extends SqlBaseService<Stock> implements
 
 	@Override
 	public Stock getByStockAllCode(String stockCode) {
+		if (!ICloudUtils.isNotNull(stockCode)) {
+			return null;
+		}
 		List<Stock> list = this.stockDao.findByProperty(
 				StockDaoImpl.STOCKALLCODE, stockCode, 0, 1);
-		if (!ICloudUtils.isEmpty(list)) {
-			return list.get(0);
+		return ICloudUtils.getFirstElement(list);
+	}
+
+	@Override
+	public Stock getByStockCode(String stockCode) {
+		if (!ICloudUtils.isNotNull(stockCode)) {
+			return null;
 		}
-		return null;
+		List<Stock> list = this.stockDao.findByProperty(StockDaoImpl.STOCKCODE,
+				stockCode, 0, 1);
+		return ICloudUtils.getFirstElement(list);
 	}
 }

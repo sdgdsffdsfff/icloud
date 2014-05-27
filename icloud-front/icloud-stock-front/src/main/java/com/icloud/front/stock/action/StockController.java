@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.icloud.framework.core.wrapper.PageView;
 import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.logger.ri.RequestIdentityLogger;
+import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.stock.baseaction.BaseStockController;
 import com.icloud.front.stock.pojo.BaseStockMenu;
 import com.icloud.front.stock.pojo.StockMenuBean;
@@ -24,13 +25,14 @@ public class StockController extends BaseStockController {
 			.getLogger(StockController.class);
 
 	@RequestMapping("/stockMenu")
-	// @ResponseBody
-	// @RequestParam(required=true) String hotelId
 	public ModelAndView stockMenu() {
 		ModelAndView model = new ModelAndView("stock/mainPage");
 		model.addObject("mainMenus", stockCommonBussiness.getBaseMenu());
 		return model;
 	}
+
+	// @ResponseBody
+	// @RequestParam(required=true) String hotelId
 
 	@RequestMapping("/listStockView")
 	public ModelAndView stockListMenu(
@@ -56,6 +58,17 @@ public class StockController extends BaseStockController {
 		List<StockMenuBean> menuList = stockCommonBussiness
 				.getStockMenuBean(id);
 		model.addObject("menuList", menuList);
+		return model;
+	}
+
+	@RequestMapping("/stockDetail")
+	public ModelAndView getStockDetail(String stockCode, String type) {
+		ModelAndView model = new ModelAndView("stock/stock-base-detail");
+		if (ICloudUtils.isNotNull(stockCode)) {
+			Stock stock = this.stockDetailBussiness
+					.getStockByStockCode(stockCode);
+			model.addObject("stock", stock);
+		}
 		return model;
 	}
 }

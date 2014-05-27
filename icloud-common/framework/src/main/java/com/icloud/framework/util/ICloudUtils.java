@@ -1,6 +1,7 @@
 package com.icloud.framework.util;
 
 import java.util.Collection;
+import java.util.List;
 
 public class ICloudUtils {
 
@@ -61,4 +62,17 @@ public class ICloudUtils {
 		return null;
 	}
 
+	/**
+	 * 获得第n个元素
+	 */
+	public static <T> T getElement(List<T> list, int n) {
+		if (!ICloudUtils.isEmpty(list) && list.size() > n) {
+			return list.get(n);
+		}
+		return null;
+	}
+
+	public static <T> T getFirstElement(List<T> list) {
+		return getElement(list, 0);
+	}
 }

@@ -44,6 +44,8 @@ public class StockAnalysis extends BaseServiceImporter {
 		double amount = currentDateHistory.getVolume()
 				* currentDateHistory.getAdjPrice();
 
+
+
 		Stock tmpStock = new Stock();
 		tmpStock.setCurrentPrice(currentPrice);// 当前价
 		tmpStock.setChg(chg);// 涨跌额
