@@ -4,7 +4,7 @@
         <div class="stockTitle">
             <div class="topName">
                 <span class="stockName">
-                    <strong title="" class="stockName">${stock.stockName}(${stock.stockLocation}:${stock.stockCode})</strong>
+                    <strong title="" class="stockName">${stock.stockName}(${stock.stockAllCode})</strong>
                 </span>
                 <span class="stockOp" style="display: inline;">
                     <a href="/performance" class="stockTrade">关注</a>

@@ -16,6 +16,7 @@ import com.icloud.front.stock.baseaction.BaseStockController;
 import com.icloud.front.stock.pojo.BaseStockMenu;
 import com.icloud.front.stock.pojo.StockMenuBean;
 import com.icloud.stock.model.Stock;
+import com.icloud.stock.model.StockDateHistory;
 import com.icloud.stock.model.StockDetail;
 import com.icloud.stock.model.constant.StockConstants.BaseCategory;
 
@@ -72,15 +73,33 @@ public class StockController extends BaseStockController {
 					.getStockDetailByStockCode(stockCode);
 			if (ICloudUtils.isNotNull(stock)) {
 				model.addObject("stock", stock);
-				model.addObject("stockPageTitle",
-						this.buuyuuSeoBussiness.getStockPageTitle(stock));
-				model.addObject("stockPageKeywords",
-						this.buuyuuSeoBussiness.getStockPageKeywords(stock));
-				model.addObject("stockPageDescription",
-						this.buuyuuSeoBussiness.getStockPageDescription(stock));
+				this.buuyuuSeoBussiness.setSeoInStockDetail(stock, model);
 			}
 			if (ICloudUtils.isNotNull(detail)) {
 				model.addObject("stockDetail", detail);
+			}
+		}
+		return model;
+	}
+
+	@RequestMapping("/stockBaseHistory")
+	public ModelAndView getStockDetailHistory(String stockCode, String pageNo) {
+		ModelAndView model = new ModelAndView("stock/stock-base-history");
+		if (ICloudUtils.isNotNull(stockCode)) {
+			Stock stock = this.stockDetailBussiness
+					.getStockByStockCode(stockCode);
+			if (ICloudUtils.isNotNull(stock)) {
+				model.addObject("stock", stock);
+				this.buuyuuSeoBussiness.setSeoInStockDetail(stock, model);
+
+				/**
+				 * 获得历史
+				 */
+				Pagination<StockDateHistory> pagination = this.stockDetailBussiness
+						.getStockDateHistoryList(stock.getId(), pageNo, 30);
+				PageView pageView = PageView.convertPage(pagination);
+				model.addObject("pagination", pagination);
+				model.addObject("pageView", pageView);
 			}
 		}
 		return model;

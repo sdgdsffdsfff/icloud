@@ -1,6 +1,7 @@
 package com.icloud.front.stock.bussiness.seo;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.stock.bussiness.BaseAction;
@@ -13,8 +14,10 @@ public class BuuyuuSeoBussiness extends BaseAction {
 	public String getStockPageTitle(Stock stock) {
 		String title = SEOConstants.STOCK_TITLE;
 		if (ICloudUtils.isNotNull(stock)) {
-			title = stock.getStockName() + " " + stock.getCurrentPrice() + "("
-					+ stock.getPercent() + ") (" + stock.getStockAllCode()
+			title = stock.getStockName() + " "
+					+ ICloudUtils.getDigitalString(stock.getCurrentPrice(), 2)
+					+ "(" + ICloudUtils.getDigitalString(stock.getPercent(), 2)
+					+ ") (" + stock.getStockAllCode()
 					+ ")  股票股价,行情,新闻,财报,数据 - 必有网站";
 		}
 		return title;
@@ -54,6 +57,15 @@ public class BuuyuuSeoBussiness extends BaseAction {
 					+ "财务分析";
 		}
 		return description;
+	}
+
+	public void setSeoInStockDetail(Stock stock, ModelAndView model) {
+		if (ICloudUtils.isNotNull(stock) && ICloudUtils.isNotNull(model)) {
+			model.addObject("stockPageTitle", getStockPageTitle(stock));
+			model.addObject("stockPageKeywords", getStockPageKeywords(stock));
+			model.addObject("stockPageDescription",
+					getStockPageDescription(stock));
+		}
 	}
 
 }

@@ -82,6 +82,10 @@
 					<bean
 						class="com.icloud.front.common.freemarker.DigitalGetter"></bean>
 				</entry>
+				<entry key="getPageUrl">
+					<bean
+						class="com.icloud.front.common.freemarker.StockPageUrlGetter"></bean>
+				</entry>
 			</map>
 		</property>
 	</bean>

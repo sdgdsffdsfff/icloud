@@ -1,3 +1,4 @@
+<#import "/icloud/pageView.ftl" as pageView/>
 <#macro sList current>
 <div class="stockList-header">
 	<a href="${basepath}/stock/stockMenu">行情</a>&nbsp;>&nbsp;
@@ -71,48 +72,6 @@
             </tbody>
         </table>
     </div>
-    <#if (pageView)??>
-    <div class="pageList">
-        <div class="pager-wrapper">
-            <ul class="pager">
-            	<#if (pageView.prePage)??>
-                  <li class="last">
-                    <a onclick="stockListloading(${cateId},${(pageView.prePage.pageNo)})" href="#">上一页</a>
-                  </li>
-                </#if>
-                <#if (pageView.firstPage)??>
-                	<li>
-                        <a onclick="stockListloading(${cateId},${(pageView.firstPage.pageNo)})" href="#">${(pageView.firstPage.pageNo+1)}</a>
-                    </li>
-                    <li>...</li>
-                </#if>
-                <#if (pageView.pageList)??>
-                	<#list pageView.pageList as pageItem>
-                	    <#if pageItem.hasUrl=false>
-                		 <li class="active">
-                    		<a href="#">${(pageItem.pageNo+1)}</a>
-                		 </li>
-                		 <#else>
-                		   <li>
-                              <a onclick="stockListloading('${cateId}','${(pageItem.pageNo)}')" href="#">${(pageItem.pageNo+1)}</a>
-                           </li>
-                		 </#if>
-                	</#list>
-                </#if>
-                <#if (pageView.lastPage)??>
-                    <li>...</li>
-                	<li>
-                        <a onclick="stockListloading(${cateId},${(pageView.lastPage.pageNo)})" href="#">${(pageView.lastPage.pageNo+1)}</a>
-                    </li>
-                </#if>
-                <#if (pageView.nextPage)??>
-                   <li class="next">
-                      <a onclick="stockListloading(${(cateId)},${(pageView.nextPage.pageNo)})" href="#">下一页</a>
-                   </li>
-                </#if>
-            </ul>
-        </div>
-    </div>
-    </#if>
+    <@pageView.pagination param1='1' param2='${cateId}' param3='33'/>
 </div>
 </#macro>
