@@ -8,6 +8,14 @@
          	<li <#if current=="行情">class="first active"</#if>><a href="${basepath}/stock/stockMenu">行情</a></li>
             </ul>
        </nav>
+       <div class="search">
+       	<form method="get" action="/k">
+          <input id="quick-search" class="quick-search" name="q" type="text" autocomplete="off" placeholder="搜索 股票" class="typeahead">
+         </form>
+         <span class="icon">
+            <i></i>
+          </span>
+       </div>
        <nav class="main-links">
           <ul class="clearfix">
             <li class="first"><a href="#">注册</a></li>
