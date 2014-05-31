@@ -1,3 +1,28 @@
+/** page framework */
+
+.mainStockDetailContent {
+    height: 100%;
+    width: 680px;
+    background: #fff;
+    float: left;
+    z-index: 2000;
+    margin-left: 10px;
+    border-right: 1px solid #f1f1f1;
+    border-left: 1px solid #f1f1f1;
+}
+.mainStockDetailContent .wrapper {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.rightStockDetailContent {
+    width: 170px;
+    margin-left: 10px;
+    background: #fff;
+    float: left;
+}
+.wrapper {
+    padding-top: 0px;
+}
 /** name*/
 
 .stockTitle {
@@ -65,4 +90,20 @@ body.oppositeColor span.stock_down {
 .stockChart {
     margin-bottom: 10px;
     height: 388px;
+}
+/** 公司业务*/
+
+.stock-company {
+    margin-bottom: 20px;
+    overflow: hidden;
+    font-size: 13px;
+    line-height: 20px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #F1F1F1;
+}
+.stock-company .wrapper {
+    padding-bottom: 8px;
+}
+.companyInfo strong.title {
+    margin-right: 3px;
 }

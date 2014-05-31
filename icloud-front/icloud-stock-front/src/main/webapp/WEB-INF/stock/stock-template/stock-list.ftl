@@ -47,19 +47,19 @@
               	<#assign a="stock_index"/>
                 <tr class="<#if stock_index%2==0>even_stock_up<#else>odd_stock_up</#if>" code="${(stock.stockCode)!''}">
                     <td>
-                        <a target="_blank" href="${(stock.stockCode)!''}">${(stock.stockName)!''}</a>
+                        <a target="_blank" href="${basepath}/stock/stockBaseDetail?stockCode=${(stock.stockCode)!''}&type=${(baseStockMenu.code)!''}">${(stock.stockName)!''}</a>
                     </td>
                     <td>
-                        <a target="_blank" href="${(stock.stockCode)!''}">${(stock.stockAllCode)!''}</a>
+                        <a target="_blank" href="${basepath}/stock/stockBaseDetail?stockCode=${(stock.stockCode)!''}&type=${(baseStockMenu.code)!''}">${(stock.stockAllCode)!''}</a>
                     </td>
                     <td class="stock-color">${(stock.currentPrice)!''}</td>
                     <td class="${getStockColor('${(stock.chg)}')}">${(stock.chg)!''}</td>
                     <td class="${getStockColor('${(stock.chg)}')}">${(stock.percent * 100)!''}%</td>
                     <td class="${getStockColor('${(stock.chg)}')}">${(stock.low)!''} - ${(stock.high)!''}</td>
                     <td class="${getStockColor('${(stock.chg)}')}">${(stock.low52w)!''} - ${(stock.high52w)!''}</td>
-                    <td class="nocolor">35.99亿</td>
-                    <td class="nocolor">1317.03万</td>
-                    <td class="nocolor">1.49亿</td>
+                    <td class="nocolor">${getDigital('${stock.totalMoney}')}</td>
+                    <td class="nocolor">${getDigital('${stock.volume}')}</td>
+                    <td class="nocolor">${getDigital('${stock.amount}')}</td>
                     <td>
                         <a href="#" class="followStock" target="_blank" data-stockid="${(stock.stockCode)!''}" data-stockname="${(stock.stockName)!''}" data-stockcurrent="11.5">
                             <span></span>关注

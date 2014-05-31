@@ -1,5 +1,6 @@
 #!/bin/sh
- 
+
+cd /opt/fetchstock
 # This script start and stop the index server
 basepath=`pwd`
 libpath=.:$basepath/conf:$basepath/lib/*

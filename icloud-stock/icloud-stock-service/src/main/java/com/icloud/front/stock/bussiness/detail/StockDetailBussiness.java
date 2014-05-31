@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.icloud.front.stock.bussiness.BaseAction;
 import com.icloud.stock.model.Stock;
+import com.icloud.stock.model.StockDetail;
 
 @Service("stockDetailBussiness")
 public class StockDetailBussiness extends BaseAction {
@@ -12,4 +13,7 @@ public class StockDetailBussiness extends BaseAction {
 		return this.stockService.getByStockCode(stockCode);
 	}
 
+	public StockDetail getStockDetailByStockCode(String stockCode) {
+		return this.stockDetailService.getStockByStockCode(stockCode);
+	}
 }

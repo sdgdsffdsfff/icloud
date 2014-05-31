@@ -78,6 +78,10 @@
 					<bean
 						class="com.icloud.front.common.freemarker.StockColorPropertyGetter"></bean>
 				</entry>
+				<entry key="getDigital">
+					<bean
+						class="com.icloud.front.common.freemarker.DigitalGetter"></bean>
+				</entry>
 			</map>
 		</property>
 	</bean>

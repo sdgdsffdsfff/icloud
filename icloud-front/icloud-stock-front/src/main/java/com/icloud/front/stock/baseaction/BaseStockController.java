@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import com.icloud.front.stock.bussiness.detail.StockDetailBussiness;
 import com.icloud.front.stock.bussiness.menu.StockCommonBussiness;
+import com.icloud.front.stock.bussiness.seo.BuuyuuSeoBussiness;
 import com.icloud.front.stock.bussiness.view.StockListBussiness;
 
 public class BaseStockController {
@@ -13,4 +14,6 @@ public class BaseStockController {
 	protected StockDetailBussiness stockDetailBussiness;
 	@Resource(name = "stockListBussiness")
 	protected StockListBussiness stockListBussiness;
+	@Resource(name = "buuyuuSeoBussiness")
+	protected BuuyuuSeoBussiness buuyuuSeoBussiness;
 }

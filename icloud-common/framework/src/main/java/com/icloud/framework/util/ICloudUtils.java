@@ -1,5 +1,6 @@
 package com.icloud.framework.util;
 
+import java.text.NumberFormat;
 import java.util.Collection;
 import java.util.List;
 
@@ -74,5 +75,30 @@ public class ICloudUtils {
 
 	public static <T> T getFirstElement(List<T> list) {
 		return getElement(list, 0);
+	}
+
+	/**
+	 * 显示数据
+	 */
+	public static String getDigitalString(double d, int n) {
+		if (n <= 0) {
+			n = 2;
+		}
+		NumberFormat nFormat = NumberFormat.getNumberInstance();
+		nFormat.setMaximumFractionDigits(n);
+		if (d > 10000 * 10000) {
+			d = d / (10000 * 10000);
+			return nFormat.format(d) + "亿";
+		} else if (d > 10000) {
+			d = d / 10000;
+			return nFormat.format(d) + "万";
+		} else {
+			return nFormat.format(d);
+		}
+	}
+
+	public static void main(String[] args) {
+		double d = 178;
+		System.out.println(getDigitalString(d, 2));
 	}
 }

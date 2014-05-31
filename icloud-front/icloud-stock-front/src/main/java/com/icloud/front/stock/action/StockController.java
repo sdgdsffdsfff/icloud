@@ -16,6 +16,7 @@ import com.icloud.front.stock.baseaction.BaseStockController;
 import com.icloud.front.stock.pojo.BaseStockMenu;
 import com.icloud.front.stock.pojo.StockMenuBean;
 import com.icloud.stock.model.Stock;
+import com.icloud.stock.model.StockDetail;
 import com.icloud.stock.model.constant.StockConstants.BaseCategory;
 
 @Controller
@@ -61,13 +62,26 @@ public class StockController extends BaseStockController {
 		return model;
 	}
 
-	@RequestMapping("/stockDetail")
+	@RequestMapping("/stockBaseDetail")
 	public ModelAndView getStockDetail(String stockCode, String type) {
 		ModelAndView model = new ModelAndView("stock/stock-base-detail");
 		if (ICloudUtils.isNotNull(stockCode)) {
 			Stock stock = this.stockDetailBussiness
 					.getStockByStockCode(stockCode);
-			model.addObject("stock", stock);
+			StockDetail detail = this.stockDetailBussiness
+					.getStockDetailByStockCode(stockCode);
+			if (ICloudUtils.isNotNull(stock)) {
+				model.addObject("stock", stock);
+				model.addObject("stockPageTitle",
+						this.buuyuuSeoBussiness.getStockPageTitle(stock));
+				model.addObject("stockPageKeywords",
+						this.buuyuuSeoBussiness.getStockPageKeywords(stock));
+				model.addObject("stockPageDescription",
+						this.buuyuuSeoBussiness.getStockPageDescription(stock));
+			}
+			if (ICloudUtils.isNotNull(detail)) {
+				model.addObject("stockDetail", detail);
+			}
 		}
 		return model;
 	}
