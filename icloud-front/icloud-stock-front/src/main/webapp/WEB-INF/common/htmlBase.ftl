@@ -10,6 +10,7 @@
 	<meta name="keywords" content="${keywords}">
 	<meta name="description" content="${description}">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="shortcut icon" href="${basepath}/resources/images/icloud/favicon.ico" />
 	<link rel="stylesheet" href="${basepath}/resources/css/icloud/icloud_reset.css?v=${getStaticResourceVersion()}" />
 	<link rel="stylesheet" href="${basepath}/resources/css/icloud/icloud.css?v=${getStaticResourceVersion()}" />
 	<link rel="stylesheet" href="${basepath}/resources/css/icloud/jquery.bigautocomplete.css?v=${getStaticResourceVersion()}" />

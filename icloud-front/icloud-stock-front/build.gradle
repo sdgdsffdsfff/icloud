@@ -1,13 +1,5 @@
 apply plugin: 'war'
 apply plugin: 'eclipse'
-
-group = 'com.icloud.stock'
-version = "1.0-SNAPSHOT"
-
-jar {
- baseName =  'icloud-stock-front'
-}
-
 dependencies {
 	compile project(':icloud-stock:icloud-stock-service')
     compile project(':icloud-front:icloud-common-front')
