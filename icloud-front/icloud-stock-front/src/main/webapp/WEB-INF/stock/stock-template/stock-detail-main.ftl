@@ -1,3 +1,4 @@
+<#import "/stock/stock-template/stock-charts.ftl" as sdc/>
 <#macro stockDetailMain>
 <div class="mainStockDetailContent">
     <div class="wrapper">
@@ -74,31 +75,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="stockChart">
-            <div class="stockTitle">
-                <div class="topName">
-                    <span class="stockName">
-                        <strong title="" class="stockName">日曲线</strong>
-                    </span>
-                    <div class="clear"></div>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div id="echartExample" style="height: 330px; border: 1px solid rgb(204, 204, 204);"></div>
-        </div>
-
-        <div class="stockChart">
-            <div class="stockTitle">
-                <div class="topName">
-                    <span class="stockName">
-                        <strong title="" class="stockName">周曲线</strong>
-                    </span>
-                    <div class="clear"></div>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div id="echartExample2" style="height: 330px; border: 1px solid rgb(204, 204, 204);"></div>
-        </div>
+        <@sdc.stockChart chartName="日曲线" chartID="date-charts" />
     </div>
 </div>
 </#macro>
