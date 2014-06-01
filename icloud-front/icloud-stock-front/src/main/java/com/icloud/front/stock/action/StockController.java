@@ -18,6 +18,7 @@ import com.icloud.front.stock.baseaction.BaseStockController;
 import com.icloud.front.stock.pojo.BaseStockMenu;
 import com.icloud.front.stock.pojo.StockBean;
 import com.icloud.front.stock.pojo.StockCompleteResult;
+import com.icloud.front.stock.pojo.StockDateHistoryResult;
 import com.icloud.front.stock.pojo.StockMenuBean;
 import com.icloud.stock.model.Stock;
 import com.icloud.stock.model.StockDateHistory;
@@ -134,8 +135,22 @@ public class StockController extends BaseStockController {
 	@ResponseBody
 	public String stockSearch(@RequestParam(required = true) String keyword) {
 		List<StockBean> list = this.stockNameSearcher.search(keyword, 10);
-		Gson gson = new Gson();
+
 		return gson.toJson(StockCompleteResult
 				.convertToStockCompleteResult(list));
+	}
+
+	@RequestMapping("/getDateHistory")
+	@ResponseBody
+	public String getDateHistory(@RequestParam(required = true) String stockCode) {
+		Stock stock = this.stockDetailBussiness.getStockByStockCode(stockCode);
+		if (!ICloudUtils.isNotNull(stock)) {
+			stock = this.stockDetailBussiness.getRadomStock();
+		}
+		List<StockDateHistory> list = this.stockDetailBussiness
+				.getStockDateHistoryList(stock.getId(), 0, 100);
+		StockDateHistoryResult result = StockDateHistoryResult
+				.convertToStockDateHistoryResult(stock.getStockName(), list);
+		return gson.toJson(result);
 	}
 }

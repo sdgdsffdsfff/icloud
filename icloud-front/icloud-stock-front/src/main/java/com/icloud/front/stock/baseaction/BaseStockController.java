@@ -2,6 +2,7 @@ package com.icloud.front.stock.baseaction;
 
 import javax.annotation.Resource;
 
+import com.google.gson.Gson;
 import com.icloud.front.stock.bussiness.detail.StockDetailBussiness;
 import com.icloud.front.stock.bussiness.menu.StockCommonBussiness;
 import com.icloud.front.stock.bussiness.seo.BuuyuuSeoBussiness;
@@ -19,5 +20,7 @@ public class BaseStockController {
 	protected BuuyuuSeoBussiness buuyuuSeoBussiness;
 	@Resource(name = "stockNameSearcher")
 	protected StockNameSearcher stockNameSearcher;
+
+	protected Gson gson = new Gson();
 
 }

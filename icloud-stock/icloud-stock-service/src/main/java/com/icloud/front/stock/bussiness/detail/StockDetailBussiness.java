@@ -25,6 +25,12 @@ public class StockDetailBussiness extends BaseAction {
 		return this.stockDetailService.getStockByStockCode(stockCode);
 	}
 
+	public List<StockDateHistory> getStockDateHistoryList(Integer stockId,
+			int start, int limit) {
+		return this.stockDateHistoryService
+				.findByStockId(stockId, start, limit);
+	}
+
 	public Pagination<StockDateHistory> getStockDateHistoryList(
 			Integer stockId, String pageNo, int limit) {
 		if (!ICloudUtils.isNotNull(stockId))
@@ -54,5 +60,13 @@ public class StockDetailBussiness extends BaseAction {
 		pagination.setData(resultList);
 		pagination.build();
 		return pagination;
+	}
+
+	public Stock getRadomStock() {
+		List<Stock> list = this.stockService.findAll(0, 10);
+		if (ICloudUtils.isEmpty(list)) {
+			return null;
+		}
+		return list.get(0);
 	}
 }

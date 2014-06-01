@@ -7,4 +7,9 @@
 <@sdm.stockDetailMenus current="基本信息"/>
 <@sdmain.stockDetailMain />
 <@sdc.stockDetailCompanyInfo />
+<script type="text/javascript">
+$(function() {
+	fillDateAllCharts(${stock.stockCode});
+});
+</script>
 </@imc.mainContainer>

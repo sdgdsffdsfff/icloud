@@ -85,6 +85,7 @@ public class ICloudUtils {
 			n = 2;
 		}
 		NumberFormat nFormat = NumberFormat.getNumberInstance();
+		nFormat.setGroupingUsed(false);
 		nFormat.setMaximumFractionDigits(n);
 		if (d > 10000 * 10000) {
 			d = d / (10000 * 10000);
@@ -97,8 +98,18 @@ public class ICloudUtils {
 		}
 	}
 
+	/**
+	 * 显示数据
+	 */
+	public static String getDigitalString(double d) {
+		NumberFormat nFormat = NumberFormat.getNumberInstance();
+		nFormat.setGroupingUsed(false);
+		nFormat.setMaximumFractionDigits(2);
+		return nFormat.format(d);
+	}
+
 	public static void main(String[] args) {
-		double d = 178;
-		System.out.println(getDigitalString(d, 2));
+		double d = 178333;
+		System.out.println(getDigitalString(d));
 	}
 }
