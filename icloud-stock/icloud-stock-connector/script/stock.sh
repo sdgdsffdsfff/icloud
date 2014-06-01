@@ -10,7 +10,7 @@ libclass=com.icloud.stock.app.AppMain
 
 start() {
 test -d /data/log/stock/fetch/ || mkdir /data/log/stock/fetch/ -p
-java -Xms128M -Xmx1024M -classpath $libpath $libclass $1>> /data/log/stock/fetch/history.log 2>&1 &
+/app/jdk1.7.0_21/bin/java -Xms128M -Xmx1024M -classpath $libpath $libclass $1>> /data/log/stock/fetch/history.log 2>&1 &
 }
  
 stop() {
