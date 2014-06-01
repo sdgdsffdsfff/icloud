@@ -9,8 +9,8 @@
             </ul>
        </nav>
        <div class="search">
-       	<form method="get" action="/k">
-          <input id="quick-search" class="quick-search" name="q" type="text" autocomplete="off" placeholder="搜索 股票" class="typeahead">
+       	 <form>
+          <input id="quick-search" class="quick-search" name="stockCode" type="text" autocomplete="off" placeholder="搜索 股票" class="typeahead">
          </form>
          <span class="icon">
             <i></i>

@@ -21,4 +21,7 @@ public class AutoCompleteConstants {
 	public static final int META_FLIGHT_REGION = 7;
 	public static final int META_PRICING_INTERNATIONAL = 8;
 	public static final int META_PRICING_INTERNAL = 9;
+
+	// 我们自己的
+	public static final int META_STOCK_NAME = 10;
 }

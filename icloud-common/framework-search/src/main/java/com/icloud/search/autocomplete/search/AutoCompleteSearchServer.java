@@ -37,7 +37,7 @@ import com.icloud.tops.constants.flight.FlightAirLineConstants;
  * @description
  * @author Jiangning Cui
  * @date 2011-6-2
- * 
+ *
  */
 public abstract class AutoCompleteSearchServer<T> {
 	static final Logger logger = LoggerFactory.getLogger(AutoCompleteSearchServer.class);
@@ -279,7 +279,7 @@ public abstract class AutoCompleteSearchServer<T> {
 
 	/**
 	 * 去掉重复的汉字
-	 * 
+	 *
 	 * @param searchName
 	 * @return
 	 */
@@ -332,11 +332,11 @@ public abstract class AutoCompleteSearchServer<T> {
 		return null;
 	}
 
-	protected abstract int hotQueueSort(BeanSortedQueue<T> queue, List<T> listPinyinBean, String searchWord, Boolean isEnglish);
+	protected abstract boolean hotQueueSort(BeanSortedQueue<T> queue, List<T> listPinyinBean, String searchWord, Boolean isEnglish);
 
 	/**
 	 * 热度队列排序
-	 * 
+	 *
 	 * @param queue
 	 * @param tParam
 	 * @return
@@ -402,7 +402,7 @@ public abstract class AutoCompleteSearchServer<T> {
 
 	/**
 	 * 判断是否有重叠的叠字 条件： 连续有3个字重叠
-	 * 
+	 *
 	 * @param searchName
 	 * @return
 	 */
@@ -429,7 +429,7 @@ public abstract class AutoCompleteSearchServer<T> {
 
 	/**
 	 * 获取拼音查询query
-	 * 
+	 *
 	 * @param pinyin
 	 *            拼音串
 	 * @param field
@@ -456,7 +456,7 @@ public abstract class AutoCompleteSearchServer<T> {
 
 	/**
 	 * 英文模糊搜索
-	 * 
+	 *
 	 * @param tParam
 	 *            输入输出参数
 	 * @return >=0 成功 ; <0 失败
@@ -534,7 +534,7 @@ public abstract class AutoCompleteSearchServer<T> {
 
 	/**
 	 * 英文最小匹配单词数
-	 * 
+	 *
 	 * @param lst
 	 * @return
 	 */
@@ -606,7 +606,7 @@ public abstract class AutoCompleteSearchServer<T> {
 
 	/**
 	 * 根据查询条件query和获取的记录数，获取搜索结果到tParam.list
-	 * 
+	 *
 	 * @param query
 	 *            :查询query;recordCount 返回最多纪录数；tParam 结果集参数
 	 * @return >=0 成功 ; <0 失败
@@ -651,7 +651,7 @@ public abstract class AutoCompleteSearchServer<T> {
 
 	/**
 	 * 根据搜索词长度获取 长度限制范围
-	 * 
+	 *
 	 * @param wordCount
 	 *            搜索词字数
 	 * @return 匹配结果的最小，最大字数限制

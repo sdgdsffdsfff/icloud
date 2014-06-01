@@ -20,10 +20,11 @@ import org.slf4j.LoggerFactory;
  * @description
  * @author Jiangning Cui
  * @date 2011-6-2
- * 
+ *
  */
 public class LuceneIndexManager {
-	private static final Logger logger = LoggerFactory.getLogger(LuceneIndexManager.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(LuceneIndexManager.class);
 	private Map<String, IndexSearcher> searchPool = null;
 	private Analyzer analyzer = null;
 
@@ -50,38 +51,47 @@ public class LuceneIndexManager {
 		return this.analyzer;
 	}
 
-	public IndexSearcher buildSearcher(String indexdir, Directory directory, IndexStaticDataInteface staticDataInterface) {
+	public IndexSearcher buildSearcher(String indexdir, Directory directory,
+			IndexStaticDataInteface staticDataInterface) {
 		if (indexdir != null) {
 			IndexSearcher searcher = null;
 			searcher = searchPool.get(indexdir);
 			if (searcher != null)
 				return searcher;
-			try {
-				if (directory == null) {
-					directory = FSDirectory.open(new File(indexdir));
+			synchronized (searchPool) {
+				if (searcher == null) {
+					try {
+						if (directory == null) {
+							directory = FSDirectory.open(new File(indexdir));
+						}
+						searcher = new IndexSearcher(IndexReader.open(
+								directory, false));
+					} catch (CorruptIndexException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						searcher = null;
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						searcher = null;
+					} catch (Exception e) {
+						e.printStackTrace();
+						searcher = null;
+					}
+					if (staticDataInterface != null) {
+						staticDataInterface.loadIndexData(searcher);
+					}
+					if (searcher != null) {
+						logger.info("index " + indexdir + " open succeed!"
+								+ " Doc num is:"
+								+ searcher.getIndexReader().maxDoc());
+						searchPool.put(indexdir, searcher);
+					} else {
+						logger.error("index " + indexdir + " open error!");
+					}
 				}
-				searcher = new IndexSearcher(IndexReader.open(directory, false));
-			} catch (CorruptIndexException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				searcher = null;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				searcher = null;
-			} catch (Exception e) {
-				e.printStackTrace();
-				searcher = null;
 			}
-			if (staticDataInterface != null) {
-				staticDataInterface.loadIndexData(searcher);
-			}
-			if (searcher != null) {
-				logger.info("index " + indexdir + " open succeed!" + " Doc num is:" + searcher.getIndexReader().maxDoc());
-				searchPool.put(indexdir, searcher);
-			} else {
-				logger.error("index " + indexdir + " open error!");
-			}
+
 			// searcher.setSimilarity(new SimilarityDelegator(searcher
 			// .getSimilarity()) {
 			// public float tf(float freq) {
@@ -97,7 +107,8 @@ public class LuceneIndexManager {
 		return null;
 	}
 
-	public IndexSearcher buildSearcher(String indexdir, IndexStaticDataInteface staticDataInterface) {
+	public IndexSearcher buildSearcher(String indexdir,
+			IndexStaticDataInteface staticDataInterface) {
 		return buildSearcher(indexdir, null, staticDataInterface);
 	}
 
@@ -109,7 +120,8 @@ public class LuceneIndexManager {
 	// }
 	// }
 
-	public synchronized String reOpenIndex(String indexPath, Directory directory, IndexStaticDataInteface staticDataInterface) {
+	public synchronized String reOpenIndex(String indexPath,
+			Directory directory, IndexStaticDataInteface staticDataInterface) {
 		if (indexPath == null)
 			return "indexPath is null";
 		StringBuffer sb = new StringBuffer();
@@ -126,10 +138,13 @@ public class LuceneIndexManager {
 			searchPool.put(indexPath, newIndex);
 			Thread.sleep(100);
 			if (ci != null) {
-				sb.append(" old version: ").append(ci.getIndexReader().getVersion());
+				sb.append(" old version: ").append(
+						ci.getIndexReader().getVersion());
 				ci.close();
 			}
-			sb.append(" new version: ").append(IndexReader.getCurrentVersion(directory)).append(" reopen succeed!\n");
+			sb.append(" new version: ")
+					.append(IndexReader.getCurrentVersion(directory))
+					.append(" reopen succeed!\n");
 			return sb.toString();
 		} catch (IOException e) {
 			logger.error("index " + indexPath + " not found!");
@@ -141,7 +156,8 @@ public class LuceneIndexManager {
 		return sb.toString();
 	}
 
-	public String reOpenIndex(String indexPath, IndexStaticDataInteface staticDataInterface) {
+	public String reOpenIndex(String indexPath,
+			IndexStaticDataInteface staticDataInterface) {
 		return reOpenIndex(indexPath, null, staticDataInterface);
 	}
 }

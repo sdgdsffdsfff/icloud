@@ -6,14 +6,18 @@ import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.icloud.framework.core.wrapper.PageView;
 import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.stock.baseaction.BaseStockController;
 import com.icloud.front.stock.pojo.BaseStockMenu;
+import com.icloud.front.stock.pojo.StockBean;
+import com.icloud.front.stock.pojo.StockCompleteResult;
 import com.icloud.front.stock.pojo.StockMenuBean;
 import com.icloud.stock.model.Stock;
 import com.icloud.stock.model.StockDateHistory;
@@ -69,6 +73,27 @@ public class StockController extends BaseStockController {
 		if (ICloudUtils.isNotNull(stockCode)) {
 			Stock stock = this.stockDetailBussiness
 					.getStockByStockCode(stockCode);
+			/**
+			 * if stock 为空的时候,做其他的处理
+			 */
+			if (!ICloudUtils.isNotNull(stock)) {
+				int index = stockCode.indexOf("(");
+				if (index != -1) {
+					stockCode = stockCode.substring(0, index);
+				}
+				/**
+				 * 进行搜索
+				 */
+				List<StockBean> list = this.stockNameSearcher.search(stockCode,
+						10);
+				if (!ICloudUtils.isEmpty(list)) {
+					StockBean bean = list.get(0);
+					stockCode = bean.getStockCode();
+					stock = this.stockDetailBussiness
+							.getStockByStockCode(stockCode);
+				}
+			}
+
 			StockDetail detail = this.stockDetailBussiness
 					.getStockDetailByStockCode(stockCode);
 			if (ICloudUtils.isNotNull(stock)) {
@@ -103,5 +128,14 @@ public class StockController extends BaseStockController {
 			}
 		}
 		return model;
+	}
+
+	@RequestMapping("/stockSearch")
+	@ResponseBody
+	public String stockSearch(@RequestParam(required = true) String keyword) {
+		List<StockBean> list = this.stockNameSearcher.search(keyword, 10);
+		Gson gson = new Gson();
+		return gson.toJson(StockCompleteResult
+				.convertToStockCompleteResult(list));
 	}
 }

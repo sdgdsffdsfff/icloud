@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.icloud.stock.business.PersonService;
 import com.icloud.stock.model.Category;
 import com.icloud.stock.model.StockDetail;
+import com.icloud.stock.search.service.StockNameSearcher;
 import com.icloud.stock.service.ICategoryService;
 import com.icloud.stock.service.ICategoryStockService;
 import com.icloud.stock.service.IStockDetailService;
@@ -32,6 +33,9 @@ public class StockServiceTest {
 
 	@Resource(name = "stockDetailService")
 	private IStockDetailService stockDetailService;
+
+	@Resource(name = "stockNameSearcher")
+	protected StockNameSearcher stockNameSearcher;
 
 	@Test
 	public void getAllStock() {

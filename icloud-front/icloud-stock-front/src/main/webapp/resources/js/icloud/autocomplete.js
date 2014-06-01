@@ -1,27 +1,17 @@
-/**股票名称自动补全*/
+/** 股票名称自动补全 */
 function stockNameAutoComplete() {
-    $("#quick-search").bigAutocomplete({
-        data: [{
-                title: "book"
-            },
-            {
-                title: "blue"
-            },
-            {
-                title: "fool"
-            },
-            {
-                title: "bus"
-            }],
-        callback: function (data) {
-            alert(data);
-        }
-    });
-//     var url_ = "ajax.php";
-//    $("#nn").bigAutocomplete({url:url_});
+	var url_ = "stockSearch";
+	$("#quick-search").bigAutocomplete(
+			{
+				url : url_,
+				callback : function(data) {
+					var redirecturl = "stockBaseDetail?stockCode="
+							+ data.result + "&type=-1;"
+					window.open(redirecturl);
+				}
+			});
 }
 
-
-$(document).ready(function () {
-    stockNameAutoComplete();
+$(document).ready(function() {
+	stockNameAutoComplete();
 });
