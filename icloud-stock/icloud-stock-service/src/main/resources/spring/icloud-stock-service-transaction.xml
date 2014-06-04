@@ -20,10 +20,71 @@
 				/> <tx:method name="get*" read-only="true" propagation="NOT_SUPPORTED" /> -->
 		</tx:attributes>
 	</tx:advice>
+
+
+	<tx:advice id="stock-repeatedReadTxAdvice"
+		transaction-manager="transactionManager">
+		<!-- the transactional semantics... -->
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" isolation="REPEATABLE_READ"
+				rollback-for="Throwable" />
+		</tx:attributes>
+	</tx:advice>
+
+	<tx:advice id="stock-readCommitedTxAdvice"
+		transaction-manager="transactionManager">
+		<!-- the transactional semantics... -->
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" isolation="READ_COMMITTED"
+				rollback-for="Throwable" />
+		</tx:attributes>
+	</tx:advice>
+
+	<tx:advice id="stock-readCommitedTxAdvice-REQUIRES_NEW"
+		transaction-manager="transactionManager">
+		<!-- the transactional semantics... -->
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRES_NEW" isolation="READ_COMMITTED"
+				rollback-for="Throwable" />
+		</tx:attributes>
+	</tx:advice>
+
+
 	<aop:config>
 		<aop:advisor
+			pointcut="execution(* com.icloud.stock.service.impl.CategoryServiceImpl.*(..))"
+			advice-ref="stock-repeatedReadTxAdvice" />
+
+		<aop:advisor
+			pointcut="execution(* com.icloud.stock.service.impl.CategoryStockServiceImpl.*(..))"
+			advice-ref="stock-repeatedReadTxAdvice" />
+		<aop:advisor
+			pointcut="execution(* com.icloud.stock.service.impl.StockDateHistoryServiceImpl.*(..))"
+			advice-ref="stock-repeatedReadTxAdvice" />
+		<aop:advisor
+			pointcut="execution(* com.icloud.stock.service.impl.StockDetailServiceImpl.*(..))"
+			advice-ref="stock-repeatedReadTxAdvice" />
+		<aop:advisor
+			pointcut="execution(* com.icloud.stock.service.impl.StockDivinePriceServiceImpl.*(..))"
+			advice-ref="stock-repeatedReadTxAdvice" />
+		<aop:advisor
 			pointcut="execution(* com.icloud.stock.service.impl.StockServiceImpl.*(..))"
-			advice-ref="stockAdvice" />
+			advice-ref="stock-repeatedReadTxAdvice" />
+
+
+		<aop:advisor
+			pointcut="execution(* com.icloud.user.service.impl.SessionServiceImpl.*(..))"
+			advice-ref="stock-repeatedReadTxAdvice" />
+
+		<aop:advisor
+			pointcut="execution(* com.icloud.user.service.impl.UserAccessServiceImpl.*(..))"
+			advice-ref="stock-repeatedReadTxAdvice" />
+		<aop:advisor
+			pointcut="execution(* com.icloud.user.service.impl.UserServiceImpl.*(..))"
+			advice-ref="stock-repeatedReadTxAdvice" />
+		<aop:advisor
+			pointcut="execution(* com.icloud.user.service.impl.UserStockFocusServiceImpl.*(..))"
+			advice-ref="stock-repeatedReadTxAdvice" />
 	</aop:config>
 
 </beans>
