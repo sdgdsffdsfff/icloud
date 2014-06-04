@@ -1,6 +1,6 @@
 /** 股票名称自动补全 */
 function stockNameAutoComplete() {
-	var url_ = "stockSearch";
+	var url_ = basepath + '/stock/stockSearch';
 	$("#quick-search").bigAutocomplete(
 			{
 				url : url_,

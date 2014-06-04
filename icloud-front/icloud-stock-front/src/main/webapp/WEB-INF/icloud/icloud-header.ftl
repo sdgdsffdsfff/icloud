@@ -21,7 +21,7 @@
             <li class="first"><a href="#">注册</a></li>
             <li><a href="#">登录</a></li>
             <li><span class="hyper-link">
-                <u>崔江宁</u>
+                <u>我的用户</u>
                 <i class="arrow-down"></i>
                 <div class="hyper-text">
                     <a href="#">我的应用</a>
@@ -30,6 +30,6 @@
             </span></li>
             </ul>
           </nav>
-        </div>
+    </div>
 </header>
 </#macro>
