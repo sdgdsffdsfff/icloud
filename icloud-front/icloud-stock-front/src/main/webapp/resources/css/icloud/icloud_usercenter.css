@@ -222,12 +222,7 @@
     width: 778px;
     margin-left: 20px;
 }
-.us-body {} .us-title span {
-    float: left;
-    height: 26px;
-    padding-right: 10px;
-    border-bottom: 2px solid #f1634c;
-}
+.us-body {}
 /** us end*/
 
 /** us-content start */
@@ -253,6 +248,119 @@
 }
 /** us-content end */
 
+/* tab切换 */
+
+.tab_change {
+    width: 100%;
+    background: #f8f8f8;
+    border-bottom: 1px solid #e1e1e1;
+}
+.tab_change li {
+    float: left;
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #636363;
+}
+.tab_change li em {
+    float: left;
+    min-width: 65px;
+    text-align: center;
+    padding: 0 15px;
+    font-weight: bold;
+    border-left: 1px solid #e1e1e1;
+    margin-left: -1px;
+}
+/**  modifyPayPw**/
+
+.modifyPayPw {
+    padding: 10px 0 10px 5px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e1e1e1;
+    font-size: 14px;
+    font-weight: bold;
+    color: #505050;
+}
+.modifyPayPw_tab {
+    margin-top: 30px;
+    color: #636363;
+}
+.modifyPayPw_tab td {
+    line-height: 40px;
+}
+.modifyPayPw_tab td input {
+    width: 160px;
+    line-height: 22px;
+    height: 22px;
+}
+.modifyPayPw_tab td:first-child {
+    text-align: right;
+}
+.usRightContent {
+    border: 1px solid #e1e1e1;
+    background-color: #fff;
+}
+.usRightContent {
+    border: 1px solid #e1e1e1;
+    background-color: #fff;
+}
+.amendPwSucceed,
+.amendPwDefeated {
+    padding: 25px;
+    background: #fafadb;
+    font-size: 16px;
+    font-weight: bold;
+    color: #636363;
+    line-height: 36px;
+    border: 1px solid #dcc791;
+    margin-bottom: 10px;
+}
+.amendPwSucceed em {
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    background: url(../../images/icloud/succeed.png) no-repeat;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.amendPwDefeated em {
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    background: url(../../images/icloud/wrong.png) no-repeat;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+/**user successful*/
+
+.usersuccessful {
+    color: #636363;
+    background: url('../..//images/icloud/succeed.png') no-repeat 20px 50% #FAFADB;
+    line-height: 64px;
+    height: 64px;
+    padding-left: 65px;
+    font-size: 16px;
+    font-weight: bold;
+}
+/** 信息维护*/
+
+.tabPanel {
+    padding: 12px
+}
+.tabPanel td,
+.addstaff td {
+    padding: 5px 0;
+    height: 30px;
+    color: #636363
+}
+.us-content input[type=text].disabled {
+    border: none
+}
+.btn_modifyPassword {
+    color: #CF6B00;
+    padding-left: 10px;
+    text-decoration: none
+}
 /** i.ucnav start **/
 
 i.ucnav_03 {
@@ -321,3 +429,12 @@ i.ico_shengcangguidign {
     height: 33px;
 }
 /** i ucnav end */
+
+input[type=text],
+input[type=password] {
+    border: 1px solid #ABADB3;
+    height: 23px;
+    width: 134px;
+    padding: 0 2px;
+    line-height: 23px \9;
+}
