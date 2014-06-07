@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>必有股票-可能是最懂股票的网站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <link rel="stylesheet" href="../css/icloud/icloud_reset.css" media="all" />
+    <link rel="stylesheet" href="../css/icloud/icloud.css" media="screen" />
+    <link rel="stylesheet" href="../css/icloud/stock.css" media="screen" />
+    <link rel="stylesheet" href="../css/icloud/icloud_usercenter.css" media="screen" />
+    <script type="text/javascript" src="../js/common/jquery.min.js"></script>
+    <!--[if IE]>
+    <script src="../js/common/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../js/common/echarts-plain-map.js"></script>
+    <script type="text/javascript" src="../js/icloud/icloud.js"></script>
+    <script type="text/javascript" src="../js/icloud/menu.js"></script>
+    <script type="text/javascript" src="../js/icloud/exampledata.js"></script>
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <header class="main-header">
+            <div class="header-wrapper" />
+            <div class="main-menu">
+                <a class="logo" href="/">
+                    <h1>必有股票</h1>
+                </a>
+                <nav class="main-nav">
+                    <ul class="clearfix">
+                        <li class="first active">
+                            <a herf="#">上海股票</a>
+                        </li>
+                        <li>
+                            <a herf="#">深圳股票</a>
+                        </li>
+                        <li>
+                            <a herf="#">历史记录</a>
+                        </li>
+                    </ul>
+                </nav>
+                <nav class="main-links">
+                    <ul class="clearfix">
+                        <li class="first">
+                            <a href="#">注册</a>
+                        </li>
+                        <li>
+                            <a href="#">登录</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </header>
+
+        <section class="main-body clearfix">
+            <div class="regist">
+                <!--regist start-->
+                <div class="chief">
+                    <h3>会员注册</h3>
+                </div>
+                <div class="message">
+                    <!--message start-->
+                    <h3>账号信息</h3>
+                    <table cellpadding="0" cellspacing="0" class="mes_tab">
+                        <colgroup>
+                            <col width="150px" />
+                        </colgroup>
+                        <tr>
+                            <td>
+                                <i>*</i>用户名</td>
+                            <td>
+                                <input type="text" />
+                                <em>字母开头，由4～16个数字或字母组成。</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i>*</i>电子邮箱</td>
+                            <td>
+                                <input type="text" />
+                                <em>此邮箱用户找回密码等服务，请确保地址正确。</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i>*</i>设置密码</td>
+                            <td>
+                                <input type="text" />
+                                <em>4~20位数字或者字母的组合，区分大小写。</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i>*</i>确认密码</td>
+                            <td>
+                                <input type="text" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i>*</i>客户类型</td>
+                            <td>
+                                <label>
+                                    <input type="radio" checked="" name="type" />公司</label>
+                                <label>
+                                    <input type="radio" name="type" />个人</label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--message end-->
+
+                <div class="company">
+                    <!--company start-->
+                    <div class="message">
+                        <!--message start-->
+                        <h3>公司信息</h3>
+                        <table cellpadding="0" cellspacing="0" class="mes_tab">
+                            <colgroup>
+                                <col width="150px" />
+                            </colgroup>
+                            <tr>
+                                <td>
+                                    <i>*</i>公司类型</td>
+                                <td>
+                                    <label>
+                                        <input type="radio" checked="" name="type1" />旅行社</label>
+                                    <label>
+                                        <input type="radio" name="type1" />企业</label>
+                                    <label>
+                                        <input type="radio" name="type1" />加盟店</label>
+                                    <label>
+                                        <input type="radio" name="type1" />会展公司</label>
+                                    <label>
+                                        <input type="radio" name="type1" />不夜城分部</label>
+                                    <label>
+                                        <input type="radio" name="type1" />其他</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i>*</i>公司名称</td>
+                                <td>
+                                    <input type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i>*</i>公司简称</td>
+                                <td>
+                                    <input type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i>*</i>公司地区</td>
+                                <td>
+                                    <select name="sheng" style="width:88px;" data-role="dropdownlist">
+                                        <option>上海市</option>
+                                        <option>浙江省</option>
+                                        <option>安徽省</option>
+                                    </select>
+                                    <select name="city" style="width:88px;" data-role="dropdownlist">
+                                        <option>上海市</option>
+                                    </select>
+                                    <select name="street" style="width:88px;" data-role="dropdownlist">
+                                        <option>闸北区</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i>*</i>详细地址</td>
+                                <td>
+                                    <input type="text" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!--message end-->
+
+                    <div class="empty"></div>
+
+                    <div class="message">
+                        <!--message start-->
+                        <h3>公司负责人信息</h3>
+                        <table cellpadding="0" cellspacing="0" class="mes_tab">
+                            <colgroup>
+                                <col width="150px" />
+                            </colgroup>
+                            <tr>
+                                <td>
+                                    <i>*</i>姓名</td>
+                                <td>
+                                    <input type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i>*</i>电子邮箱</td>
+                                <td>
+                                    <input type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i>*</i>手机号码</td>
+                                <td class="hint">
+                                    <input type="text" />
+                                    <small>
+                                        <span></span>请填写手机号码</small>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i>*</i>办公电话</td>
+                                <td>
+                                    <input type="text" name="" id="" placeholder="区号" style="width:40px;" />-
+                                    <input value="" style="width:100px;" type="text" name="" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>QQ</td>
+                                <td>
+                                    <input type="text" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!--message end-->
+                </div>
+                <!--company end-->
+
+                <div class="message">
+                    <!--message start-->
+                    <h3>主要业务联系人信息</h3>
+                    <table cellpadding="0" cellspacing="0" class="mes_tab">
+                        <colgroup>
+                            <col width="150px" />
+                        </colgroup>
+                        <tr>
+                            <td>
+                                <i>*</i>姓名</td>
+                            <td>
+                                <input type="text" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i>*</i>电子邮箱</td>
+                            <td>
+                                <input type="text" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i>*</i>手机号码</td>
+                            <td>
+                                <input type="text" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i>*</i>办公电话</td>
+                            <td>
+                                <input type="text" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>QQ</td>
+                            <td>
+                                <input type="text" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <textarea></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <label>
+                                    <input type="checkbox" />我愿意接受某某某某协议</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <a class="adaptiveButton brightRed_btn">
+                                    <span class="left"></span>
+                                    <span class="center">注 册</span>
+                                    <span class="right"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--message end-->
+
+            </div>
+            <!--regist start-->
+
+        </section>
+
+        <div class="clear"></div>
+        <footer class="main-footer">
+            <center>
+                <a href="#">关于必有</a>
+                <i class="bar">|</i>
+                <a href="#">联系方式</a>
+                <i class="bar">|</i>
+                <a href="#">问题反馈</a>
+            </center>
+            <center>
+                Copyright &copy; 2014 必有网 All Rights Reserved.
+            </center>
+            <center class="copyright">
+                提示：投资有风险，入行需谨慎。
+            </center>
+        </footer>
+    </div>
+</body>
+
+</html>

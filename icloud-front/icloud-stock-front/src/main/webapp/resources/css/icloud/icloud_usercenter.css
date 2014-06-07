@@ -1,0 +1,323 @@
+@charset "utf-8";
+
+/* 重置页面头部*/
+
+.chief {
+    border-bottom: 1px solid #e1e1e1;
+    background: #f8f8f8;
+    padding-top: 10px;
+}
+.chief h3 {
+    width: 10%;
+    font-size: 14px;
+    font-weight: bold;
+    color: #f1634c;
+    border-bottom: 2px solid #f1634c;
+    padding: 0 0 10px 10px;
+    margin-bottom: -1px;
+    margin-left: 10px;
+}
+.regist {
+    border: 1px solid #e1e1e1;
+    color: #636363;
+    background: #fff;
+}
+/**register  start**/
+
+.message {
+    width: 75%;
+    margin: 20px auto;
+}
+.message h3 {
+    font-size: 14px;
+    font-weight: bold;
+    padding-bottom: 7px;
+    border-bottom: 1px dashed #e1e1e1;
+}
+.mes_tab {
+    margin-top: 15px;
+}
+.mes_tab td {
+    line-height: 30px;
+    padding: 5px 0;
+}
+.mes_tab input {
+    width: 270px;
+    height: 25px;
+    border: 1px solid #abadb3;
+    line-height: 25px;
+    padding-left: 3px;
+}
+.mes_tab td:first-child {
+    text-align: right;
+    padding-right: 15px;
+    font-size: 14px;
+}
+.mes_tab i {
+    color: #ff0000;
+}
+.mes_tab em {
+    color: #9d9d9d;
+    margin-left: 10px;
+}
+.mes_tab label {
+    margin-right: 30px;
+}
+.mes_tab label input {
+    width: auto;
+    border: 0;
+    vertical-align: middle;
+}
+.mes_tab select {
+    width: 132px;
+    margin-right: 5px;
+    height: 25px;
+    line-height: 25px;
+}
+/**register  end**/
+
+/** successful start**/
+
+.successful {
+    margin: 130px 0 0;
+    color: #636363;
+    text-align: center;
+}
+.successful h3 {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 36px;
+}
+.successful h3 em {
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    background: url(../../images/icloud/succeed.png) no-repeat left center;
+    vertical-align: middle;
+}
+.successful div {
+    margin: 15px 0;
+}
+.successful ul {
+    margin-left: 447px;
+}
+.successful ul li {
+    float: left;
+    margin-right: 20px;
+}
+.successful ul li a {
+    text-decoration: underline;
+    color: inherit;
+}
+.successful ul li a:hover {
+    color: #e52c48;
+}
+/** successful end**/
+
+/** title start*/
+
+.title {
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #e1e1e1;
+    padding: 0 15px;
+    color: #f1634c;
+    font-size: 16px;
+    font-weight: bold;
+}
+.title strong {
+    padding: 0 25px 0 10px;
+    line-height: 40px;
+    font-weight: bold;
+    display: inline-block;
+    border-bottom: 2px solid #f1634c;
+    position: relative;
+    top: 1px;
+}
+/** title end*/
+
+/** find_password start*/
+
+.find_password {
+    width: 550px;
+    margin: 40px auto;
+    color: #636363;
+}
+.find_password li {
+    padding: 10px 0px;
+    line-height: 30px;
+}
+.find_password label div {
+    float: left;
+    width: 145px;
+    text-align: right;
+    padding: 0 10px 0 0;
+}
+.find_password p {
+    padding: 5px 0;
+}
+/** find_password end*/
+
+/** us-nav start**/
+
+.us-bind {
+    padding: 10px;
+}
+.us-bind a {
+    padding: 3px 0;
+}
+.us-nav a {
+    color: #505050;
+}
+.us-nav dd a {
+    display: block;
+    padding: 10px 30px;
+}
+.us-nav dd a:hover {
+    text-decoration: underline;
+}
+.us-nav .current {
+    color: #fff;
+    background-color: #F1634C;
+}
+.us-nav .text1 {
+    color: #e94749;
+}
+.us-nav i {
+    margin-right: 5px;
+    vertical-align: text-bottom;
+    display: inline-block;
+    background: url(../../images/icloud/ucnavs.png) no-repeat;
+}
+.us-nav dt i {
+    width: 16px;
+}
+.us-nav .ic-j {
+    padding-left: 15px;
+}
+.us-nav .ic-j i {
+    vertical-align: middle;
+}
+.us-nav {
+    float: left;
+    width: 180px;
+    background-color: #F8F8F8;
+    color: #505050;
+    border: 1px solid #E1E1E1;
+}
+.us-nav dt {
+    background-color: #EAEAEA;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.us-nav h3 {
+    font-weight: bold;
+    font-size: 16px;
+    background-color: #EAEAEA;
+    padding: 10px;
+    border-bottom: 2px solid #F1634C;
+}
+.us-content {
+    float: left;
+    width: 778px;
+    margin-left: 20px;
+}
+.us-body {} .us-title span {
+    float: left;
+    height: 26px;
+    padding-right: 10px;
+    border-bottom: 2px solid #f1634c;
+}
+/** us end*/
+
+/** us-content start */
+
+.us-content {
+    float: left;
+    width: 788px;
+    margin-left: 10px;
+}
+.us-body {
+    border: 1px solid #E1E1E1;
+    width: 100%;
+    background-color: #fff;
+}
+.us-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #505050;
+    border-bottom: 1px solid #E1E1E1;
+    padding: 10px 5px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+/** us-content end */
+
+/** i.ucnav start **/
+
+i.ucnav_03 {
+    background-position: 0 0;
+    width: 12px;
+    height: 12px;
+}
+i.ucnav_07 {
+    background-position: 0 -62px;
+    width: 17px;
+    height: 17px;
+}
+i.ucnav_10 {
+    background-position: 0 -129px;
+    width: 17px;
+    height: 15px;
+}
+i.ucnav_12 {
+    background-position: 0 -194px;
+    width: 16px;
+    height: 15px;
+}
+i.ucnav_15 {
+    background-position: 0 -259px;
+    width: 16px;
+    height: 13px;
+}
+i.ucnav_17 {
+    background-position: 0 -322px;
+    width: 16px;
+    height: 14px;
+}
+i.ucnav_19 {
+    background-position: 0 -386px;
+    width: 14px;
+    height: 15px;
+}
+i.ucnav_22 {
+    background-position: 0 -451px;
+    width: 15px;
+    height: 16px;
+}
+i.ucnav_26 {
+    background-position: 0 -517px;
+    width: 14px;
+    height: 14px;
+}
+i.ucnav_29 {
+    background-position: 0 -581px;
+    width: 34px;
+    height: 33px;
+}
+i.ucnav_32 {
+    background-position: 0 -664px;
+    width: 34px;
+    height: 33px;
+}
+i.ico_tuifeipiaoguiding {
+    background-position: 0 -720px;
+    width: 34px;
+    height: 33px;
+}
+i.ico_shengcangguidign {
+    background-position: 0 -760px;
+    width: 34px;
+    height: 33px;
+}
+/** i ucnav end */

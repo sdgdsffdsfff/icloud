@@ -5,7 +5,7 @@
 	<session-factory>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.password">Qaz12345</property>
-		<property name="hibernate.connection.url">jdbc:mysql://103.242.109.49:3306/icloud?autoReconnect=true&characterEncoding=UTF-8&amp;</property>
+		<property name="hibernate.connection.url">jdbc:mysql://103.242.109.49:3306/icloud?autoReconnect=true&amp;characterEncoding=UTF-8&amp;</property>
 		<property name="hibernate.connection.username">wordpress</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="show_sql">false</property>
