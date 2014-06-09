@@ -46,6 +46,11 @@ input[type=text],input[type=password] {
 .us-nav .ic-j i{
     vertical-align:middle;
 }
+i.ucnav_03 {
+background-position: 0 0;
+width: 12px;
+height: 12px;
+}
 .us-content{
     float:left;
     width:788px;
@@ -60,7 +65,7 @@ input[type=text],input[type=password] {
     font-size:14px;
     font-weight:bold;
     color:#505050;
-    border-bottom:1px solid #E1E1E1;
+    border-bottom:1px solid #E1E1E1;    
     padding:10px 5px;
     margin-bottom:10px;
 	width:100%;

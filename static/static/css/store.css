@@ -1273,10 +1273,10 @@ input[type=checkbox],input[type=radio] { margin-right:3px; vertical-align: text-
 
 .dashed_topbor{ border-top:1px dashed #e4e4e4;}
 
-.process_step {text-align:left;border-bottom:2px solid #e1e1e1;color #e1e1e1;position:relative;}
-.process_step li {color:#c8c8c8;margin:0 75px 0 0 ;display:block;float:left;position:relative;top:2px;}
-.process_step .txt {padding:5px 0;font-size:16px;font-weight:bold;}
-.process_step .current {color:#4bae10;border-bottom:2px solid #4bae10;}
+    .process_step {text-align:left;border-bottom:2px solid #e1e1e1;color #e1e1e1;position:relative;}
+    .process_step li {color:#c8c8c8;margin:0 75px 0 0 ;display:block;float:left;position:relative;top:2px;}
+    .process_step .txt {padding:5px 0;font-size:16px;font-weight:bold;}
+    .process_step .current {color:#4bae10;border-bottom:2px solid #4bae10;}
 
 .toggle_trigger {cursor:pointer;}
 
