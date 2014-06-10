@@ -51,4 +51,18 @@ public class ICloudUserManagerController extends BaseStockController {
 				"user/manager/icloud-user-findpwd-step04");
 		return model;
 	}
+
+	@RequestMapping("/icloudLogin")
+	public ModelAndView icloudLogin() {
+		ModelAndView model = new ModelAndView(
+				"user/manager/icloud-user-login");
+		return model;
+	}
+
+	@RequestMapping("/icloudLogout")
+	public ModelAndView icloudLogout() {
+		ModelAndView model = new ModelAndView(
+				"user/manager/icloud-user-logout");
+		return model;
+	}
 }

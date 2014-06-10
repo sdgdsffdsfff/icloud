@@ -1,3 +1,5 @@
+<#import "/icloud/icloud-main-container.ftl" as imc/>
+<@imc.mainContainer current="行情"  jsFiles=[] cssFiles=['icloud/icloud_usercenter.css'] >
 <div class="row gray-border" style="margin-top:20px;">
     <h3 class="title">
         <strong>登录</strong>
@@ -29,3 +31,4 @@
         </ul>
     </div>
 </div>
+</@imc.mainContainer>

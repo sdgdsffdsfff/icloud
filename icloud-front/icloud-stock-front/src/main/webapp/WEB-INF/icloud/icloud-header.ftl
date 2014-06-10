@@ -19,7 +19,7 @@
        <nav class="main-links">
           <ul class="clearfix">
             <li class="first"><a href="${basepath}/userManager/registerView">注册</a></li>
-            <li><a href="#">登录</a></li>
+            <li><a href="${basepath}/userManager/icloudLogin">登录</a></li>
             <li><span class="hyper-link">
                 <u>我的用户</u>
                 <i class="arrow-down"></i>
