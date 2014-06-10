@@ -1,61 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<#import "/icloud/icloud-main-container.ftl" as imc/>
 
-<head>
-    <meta charset="UTF-8">
-    <title>必有股票-可能是最懂股票的网站</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <link rel="stylesheet" href="../css/icloud/icloud_reset.css" media="all" />
-    <link rel="stylesheet" href="../css/icloud/icloud.css" media="screen" />
-    <link rel="stylesheet" href="../css/icloud/stock.css" media="screen" />
-    <link rel="stylesheet" href="../css/icloud/icloud_usercenter.css" media="screen" />
-    <script type="text/javascript" src="../js/common/jquery.min.js"></script>
-    <!--[if IE]>
-    <script src="../js/common/html5.js"></script>
-    <![endif]-->
-    <script type="text/javascript" src="../js/common/echarts-plain-map.js"></script>
-    <script type="text/javascript" src="../js/icloud/icloud.js"></script>
-    <script type="text/javascript" src="../js/icloud/menu.js"></script>
-    <script type="text/javascript" src="../js/icloud/exampledata.js"></script>
-</head>
-
-<body>
-    <div class="main-wrapper">
-        <header class="main-header">
-            <div class="header-wrapper" />
-            <div class="main-menu">
-                <a class="logo" href="/">
-                    <h1>必有股票</h1>
-                </a>
-                <nav class="main-nav">
-                    <ul class="clearfix">
-                        <li class="first active">
-                            <a herf="#">上海股票</a>
-                        </li>
-                        <li>
-                            <a herf="#">深圳股票</a>
-                        </li>
-                        <li>
-                            <a herf="#">历史记录</a>
-                        </li>
-                    </ul>
-                </nav>
-                <nav class="main-links">
-                    <ul class="clearfix">
-                        <li class="first">
-                            <a href="#">注册</a>
-                        </li>
-                        <li>
-                            <a href="#">登录</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-
-        </header>
-
-        <section class="main-body clearfix">
-            <div class="regist">
+<@imc.mainContainer current="行情"  jsFiles=[] cssFiles=['icloud/icloud_usercenter.css'] >
+<div class="regist">
                 <!--regist start-->
                 <div class="chief">
                     <h3>会员注册</h3>
@@ -300,29 +246,6 @@
                     </table>
                 </div>
                 <!--message end-->
-
             </div>
             <!--regist end-->
-
-        </section>
-
-        <div class="clear"></div>
-        <footer class="main-footer">
-            <center>
-                <a href="#">关于必有</a>
-                <i class="bar">|</i>
-                <a href="#">联系方式</a>
-                <i class="bar">|</i>
-                <a href="#">问题反馈</a>
-            </center>
-            <center>
-                Copyright &copy; 2014 必有网 All Rights Reserved.
-            </center>
-            <center class="copyright">
-                提示：投资有风险，入行需谨慎。
-            </center>
-        </footer>
-    </div>
-</body>
-
-</html>
+</@imc.mainContainer>

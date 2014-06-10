@@ -18,7 +18,7 @@
        </div>
        <nav class="main-links">
           <ul class="clearfix">
-            <li class="first"><a href="#">注册</a></li>
+            <li class="first"><a href="${basepath}/user/registerView">注册</a></li>
             <li><a href="#">登录</a></li>
             <li><span class="hyper-link">
                 <u>我的用户</u>

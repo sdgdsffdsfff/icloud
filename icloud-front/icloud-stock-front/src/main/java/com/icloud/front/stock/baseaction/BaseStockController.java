@@ -8,6 +8,8 @@ import com.icloud.front.stock.bussiness.menu.StockCommonBussiness;
 import com.icloud.front.stock.bussiness.seo.BuuyuuSeoBussiness;
 import com.icloud.front.stock.bussiness.view.StockListBussiness;
 import com.icloud.stock.search.service.StockNameSearcher;
+import com.icloud.user.business.manager.UserAdminBusiness;
+import com.icloud.user.business.operation.UserLogOperationBusiness;
 
 public class BaseStockController {
 	@Resource(name = "stockCommonBussiness")
@@ -20,6 +22,10 @@ public class BaseStockController {
 	protected BuuyuuSeoBussiness buuyuuSeoBussiness;
 	@Resource(name = "stockNameSearcher")
 	protected StockNameSearcher stockNameSearcher;
+	@Resource(name = "userAdminBusiness")
+	protected UserAdminBusiness userAdminBusiness;
+	@Resource(name = "userLogOperationBusiness")
+	protected UserLogOperationBusiness userLogOperationBusiness;
 
 	protected Gson gson = new Gson();
 
