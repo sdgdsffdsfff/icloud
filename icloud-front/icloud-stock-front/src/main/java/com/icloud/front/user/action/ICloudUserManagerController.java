@@ -14,6 +14,7 @@ public class ICloudUserManagerController extends BaseStockController {
 	public ModelAndView registerView() {
 		ModelAndView model = new ModelAndView(
 				"user/manager/icloud-user-register-view");
+
 		return model;
 	}
 
