@@ -27,6 +27,6 @@ public class BaseStockController {
 	@Resource(name = "userLogOperationBusiness")
 	protected UserLogOperationBusiness userLogOperationBusiness;
 
-	protected Gson gson = new Gson();
+	protected static Gson gson = new Gson();
 
 }
