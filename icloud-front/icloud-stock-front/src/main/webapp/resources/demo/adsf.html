@@ -1,25 +1,90 @@
-<div class="row gray-border" style="margin-top:20px;">
-    <h3 class="title">
-        <strong>退出登录</strong>
-    </h3>
-    <div class="row" style="height:270px;">
-        <div class="successful">
-            <h3>
-                <em></em>退出登录成功</h3>
-            <div>欢迎使用本站。</div>
-            <ul class="clearfix">
-                <li>
-                    <a href="#">国内机票</a>
-                </li>
-                <li>
-                    <a href="#">国际机票</a>
-                </li>
-                <li>
-                    <a href="#">酒店</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title></title>
+<script type="text/javascript" src="../js/common/jquery.min.js"></script>
+<script type="text/javascript" src="../js/common/jquery.validate.js"></script>
+</head>
 
+<body>
+	<script type="text/javascript">
+	<!--
+		$(function() {
 
+			$.validator.addMethod("isMobile", function(value, element, params) {
+				return this.optional(element) || value == '13420642222';
+			}, "请填入正确的手机号码！");
+
+			var v = $("#form1").validate({
+				rules : {
+					text1 : {
+						required : true
+					},
+					text2 : {
+						required : true,
+						email : true
+					},
+					text4 : {
+						required : true,
+						digits : true
+					},
+					text5 : {
+						required : true,
+						date : true
+					},
+					text6 : {
+						required : true,
+						isMobile : true
+					},
+					text3 : {
+						required : true,
+						number : true
+					}
+				},
+				messages : {
+					text1 : {
+						required : "请输入姓名"
+					},
+					text2 : {
+						required : "email不能为空！",
+						email : "请输入正确的email"
+					},
+					text4 : {
+						required : "text4不能为空！",
+						digits : "请输入正确整数"
+					},
+					text5 : {
+						required : "text5不能为空！",
+						date : "请输入正确日期"
+					},
+					text3 : {
+						required : "text3不能为空！",
+						number : "必须为数字"
+					}
+				},
+				debug : true,
+				onfocusout : false
+			});
+
+			$("#ss").click(function() {
+				var check = v.form();
+				/*  v.errorList.push({message:"dasd",element:null});  
+				    var msg = ""; 
+				     $.each( v.errorList, function(i,v){   
+				      msg += ((i+1)+"、"+v.message+"\r\n");   
+				    });   
+				    if(msg!="") alert(msg);*/
+			});
+		});
+	//-->
+	</script>
+</body>
+<form method="post" action="" id="form1">
+	<input type="text" name="text1"><br /> <input type="text"
+		name="text2"><br /> <input type="text" name="text3"><br />
+	<input type="text" name="text4"><br /> <input type="text"
+		name="text5"><br /> <input type="text" name="text6"><br />
+	<input type="text" name="text7"><br /> <input type="text"
+		name="text8"><br /> <input type="button" id="ss" value="提交">
+</form>
+</html>

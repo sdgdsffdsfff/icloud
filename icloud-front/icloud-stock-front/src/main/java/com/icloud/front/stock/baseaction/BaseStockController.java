@@ -2,6 +2,8 @@ package com.icloud.front.stock.baseaction;
 
 import javax.annotation.Resource;
 
+import org.springframework.web.servlet.ModelAndView;
+
 import com.google.gson.Gson;
 import com.icloud.front.stock.bussiness.detail.StockDetailBussiness;
 import com.icloud.front.stock.bussiness.menu.StockCommonBussiness;
@@ -28,5 +30,9 @@ public class BaseStockController {
 	protected UserLogOperationBusiness userLogOperationBusiness;
 
 	protected static Gson gson = new Gson();
+
+	protected ModelAndView getModelAndView(String url) {
+		return new ModelAndView(url);
+	}
 
 }
