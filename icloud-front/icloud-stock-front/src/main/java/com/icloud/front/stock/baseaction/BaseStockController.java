@@ -2,9 +2,12 @@ package com.icloud.front.stock.baseaction;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.icloud.framework.logger.ri.RequestIdentityLogger;
+import com.icloud.front.stock.action.StockController;
 import com.icloud.front.stock.bussiness.detail.StockDetailBussiness;
 import com.icloud.front.stock.bussiness.menu.StockCommonBussiness;
 import com.icloud.front.stock.bussiness.seo.BuuyuuSeoBussiness;
@@ -14,6 +17,9 @@ import com.icloud.user.business.manager.UserAdminBusiness;
 import com.icloud.user.business.operation.UserLogOperationBusiness;
 
 public class BaseStockController {
+	protected static final Logger logger = RequestIdentityLogger
+			.getLogger(StockController.class);
+
 	@Resource(name = "stockCommonBussiness")
 	protected StockCommonBussiness stockCommonBussiness;
 	@Resource(name = "stockDetailBussiness")

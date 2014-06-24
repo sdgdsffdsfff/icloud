@@ -27,8 +27,6 @@ import com.icloud.stock.model.constant.StockConstants.BaseCategory;
 @Controller
 @RequestMapping("/stock")
 public class StockController extends BaseStockController {
-	private static final Logger logger = RequestIdentityLogger
-			.getLogger(StockController.class);
 
 	@RequestMapping("/stockMenu")
 	public ModelAndView stockMenu() {

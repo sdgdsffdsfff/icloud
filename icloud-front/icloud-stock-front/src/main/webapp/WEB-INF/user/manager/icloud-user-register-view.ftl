@@ -17,16 +17,15 @@
                 <td>
                     <i>*</i>用户名</td>
                 <td>
-                    <input type="text" id="username"/>
+                    <input type="text" id="username" name="username"/>
                     <em>字母开头，由4～16个数字或字母组成。</em>
                 </td>
-                <td class='quantity-error'>111</td>
             </tr>
             <tr>
                 <td>
                     <i>*</i>电子邮箱</td>
                 <td>
-                    <input id="email" type="text" class="text required email"/>
+                    <input id="email" type="text"  name="email"/>
                     <em>此邮箱用户找回密码等服务，请确保地址正确。</em>
                 </td>
             </tr>
@@ -34,7 +33,7 @@
                 <td>
                     <i>*</i>手机号码</td>
                 <td class="hint">
-                    <input type="text" />
+                    <input type="text" id="telphone" name="telphone"/>
                     <small>
                         <span></span>请填写手机号码</small>
                 </td>
@@ -49,7 +48,7 @@
                 <td>
                     <i>*</i>设置密码</td>
                 <td>
-                    <input type="text" />
+                    <input type="password" id="password" name="password"/>
                     <em>4~20位数字或者字母的组合，区分大小写。</em>
                 </td>
             </tr>
@@ -57,7 +56,7 @@
                 <td>
                     <i>*</i>确认密码</td>
                 <td>
-                    <input type="text" />
+                    <input type="password" id="confirm_password" name="confirm_password"/>
                 </td>
             </tr>
 <tr>
