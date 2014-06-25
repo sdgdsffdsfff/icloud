@@ -8,7 +8,7 @@
     <div class="message">
         <!--message start-->
         <h3>账号信息</h3>
-        <form action="" method="post" id="registerForm">
+        <form action="${basepath}/userManager/doRegisterUser" method="post" id="registerForm">
         <table cellpadding="0" cellspacing="0" class="mes_tab">
             <colgroup>
                 <col width="150px" />
@@ -41,7 +41,7 @@
             <tr>
                 <td>QQ</td>
                 <td>
-                    <input type="text" />
+                    <input type="text" id="qq" name="qq"/>
                 </td>
             </tr>
             <tr>
@@ -177,13 +177,13 @@
                 <td></td>
                 <td>
                     <label>
-                        <input type="checkbox" />我已阅读并同意以上协议</label>
+                        <input type="checkbox" id="readContract" name="readContract"/>我已阅读并同意以上协议</label>
                 </td>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    <a class="adaptiveButton brightRed_btn">
+                    <a class="adaptiveButton brightRed_btn" id="register_button">
                         <span class="left"></span>
                         <span class="center">注 册</span>
                         <span class="right"></span>

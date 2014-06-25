@@ -13,9 +13,7 @@ import com.icloud.stock.model.StockDateHistory;
 @Repository("stockDateHistoryDao")
 public class StockDateHistoryDaoImpl extends StockBaseDaoImpl<StockDateHistory>
 		implements IStockDateHistoryDao {
-	public static final String STOCK_ID = "stockId";
-	public static final String CREATE_TIME = "createTime";
-
+	
 	@Override
 	public Date getMaxUpdateTime(Integer id) {
 		String hql = "select max(createTime) from " + domainClass.getName()

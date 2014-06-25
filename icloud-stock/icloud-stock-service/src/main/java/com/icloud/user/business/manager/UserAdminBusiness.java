@@ -18,4 +18,25 @@ public class UserAdminBusiness extends UserBusiness {
 		return null;
 	}
 
+	public User getUserByUserName(String userName) {
+		if (ICloudUtils.isNotNull(userName)) {
+			return this.userService.getUserByUserName(userName);
+		}
+		return null;
+	}
+
+	public User getUserByEmail(String email) {
+		if (ICloudUtils.isNotNull(email)) {
+			return this.userService.getUserByEmail(email);
+		}
+		return null;
+	}
+
+	public User getUserByTelphone(String telphone) {
+		if (ICloudUtils.isNotNull(telphone)) {
+			return this.userService.getUserByTelphone(telphone);
+		}
+		return null;
+	}
+
 }

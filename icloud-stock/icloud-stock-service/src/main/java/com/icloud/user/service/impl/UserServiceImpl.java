@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.icloud.framework.dao.hibernate.IHibernateBaseDao;
 import com.icloud.framework.service.impl.SqlBaseService;
+import com.icloud.framework.util.ICloudUtils;
 import com.icloud.stock.model.User;
 import com.icloud.user.dao.IUserDao;
 import com.icloud.user.service.IUserService;
@@ -18,8 +19,24 @@ public class UserServiceImpl extends SqlBaseService<User> implements
 
 	@Override
 	protected IHibernateBaseDao<User> getDao() {
-		// TODO Auto-generated method stub
 		return userDao;
 	}
 
+	@Override
+	public User getUserByUserName(String userName) {
+		return ICloudUtils.getFirstElement(this.userDao.findByProperty(
+				IUserDao.USERNAME, userName));
+	}
+
+	@Override
+	public User getUserByEmail(String email) {
+		return ICloudUtils.getFirstElement(this.userDao.findByProperty(
+				IUserDao.USERMAIL, email));
+	}
+
+	@Override
+	public User getUserByTelphone(String telphone) {
+		return ICloudUtils.getFirstElement(this.userDao.findByProperty(
+				IUserDao.USERTEL, telphone));
+	}
 }

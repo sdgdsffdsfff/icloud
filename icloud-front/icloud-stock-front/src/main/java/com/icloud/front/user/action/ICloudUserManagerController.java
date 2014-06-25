@@ -1,16 +1,14 @@
 package com.icloud.front.user.action;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.stock.baseaction.BaseStockController;
-import com.icloud.front.stock.pojo.StockBean;
-import com.icloud.front.stock.pojo.StockCompleteResult;
+import com.icloud.front.user.pojo.RegisterUser;
 
 @Controller
 @RequestMapping("/userManager")
@@ -24,13 +22,43 @@ public class ICloudUserManagerController extends BaseStockController {
 
 	@RequestMapping("/validateUserName")
 	@ResponseBody
-	public boolean validateUserName(@RequestParam(required = true) String username) {
+	public boolean validateUserName(
+			@RequestParam(required = true) String username) {
 		logger.info("{}", username);
-		return false;
+		if (ICloudUtils.isNotNull(this.userAdminBusiness
+				.getUserByUserName(username))) {
+			return false;
+		}
+		return true;
+	}
+
+	@RequestMapping("/validateEmail")
+	@ResponseBody
+	public boolean validateEmail(@RequestParam(required = true) String email) {
+		logger.info("{}", email);
+		if (ICloudUtils.isNotNull(this.userAdminBusiness.getUserByEmail(email))) {
+			return false;
+		}
+		return true;
+	}
+
+	@RequestMapping("/validateTelphone")
+	@ResponseBody
+	public boolean validateTelphone(
+			@RequestParam(required = true) String telphone) {
+		logger.info("{}", telphone);
+		if (ICloudUtils.isNotNull(this.userAdminBusiness
+				.getUserByTelphone(telphone))) {
+			return false;
+		}
+		return true;
 	}
 
 	@RequestMapping("/doRegisterUser")
-	public ModelAndView doRegisterUser() {
+	public ModelAndView doRegisterUser(RegisterUser user) {
+		if (ICloudUtils.isNotNull(user)) {
+			logger.info("{}", user.toString());
+		}
 		ModelAndView model = getModelAndView("user/manager/icloud-user-register-success");
 		return model;
 	}

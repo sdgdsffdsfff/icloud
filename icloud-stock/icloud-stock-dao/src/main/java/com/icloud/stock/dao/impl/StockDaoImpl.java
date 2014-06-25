@@ -8,6 +8,5 @@ import com.icloud.stock.model.Stock;
 
 @Repository("stockDao")
 public class StockDaoImpl extends StockBaseDaoImpl<Stock> implements IStockDao {
-	public static final String STOCKALLCODE = "stockAllCode";
-	public static final String STOCKCODE = "stockCode";
+	
 }
