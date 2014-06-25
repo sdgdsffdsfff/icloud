@@ -20,6 +20,8 @@ public class BaseStockController {
 	protected static final Logger logger = RequestIdentityLogger
 			.getLogger(StockController.class);
 
+	protected static final String ERROR_URL = "redirect:/user/error";
+
 	@Resource(name = "stockCommonBussiness")
 	protected StockCommonBussiness stockCommonBussiness;
 	@Resource(name = "stockDetailBussiness")

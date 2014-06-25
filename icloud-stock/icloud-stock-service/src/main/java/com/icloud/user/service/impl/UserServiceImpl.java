@@ -39,4 +39,12 @@ public class UserServiceImpl extends SqlBaseService<User> implements
 		return ICloudUtils.getFirstElement(this.userDao.findByProperty(
 				IUserDao.USERTEL, telphone));
 	}
+
+	@Override
+	public User getUser(String email, String password) {
+		String[] paramNames = { IUserDao.USERMAIL, IUserDao.PASSWORD };
+		String[] values = { email, password };
+		return ICloudUtils.getFirstElement(this.userDao.findByProperty(
+				paramNames, values, null, true));
+	}
 }

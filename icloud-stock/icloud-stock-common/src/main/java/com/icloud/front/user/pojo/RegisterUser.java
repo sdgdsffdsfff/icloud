@@ -1,13 +1,12 @@
 package com.icloud.front.user.pojo;
 
-public class RegisterUser {
+public class RegisterUser extends LoginUser {
 	private String username;
-	private String email;
-	private String password;
 	private String confirm_password;
 	private String qq;
 	private String telphone;
 	private String readContract;
+	private String usersex;
 
 	public String getUsername() {
 		return username;
@@ -15,22 +14,6 @@ public class RegisterUser {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getConfirm_password() {
@@ -65,12 +48,21 @@ public class RegisterUser {
 		this.readContract = readContract;
 	}
 
+	public String getUsersex() {
+		return usersex;
+	}
+
+	public void setUsersex(String usersex) {
+		this.usersex = usersex;
+	}
+
 	@Override
 	public String toString() {
-		return "RegisterUser [username=" + username + ", email=" + email
-				+ ", password=" + password + ", confirm_password="
+		return "RegisterUser [username=" + username + ", email=" + getEmail()
+				+ ", password=" + getPassword() + ", confirm_password="
 				+ confirm_password + ", qq=" + qq + ", telphone=" + telphone
-				+ ", readContract=" + readContract + "]";
+				+ ", readContract=" + readContract + ", usersex=" + usersex
+				+ "]";
 	}
 
 }

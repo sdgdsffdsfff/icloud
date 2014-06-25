@@ -11,4 +11,6 @@ public interface IUserService extends ISqlBaseService<User> {
 
 	User getUserByTelphone(String telphone);
 
+	User getUser(String email, String password);
+
 }

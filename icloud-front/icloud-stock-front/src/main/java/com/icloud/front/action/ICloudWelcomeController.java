@@ -10,6 +10,6 @@ public class ICloudWelcomeController {
 		/**
 		 * 入口
 		 */
-		return "redirect:/stock/stockMenu";
+		return "forward:/stock/stockMenu";
 	}
 }

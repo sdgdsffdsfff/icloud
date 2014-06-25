@@ -7,7 +7,7 @@ public interface ISqlBaseService<T> {
 
 	public void update(T t);
 
-	public void save(T t);
+	public T save(T t);
 
 	public void delete(T t);
 

@@ -31,9 +31,9 @@ public abstract class SqlBaseService<T> implements ISqlBaseService<T> {
 	}
 
 	@Override
-	public void save(T t) {
-		// TODO Auto-generated method stub
+	public T save(T t) {
 		this.baseDao.save(t);
+		return t;
 	}
 
 	@Override

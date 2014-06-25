@@ -68,6 +68,14 @@
 			<param-name>sessionFactoryBeanName</param-name>
 			<param-value>stockSessionFactory</param-value>
 		</init-param>
+		<init-param>
+			<param-name>singleSession</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>flushMode</param-name>
+			<param-value>AUTO</param-value>
+		</init-param>
 	</filter>
 
 	<filter-mapping>

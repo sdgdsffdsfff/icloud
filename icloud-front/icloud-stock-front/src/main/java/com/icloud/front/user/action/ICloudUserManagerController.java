@@ -9,6 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.stock.baseaction.BaseStockController;
 import com.icloud.front.user.pojo.RegisterUser;
+import com.icloud.stock.model.User;
+import com.icloud.user.dict.UserConstants;
 
 @Controller
 @RequestMapping("/userManager")
@@ -55,10 +57,24 @@ public class ICloudUserManagerController extends BaseStockController {
 	}
 
 	@RequestMapping("/doRegisterUser")
-	public ModelAndView doRegisterUser(RegisterUser user) {
-		if (ICloudUtils.isNotNull(user)) {
-			logger.info("{}", user.toString());
+	public String doRegisterUser(RegisterUser registerUser) {
+		if (!ICloudUtils.isNotNull(registerUser)) {
+			return ERROR_URL;
 		}
+		logger.info("start to register, {}", registerUser.toString());
+		User user = this.userAdminBusiness.addUser(registerUser,
+				UserConstants.COMMING.COM_COMMING.getName());
+		if (ICloudUtils.isNotNull(user)) {
+			logger.info("success to register, {}", registerUser.toString());
+			return "redirect:/userManager/registersuccess";
+		} else {
+			logger.info("fail to register, {}", registerUser.toString());
+			return ERROR_URL;
+		}
+	}
+
+	@RequestMapping("/registersuccess")
+	public ModelAndView registersuccess() {
 		ModelAndView model = getModelAndView("user/manager/icloud-user-register-success");
 		return model;
 	}
@@ -84,18 +100,6 @@ public class ICloudUserManagerController extends BaseStockController {
 	@RequestMapping("/dofindPassWordStep4")
 	public ModelAndView dofindPassWordStep4() {
 		ModelAndView model = getModelAndView("user/manager/icloud-user-findpwd-step04");
-		return model;
-	}
-
-	@RequestMapping("/icloudLogin")
-	public ModelAndView icloudLogin() {
-		ModelAndView model = getModelAndView("user/manager/icloud-user-login");
-		return model;
-	}
-
-	@RequestMapping("/icloudLogout")
-	public ModelAndView icloudLogout() {
-		ModelAndView model = getModelAndView("user/manager/icloud-user-logout");
 		return model;
 	}
 }

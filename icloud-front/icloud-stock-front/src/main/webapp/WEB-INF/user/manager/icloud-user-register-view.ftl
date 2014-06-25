@@ -45,6 +45,15 @@
                 </td>
             </tr>
             <tr>
+                <td>性别</td>
+                <td>
+                    <select id="usersex" name="usersex">
+						<option value="0">男</option>
+						<option value="1">女</option>
+					</select>
+                </td>
+            </tr>
+            <tr>
                 <td>
                     <i>*</i>设置密码</td>
                 <td>
