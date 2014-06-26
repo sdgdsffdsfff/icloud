@@ -28,18 +28,9 @@ public class MemberAuthUtils {
 		// cookie.setDomain("localhost");
 		// cookie.setSecure(useSecure);
 		response.addCookie(cookie);
-		logger.info("cookieName={}, token={}", getRememberMeCookieName(), token);;
+		logger.info("cookieName={}, token={}", getRememberMeCookieName(), token);
+		;
 		return cookie;
-	}
-
-	public static void addTempRememberMeCookie(String token, boolean useSecure,
-			HttpServletRequest request, HttpServletResponse response) {
-		Cookie cookie = new Cookie(getRememberMeCookieName(), token);
-		cookie.setMaxAge(-1);
-		cookie.setPath("/");
-		cookie.setDomain(secLevelDomain(request.getRequestURL().toString()));
-		cookie.setSecure(useSecure);
-		response.addCookie(cookie);
 	}
 
 	public static void removeRememberMeCookie(boolean useSecure,
@@ -47,8 +38,8 @@ public class MemberAuthUtils {
 		Cookie cookie = new Cookie(getRememberMeCookieName(), "");
 		cookie.setMaxAge(0);
 		cookie.setPath("/");
-		cookie.setDomain(secLevelDomain(request.getRequestURL().toString()));
-		cookie.setSecure(useSecure);
+		// cookie.setDomain(secLevelDomain(request.getRequestURL().toString()));
+		// cookie.setSecure(useSecure);
 		response.addCookie(cookie);
 	}
 

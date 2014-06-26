@@ -8,12 +8,13 @@ import com.icloud.framework.config.PropertiesUtil;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.common.utils.MemberAuthUtils;
 import com.icloud.front.user.pojo.LoginUser;
+import com.icloud.front.user.pojo.UserInfo;
 import com.icloud.stock.model.User;
 
 public class ICloudMemberUtils {
 	private static final String GUSTER_PREFIX = "guster";
 	private static final String USER_PREFIX = "user";
-	private static final String PER_USER_PREFIX = "per_user";
+	private static final String PER_USER_PREFIX = "preuser";
 	private static final String TOKEN_SEP = "_";
 	private static final int SESSION_TIMEOUT = PropertiesUtil
 			.getPropertyForInt("properties/icloud-constants.properties",
@@ -60,5 +61,30 @@ public class ICloudMemberUtils {
 					+ MemberAuthUtils.getIpAddr(request) + TOKEN_SEP
 					+ System.currentTimeMillis();
 		}
+	}
+
+	/**
+	 * 获得用户信息
+	 */
+	public static UserInfo getUserInfoFromToken(String token) {
+		if (ICloudUtils.isNotNull(token) && !token.startsWith(GUSTER_PREFIX)) {
+			String[] tokens = token.split(TOKEN_SEP);
+			if (ICloudUtils.isNotNull(tokens) && tokens.length == 3) {
+				int userId = Integer.parseInt(tokens[1]);
+				String userName = tokens[2];
+				UserInfo info = new UserInfo();
+				info.setUserId(userId);
+				info.setUserName(userName);
+				return info;
+			}
+		}
+		return null;
+	}
+
+	public static void removeSession(HttpServletRequest request,
+			HttpServletResponse response) {
+		String token = generateToken(null, null, request);
+		MemberAuthUtils.addRememberMeCookie(token, SESSION_TIMEOUT, true,
+				request, response);
 	}
 }

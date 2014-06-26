@@ -51,8 +51,7 @@ public class ICloudUserController extends BaseStockController {
 			/**
 			 * 加入cookie,并且下次自动登录
 			 */
-			ICloudMemberUtils.addSession(request, response,
-					loginUser, user);
+			ICloudMemberUtils.addSession(request, response, loginUser, user);
 			return "redirect:/stock/stockMenu";
 			// return "/user/manager/icloud-user-login";
 		} else {
@@ -61,8 +60,10 @@ public class ICloudUserController extends BaseStockController {
 	}
 
 	@RequestMapping("/icloudLogout")
-	public ModelAndView icloudLogout() {
+	public String icloudLogout(HttpServletRequest request,
+			HttpServletResponse response) {
 		ModelAndView model = getModelAndView("user/manager/icloud-user-logout");
-		return model;
+		ICloudMemberUtils.removeSession(request, response);
+		return "redirect:/stock/stockMenu";
 	}
 }

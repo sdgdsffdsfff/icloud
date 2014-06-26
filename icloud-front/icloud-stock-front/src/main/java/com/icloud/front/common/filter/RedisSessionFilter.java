@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -14,17 +15,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.icloud.framework.logger.ri.RequestIdentityHolder;
 import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.framework.util.ICloudUtils;
+import com.icloud.front.common.utils.ICloudUserContextHolder;
 import com.icloud.front.common.utils.MemberAuthUtils;
+import com.icloud.front.user.pojo.UserInfo;
 import com.icloud.front.user.utils.ICloudMemberUtils;
+import com.icloud.user.business.manager.UserAdminBusiness;
 
 public class RedisSessionFilter implements Filter {
 	private static final Logger logger = RequestIdentityLogger
 			.getLogger(RedisSessionFilter.class);
 	private static Random RDM = new Random();
+
+	protected UserAdminBusiness userAdminBusiness;
 
 	@SuppressWarnings({ "unchecked", "unused" })
 	@Override
@@ -41,11 +49,49 @@ public class RedisSessionFilter implements Filter {
 		 */
 		setRequestIdentityHolder(cookie, res);
 		logger.debug("RedisSessionFilter start");
+		/**
+		 * 设置用户信息
+		 */
+		setUserInfoHolder(cookie);
+		/**
+		 * 设置用户信息
+		 */
 		chain.doFilter(request, response);
 		logger.debug("RedisSessionFilter end");
+		/**
+		 * 删除用户信息
+		 */
+		removeUserInfoHolder();
+		/**
+		 * 删除 reqid
+		 */
 		removeRequestIdentity();
 	}
 
+	/**
+	 * 设置用户信息
+	 */
+	private void setUserInfoHolder(Cookie cookie) {
+		if (ICloudUtils.isNotNull(cookie)) {
+			UserInfo info = ICloudMemberUtils.getUserInfoFromToken(cookie
+					.getValue());
+			info = userAdminBusiness.fillUserInfo(info);
+			if (ICloudUtils.isNotNull(info)) {
+				ICloudUserContextHolder.set(info);
+			}
+		}
+	}
+
+	/**
+	 * 删除用户信息
+	 */
+	private void removeUserInfoHolder() {
+		ICloudUserContextHolder.remove();
+	}
+
+	/**
+	 * 设置reqid
+	 */
 	private void setRequestIdentityHolder(Cookie cookie, HttpServletResponse res) {
 		String reqId = null;
 		if (ICloudUtils.isNotNull(cookie)) {
@@ -58,10 +104,16 @@ public class RedisSessionFilter implements Filter {
 		res.setHeader("ICloud-Request-Identity", reqId);
 	}
 
+	/**
+	 * 删除 reqid
+	 */
 	private void removeRequestIdentity() {
 		RequestIdentityHolder.remove();
 	}
 
+	/**
+	 * 获得cookie
+	 */
 	private Cookie getCookie(HttpServletRequest req, HttpServletResponse res) {
 		Cookie[] cookies = req.getCookies();
 		if (ICloudUtils.isNotNull(cookies)) {
@@ -82,7 +134,11 @@ public class RedisSessionFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-
+		ServletContext context = filterConfig.getServletContext();
+		ApplicationContext ctx = WebApplicationContextUtils
+				.getWebApplicationContext(context);
+		userAdminBusiness = (UserAdminBusiness) ctx
+				.getBean("userAdminBusiness");
 	}
 
 	@Override

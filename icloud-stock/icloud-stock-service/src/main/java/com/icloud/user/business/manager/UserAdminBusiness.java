@@ -8,6 +8,7 @@ import com.icloud.framework.util.ICloudUtils;
 import com.icloud.framework.util.StringEncoder;
 import com.icloud.front.user.pojo.LoginUser;
 import com.icloud.front.user.pojo.RegisterUser;
+import com.icloud.front.user.pojo.UserInfo;
 import com.icloud.stock.model.User;
 import com.icloud.user.business.UserBusiness;
 import com.icloud.user.util.UserUtils;
@@ -102,4 +103,15 @@ public class UserAdminBusiness extends UserBusiness {
 		return null;
 	}
 
+	public UserInfo fillUserInfo(UserInfo info) {
+		if (ICloudUtils.isNotNull(info) && info.getUserId() > 0) {
+			User user = userService.getById(info.getUserId());
+			if (ICloudUtils.isNotNull(user)
+					&& user.getUserName().equalsIgnoreCase(info.getUserName())) {
+				info.setEmail(user.getUserEmail());
+				return info;
+			}
+		}
+		return null;
+	}
 }

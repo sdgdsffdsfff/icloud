@@ -18,16 +18,20 @@
        </div>
        <nav class="main-links">
           <ul class="clearfix">
+          <#if !(currentUserInfo())?? >
             <li class="first"><a href="${basepath}/userManager/registerView">注册</a></li>
             <li><a href="${basepath}/user/icloudLogin">登录</a></li>
-            <li><span class="hyper-link">
-                <u>我的用户</u>
+            <li class="first">游客,你好</li>
+          <#else>
+            <li class="first"><span class="hyper-link">
+                <u>${(currentUserInfo().userName)}</u>
                 <i class="arrow-down"></i>
                 <div class="hyper-text">
-                    <a href="#">我的应用</a>
-                    <a href="#">退出</a>
+                    <a href="#">我的列表</a>
+                    <a href="${basepath}/user/icloudLogout">退出</a>
                 </div>
             </span></li>
+          </#if>
             </ul>
           </nav>
     </div>

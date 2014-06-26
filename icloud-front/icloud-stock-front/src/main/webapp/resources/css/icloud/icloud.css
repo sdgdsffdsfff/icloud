@@ -236,6 +236,7 @@ body {
     box-shadow: 0 2px 3px 0px #ccc;
     white-space: nowrap;
     z-index: 3;
+    width:100%;
 }
 .hyper-link u {
     color: #6d6d6d;

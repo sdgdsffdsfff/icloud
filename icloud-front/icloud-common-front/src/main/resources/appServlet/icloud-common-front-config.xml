@@ -18,8 +18,7 @@
 		<mvc:argument-resolvers>
 			<bean
 				class="com.icloud.framework.web.method.annotation.RequestArrayResolver" />
-			<bean
-				class="com.icloud.framework.web.method.annotation.RequestMapResolver" />
+			<bean class="com.icloud.framework.web.method.annotation.RequestMapResolver" />
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 	<!-- 配置自定义转换服务器 -->
@@ -75,17 +74,18 @@
 						class="com.icloud.front.common.freemarker.StaticResourceVersionGetter"></bean>
 				</entry>
 				<entry key="getStockColor">
-					<bean
-						class="com.icloud.front.common.freemarker.StockColorPropertyGetter"></bean>
+					<bean class="com.icloud.front.common.freemarker.StockColorPropertyGetter"></bean>
 				</entry>
 				<entry key="getDigital">
-					<bean
-						class="com.icloud.front.common.freemarker.DigitalGetter"></bean>
+					<bean class="com.icloud.front.common.freemarker.DigitalGetter"></bean>
 				</entry>
 				<entry key="getPageUrl">
-					<bean
-						class="com.icloud.front.common.freemarker.StockPageUrlGetter"></bean>
+					<bean class="com.icloud.front.common.freemarker.StockPageUrlGetter"></bean>
 				</entry>
+				<entry key="currentUserInfo">
+					<bean class="com.icloud.front.common.freemarker.CurrentUserInfoGetter"></bean>
+				</entry>
+
 			</map>
 		</property>
 	</bean>
@@ -104,7 +104,7 @@
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 	<!-- 异常处理器 -->
 	<!-- 勿去，否则会有bug。可在页面源码查看异常堆栈 -->
-	<!-- <bean id="exceptionResolver" class="com.icloud.tops.front.common.CustomizedHandlerExceptionResolver"
+	<!-- <bean id="exceptionResolver" class="com.icloud.tops.front.common.CustomizedHandlerExceptionResolver" 
 		/> -->
 	<!-- 验证器 -->
 	<bean id="validator"
