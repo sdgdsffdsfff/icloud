@@ -1,0 +1,228 @@
+<#import "/icloud/icloud-main-container.ftl" as imc/>
+<@imc.mainContainer current="行情"  jsFiles=[] cssFiles=['icloud/icloud_usercenter.css'] >
+<aside class="us-nav">
+    <nav>
+        <h3>用户中心</h3>
+        <div class="us-bind">
+            <a href="#">手机已绑定</a>&#12288;
+            <a class="text1" href="#">
+                <i class="ucnav_03"></i>邮箱未绑定</a>
+        </div>
+        <dl>
+            <dt>
+                <i class="ucnav_07"></i>订单管理</dt>
+            <dd>
+                <a href="#">当日所有订单</a>
+            </dd>
+            <dd>
+                <a href="#">国内机票订单</a>
+            </dd>
+            <dd>
+                <a href="#">国际机票订单</a>
+            </dd>
+            <dd>
+                <a href="#">酒店订单</a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>
+                <i class="ucnav_10"></i>询价单管理</dt>
+            <dd>
+                <a href="#">国内机票询价单</a>
+            </dd>
+            <dd>
+                <a href="#">国际机票询价单</a>
+            </dd>
+            <dd>
+                <a href="#">酒店询价单</a>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>
+                <i class="ucnav_12"></i>电子钱包</dt>
+            <dd>
+                <a href="#">账户信息</a>
+            </dd>
+            <dd>
+                <a href="#">账户充值</a>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>
+                <i class="ucnav_15"></i>票据管理</dt>
+            <dd>
+                <a href="#">行程单</a>
+            </dd>
+            <dd>
+                <a href="#">发票</a>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>
+                <i class="ucnav_17"></i>统计报表</dt>
+            <dd>
+                <a href="#">财务报表</a>
+            </dd>
+            <dd>
+                <a href="#">机票业务</a>
+            </dd>
+            <dd>
+                <a href="#">酒店业务</a>
+            </dd>
+            <dd>
+                <a href="#">分销业务</a>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>
+                <i class="ucnav_19"></i>分销商管理</dt>
+            <dd>
+                <a href="#">分销商管理</a>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>
+                <i class="ucnav_22"></i>账户资料</dt>
+            <dd>
+                <a class="current" href="#">信息维护</a>
+            </dd>
+            <dd>
+                <a href="#">消息设置</a>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>
+                <i class="ucnav_26"></i>我的工具</dt>
+            <dd>
+                <a class="ic-j" href="#">
+                    <i class="ucnav_29"></i>常旅客管理</a>
+            </dd>
+            <dd>
+                <a class="ic-j" href="#">
+                    <i class="ucnav_32"></i>短消息</a>
+            </dd>
+        </dl>
+    </nav>
+</aside>
+<main class="us-content">
+    <h1 class="us-title">信息维护</h1>
+    <div class="us-body">
+        <aside>
+            <ul class="tab_change clearfix">
+                <li class="currentState">
+                    <em>
+                        <a href="javascript:void(0);">我的账号</a>
+                    </em>
+                </li>
+            </ul>
+        </aside>
+        <div class="usersuccessful">登录密码修改成功！</div>
+        <div class="tabPanel">
+            <h1 class="us-title">账号信息</h1>
+            <table>
+                <colgroup>
+                    <col width="75">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td class="td_head">用户名：</td>
+                        <td>laobao</td>
+                    </tr>
+                    <tr>
+                        <td class="td_head">电子邮箱：</td>
+                        <td>234567@163.com</td>
+                    </tr>
+                    <tr>
+                        <td class="td_head">登录密码：</td>
+                        <td>********
+                            <a href="javascript:;" class="btn_modifyPassword">修改密码</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_head">客户类型：</td>
+                        <td>公司</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h1 class="us-title">
+                主要业务联系人信息
+                <span style="float:right;margin-top:-8px">
+                    <a class="adaptiveButton medium brightRed_btn btn_edit">
+                        <span class="left"></span>
+                        <span class="center center_1">编辑</span>
+                        <span class="right"></span>
+                    </a>
+                    <a class="adaptiveButton medium brightRed_btn btn_save" style="display:none">
+                        <span class="left"></span>
+                        <span class="center center_1">保存</span>
+                        <span class="right"></span>
+                    </a>
+                </span>
+
+            </h1>
+            <table id="tbl_mainBusinessContactInfo">
+                <colgroup>
+                    <col width="75">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td class="td_head">
+                            <i class="important">*</i>姓名：</td>
+                        <td>
+                            <input value="燕小六" type="text" name="" id="" class="editable disabled" readonly="readonly" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_head">
+                            <i class="important">*</i>电子邮箱：</td>
+                        <td>
+                            <input value="234567@163.com" type="text" name="" id="" class="editable disabled" readonly="readonly" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_head">
+                            <i class="important">*</i>手机号码：</td>
+                        <td>
+                            <input value="13912345678" type="text" name="" id="" class="editable disabled" readonly="readonly" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_head">
+                            <i class="important">*</i>办公电话：</td>
+                        <td>
+                            <input type="text" name="" id="" class="editable disabled" readonly="readonly" value="021" style="width:30px" />-
+                            <input value="543217890" type="text" name="" id="" class="editable disabled" readonly="readonly" style="width:92px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_head">QQ：</td>
+                        <td>
+                            <input value="13912345678" type="text" name="" id="" class="editable disabled" readonly="readonly" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</@imc.mainContainer>
+<script type="text/javascript">
+    $(function() {
+        $(".btn_edit").click(function() {
+            $("#tbl_mainBusinessContactInfo :text").removeClass("disabled").prop("readonly", false);
+            $(this).hide();
+            $(".btn_save").show();
+        });
+        $(".btn_save").click(function() {
+            $("#tbl_mainBusinessContactInfo :text").addClass("disabled").prop("readonly", true);
+            $(this).hide();
+            $(".btn_edit").show();
+        });
+    })
+</script>

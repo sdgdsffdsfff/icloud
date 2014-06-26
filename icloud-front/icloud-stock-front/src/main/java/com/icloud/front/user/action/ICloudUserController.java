@@ -72,4 +72,9 @@ public class ICloudUserController extends BaseStockController {
 			HttpServletResponse response) {
 		return getModelAndView("user/manager/icloud-user-logout");
 	}
+
+	@RequestMapping("/myHome")
+	public ModelAndView myHome() {
+		return getModelAndView("user/myspace/icloud-user-space");
+	}
 }

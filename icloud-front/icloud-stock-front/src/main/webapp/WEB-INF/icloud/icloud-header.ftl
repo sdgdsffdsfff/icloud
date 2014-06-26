@@ -27,7 +27,7 @@
                 <u>${(currentUserInfo().userName)}</u>
                 <i class="arrow-down"></i>
                 <div class="hyper-text">
-                    <a href="#">我的列表</a>
+                    <a href="${basepath}/user/myHome">我的列表</a>
                     <a href="${basepath}/user/icloudLogout">退出</a>
                 </div>
             </span></li>
