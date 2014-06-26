@@ -19,7 +19,7 @@ public class ICloudUserController extends BaseStockController {
 
 	@RequestMapping("/error")
 	public ModelAndView doError() {
-		ModelAndView model = getModelAndView("icloud/icloud-error");
+		ModelAndView model = getErrorModelAndView();
 		return model;
 	}
 

@@ -8,7 +8,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.stock.baseaction.BaseStockController;
+import com.icloud.front.user.pojo.LoginUser;
 import com.icloud.front.user.pojo.RegisterUser;
+import com.icloud.stock.config.MailConfig;
 import com.icloud.stock.model.User;
 import com.icloud.user.dict.UserConstants;
 
@@ -36,12 +38,15 @@ public class ICloudUserManagerController extends BaseStockController {
 
 	@RequestMapping("/validateEmail")
 	@ResponseBody
-	public boolean validateEmail(@RequestParam(required = true) String email) {
+	public boolean validateEmail(@RequestParam(required = true) String email,
+			String requiredTrue) {
 		logger.info("{}", email);
 		if (ICloudUtils.isNotNull(this.userAdminBusiness.getUserByEmail(email))) {
-			return false;
+			// return false;
+			return ICloudUtils.isNotNull(requiredTrue) ? true : false;
 		}
-		return true;
+		// return true;
+		return ICloudUtils.isNotNull(requiredTrue) ? false : true;
 	}
 
 	@RequestMapping("/validateTelphone")
@@ -80,21 +85,74 @@ public class ICloudUserManagerController extends BaseStockController {
 	}
 
 	@RequestMapping("/dofindPassWordStep1")
-	public ModelAndView dofindPassWordStep1() {
+	public ModelAndView dofindPassWordStep1(LoginUser user) {
 		ModelAndView model = getModelAndView("user/manager/icloud-user-findpwd-step01");
 		return model;
 	}
 
 	@RequestMapping("/dofindPassWordStep2")
-	public ModelAndView dofindPassWordStep2() {
+	public String dofindPassWordStep2(LoginUser loginUser) {
+		String email = loginUser.getEmail();
+		// 查找这个用户
+		logger.info("email={}", email);
+		// 发送邮件给该邮箱
+		User user = this.userAdminBusiness.getUserByEmail(email);
+		// 重置密码和发送邮件
+		if (ICloudUtils.isNotNull(user)) {
+			/**
+			 * 充值密码
+			 */
+			userAdminBusiness.resetPassword(user);
+			MailConfig.sendFindPassword(email, user.getUserName(),
+					user.getUserPassword());
+		}
+		return "redirect:/userManager/dofindPassWordStep2success";
+	}
+
+	@RequestMapping("/dofindPassWordStep2success")
+	public ModelAndView dofindPassWordStep2success() {
 		ModelAndView model = getModelAndView("user/manager/icloud-user-findpwd-step02");
 		return model;
 	}
 
 	@RequestMapping("/dofindPassWordStep3")
-	public ModelAndView dofindPassWordStep3() {
-		ModelAndView model = getModelAndView("user/manager/icloud-user-findpwd-step03");
-		return model;
+	public ModelAndView dofindPassWordStep3(
+			@RequestParam(required = true) String userName,
+			@RequestParam(required = true) String token) {
+		User user = this.userAdminBusiness.getUserByUserName(userName);
+		if (ICloudUtils.isNotNull(user)
+				&& user.getUserPassword().equalsIgnoreCase(token)) {
+			ModelAndView model = getModelAndView("user/manager/icloud-user-findpwd-step03");
+			model.addObject("userName", userName);
+			model.addObject("token", token);
+			return model;
+		} else {
+			ModelAndView model = getErrorModelAndView("您申请的找回密码功能出现错误，有以下原因：1. 过期;2.非法操作");
+			return model;
+		}
+	}
+
+	@RequestMapping("/doFindAndUpdatePwd")
+	public String dofindPassWordStep2(RegisterUser registerUser) {
+		if (ICloudUtils.isNotNull(registerUser)
+				&& ICloudUtils.isNotNull(registerUser.getPassword())
+				&& ICloudUtils.isNotNull(registerUser.getConfirm_password())
+				&& registerUser.getPassword().equalsIgnoreCase(
+						registerUser.getConfirm_password())) {
+			User user = this.userAdminBusiness.getUserByUserName(registerUser
+					.getUsername());
+			if (ICloudUtils.isNotNull(user)) {
+				if (ICloudUtils.isNotNull(user.getUserPassword())
+						&& user.getUserPassword().equalsIgnoreCase(
+								registerUser.getToken())) {
+					this.userAdminBusiness.updatePassword(user,
+							registerUser.getPassword());
+					return "redirect:/userManager/dofindPassWordStep4"; 
+				}
+			}
+
+		}
+		return ERROR_URL;
 	}
 
 	@RequestMapping("/dofindPassWordStep4")

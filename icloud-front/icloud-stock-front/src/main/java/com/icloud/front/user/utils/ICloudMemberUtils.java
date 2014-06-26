@@ -9,6 +9,7 @@ import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.common.utils.MemberAuthUtils;
 import com.icloud.front.user.pojo.LoginUser;
 import com.icloud.front.user.pojo.UserInfo;
+import com.icloud.stock.config.ICloudConfig;
 import com.icloud.stock.model.User;
 
 public class ICloudMemberUtils {
@@ -16,9 +17,6 @@ public class ICloudMemberUtils {
 	private static final String USER_PREFIX = "user";
 	private static final String PER_USER_PREFIX = "preuser";
 	private static final String TOKEN_SEP = "_";
-	private static final int SESSION_TIMEOUT = PropertiesUtil
-			.getPropertyForInt("properties/icloud-constants.properties",
-					"session-timeout");
 
 	public static Cookie addSession(HttpServletRequest request,
 			HttpServletResponse response, LoginUser loginUser, User user) {
@@ -30,7 +28,7 @@ public class ICloudMemberUtils {
 						true, request, response);
 			} else {
 				return MemberAuthUtils.addRememberMeCookie(token,
-						SESSION_TIMEOUT, true, request, response);
+						ICloudConfig.SESSION_TIMEOUT, true, request, response);
 			}
 		}
 		return null;
@@ -84,7 +82,7 @@ public class ICloudMemberUtils {
 	public static void removeSession(HttpServletRequest request,
 			HttpServletResponse response) {
 		String token = generateToken(null, null, request);
-		MemberAuthUtils.addRememberMeCookie(token, SESSION_TIMEOUT, true,
-				request, response);
+		MemberAuthUtils.addRememberMeCookie(token,
+				ICloudConfig.SESSION_TIMEOUT, true, request, response);
 	}
 }

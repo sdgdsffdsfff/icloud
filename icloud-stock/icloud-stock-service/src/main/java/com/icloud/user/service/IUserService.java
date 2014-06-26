@@ -13,4 +13,8 @@ public interface IUserService extends ISqlBaseService<User> {
 
 	User getUser(String email, String password);
 
+	void resetPassword(User user);
+
+	void updatePassword(User user, String encrypt);
+
 }

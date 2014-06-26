@@ -15,8 +15,8 @@
 	<tx:advice id="stockAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="*" read-only="false" />
-			<!-- <tx:method name="saveAll" propagation="REQUIRED" /> <tx:method name="delete*"
-				propagation="REQUIRED" /> <tx:method name="update*" propagation="REQUIRED"
+			<!-- <tx:method name="saveAll" propagation="REQUIRED" /> <tx:method name="delete*" 
+				propagation="REQUIRED" /> <tx:method name="update*" propagation="REQUIRED" 
 				/> <tx:method name="get*" read-only="true" propagation="NOT_SUPPORTED" /> -->
 		</tx:attributes>
 	</tx:advice>

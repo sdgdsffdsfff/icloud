@@ -16,7 +16,7 @@
             <li>
                 <label>
                     <div>密码:</div>
-                    <input type="text" name="password" class="normal_txt" style="width:150px;" placeholder="" />
+                    <input type="password" name="password" class="normal_txt" style="width:150px;" placeholder="" />
                 </label>
             </li>
             <li>
@@ -40,10 +40,12 @@
                         <span class="center center_1">登&nbsp;&nbsp;录</span>
                         <span class="right"></span>
                     </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="${basepath}/userManager/dofindPassWordStep1">忘记密码</a>
                 </div>
             </li>
         </ul>
         </form>
+        
     </div>
 </div>
 </@imc.mainContainer>

@@ -39,7 +39,7 @@ public class HibernateBaseDaoImpl<T> extends HibernateDaoSupport implements
 
 	@Override
 	public void update(T t) {
-		getHibernateTemplate().update(t);
+		getHibernateTemplate().saveOrUpdate(t);
 	}
 
 	@Override

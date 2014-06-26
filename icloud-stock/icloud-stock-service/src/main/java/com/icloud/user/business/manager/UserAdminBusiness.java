@@ -19,7 +19,6 @@ public class UserAdminBusiness extends UserBusiness {
 	public User addUser(String userName, String password) {
 		if (ICloudUtils.isNotNull(userName) && ICloudUtils.isNotNull(password)) {
 			password = StringEncoder.encrypt(password);// 加密
-
 		}
 		return null;
 	}
@@ -113,5 +112,13 @@ public class UserAdminBusiness extends UserBusiness {
 			}
 		}
 		return null;
+	}
+
+	public void resetPassword(User user) {
+		this.userService.resetPassword(user);
+	}
+
+	public void updatePassword(User user, String password) {
+		this.userService.updatePassword(user,StringEncoder.encrypt(password));
 	}
 }

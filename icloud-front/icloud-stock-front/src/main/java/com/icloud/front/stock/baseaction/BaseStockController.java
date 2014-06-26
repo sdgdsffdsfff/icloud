@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.icloud.framework.logger.ri.RequestIdentityLogger;
+import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.stock.action.StockController;
 import com.icloud.front.stock.bussiness.detail.StockDetailBussiness;
 import com.icloud.front.stock.bussiness.menu.StockCommonBussiness;
@@ -41,6 +42,19 @@ public class BaseStockController {
 
 	protected ModelAndView getModelAndView(String url) {
 		return new ModelAndView(url);
+	}
+
+	protected ModelAndView getErrorModelAndView(String tip) {
+		if (!ICloudUtils.isNotNull(tip)) {
+			tip = "Oh,God!操作出错了";
+		}
+		ModelAndView model = getModelAndView("icloud/icloud-error");
+		model.addObject("errorTip", tip);
+		return model;
+	}
+
+	protected ModelAndView getErrorModelAndView() {
+		return getErrorModelAndView("Oh,God!操作出错了");
 	}
 
 }

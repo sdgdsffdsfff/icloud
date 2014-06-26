@@ -21,18 +21,7 @@
         <div class="successful">
             <h3>
                 <em></em>设置新密码成功</h3>
-            <div>欢迎使用本站。</div>
-            <ul class="clearfix">
-                <li>
-                    <a href="#">国内机票</a>
-                </li>
-                <li>
-                    <a href="#">国际机票</a>
-                </li>
-                <li>
-                    <a href="#">酒店</a>
-                </li>
-            </ul>
+            <div>欢迎使用本站。<a href="${basepath}/user/icloudLogin">点击此处进行登录</a></div>
         </div>
     </div>
 </div>

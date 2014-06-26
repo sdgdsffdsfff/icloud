@@ -26,7 +26,6 @@ public abstract class SqlBaseService<T> implements ISqlBaseService<T> {
 
 	@Override
 	public void update(T t) {
-		// TODO Auto-generated method stub
 		this.baseDao.update(t);
 	}
 

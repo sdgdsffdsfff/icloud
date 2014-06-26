@@ -7,6 +7,7 @@ public class RegisterUser extends LoginUser {
 	private String telphone;
 	private String readContract;
 	private String usersex;
+	private String token;
 
 	public String getUsername() {
 		return username;
@@ -54,6 +55,14 @@ public class RegisterUser extends LoginUser {
 
 	public void setUsersex(String usersex) {
 		this.usersex = usersex;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	@Override
