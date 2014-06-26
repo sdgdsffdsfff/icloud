@@ -39,7 +39,7 @@ public class AccessLogSessionFilter implements Filter {
 		// }
 		// String reqId = username + '-' + genReqId();
 		// RequestIdentityHolder.set(reqId);
-		res.setHeader("Tops-Request-Identity", reqId);
+		res.setHeader("ICloud-Request-Identity", reqId);
 		chain.doFilter(request, response);
 		logger.debug("AccessLogSessionFilter end ");
 		RequestIdentityHolder.remove();

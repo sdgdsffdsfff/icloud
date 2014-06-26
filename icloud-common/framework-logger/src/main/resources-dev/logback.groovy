@@ -18,7 +18,7 @@ import static ch.qos.logback.classic.Level.INFO
 
 appender("stdout", ConsoleAppender) {
   encoder(PatternLayoutEncoder) {
-    pattern = "%d{YYYY-MM-dd HH:mm:ss} [%level] %logger{50}.%M [%file:%line]-> %X{rpid} %msg %n%ex"
+    pattern = "%d{YYYY-MM-dd HH:mm:ss} [%level] %logger{50} [%file:%line]-> %X{rpid} %msg %n%ex"
   }
 }
 root(INFO, ["stdout"])

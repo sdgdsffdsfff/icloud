@@ -66,6 +66,10 @@ public class PropertiesUtil {
 		return null;
 	}
 
+	public static int getPropertyForInt(String filePath, String key) {
+		return Integer.parseInt(getProperty(filePath, key));
+	}
+
 	public static String getProperty(String filePath, String key) {
 
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext();

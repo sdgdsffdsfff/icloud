@@ -1,6 +1,7 @@
 package com.icloud.front.user.action;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +41,8 @@ public class ICloudUserController extends BaseStockController {
 	}
 
 	@RequestMapping("/doLoginUser")
-	public String doLoginUser(HttpSession session, LoginUser loginUser) {
+	public String doLoginUser(HttpServletRequest request,
+			HttpServletResponse response, LoginUser loginUser) {
 		if (ICloudUtils.isNotNull(loginUser)) {
 			logger.info("{}", loginUser.toString());
 		}
@@ -49,8 +51,10 @@ public class ICloudUserController extends BaseStockController {
 			/**
 			 * 加入cookie,并且下次自动登录
 			 */
-			ICloudMemberUtils.addSession(session, loginUser, user);
+			ICloudMemberUtils.addSession(request, response,
+					loginUser, user);
 			return "redirect:/stock/stockMenu";
+			// return "/user/manager/icloud-user-login";
 		} else {
 			return "forward:/user/failLoginUser";
 		}
@@ -61,5 +65,4 @@ public class ICloudUserController extends BaseStockController {
 		ModelAndView model = getModelAndView("user/manager/icloud-user-logout");
 		return model;
 	}
-
 }

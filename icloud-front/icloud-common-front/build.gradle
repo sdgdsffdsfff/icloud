@@ -1,7 +1,8 @@
 dependencies {
-    compile project(':icloud-common:framework')
-    compile project(':icloud-common:framework-logger')
-
+  compile project(':icloud-common:framework')
+  compile project(':icloud-common:framework-logger')
+  
+  
 	compile libraries.freemarker
 	compile libraries.commons_fileupload
 	compile libraries.jackson_mapper_asl
