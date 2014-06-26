@@ -237,6 +237,7 @@ body {
     white-space: nowrap;
     z-index: 3;
     width:100%;
+    min-width:80px;
 }
 .hyper-link u {
     color: #6d6d6d;
