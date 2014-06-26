@@ -64,6 +64,12 @@ public class ICloudUserController extends BaseStockController {
 			HttpServletResponse response) {
 		ModelAndView model = getModelAndView("user/manager/icloud-user-logout");
 		ICloudMemberUtils.removeSession(request, response);
-		return "redirect:/stock/stockMenu";
+		return "redirect:/user/icloudLogoutSuccess";
+	}
+
+	@RequestMapping("/icloudLogoutSuccess")
+	public ModelAndView icloudLogoutSuccess(HttpServletRequest request,
+			HttpServletResponse response) {
+		return getModelAndView("user/manager/icloud-user-logout");
 	}
 }

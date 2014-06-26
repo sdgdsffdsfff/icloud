@@ -9,17 +9,6 @@
             <h3>
                 <em></em>退出登录成功</h3>
             <div>欢迎使用本站。</div>
-            <ul class="clearfix">
-                <li>
-                    <a href="#">国内机票</a>
-                </li>
-                <li>
-                    <a href="#">国际机票</a>
-                </li>
-                <li>
-                    <a href="#">酒店</a>
-                </li>
-            </ul>
         </div>
     </div>
 </div>
