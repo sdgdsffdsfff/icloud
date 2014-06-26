@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icloud.framework.util.ICloudUtils;
+import com.icloud.framework.util.StringEncoder;
 import com.icloud.front.stock.baseaction.BaseStockController;
 import com.icloud.front.user.pojo.LoginUser;
 import com.icloud.front.user.pojo.RegisterUser;
@@ -17,6 +18,7 @@ import com.icloud.user.dict.UserConstants;
 @Controller
 @RequestMapping("/userManager")
 public class ICloudUserManagerController extends BaseStockController {
+	private static final String SECURE_SEED = "Abc124456";
 
 	@RequestMapping("/registerView")
 	public ModelAndView registerView() {
@@ -103,8 +105,14 @@ public class ICloudUserManagerController extends BaseStockController {
 			 * 充值密码
 			 */
 			userAdminBusiness.resetPassword(user);
-			MailConfig.sendFindPassword(email, user.getUserName(),
-					user.getUserPassword());
+			System.out.println(StringEncoder.encrypt(user.getUserPassword()
+					+ SECURE_SEED));
+			MailConfig
+					.sendFindPassword(
+							email,
+							user.getUserName(),
+							StringEncoder.encrypt(user.getUserPassword()
+									+ SECURE_SEED));
 		}
 		return "redirect:/userManager/dofindPassWordStep2success";
 	}
@@ -121,7 +129,8 @@ public class ICloudUserManagerController extends BaseStockController {
 			@RequestParam(required = true) String token) {
 		User user = this.userAdminBusiness.getUserByUserName(userName);
 		if (ICloudUtils.isNotNull(user)
-				&& user.getUserPassword().equalsIgnoreCase(token)) {
+				&& StringEncoder.encrypt(user.getUserPassword() + SECURE_SEED)
+						.equalsIgnoreCase(token)) {
 			ModelAndView model = getModelAndView("user/manager/icloud-user-findpwd-step03");
 			model.addObject("userName", userName);
 			model.addObject("token", token);
@@ -143,11 +152,12 @@ public class ICloudUserManagerController extends BaseStockController {
 					.getUsername());
 			if (ICloudUtils.isNotNull(user)) {
 				if (ICloudUtils.isNotNull(user.getUserPassword())
-						&& user.getUserPassword().equalsIgnoreCase(
-								registerUser.getToken())) {
+						&& StringEncoder.encrypt(
+								user.getUserPassword() + SECURE_SEED)
+								.equalsIgnoreCase(registerUser.getToken())) {
 					this.userAdminBusiness.updatePassword(user,
 							registerUser.getPassword());
-					return "redirect:/userManager/dofindPassWordStep4"; 
+					return "redirect:/userManager/dofindPassWordStep4";
 				}
 			}
 
