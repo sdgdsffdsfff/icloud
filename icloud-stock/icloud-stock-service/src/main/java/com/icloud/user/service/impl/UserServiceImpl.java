@@ -10,9 +10,11 @@ import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.framework.service.impl.SqlBaseService;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.framework.util.StringEncoder;
+import com.icloud.front.user.pojo.RegisterUser;
 import com.icloud.stock.model.User;
 import com.icloud.user.dao.IUserDao;
 import com.icloud.user.service.IUserService;
+import com.icloud.user.util.UserUtils;
 
 @Service("userService")
 public class UserServiceImpl extends SqlBaseService<User> implements
@@ -77,6 +79,18 @@ public class UserServiceImpl extends SqlBaseService<User> implements
 			this.update(user);
 			logger.info("end to update: userName={},password={}",
 					user.getUserName(), user.getUserPassword());
+		}
+	}
+
+	@Override
+	public void modifyBaseInfo(RegisterUser registerUser, User user) {
+		if (ICloudUtils.isNotNull(user) && ICloudUtils.isNotNull(registerUser)) {
+			logger.info("start to update: {}", registerUser);
+			user.setChinaName(registerUser.getChinaName());
+			user.setQq(registerUser.getQq());
+			user.setUserSex(UserUtils.getUserSex(registerUser.getUsersex()));
+			this.update(user);
+			logger.info("end to update: {}", registerUser);
 		}
 	}
 }

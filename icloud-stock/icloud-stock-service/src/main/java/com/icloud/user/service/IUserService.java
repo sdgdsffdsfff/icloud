@@ -1,6 +1,7 @@
 package com.icloud.user.service;
 
 import com.icloud.framework.service.ISqlBaseService;
+import com.icloud.front.user.pojo.RegisterUser;
 import com.icloud.stock.model.User;
 
 public interface IUserService extends ISqlBaseService<User> {
@@ -16,5 +17,7 @@ public interface IUserService extends ISqlBaseService<User> {
 	void resetPassword(User user);
 
 	void updatePassword(User user, String encrypt);
+
+	void modifyBaseInfo(RegisterUser registerUser, User user);
 
 }

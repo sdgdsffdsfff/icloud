@@ -1,6 +1,6 @@
 package com.icloud.stock.model;
 
-// Generated 2014-6-26 2:01:31 by Hibernate Tools 3.4.0.CR1
+// Generated 2014-6-27 17:45:35 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -20,6 +20,8 @@ public class User implements java.io.Serializable {
 	private String userSex;
 	private Date createTime;
 	private Date lastUpdateTime;
+	private String qq;
+	private String chinaName;
 	private Set userAccesses = new HashSet(0);
 
 	public User() {
@@ -27,7 +29,8 @@ public class User implements java.io.Serializable {
 
 	public User(String userName, String userPassword, String userTel,
 			String userEmail, String userComing, String userSex,
-			Date createTime, Date lastUpdateTime, Set userAccesses) {
+			Date createTime, Date lastUpdateTime, String qq, String chinaName,
+			Set userAccesses) {
 		this.userName = userName;
 		this.userPassword = userPassword;
 		this.userTel = userTel;
@@ -36,6 +39,8 @@ public class User implements java.io.Serializable {
 		this.userSex = userSex;
 		this.createTime = createTime;
 		this.lastUpdateTime = lastUpdateTime;
+		this.qq = qq;
+		this.chinaName = chinaName;
 		this.userAccesses = userAccesses;
 	}
 
@@ -109,6 +114,22 @@ public class User implements java.io.Serializable {
 
 	public void setLastUpdateTime(Date lastUpdateTime) {
 		this.lastUpdateTime = lastUpdateTime;
+	}
+
+	public String getQq() {
+		return this.qq;
+	}
+
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+
+	public String getChinaName() {
+		return this.chinaName;
+	}
+
+	public void setChinaName(String chinaName) {
+		this.chinaName = chinaName;
 	}
 
 	public Set getUserAccesses() {

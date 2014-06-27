@@ -16,8 +16,8 @@ function stockListloading(cateId, pageNo) {
 		complete : function() {
 		},
 		success : function(result) {
-			 $("#stock-list-view").html(result);
-			 hideLoader();
+			$("#stock-list-view").html(result);
+			hideLoader();
 		}
 	});
 

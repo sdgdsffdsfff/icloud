@@ -95,6 +95,7 @@ public class UserAdminBusiness extends UserBusiness {
 					user.setUserSex(UserUtils.getUserSex(registerUser
 							.getUsersex()));
 					user.setUserTel(registerUser.getTelphone());
+					user.setQq(registerUser.getQq());
 					return this.userService.save(user);
 				}
 			}
@@ -119,6 +120,17 @@ public class UserAdminBusiness extends UserBusiness {
 	}
 
 	public void updatePassword(User user, String password) {
-		this.userService.updatePassword(user,StringEncoder.encrypt(password));
+		this.userService.updatePassword(user, StringEncoder.encrypt(password));
+	}
+
+	public User getUserByUserId(UserInfo userInfo) {
+		if (ICloudUtils.isNotNull(userInfo)) {
+			return this.userService.getById(userInfo.getUserId());
+		}
+		return null;
+	}
+
+	public void modifyBaseInfo(RegisterUser registerUser, User user) {
+		this.userService.modifyBaseInfo(registerUser, user);
 	}
 }

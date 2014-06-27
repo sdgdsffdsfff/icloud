@@ -8,6 +8,7 @@ public class RegisterUser extends LoginUser {
 	private String readContract;
 	private String usersex;
 	private String token;
+	private String chinaName;
 
 	public String getUsername() {
 		return username;
@@ -63,6 +64,14 @@ public class RegisterUser extends LoginUser {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public String getChinaName() {
+		return chinaName;
+	}
+
+	public void setChinaName(String chinaName) {
+		this.chinaName = chinaName;
 	}
 
 	@Override

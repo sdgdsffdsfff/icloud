@@ -18,7 +18,7 @@ function setfindpwd() {
 			},
 			confirm_password : {
 				required : "请输入确认密码",
-				minlength : "确认密码不能小于5个字符",
+				minlength : "确认密码不能小于4个字符",
 				equalTo : "两次输入密码不一致"
 			},
 		}
