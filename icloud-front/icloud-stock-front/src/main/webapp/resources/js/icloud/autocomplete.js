@@ -5,7 +5,7 @@ function stockNameAutoComplete() {
 			{
 				url : url_,
 				callback : function(data) {
-					var redirecturl = "stockBaseDetail?stockCode="
+					var redirecturl = basepath+"/stock/stockBaseDetail?stockCode="
 							+ data.result + "&type=-1;"
 					window.open(redirecturl);
 				}
