@@ -21,6 +21,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.icloud.framework.logger.ri.RequestIdentityHolder;
 import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.framework.util.ICloudUtils;
+import com.icloud.front.common.config.FilterNotMappingConfig;
 import com.icloud.front.common.utils.ICloudUserContextHolder;
 import com.icloud.front.common.utils.MemberAuthUtils;
 import com.icloud.front.user.pojo.UserInfo;
@@ -40,32 +41,44 @@ public class RedisSessionFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		/**
-		 * 获得cookie
-		 */
-		Cookie cookie = getCookie(req, res);
-		/**
-		 * 设置reqid
-		 */
-		setRequestIdentityHolder(cookie, res);
-		logger.debug("RedisSessionFilter start");
-		/**
-		 * 设置用户信息
-		 */
-		setUserInfoHolder(cookie);
-		/**
-		 * 设置用户信息
-		 */
+		boolean isFilter = isFileter(req, res);
+		if (isFilter) {
+			/**
+			 * 获得cookie
+			 */
+			Cookie cookie = getCookie(req, res);
+			/**
+			 * 设置reqid
+			 */
+			setRequestIdentityHolder(cookie, res);
+			/**
+			 * 设置用户信息
+			 */
+			setUserInfoHolder(cookie);
+		}
+		// logger.debug("RedisSessionFilter start");
 		chain.doFilter(request, response);
-		logger.debug("RedisSessionFilter end");
-		/**
-		 * 删除用户信息
-		 */
-		removeUserInfoHolder();
-		/**
-		 * 删除 reqid
-		 */
-		removeRequestIdentity();
+		// logger.debug("RedisSessionFilter end");
+
+		if (isFilter) {
+			/**
+			 * 删除用户信息
+			 */
+			removeUserInfoHolder();
+			/**
+			 * 删除 reqid
+			 */
+			removeRequestIdentity();
+		}
+	}
+
+	private boolean isFileter(HttpServletRequest req, HttpServletResponse res) {
+		// logger.info(req.getContextPath() + "|"
+		// + FilterNotMappingConfig.isInFilterUrl(req.getContextPath()));
+		if (FilterNotMappingConfig.isInFilterUrl(req.getContextPath())) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
