@@ -347,7 +347,12 @@ public class DistributedLockFramework {
 		} catch (Exception e) {
 			logger.error("创建CuratorFramework时出错", e);
 			client = null;
-			throw e;
+			try {
+				throw e;
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		lockClient = CuratorFrameworkFactory.builder()
 				.connectString(connectionString)
