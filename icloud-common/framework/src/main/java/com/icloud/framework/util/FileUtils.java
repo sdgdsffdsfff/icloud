@@ -15,6 +15,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,14 +29,16 @@ import java.util.zip.GZIPInputStream;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.Resource;
 
 //import com.ice.tar.TarArchive;
 //import com.ice.tar.TarEntry;
 
 /**
- * 
+ *
  * @author jianyesun
- * 
+ *
  */
 public class FileUtils {
 	private static Logger logger = LoggerFactory.getLogger(FileUtils.class);
@@ -57,7 +60,7 @@ public class FileUtils {
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @param file
 	 */
 	public FileUtils(File file) {
@@ -66,7 +69,7 @@ public class FileUtils {
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @param name
 	 */
 	public FileUtils(String absolutePath) {
@@ -75,7 +78,7 @@ public class FileUtils {
 
 	/**
 	 * Return whether or not this file or directory exists
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean exists() {
@@ -84,7 +87,7 @@ public class FileUtils {
 
 	/**
 	 * open the reader
-	 * 
+	 *
 	 */
 	private void openRead() {
 		try {
@@ -125,7 +128,7 @@ public class FileUtils {
 
 	/**
 	 * close the reader
-	 * 
+	 *
 	 */
 	public void close() {
 		try {
@@ -155,7 +158,7 @@ public class FileUtils {
 
 	/**
 	 * read a line from the file
-	 * 
+	 *
 	 * @return
 	 */
 	public String readLine() {
@@ -171,7 +174,7 @@ public class FileUtils {
 
 	/**
 	 * read a line from the InputStream
-	 * 
+	 *
 	 * @return
 	 */
 	public static List<String> readLine(File file) {
@@ -186,8 +189,76 @@ public class FileUtils {
 	}
 
 	/**
+	 * read the content from file
+	 *
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws UnsupportedEncodingException
+	 */
+	public static String readContent(String file) throws FileNotFoundException,
+			UnsupportedEncodingException {
+		FileInputStream in = new FileInputStream(file);
+		return readContent(in);
+	}
+
+	/**
+	 * read the content from resource
+	 *
+	 * @param filePath
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	public static String readContentFromReSource(String filePath)
+			throws UnsupportedEncodingException {
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext();
+
+		Resource rc = ctx.getResource("/" + filePath);
+
+		InputStream input = null;
+		try {
+			input = rc.getInputStream();
+		} catch (IOException e1) {
+			logger.error(e1.getLocalizedMessage());
+			e1.printStackTrace();
+			return null;
+		}
+		return readContent(input);
+	}
+
+	/**
+	 * read the content from inputstream
+	 *
+	 * @param in
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	public static String readContent(InputStream in)
+			throws UnsupportedEncodingException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(in,
+				"UTF-8"));
+
+		StringBuffer sb = new StringBuffer();
+		String s = null;
+		try {
+			while ((s = reader.readLine()) != null) {
+				sb.append(s + "\n");
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+
+		try {
+			reader.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sb.toString();
+	}
+
+	/**
 	 * read a line from the InputStream
-	 * 
+	 *
 	 * @return
 	 */
 	@SuppressWarnings("unused")
@@ -214,7 +285,7 @@ public class FileUtils {
 
 	/**
 	 * read byte to byteArray from the file
-	 * 
+	 *
 	 * @return
 	 */
 	public static byte[] readByte(File file) {
@@ -228,7 +299,7 @@ public class FileUtils {
 
 	/**
 	 * read byte to byteArray from the InputStream
-	 * 
+	 *
 	 * @param in
 	 * @return
 	 */
@@ -261,7 +332,7 @@ public class FileUtils {
 
 	/**
 	 * read a line from the gzip-file
-	 * 
+	 *
 	 * @return
 	 */
 	public String gzipReadLine() {
@@ -269,7 +340,8 @@ public class FileUtils {
 		try {
 			if (reader == null) {
 				in = new FileInputStream(file);
-				reader = new BufferedReader(new InputStreamReader(new GZIPInputStream(in)));
+				reader = new BufferedReader(new InputStreamReader(
+						new GZIPInputStream(in)));
 			}
 			s = reader.readLine();
 		} catch (Exception e) {
@@ -280,7 +352,7 @@ public class FileUtils {
 
 	/**
 	 * read into String from the file
-	 * 
+	 *
 	 * @return
 	 */
 	public String readString() {
@@ -295,7 +367,8 @@ public class FileUtils {
 					// LogUtils.log(FileUtils.class,
 					// "file size is too large, more than " + MAX_LENGTH +
 					// " char", LogUtils.WARN);
-					logger.warn("file size is too large, more than " + MAX_LENGTH + " char");
+					logger.warn("file size is too large, more than "
+							+ MAX_LENGTH + " char");
 					break;
 				}
 			}
@@ -308,7 +381,7 @@ public class FileUtils {
 
 	/**
 	 * read the InputStream
-	 * 
+	 *
 	 * @return
 	 */
 	public int readByte(byte[] b) {
@@ -327,7 +400,7 @@ public class FileUtils {
 
 	/**
 	 * read into ArrayList Object
-	 * 
+	 *
 	 * @return
 	 */
 	public ArrayList<String> readLines() {
@@ -346,7 +419,7 @@ public class FileUtils {
 
 	/**
 	 * the file is valid
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isValid(String endwith) {
@@ -355,7 +428,7 @@ public class FileUtils {
 
 	/**
 	 * write a byte[] to the file
-	 * 
+	 *
 	 * @param b
 	 * @param off
 	 * @param len
@@ -377,7 +450,7 @@ public class FileUtils {
 
 	/**
 	 * write a byte[] to the file
-	 * 
+	 *
 	 * @param b
 	 * @return
 	 */
@@ -389,7 +462,7 @@ public class FileUtils {
 
 	/**
 	 * write a char[] to the file
-	 * 
+	 *
 	 * @param b
 	 * @param off
 	 * @param len
@@ -411,7 +484,7 @@ public class FileUtils {
 
 	/**
 	 * write a char[] to the file
-	 * 
+	 *
 	 * @param b
 	 * @return
 	 */
@@ -423,7 +496,7 @@ public class FileUtils {
 
 	/**
 	 * write a String to the file
-	 * 
+	 *
 	 * @param s
 	 */
 	public synchronized boolean write(String s) {
@@ -442,13 +515,14 @@ public class FileUtils {
 
 	/**
 	 * write a String to the file
-	 * 
+	 *
 	 * @param s
 	 * @param file
 	 */
 	public static synchronized boolean write(String s, File file, boolean append) {
 		try {
-			PrintWriter writer = new PrintWriter(new BufferedOutputStream(new FileOutputStream(file, append)));
+			PrintWriter writer = new PrintWriter(new BufferedOutputStream(
+					new FileOutputStream(file, append)));
 			writer.print(s);
 			writer.close();
 			writer = null;
@@ -462,13 +536,14 @@ public class FileUtils {
 
 	/**
 	 * write a String to the file
-	 * 
+	 *
 	 * @param s
 	 * @param file
 	 */
 	public static synchronized boolean write(byte[] b, File file, boolean append) {
 		try {
-			BufferedOutputStream writer = new BufferedOutputStream(new FileOutputStream(file, append));
+			BufferedOutputStream writer = new BufferedOutputStream(
+					new FileOutputStream(file, append));
 			writer.write(b);
 			writer.flush();
 			writer.close();
@@ -483,13 +558,15 @@ public class FileUtils {
 
 	/**
 	 * write a String to the file
-	 * 
+	 *
 	 * @param s
 	 * @param file
 	 */
-	public static synchronized boolean writep(String s, File file, boolean append) {
+	public static synchronized boolean writep(String s, File file,
+			boolean append) {
 		try {
-			OutputStreamWriter os = new OutputStreamWriter(new FileOutputStream(file, append), "UTF-8");
+			OutputStreamWriter os = new OutputStreamWriter(
+					new FileOutputStream(file, append), "UTF-8");
 			os.write(s);
 			os.close();
 			return true;
@@ -502,18 +579,19 @@ public class FileUtils {
 
 	/**
 	 * write a String to the file
-	 * 
+	 *
 	 * @param s
 	 * @param relativePath
 	 */
-	public static synchronized boolean write(String s, String absolutePath, boolean append) {
+	public static synchronized boolean write(String s, String absolutePath,
+			boolean append) {
 		File file = new File(absolutePath);
 		return write(s, file, append);
 	}
 
 	/**
 	 * write a Object to the file
-	 * 
+	 *
 	 * @param o
 	 * @param file
 	 */
@@ -531,7 +609,7 @@ public class FileUtils {
 
 	/**
 	 * read a Object from the file
-	 * 
+	 *
 	 * @param file
 	 * @return
 	 */
@@ -551,7 +629,7 @@ public class FileUtils {
 
 	/**
 	 * delete a file or directory
-	 * 
+	 *
 	 * @param file
 	 */
 	public static boolean deleteFile(File file) {
@@ -575,7 +653,7 @@ public class FileUtils {
 
 	/**
 	 * delete a file or directory
-	 * 
+	 *
 	 * @param file
 	 */
 	public static boolean deleteFile(String filename) {
@@ -589,7 +667,7 @@ public class FileUtils {
 
 	/**
 	 * get the files by the absolutePath
-	 * 
+	 *
 	 * @param s
 	 * @param file
 	 */
@@ -609,7 +687,7 @@ public class FileUtils {
 
 	/**
 	 * get all files in a directory include its sub directory
-	 * 
+	 *
 	 * @param absolutePath
 	 */
 	public static List<File> getAllFiles(String absolutePath) {
@@ -633,7 +711,7 @@ public class FileUtils {
 
 	/**
 	 * get the file by the absolutePath
-	 * 
+	 *
 	 * @param s
 	 * @param file
 	 */
@@ -782,7 +860,7 @@ public class FileUtils {
 
 	/**
 	 * whether is not file exists
-	 * 
+	 *
 	 * @param file
 	 * @return
 	 */
@@ -790,7 +868,8 @@ public class FileUtils {
 		if (!file.exists()) {
 			// LogUtils.log(FileUtils.class, "directory - " +
 			// file.getAbsolutePath() + " not exists  - ", LogUtils.WARN);
-			logger.warn("directory - " + file.getAbsolutePath() + " not exists  - ");
+			logger.warn("directory - " + file.getAbsolutePath()
+					+ " not exists  - ");
 			return false;
 		}
 		return true;
@@ -798,14 +877,15 @@ public class FileUtils {
 
 	/**
 	 * whether is not filename exists
-	 * 
+	 *
 	 * @param filename
 	 * @return
 	 */
 	public static boolean exists(String filename) {
 		File file = new File(filename);
 		if (!file.exists()) {
-			logger.warn("directory - " + file.getAbsolutePath() + " not exists  - ");
+			logger.warn("directory - " + file.getAbsolutePath()
+					+ " not exists  - ");
 			// LogUtils.log(FileUtils.class, "directory - " +
 			// file.getAbsolutePath() + " not exists  - ", LogUtils.WARN);
 			return false;
@@ -818,7 +898,8 @@ public class FileUtils {
 		if (!file.exists()) {
 
 			if (!file.mkdir()) {
-				logger.warn("creating directory - " + file.getAbsolutePath() + " not exists  - ");
+				logger.warn("creating directory - " + file.getAbsolutePath()
+						+ " not exists  - ");
 				return false;
 			}
 		}
@@ -929,7 +1010,8 @@ public class FileUtils {
 	}
 
 	public static void writeFile(File file, InputStream is) throws IOException {
-		FileOutputStream fos = org.apache.commons.io.FileUtils.openOutputStream(file);
+		FileOutputStream fos = org.apache.commons.io.FileUtils
+				.openOutputStream(file);
 		BufferedOutputStream bos = null;
 		BufferedInputStream bis = null;
 

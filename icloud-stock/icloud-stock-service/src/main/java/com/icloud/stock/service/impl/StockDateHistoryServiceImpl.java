@@ -74,7 +74,7 @@ public class StockDateHistoryServiceImpl extends
 	@Override
 	public int countByStockId(Integer id) {
 		return (int) this.stockHistoryDao.countByProperty(
-				StockDateHistoryDaoImpl.STOCK_ID, id);
+				StockDateHistoryDaoImpl.STOCKID, id);
 	}
 
 	@Override

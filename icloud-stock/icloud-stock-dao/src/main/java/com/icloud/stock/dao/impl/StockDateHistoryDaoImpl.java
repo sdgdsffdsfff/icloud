@@ -13,7 +13,7 @@ import com.icloud.stock.model.StockDateHistory;
 @Repository("stockDateHistoryDao")
 public class StockDateHistoryDaoImpl extends StockBaseDaoImpl<StockDateHistory>
 		implements IStockDateHistoryDao {
-	
+
 	@Override
 	public Date getMaxUpdateTime(Integer id) {
 		String hql = "select max(createTime) from " + domainClass.getName()
@@ -29,7 +29,7 @@ public class StockDateHistoryDaoImpl extends StockBaseDaoImpl<StockDateHistory>
 
 	@Override
 	public void deleteByStockId(final Integer id) {
-		this.deleteByProperty(STOCK_ID, id);
+		this.deleteByProperty(STOCKID, id);
 		// getHibernateTemplate().execute(
 		// new HibernateCallback<StockDateHistory>() {
 		// @Override
@@ -50,10 +50,10 @@ public class StockDateHistoryDaoImpl extends StockBaseDaoImpl<StockDateHistory>
 		// String hql = "from " + domainClass.getName() + " where stockId = " +
 		// id
 		// + " order by createTime desc";
-		String[] params = { STOCK_ID };
+		String[] params = { STOCKID };
 		Integer[] values = { id };
 		// return this.findByProperty(hql);
-		return this.findByProperty(params, values, CREATE_TIME, false);
+		return this.findByProperty(params, values, CREATETIME, false);
 	}
 
 	@Override
@@ -61,9 +61,9 @@ public class StockDateHistoryDaoImpl extends StockBaseDaoImpl<StockDateHistory>
 		// String hql = "from " + domainClass.getName() + " where stockId = " +
 		// id
 		// + " order by createTime desc";
-		String[] params = { STOCK_ID };
+		String[] params = { STOCKID };
 		Integer[] values = { id };
-		return this.findByProperty(params, values, CREATE_TIME, false, start,
+		return this.findByProperty(params, values, CREATETIME, false, start,
 				limit);
 		// return this.findByProperty(hql, start, limit);
 

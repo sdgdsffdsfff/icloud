@@ -1,0 +1,8 @@
+﻿package $destPack;
+
+import $baseDaoPath;
+import $modelPath;
+
+public interface $modelDaoName extends $baseDaoName<$modelName> {
+$allContext
+}

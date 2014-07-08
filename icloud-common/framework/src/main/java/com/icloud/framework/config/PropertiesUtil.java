@@ -29,9 +29,9 @@ public class PropertiesUtil {
 	}
 
 	/**
-	 * 
+	 *
 	 * description: 从消息定义文件中取出code所对应的消息, args为占位符的实际值
-	 * 
+	 *
 	 * @param code
 	 * @param args
 	 * @return 消息
@@ -96,7 +96,8 @@ public class PropertiesUtil {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public static Map<String, String> mapProperties(String filePath) {
+	public static Map<String, String> mapProperties(String filePath)
+			throws IOException {
 
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext();
 
@@ -112,7 +113,7 @@ public class PropertiesUtil {
 		}
 
 		Map<String, String> map = new HashMap<String, String>();
-		if (input != null)
+		if (input != null) {
 			try {
 				Properties properties = new Properties();
 				properties.load(input);
@@ -123,7 +124,10 @@ public class PropertiesUtil {
 				}
 			} catch (IOException e) {
 				logger.error(e.getLocalizedMessage(), e);
+			} finally {
+				input.close();
 			}
+		}
 		return map;
 	}
 }
