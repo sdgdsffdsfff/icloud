@@ -16,4 +16,5 @@ dependencies {
 
     compile libraries.joda_time
     compile libraries.morphia_validation
+    compile libraries.mongo_java_driver
 }

@@ -9,7 +9,10 @@
 	default-autowire="byName" default-lazy-init="true">
 
 	<context:property-placeholder
-		location="classpath*:properties/mongo-database.properties;classpath*:properties/mongo-options-default.properties"
+		location="classpath*:properties/mongo-database.properties"
+		ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="classpath*:properties/mongo-options-default.properties"
 		ignore-unresolvable="true" />
 
 	<import resource="classpath*:/spring/shtb-mongo-component-scan.xml" />

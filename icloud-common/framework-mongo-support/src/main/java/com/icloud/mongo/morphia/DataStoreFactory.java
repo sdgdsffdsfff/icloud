@@ -1,6 +1,8 @@
 package com.icloud.mongo.morphia;
 
 import java.net.UnknownHostException;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.PostConstruct;
 
@@ -29,11 +31,18 @@ public class DataStoreFactory {
     // morphia bean到包路径
     private String[] packagePaths;
     private TZDatastoreProvider tzDatastoreProvider;
+    
+    private TZMongoClientOptionsBuilder optionsBuilder;
+    private static Map<String, MongoClient> mongoClientMap = new ConcurrentHashMap<>();
 
     public void setPackagePaths(String[] packagePaths) {
         this.packagePaths = packagePaths;
     }
 
+    public void setOptionsBuilder(TZMongoClientOptionsBuilder optionsBuilder) {
+		this.optionsBuilder = optionsBuilder;
+	}
+    
     // 初始化,扫描mongo entity 路径
     @PostConstruct
     public void init() {
@@ -94,11 +103,26 @@ public class DataStoreFactory {
         return datastore;
     }
 
-    public Datastore createDatastore(String uri) throws UnknownHostException {
-        MongoClientURI mcUri = new MongoClientURI(uri);
-        MongoClient mc = new MongoClient(mcUri);
-        Datastore datastore = morphia.createDatastore(mc, mcUri.getDatabase());
-        return postProcessDatastoreCreation(datastore);
-    }
+//    public Datastore createDatastore(String uri) throws UnknownHostException {
+//        MongoClientURI mcUri = new MongoClientURI(uri);
+//        MongoClient mc = new MongoClient(mcUri);
+//        Datastore datastore = morphia.createDatastore(mc, mcUri.getDatabase());
+//        return postProcessDatastoreCreation(datastore);
+//    }
 
+    public Datastore createDatastore(String uri) throws UnknownHostException {
+		MongoClientURI mcUri = null;
+		if (optionsBuilder != null) {
+			mcUri = new MongoClientURI(uri, optionsBuilder.getOptionsBuilder());
+		} else {
+			mcUri = new MongoClientURI(uri);
+		}
+		MongoClient mc = mongoClientMap.get(uri);
+		if (mc == null) {
+			mc = new MongoClient(mcUri);
+		}
+		Datastore datastore = morphia.createDatastore(mc, mcUri.getDatabase());
+		morphia.createDatastore(mc, mcUri.getDatabase());
+		return postProcessDatastoreCreation(datastore);
+	}
 }

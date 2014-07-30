@@ -21,10 +21,9 @@
 		p:maxConnectionLifeTime="${maxConnectionLifeTime}" p:maxWaitTime="${maxWaitTime}"
 		p:connectTimeout="${connectTimeout}" p:cursorFinalizerEnabled="${cursorFinalizerEnabled}"
 		p:socketTimeout="${socketTimeout}" p:socketKeepAlive="${socketKeepAlive}"
-		p:alwaysUseMBeans="${alwaysUseMBeans}" p:description="${gta.description}"
-		p:minConnectionsPerHost="${gta.minConnectionsPerHost}"
-		p:connectionsPerHost="${gta.connectionsPerHost}"
-		p:threadsAllowedToBlockForConnectionMultiplier="${gta.threadsAllowedToBlockForConnectionMultiplier}" />
+		p:alwaysUseMBeans="${alwaysUseMBeans}" p:minConnectionsPerHost="${minConnectionsPerHost}"
+		p:connectionsPerHost="${connectionsPerHost}"
+		p:threadsAllowedToBlockForConnectionMultiplier="${threadsAllowedToBlockForConnectionMultiplier}" />
 
 	<bean id="shtbDatastore" name="shtbDatastore" factory-bean="shtbDatastoreFactory"
 		factory-method="createDatastore">
