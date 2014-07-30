@@ -15,13 +15,14 @@ import org.slf4j.LoggerFactory;
 
 import com.cninfo.shtb.basedao.IShbtMongoBaseDao;
 import com.github.jmkgreen.morphia.Datastore;
+import com.icloud.framework.util.ICloudUtils;
 import com.icloud.mongo.dao.impl.MorphiaBasicDao;
 import com.icloud.mongo.entity.MorphiaEntity;
 
 public class ShbtMongoBaseDao<E extends MorphiaEntity<ObjectId>> extends
 		MorphiaBasicDao<E, ObjectId> implements IShbtMongoBaseDao<E> {
-
 	Logger logger = LoggerFactory.getLogger(ShbtMongoBaseDao.class);
+
 	@Resource(name = "shtbDatastore")
 	private Datastore shtbDatastore;
 
@@ -32,7 +33,7 @@ public class ShbtMongoBaseDao<E extends MorphiaEntity<ObjectId>> extends
 
 	@Override
 	public List<E> getByIdStrs(List<String> ids) {
-		if (ids == null || ids.size() == 0) {
+		if (ICloudUtils.isEmpty(ids)) {
 			return null;
 		}
 		List<ObjectId> objIds = new LinkedList<ObjectId>();
