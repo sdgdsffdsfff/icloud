@@ -87,9 +87,4 @@ public class ImageBasicDaoImpl implements IImageBasicDao {
         gFile.save();
         return (ObjectId) gFile.getId();
     }
-
-
-
-
-
 }

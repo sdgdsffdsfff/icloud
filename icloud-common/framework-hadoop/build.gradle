@@ -9,6 +9,5 @@ dependencies {
 		transitive = false
 	}
 	compile libraries.commons_cli
-	compile libraries.sstable
 	compile libraries.thrift
 }

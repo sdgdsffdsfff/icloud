@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import com.icloud.framework.file.TextFile;
 import com.icloud.stock.connector.handler.impl.DownLoadCVSHandler;
 import com.icloud.stock.connector.handler.impl.StockCurrentInfoHandler;
 import com.icloud.stock.connector.handler.impl.StockMetaInfoHandler;
@@ -62,6 +63,15 @@ public class StockTest {
 			for (StockDateHistory stockDateHistory : httpData) {
 				System.out.println(stockDateHistory);
 			}
+		}
+	}
+
+	@Test
+	public void readTest() {
+		String file = "E:\\data\\1\\22.txt";
+		TextFile textFile = new TextFile(file);
+		for (String str : textFile) {
+			System.out.println(str);
 		}
 	}
 }

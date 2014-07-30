@@ -1,0 +1,34 @@
+package com.cninfo.shtb.mongo.entity;
+
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Indexed;
+import com.icloud.mongo.entity.BaseEntity;
+
+@Entity("shtb.Member")
+public class Member extends BaseEntity {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4943923252437643187L;
+	@Indexed
+	private String userName;
+	private String passWord;
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassWord() {
+		return passWord;
+	}
+
+	public void setPassWord(String passWord) {
+		this.passWord = passWord;
+	}
+
+}

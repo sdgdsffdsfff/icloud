@@ -1,0 +1,12 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+group = 'com.cninfo.shtb'
+version = "1.0-SNAPSHOT"
+
+jar {
+ baseName =  'sh-mongo'
+}
+dependencies {
+    compile project(':icloud-common:framework-dao-base')
+}

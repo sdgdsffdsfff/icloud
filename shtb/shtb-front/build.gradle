@@ -1,0 +1,6 @@
+apply plugin: 'war'
+apply plugin: 'eclipse'
+dependencies {
+  compile project(':icloud-front:icloud-common-front')
+  compile project(':shtb:shtb-mongo')
+}

@@ -269,7 +269,7 @@ ext {
 
     // lucene
     luecne_core:            'org.apache.lucene:lucene-core:3.6.2',
-    IKAnalyzer:             'org.wltea.analyzer.lucene:IKAnalyzer:2012_u5',
+    IKAnalyzer:             'org.wltea.analyzer.lucene:IKAnalyzer:2012_u6',
 
     /* M */
 

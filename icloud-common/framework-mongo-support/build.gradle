@@ -10,8 +10,10 @@ jar {
  baseName =  'framework-mongo-support'
 }
 dependencies {
-	testCompile libraries.junit
+    compile project(':icloud-common:framework-core')
+
+    testCompile libraries.junit
 
     compile libraries.joda_time
-	compile libraries.morphia_validation
+    compile libraries.morphia_validation
 }
