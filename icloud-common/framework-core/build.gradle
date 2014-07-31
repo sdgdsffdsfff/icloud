@@ -1,9 +1,8 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
-group = 'com.travelzen'
+group = 'com.icloud'
 version = '1.0-SNAPSHOT'
-//version = '1.0'
 
 jar {
 	baseName =  'framework-core'
