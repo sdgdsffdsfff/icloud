@@ -1,0 +1,74 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: "com.github.johnrengelman.shadow"
+
+buildscript {
+    repositories { jcenter() }
+    dependencies { classpath 'com.github.jengelman.gradle.plugins:shadow:1.0.3' }
+}
+
+group = 'net.p5w.isns'
+version = '4.0.0-SNAPSHOT'
+
+jar {
+    baseName =  'isns-cds'
+	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	manifest.attributes("Main-Class":"net.p5w.isns.cds.relationship.topology.UserRelationShipTopology")
+}
+
+shadowJar {
+  baseName =  'isns-cds'
+  appendManifest {
+    attributes 'Main-Class': 'net.p5w.isns.cds.relationship.topology.UserRelationShipTopology'
+    attributes 'Implementation-Version':'4.1'
+  }
+  append('META-INF/spring.handlers')
+  append('META-INF/spring.schemas')
+}
+ 
+configurations { providedCompile }
+
+dependencies { 
+    providedCompile libraries.storm
+	compile (project(':isns-common')){
+		exclude group:'org.hibernate',module:'hibernate-core'
+		exclude group:'org.apache.struts'
+		exclude group:'com.belerweb',module:'weibo4j-oauth2'
+		exclude group:'net.sourceforge.jexcelapi',module:'jxl'
+		exclude group:'javax.activation',module:'activation'
+		exclude group:'cglib',module:'cglib'
+		exclude group:'asm',module:'asm'
+		exclude group:'axis',module:'axis'
+		exclude group:'org.apache.axis'
+		exclude group:'net.sf.ehcache',module:'ehcache-core'
+		exclude group:'jline',module:'jline'
+		exclude group:'javax.xml',module:'jaxrpc-api'
+		exclude group:'javax.jms',module:'jms-api'
+		exclude group:'javax.transaction',module:'jta'
+		exclude group:'junit',module:'junit'
+		exclude group:'javax.servlet',module:'jstl'
+		exclude group:'com.cninfo',module:'keytool'
+		exclude group:'com.google.code',module:'kaptcha'
+		exclude group:'log4j',module:'log4j'
+		exclude group:'ch.qos.logback',module:'logback-classic'
+		exclude group:'javax.mail',module:'mail'
+		exclude group:'com.qq',module:'qq-connect'
+		exclude group:'javax.xml.soap',module:'saaj-api'
+		exclude group:'tomcat',module:'servlet-api'
+		exclude group:'javax.validation',module:'validation-api'
+		exclude group:'wsdl4j',module:'wsdl4j'
+		exclude group:'org.apache.poi',module:'poi-ooxml'
+		exclude group:'org.springframework',module:'spring-webmvc'
+		exclude group:'org.springframework',module:'spring-web'
+		exclude group:'org.springframework.security',module:'spring-security-taglibs'
+		exclude group:'org.springframework.security.oauth',module:'spring-security-oauth2'
+		exclude group:'org.springframework.security',module:'spring-security-config'
+		exclude group:'org.springframework.security',module:'spring-security-web'
+		exclude group:'org.springframework.security',module:'spring-security-acl'
+		exclude group:'org.springframework.security',module:'spring-security-core'
+	}
+}
+
+sourceSets.main.compileClasspath += configurations.providedCompile
+sourceSets.test.compileClasspath += configurations.providedCompile
+sourceSets.test.runtimeClasspath += configurations.providedCompile
