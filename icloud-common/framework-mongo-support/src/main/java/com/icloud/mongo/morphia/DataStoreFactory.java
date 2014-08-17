@@ -1,8 +1,8 @@
 package com.icloud.mongo.morphia;
 
 import java.net.UnknownHostException;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.PostConstruct;
 
@@ -33,7 +33,8 @@ public class DataStoreFactory {
     private TZDatastoreProvider tzDatastoreProvider;
     
     private TZMongoClientOptionsBuilder optionsBuilder;
-    private static Map<String, MongoClient> mongoClientMap = new ConcurrentHashMap<>();
+//    private static Map<String, MongoClient> mongoClientMap = new ConcurrentHashMap<>();
+    private static Map<String, MongoClient> mongoClientMap = new HashMap<String, MongoClient>();
 
     public void setPackagePaths(String[] packagePaths) {
         this.packagePaths = packagePaths;

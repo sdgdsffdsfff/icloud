@@ -6,6 +6,7 @@
        <nav class="main-nav">
          <ul class="clearfix">
          	<li <#if current=="行情">class="first active"</#if>><a href="${basepath}/stock/stockMenu">行情</a></li>
+         	<li <#if current=="爬虫数据">class="first active"</#if>><a href="${basepath}/stock/openMenus">爬虫数据</a></li>
             </ul>
        </nav>
        <div class="search">

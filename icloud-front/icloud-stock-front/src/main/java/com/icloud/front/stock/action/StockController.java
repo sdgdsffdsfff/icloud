@@ -1,8 +1,8 @@
 package com.icloud.front.stock.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.icloud.framework.core.wrapper.PageView;
 import com.icloud.framework.core.wrapper.Pagination;
-import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.stock.baseaction.BaseStockController;
 import com.icloud.front.stock.pojo.BaseStockMenu;
@@ -19,6 +18,7 @@ import com.icloud.front.stock.pojo.StockBean;
 import com.icloud.front.stock.pojo.StockCompleteResult;
 import com.icloud.front.stock.pojo.StockDateHistoryResult;
 import com.icloud.front.stock.pojo.StockMenuBean;
+import com.icloud.stock.model.Category;
 import com.icloud.stock.model.Stock;
 import com.icloud.stock.model.StockDateHistory;
 import com.icloud.stock.model.StockDetail;
@@ -27,16 +27,71 @@ import com.icloud.stock.model.constant.StockConstants.BaseCategory;
 @Controller
 @RequestMapping("/stock")
 public class StockController extends BaseStockController {
+	protected List<BaseStockMenu> addMainMenus(ModelAndView model) {
+		List<BaseStockMenu> baseMenus = stockCommonBussiness.getBaseMenu();
+		model.addObject("mainMenus", baseMenus);
+		return baseMenus;
+	}
 
 	@RequestMapping("/stockMenu")
 	public ModelAndView stockMenu() {
 		ModelAndView model = new ModelAndView("stock/mainPage");
-		model.addObject("mainMenus", stockCommonBussiness.getBaseMenu());
+		addMainMenus(model);
 		return model;
 	}
 
 	// @ResponseBody
 	// @RequestParam(required=true) String hotelId
+	@RequestMapping("/openMenus")
+	public ModelAndView openMenus() {
+		ModelAndView model = new ModelAndView("opendata/open-menus");
+		/**
+		 * 获得所有数据
+		 */
+		List<BaseStockMenu> menus = addMainMenus(model);
+		List<StockMenuBean> stockMenuBeans = new ArrayList<StockMenuBean>();
+		/**
+		 * 获得所有分类数据
+		 */
+		for (BaseStockMenu menu : menus) {
+			StockMenuBean bean = stockCommonBussiness
+					.getSingleStockMenuBean(menu.getCode());
+			if (ICloudUtils.isNotNull(bean)) {
+				stockMenuBeans.add(bean);
+			}
+		}
+		model.addObject("stockMenuBeans", stockMenuBeans);
+		return model;
+	}
+
+	@RequestMapping("/openStockList")
+	public ModelAndView openStockList(
+			@RequestParam(required = true) String cateId, String pageNo) {
+		ModelAndView model = new ModelAndView("opendata/open-stock-list");
+		addMainMenus(model);
+
+		BaseStockMenu baseStockMenu = this.stockCommonBussiness
+				.getBaseStockMenu(cateId);
+
+		if (ICloudUtils.isNotNull(baseStockMenu)) {
+			Category category = stockCommonBussiness
+					.getCategoryFromCateId(cateId);
+			if (ICloudUtils.isNotNull(category)) {
+				StockMenuBean bean = stockCommonBussiness
+						.getSingleStockMenuBean(category
+								.getCategoryCategoryType());
+				model.addObject("stockMenuBean", bean);
+			}
+		}
+		Pagination<Stock> pagination = this.stockListBussiness.getStockList(
+				cateId, pageNo, 30);
+		PageView pageView = PageView.convertPage(pagination);
+		model.addObject("baseStockMenu", baseStockMenu);
+		model.addObject("pagination", pagination);
+		model.addObject("pageView", pageView);
+		model.addObject("cateId", cateId);
+		return model;
+	}
 
 	@RequestMapping("/listStockView")
 	public ModelAndView stockListMenu(

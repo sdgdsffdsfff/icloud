@@ -24,6 +24,10 @@ public class StockPageUrlGetter implements TemplateMethodModel {
 			String cateId = (String) args.get(1);
 			return "onclick=\"stockListloading(" + cateId + "," + pageNo
 					+ ")\" href=\"#\"";
+		} else if ("3".equalsIgnoreCase(pageId)) {
+			String cateId = (String) args.get(1);
+			return "href=\"openStockList?cateId=" + cateId
+					+ "&pageNo=" + pageNo + "\"";
 		}
 		return "/stock/index";
 	}

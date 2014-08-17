@@ -16,8 +16,8 @@ allprojects {
     targetCompatibility = '1.6'
 
     repositories {
-        maven { url 'http://172.31.16.127:8081/nexus/content/groups/public' }
-        maven { url 'http://192.168.186.130:8081/nexus/content/groups/public' }
+        //maven { url 'http://172.31.16.127:8081/nexus/content/groups/public' }
+        maven { url 'http://localhost:8081/nexus/content/groups/public' }
         maven { url 'https://maven.alfresco.com/nexus/content/groups/public' }
         mavenCentral()
     }

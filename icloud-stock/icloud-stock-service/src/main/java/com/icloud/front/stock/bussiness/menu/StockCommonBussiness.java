@@ -46,6 +46,28 @@ public class StockCommonBussiness extends BaseAction {
 		return buildStockMenuBean(categorys, fatherName);
 	}
 
+	public StockMenuBean getSingleStockMenuBean(String type) {
+		String fatherName = null;
+		if (!ICloudUtils.isNotNull(type)) {
+			type = BaseCategory.BASE.getType();
+			fatherName = BaseCategory.BASE.getName();
+		}
+		type = type.trim();
+		BaseCategory baseCategory = BaseCategory.getBaseCategory(type);
+
+		type = baseCategory.getType();
+		fatherName = baseCategory.getName();
+		StockMenuBean stockMenuBean = new StockMenuBean();
+		stockMenuBean.setName(fatherName);
+		List<Category> categorys = this.categoryService.getCategoryByType(type);
+		if (!ICloudUtils.isEmpty(categorys)) {
+			for (Category cate : categorys) {
+				stockMenuBean.addCategory(cate, fatherName);
+			}
+		}
+		return stockMenuBean;
+	}
+
 	/**
 	 * 每个东西超过7之后,并且后面的首字母相同,便进行合并
 	 *
@@ -108,6 +130,20 @@ public class StockCommonBussiness extends BaseAction {
 			name = name + "-" + lastChar;
 		}
 		return name;
+	}
+
+	/**
+	 * 返回category
+	 * @param cateId
+	 * @return
+	 */
+	public Category getCategoryFromCateId(String cateId) {
+		int id = ICloudUtils.parseInt(cateId);
+		if (id != -1) {
+			Category category = this.categoryService.getById(id);
+			return category;
+		}
+		return null;
 	}
 
 	public BaseStockMenu getBaseStockMenu(String cateId) {
