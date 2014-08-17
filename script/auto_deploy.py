@@ -183,7 +183,6 @@ def start_tomcat():
 
 if args.restartonly:
     stop_tomcat()
-    sshCmd('rm -rf %(tomcat)s/webapps/%(webapp)s' % placeholders)
     sshCmd('rm -rf %(tomcat)s/work/*' % placeholders)
     start_tomcat()
 elif args.rollback:                                                                                    
