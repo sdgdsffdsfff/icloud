@@ -33,7 +33,6 @@ function menuloading() {
 				} else {
 
 				}
-
 			}, function() {
 				$(this).removeClass("selected");
 				$(".menu-panel", this).removeClass("selected");
