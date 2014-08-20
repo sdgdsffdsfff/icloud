@@ -105,8 +105,6 @@ public class ICloudUserManagerController extends BaseStockController {
 			 * 充值密码
 			 */
 			userAdminBusiness.resetPassword(user);
-			System.out.println(StringEncoder.encrypt(user.getUserPassword()
-					+ SECURE_SEED));
 			MailConfig
 					.sendFindPassword(
 							email,
