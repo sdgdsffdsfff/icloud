@@ -114,7 +114,7 @@ public class StockUtil {
 			price.setUserId(StockConstants.SYSTEM_USER_ID);
 			price.setUserName(StockConstants.SYSTEM_USER_NAME);
 			price.setUserComment("比较低级的预测哦");
-			price.setPrePercent(stock.getPreCare());
+			price.setPrePercent(stock.getPrePercent());
 			price.setPreCare(stock.getPreCare());
 			return price;
 		}
