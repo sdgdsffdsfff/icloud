@@ -14,6 +14,7 @@ public class Member extends BaseEntity {
 	@Indexed
 	private String userName;
 	private String passWord;
+	private String chineseName;
 
 	public String getUserName() {
 		return userName;
@@ -29,6 +30,14 @@ public class Member extends BaseEntity {
 
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
+	}
+
+	public String getChineseName() {
+		return chineseName;
+	}
+
+	public void setChineseName(String chineseName) {
+		this.chineseName = chineseName;
 	}
 
 }
