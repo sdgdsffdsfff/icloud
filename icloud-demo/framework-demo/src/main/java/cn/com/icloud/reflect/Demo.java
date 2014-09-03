@@ -1,4 +1,4 @@
-package com.cn.icloud.reflect;
+package cn.com.icloud.reflect;
 
 public class Demo {
 	private String a;

@@ -1,4 +1,4 @@
-package com.cn.icloud.Safety;
+package cn.com.icloud.Safety;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

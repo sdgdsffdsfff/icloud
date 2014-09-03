@@ -1,4 +1,4 @@
-package com.cn.icloud.iterator;
+package cn.com.icloud.iterator;
 
 
 public class TextFileTest {

@@ -1,4 +1,4 @@
-package com.cn.icloud.proxy;
+package cn.com.icloud.proxy;
 
 public interface Subject {
 	public void request();

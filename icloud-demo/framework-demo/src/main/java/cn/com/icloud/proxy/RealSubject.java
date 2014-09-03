@@ -1,4 +1,4 @@
-package com.cn.icloud.proxy;
+package cn.com.icloud.proxy;
 
 public class RealSubject implements Subject {
 

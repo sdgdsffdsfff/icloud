@@ -25,11 +25,11 @@ public class MemberDao extends ShbtMongoBaseDao<Member> implements IMemberDao {
 		// query.field("chineseName").contains("宁2");
 		// query.or(criteria);
 		// query.or(criteria);
-
+		
 		query.or(query.criteria("userName").contains("g2"),
 				query.criteria("chineseName").contains("宁1"),
 				query.criteria("passWord").contains("s3"));
 		return query.asList();
 	}
-
+    
 }
