@@ -1,4 +1,4 @@
-package com.cinfo.shtb.base.dao;
+package com.cninfo.shtb.base.dao;
 
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

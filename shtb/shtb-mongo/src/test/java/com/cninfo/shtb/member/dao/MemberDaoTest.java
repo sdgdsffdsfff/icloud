@@ -1,4 +1,4 @@
-package com.cinfo.shtb.member.dao;
+package com.cninfo.shtb.member.dao;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 
 import org.junit.Test;
 
-import com.cinfo.shtb.base.dao.BaseDaoTest;
+import com.cninfo.shtb.base.dao.BaseDaoTest;
 import com.cninfo.shtb.member.dao.IMemberDao;
 import com.cninfo.shtb.mongo.entity.Member;
 
