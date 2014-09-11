@@ -283,7 +283,7 @@ ext {
     mockito:                'org.mockito:mockito-all:1.8.4',
 
     // mongodb
-    mongo_java_driver:      'org.mongodb:mongo-java-driver:2.12.0',
+    mongo_java_driver:      'org.mongodb:mongo-java-driver:2.12.3',
     morphia:                "com.github.jmkgreen.morphia:morphia:${versions.morphia}",
     morphia_validation:     "com.github.jmkgreen.morphia:morphia-validation:${versions.morphia}",
     morphia_logging_slf4j: "com.github.jmkgreen.morphia:morphia-logging-slf4j:${versions.morphia}",

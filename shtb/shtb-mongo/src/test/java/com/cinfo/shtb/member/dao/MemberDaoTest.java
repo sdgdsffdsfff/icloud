@@ -16,16 +16,16 @@ public class MemberDaoTest extends BaseDaoTest {
 	@Resource(name = "shtb_MemberDao")
 	private IMemberDao memberDao;
 
-//	@Test
-//	public void saveMember() {
-//		for (int i = 0; i < 10; i++) {
-//			Member member = new Member();
-//			member.setPassWord("sssss" + i);
-//			member.setUserName("cuijiangning" + i);
-//			member.setChineseName("崔江宁" + i);
-//			this.memberDao.saveEntity(member);
-//		}
-//	}
+	@Test
+	public void saveMember() {
+		for (int i = 0; i < 100000; i++) {
+			Member member = new Member();
+			member.setPassWord("sssss" + i);
+			member.setUserName("cuijiangning" + i);
+			member.setChineseName("崔江宁" + i);
+			this.memberDao.saveEntity(member);
+		}
+	}
 
 	@Test
 	public void findMember() {

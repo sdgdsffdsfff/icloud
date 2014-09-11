@@ -4,13 +4,15 @@ import com.github.jmkgreen.morphia.annotations.Entity;
 import com.github.jmkgreen.morphia.annotations.Indexed;
 import com.icloud.mongo.entity.BaseEntity;
 
-@Entity("shtb.Member")
+@Entity("shtb.Member2")
 public class Member extends BaseEntity {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4943923252437643187L;
+	@Indexed
+	private String key = Double.toString(Math.random());
 	@Indexed
 	private String userName;
 	private String passWord;

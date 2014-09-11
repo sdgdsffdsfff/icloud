@@ -13,7 +13,7 @@
 				<value>com.cninfo.shtb.mongo.entity</value>
 			</list>
 		</property>
-		<property name="optionsBuilder" ref="defaultMongoOptionsBuilder" />
+		 <property name="optionsBuilder" ref="defaultMongoOptionsBuilder" />
 	</bean>
 
 	<bean id="defaultMongoOptionsBuilder" class="com.icloud.mongo.TZMongoClientOptionsBuilder"
