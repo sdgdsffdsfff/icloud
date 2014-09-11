@@ -1,5 +1,6 @@
 package com.cninfo.media.mongo.entity;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 import org.apache.commons.io.IOUtils;
@@ -65,13 +66,14 @@ public class Media implements java.io.Serializable {
 
 	public byte[] getContent() {
 		if (content == null) {
-			byte[] temp = new byte[(int)length];
+			byte[] temp = new byte[(int) length];
 			try {
 				IOUtils.read(inputStream, temp);
 			} catch (IOException e) {
-				throw new RuntimeException("Read inputstream error occured!" + filename, e);
+				throw new RuntimeException("Read inputstream error occured!"
+						+ filename, e);
 			}
-//			content = FileUtils.readByte(inputStream);
+			// content = FileUtils.readByte(inputStream);
 			IOUtils.closeQuietly(inputStream);
 			content = temp;
 		}
@@ -83,6 +85,9 @@ public class Media implements java.io.Serializable {
 	}
 
 	public java.io.InputStream getInputStream() {
+		if (inputStream == null && content != null) {
+			return new ByteArrayInputStream(content);
+		}
 		return inputStream;
 	}
 
@@ -119,10 +124,12 @@ public class Media implements java.io.Serializable {
 		builder.append("mediaId     : " + mediaId + "\n");
 		builder.append("createTime  : " + DateUtils.format(createTime, 8));
 		builder.append("filename    : " + filename + "\n");
-		String c = content == null ? "" : (content.length > 1024 ? "..." : (new String(content)));
+		String c = content == null ? "" : (content.length > 1024 ? "..."
+				: (new String(content)));
 		builder.append("content     : " + c + "\n");
 		builder.append("mediaType   : " + mediaType + "\n");
-		builder.append("description : " + (description == null ? "" : description) + "\n");
+		builder.append("description : "
+				+ (description == null ? "" : description) + "\n");
 		return builder.toString();
 	}
 
