@@ -20,71 +20,78 @@ import com.mongodb.gridfs.GridFSInputFile;
 
 public class ImageBasicDaoImpl implements IImageBasicDao {
 
-    public GridFS grfs;
+	public GridFS grfs;
 
-    public GridFS grfsContract;
+	// public GridFS grfsContract;
 
-    @Resource
-    public Datastore datastore;
+	@Resource
+	public Datastore datastore;
 
-    @PostConstruct
-    public void initGridFS() throws Exception {
-        grfs = new GridFS(datastore.getDB(), Constants.GRIDFS_PICTURE_BUCKET);
-        grfsContract = new GridFS(datastore.getDB(), Constants.GRIDFS_CONTRACT_BUCKET);
-    }
+	@Override
+	public void setDatastore(Datastore ds) {
+		this.datastore = ds;
+	}
 
-    @Override
-    public ObjectId saveImage(File img, String filename, Long version) throws IOException {
-        GridFSInputFile gFile = grfs.createFile(img);
-        gFile.setFilename(filename);
-        gFile.put(Constants.IMAGE_VERSION_PROPERTY_KEY, version);
-        gFile.save();
-        return (ObjectId) gFile.getId();
-    }
+	// @PostConstruct
+	// public void initGridFS() throws Exception {
+	// grfs = new GridFS(datastore.getDB(), Constants.GRIDFS_PICTURE_BUCKET);
+	// // grfsContract = new GridFS(datastore.getDB(),
+	// // Constants.GRIDFS_CONTRACT_BUCKET);
+	// }
 
-    @Override
-    public Long getCurrentVersion(String filename) {
-        GridFSDBFile gFile = grfs.findOne(filename);
-        if (gFile == null) {
-            return null;
-        }
-        return (Long) gFile.get(Constants.IMAGE_VERSION_PROPERTY_KEY);
-    }
+	@Override
+	public ObjectId saveImage(File img, String filename, Long version)
+			throws IOException {
+		GridFSInputFile gFile = grfs.createFile(img);
+		gFile.setFilename(filename);
+		gFile.put(Constants.IMAGE_VERSION_PROPERTY_KEY, version);
+		gFile.save();
+		return (ObjectId) gFile.getId();
+	}
 
-    @Override
-    public void removeImage(String mediaTypeId) {
-        DBObject dbo = new BasicDBObject();
-        dbo.put(Constants.MEDIATYPE_ID, mediaTypeId);
-        grfs.remove(dbo);
-    }
+	@Override
+	public Long getCurrentVersion(String filename) {
+		GridFSDBFile gFile = grfs.findOne(filename);
+		if (gFile == null) {
+			return null;
+		}
+		return (Long) gFile.get(Constants.IMAGE_VERSION_PROPERTY_KEY);
+	}
 
-    @Override
-    public void removeImageById(String mediaId) {
-        DBObject dbo = new BasicDBObject();
-        dbo.put(Constants.MEDIA_ID, mediaId);
-        grfs.remove(dbo);
-    }
+	@Override
+	public void removeImage(String mediaTypeId) {
+		DBObject dbo = new BasicDBObject();
+		dbo.put(Constants.MEDIATYPE_ID, mediaTypeId);
+		grfs.remove(dbo);
+	}
 
-    @Override
-    public ImageEntity getImage(String filename) {
-        GridFSDBFile gFile = grfs.findOne(filename);
-        if (gFile == null) {
-            return null;
-        }
+	@Override
+	public void removeImageById(String mediaId) {
+		DBObject dbo = new BasicDBObject();
+		dbo.put(Constants.MEDIA_ID, mediaId);
+		grfs.remove(dbo);
+	}
 
-        ImageEntity ie = new ImageEntity();
-        ie.setInputStream(gFile.getInputStream());
-        ie.setVersion((Long) gFile.get(Constants.IMAGE_VERSION_PROPERTY_KEY));
+	@Override
+	public ImageEntity getImage(String filename) {
+		GridFSDBFile gFile = grfs.findOne(filename);
+		if (gFile == null) {
+			return null;
+		}
 
-        return ie;
-    }
+		ImageEntity ie = new ImageEntity();
+		ie.setInputStream(gFile.getInputStream());
+		ie.setVersion((Long) gFile.get(Constants.IMAGE_VERSION_PROPERTY_KEY));
 
-    @Override
-    public ObjectId saveBlankImage(String filename, long version) {
-        GridFSInputFile gFile = grfs.createFile(new byte[] {});
-        gFile.setFilename(filename);
-        gFile.put(Constants.IMAGE_VERSION_PROPERTY_KEY, version);
-        gFile.save();
-        return (ObjectId) gFile.getId();
-    }
+		return ie;
+	}
+
+	@Override
+	public ObjectId saveBlankImage(String filename, long version) {
+		GridFSInputFile gFile = grfs.createFile(new byte[] {});
+		gFile.setFilename(filename);
+		gFile.put(Constants.IMAGE_VERSION_PROPERTY_KEY, version);
+		gFile.save();
+		return (ObjectId) gFile.getId();
+	}
 }

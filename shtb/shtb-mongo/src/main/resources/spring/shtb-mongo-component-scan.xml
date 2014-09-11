@@ -11,6 +11,7 @@
 		<property name="packagePaths">
 			<list>
 				<value>com.cninfo.shtb.mongo.entity</value>
+				<value>com.cninfo.media.mongo.entity</value>
 			</list>
 		</property>
 		 <property name="optionsBuilder" ref="defaultMongoOptionsBuilder" />
@@ -32,4 +33,5 @@
 
 	<context:component-scan base-package="com.cninfo.shtb.member.dao" />
 	<context:component-scan base-package="com.cninfo.shtb.member.service" />
+	<context:component-scan base-package="com.cninfo.media.dao" />
 </beans>
