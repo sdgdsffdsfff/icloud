@@ -16,7 +16,7 @@ public class PerformanceTest {
 
 	public static void startToPerforManceTest() {
 		LoadPerformanceUnit LoadPerformanceUnit = new LoadPerformanceUnit(100,
-				1000000, MongoFilePerformanceRunnable.class);
+				10000000, MongoFilePerformanceRunnable.class);
 		LoadPerformanceUnit.run();
 	}
 

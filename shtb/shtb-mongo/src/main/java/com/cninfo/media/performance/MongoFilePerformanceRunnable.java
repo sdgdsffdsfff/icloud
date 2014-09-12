@@ -51,13 +51,13 @@ public class MongoFilePerformanceRunnable extends PerformanceRunnable {
 
 	public void testSave() throws FileNotFoundException {
 		Media media = new Media();
-//		InputStream inputStream = new FileInputStream(new File(
-//				"/opt/performance/mongo/test1.txt"));
+		// InputStream inputStream = new FileInputStream(new File(
+		// "/opt/performance/mongo/test1.txt"));
 		media.setContent(content);
-		String filename = System.currentTimeMillis() + ""
-				+ Math.ceil(Math.random() * 10000);
+		String dis = Math.ceil(Math.random() * 100) + "";
+		String filename = System.currentTimeMillis() + "" + dis;
 		media.setFilename(filename + ".txt");
-		media.setMediaId(filename);
+		media.setMediaId(dis);
 		media.setType("txt");
 		media.setCreateTime(new Date());
 		media.setLength(content.length);

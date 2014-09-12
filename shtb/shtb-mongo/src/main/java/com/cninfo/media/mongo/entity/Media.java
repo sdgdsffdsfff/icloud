@@ -1,4 +1,4 @@
-package com.cninfo.media.mongo.entity;
+ package com.cninfo.media.mongo.entity;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

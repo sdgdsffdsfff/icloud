@@ -25,6 +25,7 @@ public class MediaDaoImpl extends CninfoMediaBaseDaoImpl implements IMediaDao {
 	@Override
 	public Object addMedia(Media media) {
 		GridFSFile mediafile = this.grfs.createFile(media.getInputStream());
+//		this.grfs.createFile().getOutputStream();
 		mediafile.put("mediaId", media.getMediaId());
 		mediafile.put("filename", media.getFilename());
 		mediafile.put("contentType", media.getType());
