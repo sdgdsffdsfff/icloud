@@ -7,10 +7,11 @@ import com.cninfo.shtb.mongo.entity.Member;
 
 public interface IMemberDao extends IShbtMongoBaseDao<Member> {
 
-	/** 
-	 * @return
-	 * List<Member>
-	 * @throws 
+	/**
+	 * @return List<Member>
+	 * @throws
 	 */
 	List<Member> query();
+
+	List<Member> queryDistinctName();
 }

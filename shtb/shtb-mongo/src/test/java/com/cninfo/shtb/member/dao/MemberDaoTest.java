@@ -56,4 +56,9 @@ public class MemberDaoTest extends BaseDaoTest {
 		List<Member> list = memberDao.query();
 		print(list);
 	}
+
+	@Test
+	public void find() {
+		this.memberDao.queryDistinctName();
+	}
 }
