@@ -10,13 +10,14 @@ import com.travelzen.tops.preformance.LoadPerformanceUnit;
  * @author 崔江宁
  * @email cuijiangning@cninfo.com.cn 2014年9月11日 下午2:52:59
  */
-public class PerformanceTest {
-	static ClassPathXmlApplicationContext svContext = new ClassPathXmlApplicationContext("classpath*:spring/shtb-mongo-ctx-min.xml");
-	public static IMediaDao mediaDao = (IMediaDao) svContext.getBean("mediaDao");
+public class PerformanceMongoSaveTest {
 
 	public static void startToPerforManceTest() {
-		LoadPerformanceUnit LoadPerformanceUnit = new LoadPerformanceUnit(100,
-				1000000, MongoFilePerformanceRunnable.class);
+		int sum = 1000000;
+		int thread_num = 100;
+		
+		LoadPerformanceUnit LoadPerformanceUnit = new LoadPerformanceUnit(
+				thread_num, sum, MongoFilePerformanceRunnable.class);
 		LoadPerformanceUnit.run();
 	}
 

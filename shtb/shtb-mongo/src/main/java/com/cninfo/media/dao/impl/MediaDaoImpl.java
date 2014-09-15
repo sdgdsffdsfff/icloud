@@ -1,5 +1,8 @@
 package com.cninfo.media.dao.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -7,7 +10,9 @@ import org.springframework.stereotype.Repository;
 import com.cninfo.media.basedao.impl.CninfoMediaBaseDaoImpl;
 import com.cninfo.media.dao.IMediaDao;
 import com.cninfo.media.mongo.entity.Media;
+import com.github.jmkgreen.morphia.mapping.Mapper;
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSFile;
@@ -25,7 +30,7 @@ public class MediaDaoImpl extends CninfoMediaBaseDaoImpl implements IMediaDao {
 	@Override
 	public Object addMedia(Media media) {
 		GridFSFile mediafile = this.grfs.createFile(media.getInputStream());
-//		this.grfs.createFile().getOutputStream();
+		// this.grfs.createFile().getOutputStream();
 		mediafile.put("mediaId", media.getMediaId());
 		mediafile.put("filename", media.getFilename());
 		mediafile.put("contentType", media.getType());
@@ -54,5 +59,28 @@ public class MediaDaoImpl extends CninfoMediaBaseDaoImpl implements IMediaDao {
 		media.setType(file.getContentType());
 		media.setLength(file.getLength());
 		return media;
+	}
+
+	@Override
+	public List<String> getMediaIds(int start, int limit) {
+		DBCursor fileList = this.grfs.getFileList();
+		DBCursor skipList = fileList.skip(start);
+		List<String> list = new ArrayList<String>();
+		int count = 0;
+		while (skipList.hasNext()) {
+			DBObject dbo = skipList.next();
+			String key = (String) dbo.get("mediaId");
+			list.add(key);
+			count++;
+			if (count >= limit)
+				break;
+		}
+		return list;
+	}
+
+	@Override
+	public Long count() {
+		DBCursor fileList = this.grfs.getFileList();
+		return (long) fileList.count();
 	}
 }

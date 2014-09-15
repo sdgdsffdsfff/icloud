@@ -3,7 +3,6 @@ package com.cninfo.media.performance;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 
@@ -61,7 +60,7 @@ public class MongoFilePerformanceRunnable extends PerformanceRunnable {
 		media.setType("txt");
 		media.setCreateTime(new Date());
 		media.setLength(content.length);
-		PerformanceTest.mediaDao.addMedia(media);
+		BeanUtils.mediaDao.addMedia(media);
 		// try {
 		// inputStream.close();
 		// } catch (IOException e) {
