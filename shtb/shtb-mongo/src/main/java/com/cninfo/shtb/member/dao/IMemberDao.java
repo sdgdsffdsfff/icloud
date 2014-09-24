@@ -14,4 +14,11 @@ public interface IMemberDao extends IShbtMongoBaseDao<Member> {
 	List<Member> query();
 
 	List<Member> queryDistinctName();
+
+	/** 
+	 * 
+	 * void
+	 * @throws 
+	 */
+	void mapreduce();
 }

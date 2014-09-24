@@ -61,4 +61,9 @@ public class MemberDaoTest extends BaseDaoTest {
 	public void find() {
 		this.memberDao.queryDistinctName();
 	}
+	
+	@Test
+	public void testMapReduce(){
+		this.memberDao.mapreduce();
+	}
 }
