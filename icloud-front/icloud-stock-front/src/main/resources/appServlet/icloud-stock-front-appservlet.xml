@@ -8,4 +8,5 @@
 	">
 	<import resource="classpath*:appServlet/icloud-common-front-config.xml" />
 	<import resource="classpath*:spring/icloud-stock-front-action.xml" />
+	<import resource="classpath*:spring/icloud-stock-service-ctx-min.xml" />
 </beans>

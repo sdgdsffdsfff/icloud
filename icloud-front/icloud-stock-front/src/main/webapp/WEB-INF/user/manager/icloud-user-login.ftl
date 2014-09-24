@@ -5,7 +5,7 @@
         <strong>登&nbsp;录</strong>
     </h3>
     <div class="row" style="height:330px;">
-    	<form action="${basepath}/user/doLoginUser" method="post" id="loginForm">
+    	<form action="${basepath}/facade/doLoginUser" method="post" id="loginForm">
         <ul class="find_password">
             <li>
                 <label>

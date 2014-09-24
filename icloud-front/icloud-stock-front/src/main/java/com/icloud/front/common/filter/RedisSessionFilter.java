@@ -41,12 +41,12 @@ public class RedisSessionFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		boolean isFilter = isFileter(req, res);
+		boolean isFilter = isFilter(req, res);
 		if (isFilter) {
 			/**
 			 * 获得cookie
 			 */
-			Cookie cookie = getCookie(req, res);
+			Cookie cookie = ICloudMemberUtils.getCookie(req, res);
 			/**
 			 * 设置reqid
 			 */
@@ -72,7 +72,7 @@ public class RedisSessionFilter implements Filter {
 		}
 	}
 
-	private boolean isFileter(HttpServletRequest req, HttpServletResponse res) {
+	private boolean isFilter(HttpServletRequest req, HttpServletResponse res) {
 		// logger.info(req.getContextPath() + "|"
 		// + FilterNotMappingConfig.isInFilterUrl(req.getContextPath()));
 		if (FilterNotMappingConfig.isInFilterUrl(req.getContextPath())) {
@@ -124,27 +124,7 @@ public class RedisSessionFilter implements Filter {
 		RequestIdentityHolder.remove();
 	}
 
-	/**
-	 * 获得cookie
-	 */
-	private Cookie getCookie(HttpServletRequest req, HttpServletResponse res) {
-		Cookie[] cookies = req.getCookies();
-		if (ICloudUtils.isNotNull(cookies)) {
-			for (Cookie ck : cookies) {
-				if (MemberAuthUtils.getRememberMeCookieName().equals(
-						ck.getName())) {
-					// logger.info("cookie = {}, cookieValue={}", ck.getName(),
-					// ck.getValue());
-					return ck;
-				}
-			}
-		}
-		/**
-		 * 如果没有cookie,生成一个
-		 */
-		return ICloudMemberUtils.addSession(req, res, null, null);
-	}
-
+	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		ServletContext context = filterConfig.getServletContext();

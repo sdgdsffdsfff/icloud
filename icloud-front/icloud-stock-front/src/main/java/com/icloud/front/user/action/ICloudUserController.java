@@ -27,54 +27,19 @@ public class ICloudUserController extends BaseStockController {
 		return model;
 	}
 
-	@RequestMapping("/icloudLogin")
-	public ModelAndView icloudLogin() {
-		ModelAndView model = getModelAndView("user/manager/icloud-user-login");
-		return model;
-	}
-
-	@RequestMapping("/failLoginUser")
-	public ModelAndView failLoginUser(LoginUser loginUser) {
-		if (ICloudUtils.isNotNull(loginUser)) {
-			logger.info("{}", loginUser.toString());
-		}
-		ModelAndView model = getModelAndView("/user/manager/icloud-user-login");
-		model.addObject("user", loginUser);
-		model.addObject("failTip", "邮箱/密码不匹配");
-		return model;
-	}
-
-	@RequestMapping("/doLoginUser")
-	public String doLoginUser(HttpServletRequest request,
-			HttpServletResponse response, LoginUser loginUser) {
-		if (ICloudUtils.isNotNull(loginUser)) {
-			logger.info("{}", loginUser.toString());
-		}
-		User user = this.userAdminBusiness.getUser(loginUser);
-		if (ICloudUtils.isNotNull(user)) {
-			/**
-			 * 加入cookie,并且下次自动登录
-			 */
-			ICloudMemberUtils.addSession(request, response, loginUser, user);
-			return "redirect:/stock/stockMenu";
-			// return "/user/manager/icloud-user-login";
-		} else {
-			return "forward:/user/failLoginUser";
-		}
-	}
+	// @RequestMapping("/icloudLogin")
+	// public ModelAndView icloudLogin() {
+	// ModelAndView model = getModelAndView("user/manager/icloud-user-login");
+	// return model;
+	// }
 
 	@RequestMapping("/icloudLogout")
 	public String icloudLogout(HttpServletRequest request,
 			HttpServletResponse response) {
-		ModelAndView model = getModelAndView("user/manager/icloud-user-logout");
+		// ModelAndView model =
+		// getModelAndView("user/manager/icloud-user-logout");
 		ICloudMemberUtils.removeSession(request, response);
-		return "redirect:/user/icloudLogoutSuccess";
-	}
-
-	@RequestMapping("/icloudLogoutSuccess")
-	public ModelAndView icloudLogoutSuccess(HttpServletRequest request,
-			HttpServletResponse response) {
-		return getModelAndView("user/manager/icloud-user-logout");
+		return "redirect:/facade/icloudLogoutSuccess";
 	}
 
 	@RequestMapping("/myHome")
@@ -88,7 +53,7 @@ public class ICloudUserController extends BaseStockController {
 		 * 取用户信息
 		 */
 		User user = this.userAdminBusiness
-				.getUserByUserId(ICloudUserContextHolder.get());
+				.getUserByUserInfo(ICloudUserContextHolder.get());
 		if (!ICloudUtils.isNotNull(user)) {
 			return getErrorModelAndView();
 		}
@@ -107,7 +72,7 @@ public class ICloudUserController extends BaseStockController {
 		 * 取用户信息
 		 */
 		User user = this.userAdminBusiness
-				.getUserByUserId(ICloudUserContextHolder.get());
+				.getUserByUserInfo(ICloudUserContextHolder.get());
 		if (!ICloudUtils.isNotNull(user)
 				|| !ICloudUtils.isNotNull(registerUser)) {
 			return ERROR_URL;
@@ -138,15 +103,15 @@ public class ICloudUserController extends BaseStockController {
 		 * 取用户信息
 		 */
 		User user = this.userAdminBusiness
-				.getUserByUserId(ICloudUserContextHolder.get());
+				.getUserByUserInfo(ICloudUserContextHolder.get());
 		if (!ICloudUtils.isNotNull(user)) {
 			return ERROR_URL;
 		}
 		logger.info("oldpwd:{},newpwd:{},confirmPwd:{}", oldpwd, newpwd,
 				confirmPwd);
-		if (ICloudUtils.isNotNull(oldpwd) &&ICloudUtils.isNotNull(newpwd)
-				&&ICloudUtils.isNotNull(confirmPwd)
-				&&newpwd.equalsIgnoreCase(confirmPwd)) {
+		if (ICloudUtils.isNotNull(oldpwd) && ICloudUtils.isNotNull(newpwd)
+				&& ICloudUtils.isNotNull(confirmPwd)
+				&& newpwd.equalsIgnoreCase(confirmPwd)) {
 			if (StringEncoder.encrypt(oldpwd).equalsIgnoreCase(
 					user.getUserPassword())) {
 				this.userAdminBusiness.updatePassword(user, oldpwd);

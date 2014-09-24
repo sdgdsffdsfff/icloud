@@ -123,7 +123,7 @@ public class UserAdminBusiness extends UserBusiness {
 		this.userService.updatePassword(user, StringEncoder.encrypt(password));
 	}
 
-	public User getUserByUserId(UserInfo userInfo) {
+	public User getUserByUserInfo(UserInfo userInfo) {
 		if (ICloudUtils.isNotNull(userInfo)) {
 			return this.userService.getById(userInfo.getUserId());
 		}

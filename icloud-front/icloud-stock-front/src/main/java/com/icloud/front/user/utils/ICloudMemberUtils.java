@@ -62,6 +62,28 @@ public class ICloudMemberUtils {
 	}
 
 	/**
+	 * 获得cookie
+	 */
+	public static Cookie getCookie(HttpServletRequest req, HttpServletResponse res) {
+		Cookie[] cookies = req.getCookies();
+		if (ICloudUtils.isNotNull(cookies)) {
+			for (Cookie ck : cookies) {
+				if (MemberAuthUtils.getRememberMeCookieName().equals(
+						ck.getName())) {
+					// logger.info("cookie = {}, cookieValue={}", ck.getName(),
+					// ck.getValue());
+					return ck;
+				}
+			}
+		}
+		/**
+		 * 如果没有cookie,生成一个
+		 */
+		return ICloudMemberUtils.addSession(req, res, null, null);
+	}
+
+	
+	/**
 	 * 获得用户信息
 	 */
 	public static UserInfo getUserInfoFromToken(String token) {
