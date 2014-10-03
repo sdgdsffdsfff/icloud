@@ -1,0 +1,15 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+group = 'com.icloud.stock'
+version = "1.0-SNAPSHOT"
+
+jar {
+ baseName =  'icloud-stock-generated'
+}
+dependencies {
+	compile libraries.httpclient
+	compile libraries.mysql_connector
+	compile libraries.javassist
+
+}

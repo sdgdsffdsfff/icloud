@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 4, 2014 1:13:08 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.icloud.stock.model.JuhuasuanUrl" table="`juhuasuan-url`" catalog="icloud">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="45" not-null="true" />
+        </property>
+        <property name="taobaoUrl" type="string">
+            <column name="`taobao-url`" length="1024" not-null="true" />
+        </property>
+        <property name="icloudUrl" type="string">
+            <column name="`icloud-url`" length="1024" not-null="true" />
+        </property>
+        <property name="userId" type="int">
+            <column name="`user-id`" not-null="true" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="`create-time`" length="19" not-null="true" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="`update-time`" length="19" not-null="true" />
+        </property>
+        <property name="desText" type="string">
+            <column name="`des-text`" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

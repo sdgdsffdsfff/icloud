@@ -1,7 +1,5 @@
 package com.icloud.stock.dao.test;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -12,7 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.icloud.stock.dao.ICategoryDao;
 import com.icloud.stock.dao.IStockDao;
 import com.icloud.stock.model.Category;
-import com.icloud.stock.model.Stock;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:spring/icloud-stock-dao-ctx-min.xml" })

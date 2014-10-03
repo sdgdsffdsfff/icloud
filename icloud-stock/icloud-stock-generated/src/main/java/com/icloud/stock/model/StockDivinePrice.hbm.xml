@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 4, 2014 1:13:08 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.icloud.stock.model.StockDivinePrice" table="stock_divine_price" catalog="icloud">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="stockId" type="java.lang.Integer">
+            <column name="stock_id" />
+        </property>
+        <property name="stockCode" type="string">
+            <column name="stock_code" length="100" />
+        </property>
+        <property name="preLow" type="java.lang.Double">
+            <column name="pre_low" precision="22" scale="0" />
+        </property>
+        <property name="preHigh" type="java.lang.Double">
+            <column name="pre_high" precision="22" scale="0" />
+        </property>
+        <property name="resultLow" type="java.lang.Double">
+            <column name="result_low" precision="22" scale="0" />
+        </property>
+        <property name="resultHigh" type="java.lang.Double">
+            <column name="result_high" precision="22" scale="0" />
+        </property>
+        <property name="preDateTime" type="date">
+            <column name="pre_date_time" length="10" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" />
+        </property>
+        <property name="userId" type="java.lang.Integer">
+            <column name="user_id" />
+        </property>
+        <property name="userName" type="string">
+            <column name="user_name" length="100" />
+        </property>
+        <property name="userComment" type="string">
+            <column name="user_comment" length="65535" />
+        </property>
+        <property name="prePercent" type="java.lang.Integer">
+            <column name="pre_percent" />
+        </property>
+        <property name="preCare" type="java.lang.Integer">
+            <column name="pre_care" />
+        </property>
+    </class>
+</hibernate-mapping>

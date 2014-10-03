@@ -17,18 +17,6 @@
 		<property name="hbm2ddl.auto">update</property>
 		<property name="jdbc.batch_size">110</property>
 		<property name="connection.autocommit">true</property>
-		<mapping resource="model/Category.hbm.xml" />
-		<mapping resource="model/CategoryStock.hbm.xml" />
-		<mapping resource="model/Session.hbm.xml" />
-		<mapping resource="model/Stock.hbm.xml" />
-		<mapping resource="model/StockDateHistory.hbm.xml" />
-		<mapping resource="model/StockDivinePrice.hbm.xml" />
-		<mapping resource="model/User.hbm.xml" />
-		<mapping resource="model/UserAccess.hbm.xml" />
-		<mapping resource="model/UserStockFocus.hbm.xml" />
-		<mapping resource="model/StockDetail.hbm.xml" />
-		<mapping resource="model/JuhuasuanDetail.hbm.xml" />
-		<mapping resource="model/JuhuasuanSession.hbm.xml" />
-		<mapping resource="model/JuhuasuanUrl.hbm.xml" />
+		
 	</session-factory>
 </hibernate-configuration>

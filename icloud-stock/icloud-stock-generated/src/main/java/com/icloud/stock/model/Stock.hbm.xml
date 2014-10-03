@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 4, 2014 1:13:08 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.icloud.stock.model.Stock" table="stock" catalog="icloud">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="stockName" type="string">
+            <column name="stock_name" length="100" />
+        </property>
+        <property name="stockCode" type="string">
+            <column name="stock_code" length="100" not-null="true" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="update_time" length="19" />
+        </property>
+        <property name="stockLocation" type="string">
+            <column name="stock_location" length="20" />
+        </property>
+        <property name="descrition" type="string">
+            <column name="descrition" length="500" />
+        </property>
+        <property name="stockAllCode" type="string">
+            <column name="stock_all_code" length="500" />
+        </property>
+        <property name="currentPrice" type="java.lang.Double">
+            <column name="current_price" precision="22" scale="0">
+                <comment>&#229;&#189;&#147;&#229;&#137;&#141;&#228;&#187;&#183;</comment>
+            </column>
+        </property>
+        <property name="chg" type="java.lang.Double">
+            <column name="chg" precision="22" scale="0">
+                <comment>&#230;&#182;&#168;&#232;&#183;&#140;&#233;&#162;&#157;</comment>
+            </column>
+        </property>
+        <property name="percent" type="java.lang.Double">
+            <column name="percent" precision="22" scale="0">
+                <comment>&#230;&#182;&#168;&#232;&#183;&#140;&#229;&#185;&#133;</comment>
+            </column>
+        </property>
+        <property name="lastClose" type="java.lang.Double">
+            <column name="last_close" precision="22" scale="0">
+                <comment>&#228;&#184;&#138;&#228;&#184;&#170;&#228;&#186;&#164;&#230;&#152;&#147;&#233;&#151;&#173;&#228;&#187;&#183;</comment>
+            </column>
+        </property>
+        <property name="open" type="java.lang.Double">
+            <column name="open" precision="22" scale="0">
+                <comment>&#228;&#184;&#138;&#228;&#184;&#170;&#228;&#186;&#164;&#230;&#152;&#147;&#230;&#151;&#165;&#229;&#188;&#128;&#228;&#187;&#183;</comment>
+            </column>
+        </property>
+        <property name="high" type="java.lang.Double">
+            <column name="high" precision="22" scale="0">
+                <comment>&#229;&#189;&#147;&#230;&#151;&#165;&#230;&#156;&#128;&#233;&#171;&#152;&#228;&#187;&#183;</comment>
+            </column>
+        </property>
+        <property name="low" type="java.lang.Double">
+            <column name="low" precision="22" scale="0">
+                <comment>&#229;&#189;&#147;&#230;&#151;&#165;&#230;&#156;&#128;&#228;&#189;&#142;&#228;&#187;&#183;</comment>
+            </column>
+        </property>
+        <property name="volume" type="java.lang.Double">
+            <column name="volume" precision="22" scale="0">
+                <comment>&#230;&#136;&#144;&#228;&#186;&#164;&#233;&#135;&#143;</comment>
+            </column>
+        </property>
+        <property name="high52w" type="java.lang.Double">
+            <column name="high52w" precision="22" scale="0">
+                <comment>52&#229;&#145;&#168;&#230;&#156;&#128;&#233;&#171;&#152;</comment>
+            </column>
+        </property>
+        <property name="low52w" type="java.lang.Double">
+            <column name="low52w" precision="22" scale="0">
+                <comment>52&#229;&#145;&#168;&#230;&#156;&#128;&#228;&#189;&#142;</comment>
+            </column>
+        </property>
+        <property name="amount" type="java.lang.Double">
+            <column name="amount" precision="22" scale="0">
+                <comment>&#230;&#136;&#144;&#228;&#186;&#164;&#233;&#162;&#157;</comment>
+            </column>
+        </property>
+        <property name="preLow" type="java.lang.Double">
+            <column name="pre_low" precision="22" scale="0">
+                <comment>&#233;&#162;&#132;&#230;&#181;&#139;&#230;&#156;&#128;&#228;&#189;&#142;</comment>
+            </column>
+        </property>
+        <property name="preHigh" type="java.lang.Double">
+            <column name="pre_high" precision="22" scale="0">
+                <comment>&#233;&#162;&#132;&#230;&#181;&#139;&#230;&#156;&#128;&#233;&#171;&#152;</comment>
+            </column>
+        </property>
+        <property name="prePercent" type="java.lang.Integer">
+            <column name="pre_percent">
+                <comment>&#230;&#179;&#162;&#229;&#138;&#168;&#230;&#175;&#148;&#228;&#190;&#139;</comment>
+            </column>
+        </property>
+        <property name="preCare" type="java.lang.Integer">
+            <column name="pre_care">
+                <comment>&#233;&#162;&#132;&#230;&#181;&#139;&#229;&#133;&#179;&#230;&#179;&#168;&#229;&#186;&#166;</comment>
+            </column>
+        </property>
+        <property name="flowStock" type="java.lang.Double">
+            <column name="flowStock" precision="22" scale="0">
+                <comment>&#230;&#181;&#129;&#229;&#138;&#168;&#232;&#130;&#161;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="totalStock" type="java.lang.Double">
+            <column name="totalStock" precision="22" scale="0">
+                <comment>&#230;&#128;&#187;&#232;&#130;&#161;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="totalMoney" type="java.lang.Double">
+            <column name="totalMoney" precision="22" scale="0">
+                <comment>&#230;&#128;&#187;&#232;&#181;&#132;&#233;&#135;&#145;&#233;&#135;&#143;</comment>
+            </column>
+        </property>
+        <set name="categoryStocks" table="category_stock" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="stock_id" />
+            </key>
+            <one-to-many class="com.icloud.stock.model.CategoryStock" />
+        </set>
+    </class>
+</hibernate-mapping>
