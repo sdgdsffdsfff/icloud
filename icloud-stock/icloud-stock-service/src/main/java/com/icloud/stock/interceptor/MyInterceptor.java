@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class MyInterceptor {
 
-	@Pointcut("execution (* com.icloud.stock.business.impl.PersonServiceImpl.*(..))")
+	@Pointcut("execution (* com.icloud.stock.bussiness.impl.PersonServiceImpl.*(..))")
 	private void anyMethod() {
 		System.out.println("--------------------");
 	}// 声明一个切入点

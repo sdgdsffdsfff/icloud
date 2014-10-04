@@ -23,10 +23,9 @@ import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.common.config.FilterNotMappingConfig;
 import com.icloud.front.common.utils.ICloudUserContextHolder;
-import com.icloud.front.common.utils.MemberAuthUtils;
+import com.icloud.front.user.bussiness.UserAdminBusiness;
 import com.icloud.front.user.pojo.UserInfo;
 import com.icloud.front.user.utils.ICloudMemberUtils;
-import com.icloud.user.business.manager.UserAdminBusiness;
 
 public class RedisSessionFilter implements Filter {
 	private static final Logger logger = RequestIdentityLogger

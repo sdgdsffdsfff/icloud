@@ -9,13 +9,13 @@ import com.google.gson.Gson;
 import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.stock.action.StockController;
-import com.icloud.front.stock.bussiness.detail.StockDetailBussiness;
-import com.icloud.front.stock.bussiness.menu.StockCommonBussiness;
-import com.icloud.front.stock.bussiness.seo.BuuyuuSeoBussiness;
-import com.icloud.front.stock.bussiness.view.StockListBussiness;
+import com.icloud.front.stock.bussiness.BuuyuuSeoBussiness;
+import com.icloud.front.stock.bussiness.StockCommonBussiness;
+import com.icloud.front.stock.bussiness.StockDetailBussiness;
+import com.icloud.front.stock.bussiness.StockListBussiness;
+import com.icloud.front.user.bussiness.UserAdminBusiness;
+import com.icloud.front.user.bussiness.UserLogOperationBusiness;
 import com.icloud.stock.search.service.StockNameSearcher;
-import com.icloud.user.business.manager.UserAdminBusiness;
-import com.icloud.user.business.operation.UserLogOperationBusiness;
 
 public class BaseStockController {
 	protected static final Logger logger = RequestIdentityLogger

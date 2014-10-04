@@ -1,4 +1,4 @@
-package com.icloud.stock.business.impl;
+package com.icloud.stock.bussiness.impl;
 
 import org.springframework.stereotype.Service;
 

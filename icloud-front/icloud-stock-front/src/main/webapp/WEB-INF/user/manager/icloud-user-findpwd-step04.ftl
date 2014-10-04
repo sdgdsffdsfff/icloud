@@ -21,7 +21,7 @@
         <div class="successful">
             <h3>
                 <em></em>设置新密码成功</h3>
-            <div>欢迎使用本站。<a href="${basepath}/user/icloudLogin">点击此处进行登录</a></div>
+            <div>欢迎使用本站。<a href="${basepath}/facade/icloudLogin">点击此处进行登录</a></div>
         </div>
     </div>
 </div>
