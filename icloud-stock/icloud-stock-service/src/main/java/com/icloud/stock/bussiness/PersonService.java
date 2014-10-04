@@ -1,4 +1,4 @@
-package com.icloud.stock.business;
+package com.icloud.stock.bussiness;
 
 public interface PersonService {
 	public int save(String name);

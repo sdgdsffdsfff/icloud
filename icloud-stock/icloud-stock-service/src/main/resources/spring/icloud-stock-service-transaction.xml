@@ -85,6 +85,16 @@
 		<aop:advisor
 			pointcut="execution(* com.icloud.user.service.impl.UserStockFocusServiceImpl.*(..))"
 			advice-ref="stock-repeatedReadTxAdvice" />
+
+		<aop:advisor
+			pointcut="execution(* com.icloud.stock.service.impl.JuhuasuanDetailServiceImpl.*(..))"
+			advice-ref="stock-repeatedReadTxAdvice" />
+		<aop:advisor
+			pointcut="execution(* com.icloud.stock.service.impl.JuhuasuanUrlServiceImpl.*(..))"
+			advice-ref="stock-repeatedReadTxAdvice" />
+		<aop:advisor
+			pointcut="execution(* com.icloud.stock.service.impl.JuhuasuanSessionServiceImpl.*(..))"
+			advice-ref="stock-repeatedReadTxAdvice" />
 	</aop:config>
 
 </beans>

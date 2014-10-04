@@ -1,4 +1,4 @@
-package com.icloud.front.stock.bussiness.detail;
+package com.icloud.front.stock.bussiness;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.util.ICloudUtils;
-import com.icloud.front.stock.bussiness.BaseAction;
 import com.icloud.stock.model.CategoryStock;
 import com.icloud.stock.model.Stock;
 import com.icloud.stock.model.StockDateHistory;

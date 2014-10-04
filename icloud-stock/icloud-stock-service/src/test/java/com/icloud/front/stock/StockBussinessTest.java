@@ -6,8 +6,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.icloud.front.stock.bussiness.menu.StockCommonBussiness;
-import com.icloud.front.stock.bussiness.view.StockListBussiness;
+import com.icloud.front.stock.bussiness.StockCommonBussiness;
+import com.icloud.front.stock.bussiness.StockListBussiness;
 import com.icloud.stock.search.service.StockNameSearcher;
 
 @ContextConfiguration(locations = { "classpath*:spring/applicationContext-stock.xml" })

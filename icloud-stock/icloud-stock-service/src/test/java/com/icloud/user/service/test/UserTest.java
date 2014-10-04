@@ -7,8 +7,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.icloud.front.user.bussiness.UserAdminBusiness;
 import com.icloud.stock.model.User;
-import com.icloud.user.business.manager.UserAdminBusiness;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:spring/icloud-stock-service-ctx-min.xml" })

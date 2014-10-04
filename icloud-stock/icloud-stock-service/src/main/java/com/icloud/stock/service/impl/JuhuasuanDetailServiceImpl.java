@@ -10,7 +10,7 @@ import com.icloud.stock.dao.IJuhuasuanDetailDao;
 import com.icloud.stock.model.JuhuasuanDetail;
 import com.icloud.stock.service.IJuhuasuanDetailService;
 
-@Service("juhuasuanUrlDetail")
+@Service("juhuasuanDetailService")
 public class JuhuasuanDetailServiceImpl extends SqlBaseService<JuhuasuanDetail>
 		implements IJuhuasuanDetailService {
 

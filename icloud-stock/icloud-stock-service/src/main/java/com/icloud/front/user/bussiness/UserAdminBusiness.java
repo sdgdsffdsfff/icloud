@@ -1,4 +1,4 @@
-package com.icloud.user.business.manager;
+package com.icloud.front.user.bussiness;
 
 import java.util.Date;
 
@@ -10,7 +10,6 @@ import com.icloud.front.user.pojo.LoginUser;
 import com.icloud.front.user.pojo.RegisterUser;
 import com.icloud.front.user.pojo.UserInfo;
 import com.icloud.stock.model.User;
-import com.icloud.user.business.UserBusiness;
 import com.icloud.user.util.UserUtils;
 
 @Service("userAdminBusiness")

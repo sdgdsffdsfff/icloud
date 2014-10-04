@@ -1,10 +1,9 @@
-package com.icloud.front.stock.bussiness.seo;
+package com.icloud.front.stock.bussiness;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icloud.framework.util.ICloudUtils;
-import com.icloud.front.stock.bussiness.BaseAction;
 import com.icloud.stock.dict.SEOConstants;
 import com.icloud.stock.model.Stock;
 

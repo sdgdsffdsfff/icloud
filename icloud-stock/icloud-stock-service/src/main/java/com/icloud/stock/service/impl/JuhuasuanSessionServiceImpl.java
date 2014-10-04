@@ -14,7 +14,7 @@ import com.icloud.stock.service.IJuhuasuanSessionService;
 public class JuhuasuanSessionServiceImpl extends SqlBaseService<JuhuasuanSession>
 		implements IJuhuasuanSessionService {
 
-	@Resource(name = "juhuasuanUrlDao")
+	@Resource(name = "juhuasuanSessionDao")
 	private IJuhuasuanSessionDao juhuasuanSessionDao;
 
 	@Override

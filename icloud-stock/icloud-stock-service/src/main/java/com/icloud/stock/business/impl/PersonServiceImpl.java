@@ -2,7 +2,7 @@ package com.icloud.stock.business.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.icloud.stock.business.PersonService;
+import com.icloud.stock.bussiness.PersonService;
 
 @Service("personService")
 public class PersonServiceImpl implements PersonService {
