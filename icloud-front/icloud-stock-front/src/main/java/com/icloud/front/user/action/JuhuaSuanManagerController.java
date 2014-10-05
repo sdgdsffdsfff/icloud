@@ -7,6 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.common.utils.ICloudUserContextHolder;
 import com.icloud.front.stock.baseaction.BaseStockController;
+import com.icloud.front.stock.pojo.JuhuasuanUrlBean;
+import com.icloud.stock.model.JuhuasuanUrl;
 import com.icloud.stock.model.User;
 
 @Controller
@@ -29,6 +31,30 @@ public class JuhuaSuanManagerController extends BaseStockController {
 	@RequestMapping("/addJuhuasuanUrlView")
 	public ModelAndView addJuhuasuanUrlView() {
 		ModelAndView modelAndView = getModelAndView("user/taobao/operation/addJuhuasuanUrlView");
+		return modelAndView;
+	}
+
+	@RequestMapping("/doAddJuhuasuanUrl")
+	public ModelAndView doAddJuhuasuanUrl(JuhuasuanUrlBean bean) {
+		ModelAndView modelAndView = getModelAndView("user/taobao/operation/juhuasuanUrlView");
+		if (ICloudUtils.isNotNull(bean)) {
+			JuhuasuanUrl urlBean = JuhuasuanUrlBean
+					.convertJuhuasuanUrlBean(bean);
+			urlBean = this.juhuasuanBussiness.saveJuhuasuanUrl(urlBean);
+			modelAndView.addObject("urlBean", urlBean);
+		}
+		return modelAndView;
+	}
+
+	@RequestMapping("/juhuasuanUrlView")
+	public ModelAndView juhuasuanUrlView(String code) {
+		ModelAndView modelAndView = getModelAndView("user/taobao/operation/juhuasuanUrlView");
+		if (ICloudUtils.isNotNull(code)) {
+			// JuhuasuanUrl urlBean = JuhuasuanUrlBean
+			// .convertJuhuasuanUrlBean(bean);
+			// urlBean = this.juhuasuanBussiness.saveJuhuasuanUrl(urlBean);
+			// modelAndView.addObject("urlBean", urlBean);
+		}
 		return modelAndView;
 	}
 }

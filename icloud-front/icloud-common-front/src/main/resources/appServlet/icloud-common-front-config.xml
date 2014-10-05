@@ -85,6 +85,9 @@
 				<entry key="currentUserInfo">
 					<bean class="com.icloud.front.common.freemarker.CurrentUserInfoGetter"></bean>
 				</entry>
+				<entry key="selectValues">
+					<bean class="com.icloud.front.common.freemarker.SelectValuesGetter"></bean>
+				</entry>
 			</map>
 		</property>
 	</bean>

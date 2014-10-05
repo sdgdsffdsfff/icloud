@@ -4,10 +4,11 @@ import org.springframework.stereotype.Service;
 
 import com.icloud.stock.model.JuhuasuanUrl;
 
-@Service("userAdminBusiness")
+@Service("juhuasuanBussiness")
 public class JuhuasuanBussiness extends BaseAction {
 
-	public void saveJuhuasuanUrl(JuhuasuanUrl url) {
-
+	public JuhuasuanUrl saveJuhuasuanUrl(JuhuasuanUrl url) {
+		this.juhuasuanUrlService.save(url);
+		return url;
 	}
 }

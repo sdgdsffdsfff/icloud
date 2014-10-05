@@ -1,6 +1,4 @@
 <#import "/icloud/icloud-layer-window.ftl" as ilw/>
-<#import "/user/taobao/template/juhuasuanstatus-select-template.ftl" as jst/>
-
 <@ilw.layerwindow jsFiles=['layer/layer.min.js','icloud/juhuasuan.js','common/jquery.validate.js','common/messages_cn.js','icloud/addjuhuasuan-url.js'] cssFiles=['icloud/icloud_usercenter.css'] >
 <section class=" clearfix">
 <form action="${basepath}/usertb/doAddJuhuasuanUrl" method="post" id="juhuasuanUrlForm">
@@ -28,7 +26,11 @@
                          <li>
                              <label>
                                  <div>链接状态:</div>
-                                 <@jst.statusSelect/>
+                                 <select name="status" id="status">
+                                     <option value="0">正在运行</option>
+                                     <option value="1">暂停</option>
+                                     <option value="2">作废</option>
+                                 </select>
                              </label>
                          </li>
                          <li>
