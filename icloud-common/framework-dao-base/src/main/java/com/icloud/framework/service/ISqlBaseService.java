@@ -27,5 +27,10 @@ public interface ISqlBaseService<T> {
 			int limit);
 
 	public List<T> findAll(int start, int limit);
+	
+	public long countByProperty(String[] paramNames, Object[] values);
+	
+	public List<T> findByProperty(String[] paramNames, Object[] values,
+			String sortParam, boolean isAsc, int start, int limit);
 
 }

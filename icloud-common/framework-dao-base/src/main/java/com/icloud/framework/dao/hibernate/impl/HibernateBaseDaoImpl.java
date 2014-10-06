@@ -80,6 +80,12 @@ public class HibernateBaseDaoImpl<T> extends HibernateDaoSupport implements
 		return count.longValue();
 	}
 
+	public long count(String hql, Object[] values) {
+		List list = getHibernateTemplate().find(hql, values);
+		Long count = (Long) list.get(0);
+		return count.longValue();
+	}
+
 	@Override
 	public void deteleteAll() {
 		// TODO Auto-generated method stub
@@ -211,7 +217,7 @@ public class HibernateBaseDaoImpl<T> extends HibernateDaoSupport implements
 		String queryString = buildQuery(paramNames, values, null, false);
 		if (ICloudUtils.isNotNull(queryString)) {
 			queryString = "select count(*) " + queryString;
-			return count(queryString);
+			return count(queryString, values);
 		}
 		return 0;
 	}

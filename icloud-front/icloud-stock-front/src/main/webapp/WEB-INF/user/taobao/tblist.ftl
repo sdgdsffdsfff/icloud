@@ -1,5 +1,7 @@
 <#import "/icloud/icloud-main-container.ftl" as imc/>
 <#import "/user/user-template/user-center-menus.ftl" as ucm/>
+<#import "/user/taobao/template/juhuasuan-select-template.ftl" as jst/>
+
 <@imc.mainContainer current="行情"  jsFiles=['layer/layer.min.js','icloud/juhuasuan.js'] cssFiles=['icloud/icloud_usercenter.css'] >
 <@ucm.userCenterMenus current="所有链接"/>
 <main class="us-content">
@@ -9,34 +11,18 @@
                 <section class="us-query clearfix" style=" padding-top:15px; padding-bottom:5px;">
                     <table class="us-query-table">
                         <tr>
-                            <th>询价单编号：</th>
-                            <td><input id="" type="text" name="" style="width:115px;"></td>
-                            <th>提交日期：</th>
+                            <th>链接名称：</th>
+                            <td><input id="name" type="text" name="name" style="width:115px;" <#if urlBean??>value="${urlBean.name!""}"</#if>></td>
+                            <th>链接类型：</th>
                             <td>
-                                <input id="" value="2013-08-08" type="text" name="" style="width:73px;">
-                                <em> - </em>
-                                <input id="" value="2013-08-08" type="text" name="" style="width:73px;">
+                                <@jst.typeSelect all='-1' key='-1'/>
                             </td>
-                            <th>询价单状态：</th>
+                            <th>加固方式：</th>
                             <td>
-                                <select data-role="dropdownlist" style="width:120px" id="" name="">
-                                    <option value="">全部</option>
-                                </select>
+                                <@jst.solidifySelect all='-1' key='-1'/>
                             </td>
-                        </tr>
-                        <tr>
-                            <th>询价类型：</th>
-                            <td>
-                                <select data-role="dropdownlist" style="width:120px" id="" name="">
-                                    <option value="">全部</option>
-                                    <option value="">团队</option>
-                                    <option value="">公务机</option>
-                                </select>
-                            </td>
-                            <th>PNR码：</th>
-                            <td><input id="" type="text" name="" style="width:170px;"></td>
-                            <th>旅客姓名：</th>
-                            <td><input id="" type="text" name="" style="width:115px;"></td>
+                            <th>链接状态：</th>
+                            <td><@jst.statusSelect all='-1' key='-1'/></td>
                         </tr>
                     </table>
                     <a class="adaptiveButton brightRed_btn">
@@ -56,177 +42,30 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>询价单编号</th>
-                                <th>提交时间</th>
-                                <th>询价类型</th>
-                                <th>PNR</th>
-                                <th>出发日期</th>
-                                <th>询价单状态</th>
-                                <th>关联订单编号</th>
+                                <th>链接名称</th>
+                                <th>淘宝链接</th>
+                                <th>转换链接</th>
+                                <th>链接类型</th>
+                                <th>加固方式</th>
+                                <th>链接状态</th>
+                                <th>修改日期</th>
+                                <th>操作</th>
                             </tr>
                         </thead>
+                        <#if pagination??>
+                         <#list pagination.data as urlBean> 
                         <tr>
-                            <td><a class="text1" href="#">030312103112261</a></td>
-                            <td>2013-08-14</td>
-                            <td>团队</td>
-                            <td> </td>
-                            <td>2013-08-14</td>
-                            <td>受理中</td>
-                            <td></td>
+                            <td><a class="text1" href="#"> ${urlBean.name!""}</a></td>
+                            <td>${urlBean.taobaoUrl!""}</td>
+                            <td>${taobaohost}${urlBean.icloudUrl!""}</td>
+                            <td><@jst.typeSelect key='${urlBean.type!""}'/></td>
+                            <td><@jst.solidifySelect key='${urlBean.solidify!""}'/></td>
+                            <td><@jst.statusSelect key='${urlBean.status!""}' /></td>
+                            <td>${urlBean.updateTime?string('yyyy-MM-dd HH:mm')}</td>
+                            <td>查看</td>
                         </tr>
-                        <tr class="currentList">
-                            <td><a class="text1" href="#">030312103112261</a></td>
-                            <td>2013-08-14</td>
-                            <td>公务机</td>
-                            <td>JZ4W50</td>
-                            <td>2013-08-14 </td>
-                            <td>取消</td>
-                            <td> </td>
-                        </tr>
-                        <tr>
-                            <td><a class="text1" href="#">030312103112261</a></td>
-                            <td>2013-08-14</td>
-                            <td>公务机</td>
-                            <td> </td>
-                            <td>2013-08-14</td>
-                            <td>完成</td>
-                            <td><a class="text1" href="#">030312103112261</a></td>
-                        </tr>
-                        <tr>
-                            <td><a class="text1" href="#">030312103112261</a></td>
-                            <td>2013-08-14</td>
-                            <td>团队</td>
-                            <td> </td>
-                            <td>2013-08-14</td>
-                            <td>受理中</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><a class="text1" href="#">030312103112261</a></td>
-                            <td>2013-08-14</td>
-                            <td>团队</td>
-                            <td> </td>
-                            <td>2013-08-14</td>
-                            <td>受理中</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><a class="text1" href="#">030312103112261</a></td>
-                            <td>2013-08-14</td>
-                            <td>团队</td>
-                            <td> </td>
-                            <td>2013-08-14</td>
-                            <td>受理中</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><a class="text1" href="#">030312103112261</a></td>
-                            <td>2013-08-14</td>
-                            <td>团队</td>
-                            <td> </td>
-                            <td>2013-08-14</td>
-                            <td>受理中</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><a class="text1" href="#">030312103112261</a></td>
-                            <td>2013-08-14</td>
-                            <td>团队</td>
-                            <td> </td>
-                            <td>2013-08-14</td>
-                            <td>受理中</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><a class="text1" href="#">030312103112261</a></td>
-                            <td>2013-08-14</td>
-                            <td>团队</td>
-                            <td> </td>
-                            <td>2013-08-14</td>
-                            <td>受理中</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><a class="text1" href="#">030312103112261</a></td>
-                            <td>2013-08-14</td>
-                            <td>团队</td>
-                            <td> </td>
-                            <td>2013-08-14</td>
-                            <td>受理中</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><a class="text1" href="#">030312103112261</a></td>
-                            <td>2013-08-14</td>
-                            <td>团队</td>
-                            <td> </td>
-                            <td>2013-08-14</td>
-                            <td>受理中</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><a class="text1" href="#">030312103112261</a></td>
-                            <td>2013-08-14</td>
-                            <td>团队</td>
-                            <td> </td>
-                            <td>2013-08-14</td>
-                            <td>受理中</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><a class="text1" href="#">030312103112261</a></td>
-                            <td>2013-08-14</td>
-                            <td>团队</td>
-                            <td> </td>
-                            <td>2013-08-14</td>
-                            <td>受理中</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><a class="text1" href="#">030312103112261</a></td>
-                            <td>2013-08-14</td>
-                            <td>团队</td>
-                            <td> </td>
-                            <td>2013-08-14</td>
-                            <td>受理中</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><a class="text1" href="#">030312103112261</a></td>
-                            <td>2013-08-14</td>
-                            <td>团队</td>
-                            <td> </td>
-                            <td>2013-08-14</td>
-                            <td>受理中</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><a class="text1" href="#">030312103112261</a></td>
-                            <td>2013-08-14</td>
-                            <td>团队</td>
-                            <td> </td>
-                            <td>2013-08-14</td>
-                            <td>受理中</td>
-                            <td></td>
-                        </tr>
-                         <tr>
-                            <td><a class="text1" href="#">030312103112261</a></td>
-                            <td>2013-08-14</td>
-                            <td>团队</td>
-                            <td> </td>
-                            <td>2013-08-14</td>
-                            <td>受理中</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><a class="text1" href="#">030312103112261</a></td>
-                            <td>2013-08-14</td>
-                            <td>团队</td>
-                            <td> </td>
-                            <td>2013-08-14</td>
-                            <td>受理中</td>
-                            <td></td>
-                        </tr>
+                        </#list>
+                        </#if>
                     </table>
                 </section>
             </div>

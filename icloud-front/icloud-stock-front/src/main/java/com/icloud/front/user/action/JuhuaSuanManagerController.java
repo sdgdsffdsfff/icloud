@@ -4,27 +4,30 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.util.ICloudUtils;
-import com.icloud.front.common.utils.ICloudUserContextHolder;
 import com.icloud.front.stock.baseaction.BaseStockController;
+import com.icloud.front.stock.pojo.JuhuasuanSearchBean;
 import com.icloud.front.stock.pojo.JuhuasuanUrlBean;
 import com.icloud.stock.model.JuhuasuanUrl;
-import com.icloud.stock.model.User;
 
 @Controller
 @RequestMapping("/usertb")
 public class JuhuaSuanManagerController extends BaseStockController {
 
 	@RequestMapping("/tbList")
-	public ModelAndView baseUserInfo(String successModifyUserInfo) {
+	public ModelAndView tbList(JuhuasuanSearchBean searchBean) {
 		ModelAndView modelAndView = getModelAndView("user/taobao/tblist");
-		User user = this.userAdminBusiness
-				.getUserByUserInfo(ICloudUserContextHolder.get());
-		modelAndView.addObject("icloudUser", user);
-		if (ICloudUtils.isNotNull(successModifyUserInfo)) {
-			modelAndView.addObject("successModifyUserInfo",
-					successModifyUserInfo);
+		JuhuasuanUrl urlBean = JuhuasuanSearchBean.convert(searchBean);
+		if (!ICloudUtils.isNotNull(urlBean)) {
+			urlBean = new JuhuasuanUrl();
 		}
+		urlBean.setUserId(this.getUserId());
+		Pagination<JuhuasuanUrl> pagination = this.juhuasuanBussiness
+				.searchJuhuasuanUrl(urlBean, searchBean.getPageNo(),
+						searchBean.getLimit());
+		modelAndView.addObject("pagination", pagination);
+		modelAndView.addObject("urlBean", urlBean);
 		return modelAndView;
 	}
 

@@ -87,4 +87,14 @@ public abstract class SqlBaseService<T> implements ISqlBaseService<T> {
 		return this.baseDao.findAll(start, limit);
 	}
 
+	public long countByProperty(String[] paramNames, Object[] values) {
+		return this.baseDao.countByProperty(paramNames, values);
+	}
+
+	public List<T> findByProperty(String[] paramNames, Object[] values,
+			String sortParam, boolean isAsc, int start, int limit) {
+		return this.baseDao.findByProperty(paramNames, values, sortParam,
+				isAsc, start, limit);
+	}
+
 }

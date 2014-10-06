@@ -1,23 +1,13 @@
-<#macro statusSelect name="status" id="status" key="0">
-<select name=${name} id=${id}>
-   <#list selectValues('1') as kv>
-    <option value="${kv.key}" <#if key==kv.key>selected</#if>>&nbsp;${kv.value}&nbsp;</option>
-   </#list>
-</select>
+<#import "/user/taobao/template/select-template.ftl" as st/>
+
+<#macro statusSelect name="status" id="status" key="0" all="0">
+<@st.select name='${name}' id='${id}' key='${key}' selectId='1' all='${all}'/>
 </#macro>
 
-<#macro typeSelect name="type" id="type" key="0">
-<select name=${name} id=${id}>
-   <#list selectValues('2') as kv>
-    <option value="${kv.key}" <#if key==kv.key>selected</#if>>&nbsp;${kv.value}&nbsp;</option>
-   </#list>
-</select>
+<#macro typeSelect name="type" id="type" key="0" all="0">
+<@st.select name='${name}' id='${id}' key='${key}' selectId='2' all='${all}'/>
 </#macro>
 
-<#macro solidifySelect name="solidify" id="solidify" key="0">
-<select name=${name} id=${id}>
-   <#list selectValues('3') as kv>
-    <option value="${kv.key}" <#if key==kv.key>selected</#if>>&nbsp;${kv.value}&nbsp;</option>
-   </#list>
-</select>
+<#macro solidifySelect name="solidify" id="solidify" key="0" all="0">
+<@st.select name='${name}' id='${id}' key='${key}' selectId='3' all='${all}'/>
 </#macro>
