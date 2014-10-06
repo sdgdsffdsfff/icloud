@@ -170,7 +170,8 @@ public class JuhuasuanBussiness extends BaseAction {
 			String sessionId, JuhuasuanUrl url) {
 		String perfer = url.getIcloudUrl();
 		String perferHost = request.getHeader("Referer");
-		String localip = request.getRemoteAddr();
+//		String localip = request.getRemoteAddr();
+		String localip = request.getHeader("X-Real-IP");
 		String code = url.getIcloudUrl();
 		int user_id = url.getUserId();
 
@@ -184,5 +185,4 @@ public class JuhuasuanBussiness extends BaseAction {
 		detail.setUserId(user_id);
 		this.juhuasuanDetailService.save(detail);
 	}
-
 }

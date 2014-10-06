@@ -35,7 +35,8 @@ public class JuhuaSuanFrontController extends BaseStockController {
 					.value(url.getStatus());
 
 			String sessionId = session.getId();
-			String localip = request.getRemoteAddr();
+			// String localip = request.getRemoteAddr();
+			String localip = request.getHeader("X-Real-IP");
 			this.juhuasuanBussiness.processJuhuasuanSession(url, sessionId,
 					localip);
 			this.juhuasuanBussiness.processJuhuasuanDetail(request, sessionId,
