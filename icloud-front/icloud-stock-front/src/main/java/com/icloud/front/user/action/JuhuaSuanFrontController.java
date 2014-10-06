@@ -43,7 +43,7 @@ public class JuhuaSuanFrontController extends BaseStockController {
 					url);
 
 			if (value == JUHUASUANSTATUS.RUNNING) {
-				return "redirect:" + url.getTaobaoUrl();
+				return "redirect:" + url.getTaobaoUrl().trim();
 			}
 		}
 		return "redirect:" + WebEnv.getBuuyuuUrl();
