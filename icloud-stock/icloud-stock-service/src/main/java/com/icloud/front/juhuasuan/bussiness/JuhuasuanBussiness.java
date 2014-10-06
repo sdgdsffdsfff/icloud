@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Service;
 
 import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.juhuasuan.util.UrlCodeUtil;
+import com.icloud.stock.dao.IJuhuasuanSessionDao;
 import com.icloud.stock.dao.IJuhuasuanUrlDao;
+import com.icloud.stock.model.JuhuasuanDetail;
+import com.icloud.stock.model.JuhuasuanSession;
 import com.icloud.stock.model.JuhuasuanUrl;
 
 @Service("juhuasuanBussiness")
@@ -130,6 +135,54 @@ public class JuhuasuanBussiness extends BaseAction {
 
 		pagination.build();
 		return pagination;
+	}
+
+	public JuhuasuanSession processJuhuasuanSession(JuhuasuanUrl url,
+			String sessionId, String localip) {
+		String[] params = { IJuhuasuanSessionDao.JUHUASUANID,
+				IJuhuasuanSessionDao.SESSIONID };
+		Object[] values = { url.getId(), sessionId };
+		JuhuasuanSession juhuasuanSession = ICloudUtils
+				.getFirstElement(this.juhuasuanSessionService.findByProperty(
+						params, values, null, false, 0, 2));
+		if (!ICloudUtils.isNotNull(juhuasuanSession)) {
+			juhuasuanSession = new JuhuasuanSession();
+			juhuasuanSession.setCount(1);
+			juhuasuanSession.setCreateTime(new Date());
+			juhuasuanSession.setJuhuasuanId(url.getId());
+			juhuasuanSession.setUserId(url.getUserId());
+			juhuasuanSession.setLastreadIp(localip);
+			juhuasuanSession
+					.setLastupdateTime(juhuasuanSession.getCreateTime());
+			juhuasuanSession.setSessionId(sessionId);
+			this.juhuasuanSessionService.save(juhuasuanSession);
+		} else {
+			juhuasuanSession.setLastreadIp(localip);
+			juhuasuanSession.setLastupdateTime(new Date());
+			juhuasuanSession.setCount(juhuasuanSession.getCount() + 1);
+			this.juhuasuanSessionService.update(juhuasuanSession);
+		}
+		return juhuasuanSession;
+
+	}
+
+	public void processJuhuasuanDetail(HttpServletRequest request,
+			String sessionId, JuhuasuanUrl url) {
+		String perfer = url.getIcloudUrl();
+		String perferHost = request.getHeader("Referer");
+		String localip = request.getRemoteHost();
+		String code = url.getIcloudUrl();
+		int user_id = url.getUserId();
+
+		JuhuasuanDetail detail = new JuhuasuanDetail();
+		detail.setCreateTime(new Date());
+		detail.setOtherParam(sessionId);
+		detail.setPerfer(perfer);
+		detail.setPerferHost(perferHost);
+		detail.setPerferIp(localip);
+		detail.setUrlId(code);
+		detail.setUserId(user_id);
+		this.juhuasuanDetailService.save(detail);
 	}
 
 }

@@ -43,4 +43,9 @@ public class WebEnv {
 		return pptConf.getProperty(key, defaultValue);
 	}
 
+	public static String getBuuyuuUrl() {
+		return pptConf.getProperty("server.path.blog.buuyuu",
+				"http://www.buuyuu.com");
+	}
+
 }

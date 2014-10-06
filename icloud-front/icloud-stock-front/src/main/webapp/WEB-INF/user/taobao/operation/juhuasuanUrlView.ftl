@@ -30,7 +30,9 @@
                         <li>
                             <label>
                                 <div>转换链接:</div>
+                                <a href="${taobaohost}${urlBean.icloudUrl!""}" target="_blank">
                                 ${taobaohost}${urlBean.icloudUrl!""}
+                                </a>
                             </label>
                         </li>
                         <li>

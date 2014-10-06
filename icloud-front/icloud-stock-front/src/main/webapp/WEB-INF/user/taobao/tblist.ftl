@@ -87,7 +87,7 @@
                             <#else>
                              <td>${urlBean.taobaoUrl}</td>
                             </#if>
-                            <td>${taobaohost}${urlBean.icloudUrl!""}</td>
+                            <td><a href="${taobaohost}${urlBean.icloudUrl!""}" target="_blank">${taobaohost}${urlBean.icloudUrl!""}</a></td>
                             <td><@jst.typeSelect key='${urlBean.type!""}'/></td>
                             <td><@jst.solidifySelect key='${urlBean.solidify!""}'/></td>
                             <td><@jst.statusSelect key='${urlBean.status!""}' /></td>
