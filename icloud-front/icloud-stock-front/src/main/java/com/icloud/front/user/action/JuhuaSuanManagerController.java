@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.icloud.framework.core.wrapper.PageView;
 import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.stock.baseaction.BaseStockController;
@@ -26,7 +27,10 @@ public class JuhuaSuanManagerController extends BaseStockController {
 		Pagination<JuhuasuanUrl> pagination = this.juhuasuanBussiness
 				.searchJuhuasuanUrl(urlBean, searchBean.getPageNo(),
 						searchBean.getLimit());
+		PageView pageView = PageView.convertPage(pagination);
+		
 		modelAndView.addObject("pagination", pagination);
+		modelAndView.addObject("pageView", pageView);
 		modelAndView.addObject("urlBean", urlBean);
 		return modelAndView;
 	}

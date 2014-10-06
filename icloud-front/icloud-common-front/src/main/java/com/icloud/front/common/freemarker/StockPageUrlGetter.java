@@ -26,8 +26,10 @@ public class StockPageUrlGetter implements TemplateMethodModel {
 					+ ")\" href=\"#\"";
 		} else if ("3".equalsIgnoreCase(pageId)) {
 			String cateId = (String) args.get(1);
-			return "href=\"openStockList?cateId=" + cateId
-					+ "&pageNo=" + pageNo + "\"";
+			return "href=\"openStockList?cateId=" + cateId + "&pageNo="
+					+ pageNo + "\"";
+		} else if ("4".equalsIgnoreCase(pageId)) {
+			return "onclick=\"juhuasuanSeachLoading(" + pageNo + ")\" href=\"#\"";
 		}
 		return "/stock/index";
 	}

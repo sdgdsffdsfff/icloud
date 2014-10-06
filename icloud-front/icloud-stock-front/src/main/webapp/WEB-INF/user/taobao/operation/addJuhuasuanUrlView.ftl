@@ -13,7 +13,7 @@
                         <li>
                             <label>
                                 <div>链接名字:</div>
-                                <input type="text" name="name" id="name" class="normal_txt" style="width:150px;" />
+                                <input type="text" name="name" id="name" class="normal_txt" style="width:150px;"/>
                             </label>
                         </li>
                         <li>

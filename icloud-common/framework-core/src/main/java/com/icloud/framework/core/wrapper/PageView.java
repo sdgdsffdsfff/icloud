@@ -120,7 +120,7 @@ public class PageView {
 	}
 
 	public static void main(String[] args) {
-		PageView view = new PageView(0, 1);
+		PageView view = new PageView(0, 2);
 		view.print();
 	}
 
