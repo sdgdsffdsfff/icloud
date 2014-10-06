@@ -40,21 +40,53 @@ public class JuhuaSuanManagerController extends BaseStockController {
 		if (ICloudUtils.isNotNull(bean)) {
 			JuhuasuanUrl urlBean = JuhuasuanUrlBean
 					.convertJuhuasuanUrlBean(bean);
+			urlBean.setUserId(this.getUserId());
 			urlBean = this.juhuasuanBussiness.saveJuhuasuanUrl(urlBean);
 			modelAndView.addObject("urlBean", urlBean);
 		}
 		return modelAndView;
 	}
 
+	private void addmodelAndViewByCode(String code, String key,
+			ModelAndView modelAndView) {
+		if (ICloudUtils.isNotNull(code)) {
+			JuhuasuanUrl urlBean = this.juhuasuanBussiness
+					.getJuhuasuanUrlByCode(code);
+			modelAndView.addObject(key, urlBean);
+		}
+	}
+
 	@RequestMapping("/juhuasuanUrlView")
 	public ModelAndView juhuasuanUrlView(String code) {
 		ModelAndView modelAndView = getModelAndView("user/taobao/operation/juhuasuanUrlView");
-		if (ICloudUtils.isNotNull(code)) {
-			// JuhuasuanUrl urlBean = JuhuasuanUrlBean
-			// .convertJuhuasuanUrlBean(bean);
-			// urlBean = this.juhuasuanBussiness.saveJuhuasuanUrl(urlBean);
-			// modelAndView.addObject("urlBean", urlBean);
+		addmodelAndViewByCode(code, "urlBean", modelAndView);
+		return modelAndView;
+	}
+
+	@RequestMapping("/modifyJuhusuanUrlView")
+	public ModelAndView modifyJuhusuanView(String code) {
+		ModelAndView modelAndView = getModelAndView("user/taobao/operation/modifyJuhuasuanUrlView");
+		addmodelAndViewByCode(code, "urlBean", modelAndView);
+		return modelAndView;
+	}
+
+	@RequestMapping("/doModifyJuhusuanUrl")
+	public ModelAndView doModifyJuhusuan(JuhuasuanUrlBean bean) {
+		ModelAndView modelAndView = getModelAndView("user/taobao/operation/juhuasuanUrlView");
+		if (ICloudUtils.isNotNull(bean)) {
+			JuhuasuanUrl urlBean = JuhuasuanUrlBean
+					.convertJuhuasuanUrlBean(bean);
+			JuhuasuanUrl originJuhuasuanUrl = juhuasuanBussiness
+					.getJuhuasuanUrlById(urlBean.getId());
+			if (ICloudUtils.isNotNull(originJuhuasuanUrl)
+					&& originJuhuasuanUrl.getUserId() == this.getUserId()) {
+				urlBean.setUserId(this.getUserId());
+				originJuhuasuanUrl = this.juhuasuanBussiness
+						.updateJuhuasuanUrl(originJuhuasuanUrl, urlBean);
+			}
+			modelAndView.addObject("urlBean", originJuhuasuanUrl);
 		}
 		return modelAndView;
 	}
+
 }

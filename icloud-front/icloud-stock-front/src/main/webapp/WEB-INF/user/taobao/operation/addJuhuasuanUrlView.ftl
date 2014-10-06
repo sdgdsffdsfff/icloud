@@ -1,11 +1,14 @@
 <#import "/icloud/icloud-layer-window.ftl" as ilw/>
-<#import "/user/taobao/template/juhuasuanstatus-select-template.ftl" as jst/>
+<#import "/user/taobao/template/juhuasuan-select-template.ftl" as jst/>
 
 <@ilw.layerwindow jsFiles=['layer/layer.min.js','icloud/juhuasuan.js','common/jquery.validate.js','common/messages_cn.js','icloud/addjuhuasuan-url.js'] cssFiles=['icloud/icloud_usercenter.css'] >
 <section class=" clearfix">
 <form action="${basepath}/usertb/doAddJuhuasuanUrl" method="post" id="juhuasuanUrlForm">
             <div class="row gray-border" style="margin-top:0px;">
-                <div class="row" style="height:500px;">
+             <h3 class="title">
+                    <strong>增加链接</strong>
+                </h3>
+                <div class="row" style="height:560px;">
                     <ul class="find_password">
                         <li>
                             <label>
@@ -15,16 +18,30 @@
                         </li>
                         <li>
                             <label>
+                                <div>链接类型:</div>
+                                 <@jst.typeSelect/>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
                                 <div>淘宝链接:</div>
                                 <input type="text" name="taobaoUrl" id="taobaoUrl" class="normal_txt" style="width:150px;" />
                             </label>
                         </li>
+                        <!--
                         <li>
                             <label>
                                 <div>转换链接:</div>
                                 <input type="text" name="" class="normal_txt" style="width:150px;" placeholder="" />
                             </label>
                         </li>
+                        -->
+                         <li>
+                             <label>
+                                 <div>是否加固:</div>
+                                 <@jst.solidifySelect/>
+                             </label>
+                         </li>
                          <li>
                              <label>
                                  <div>链接状态:</div>

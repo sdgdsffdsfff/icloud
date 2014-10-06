@@ -2,7 +2,7 @@ function onclickButton() {
 	$("#addJuhuasuanUrl_id").click(function() {
 		 $.layer({
 	            type : 2,
-	            title: '增加一个链接',
+	            title: '链接操作',
 	            shadeClose: true,
 	            maxmin: true,
 	            fix : false,  

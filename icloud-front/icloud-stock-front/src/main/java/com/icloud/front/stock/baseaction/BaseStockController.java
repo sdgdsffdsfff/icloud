@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.framework.util.ICloudUtils;
+import com.icloud.front.common.utils.ICloudUserContextHolder;
 import com.icloud.front.juhuasuan.bussiness.JuhuasuanBussiness;
 import com.icloud.front.stock.action.StockController;
 import com.icloud.front.stock.bussiness.BuuyuuSeoBussiness;
@@ -16,6 +17,7 @@ import com.icloud.front.stock.bussiness.StockDetailBussiness;
 import com.icloud.front.stock.bussiness.StockListBussiness;
 import com.icloud.front.user.bussiness.UserAdminBusiness;
 import com.icloud.front.user.bussiness.UserLogOperationBusiness;
+import com.icloud.stock.model.User;
 import com.icloud.stock.search.service.StockNameSearcher;
 
 public class BaseStockController {
@@ -60,4 +62,13 @@ public class BaseStockController {
 		return getErrorModelAndView("Oh,God!操作出错了");
 	}
 
+	protected User getUser() {
+		User user = this.userAdminBusiness
+				.getUserByUserInfo(ICloudUserContextHolder.get());
+		return user;
+	}
+
+	protected int getUserId() {
+		return getUser().getId();
+	}
 }

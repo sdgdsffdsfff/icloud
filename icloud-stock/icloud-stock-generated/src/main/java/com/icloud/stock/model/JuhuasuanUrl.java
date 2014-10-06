@@ -1,6 +1,6 @@
 package com.icloud.stock.model;
 
-// Generated Oct 5, 2014 5:46:09 PM by Hibernate Tools 3.4.0.CR1
+// Generated Oct 6, 2014 8:52:59 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 
@@ -19,15 +19,15 @@ public class JuhuasuanUrl implements java.io.Serializable {
 	private String desText;
 	private String status;
 	private String type;
+	private String solidify;
 
 	public JuhuasuanUrl() {
 	}
 
-	public JuhuasuanUrl(String name, String taobaoUrl, String icloudUrl,
-			int userId, Date createTime, Date updateTime) {
+	public JuhuasuanUrl(String name, String taobaoUrl, int userId,
+			Date createTime, Date updateTime) {
 		this.name = name;
 		this.taobaoUrl = taobaoUrl;
-		this.icloudUrl = icloudUrl;
 		this.userId = userId;
 		this.createTime = createTime;
 		this.updateTime = updateTime;
@@ -35,7 +35,7 @@ public class JuhuasuanUrl implements java.io.Serializable {
 
 	public JuhuasuanUrl(String name, String taobaoUrl, String icloudUrl,
 			int userId, Date createTime, Date updateTime, String desText,
-			String status, String type) {
+			String status, String type, String solidify) {
 		this.name = name;
 		this.taobaoUrl = taobaoUrl;
 		this.icloudUrl = icloudUrl;
@@ -45,6 +45,7 @@ public class JuhuasuanUrl implements java.io.Serializable {
 		this.desText = desText;
 		this.status = status;
 		this.type = type;
+		this.solidify = solidify;
 	}
 
 	public Integer getId() {
@@ -125,6 +126,14 @@ public class JuhuasuanUrl implements java.io.Serializable {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getSolidify() {
+		return this.solidify;
+	}
+
+	public void setSolidify(String solidify) {
+		this.solidify = solidify;
 	}
 
 }
