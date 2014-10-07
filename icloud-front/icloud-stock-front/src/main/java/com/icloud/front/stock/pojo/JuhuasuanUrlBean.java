@@ -14,6 +14,7 @@ public class JuhuasuanUrlBean {
 	private String type;
 	private String solidify;
 	private String id;
+	private String originUrl;
 
 	public String getName() {
 		return name;
@@ -71,6 +72,14 @@ public class JuhuasuanUrlBean {
 		this.id = id;
 	}
 
+	public String getOriginUrl() {
+		return originUrl;
+	}
+
+	public void setOriginUrl(String originUrl) {
+		this.originUrl = originUrl;
+	}
+
 	public static JuhuasuanUrl convertJuhuasuanUrlBean(JuhuasuanUrlBean bean) {
 		if (ICloudUtils.isNotNull(bean)) {
 			JuhuasuanUrl url = new JuhuasuanUrl();
@@ -79,12 +88,14 @@ public class JuhuasuanUrlBean {
 			url.setName(bean.getName());
 			url.setTaobaoUrl(bean.getTaobaoUrl());
 			url.setUpdateTime(url.getCreateTime());
+			url.setOriginUrl(bean.getOriginUrl());
 			url.setStatus(JuhuasuanConstants.JUHUASUANSTATUS.value(
 					bean.getStatus()).getId());
 			url.setType(JuhuasuanConstants.JUHUASUANTYPE.value(bean.getType())
 					.getId());
 			url.setSolidify(JuhuasuanConstants.JUHUASUANSOLIDIFY.value(
 					bean.getSolidify()).getId());
+
 			if (ICloudUtils.isNotNull(bean.getId())) {
 				url.setId(ICloudUtils.parseInt(bean.getId()));
 			} else {

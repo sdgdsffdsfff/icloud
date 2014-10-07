@@ -3,16 +3,15 @@ package com.icloud.front.user.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.aspectj.weaver.MemberUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.common.utils.WebEnv;
 import com.icloud.front.juhuasuan.pojo.JuhuasuanConstants;
 import com.icloud.front.juhuasuan.pojo.JuhuasuanConstants.JUHUASUANSTATUS;
 import com.icloud.front.stock.baseaction.BaseStockController;
-import com.icloud.stock.model.JuhuasuanSession;
 import com.icloud.stock.model.JuhuasuanUrl;
 
 @Controller
@@ -20,7 +19,8 @@ import com.icloud.stock.model.JuhuasuanUrl;
 public class JuhuaSuanFrontController extends BaseStockController {
 
 	@RequestMapping("/*")
-	public String refer(HttpServletRequest request, HttpSession session) {
+	public ModelAndView refer(HttpServletRequest request, HttpSession session) {
+
 		String uri = request.getRequestURI();
 		String code = "";
 		if (uri.lastIndexOf("/") != -1) {
@@ -43,10 +43,19 @@ public class JuhuaSuanFrontController extends BaseStockController {
 					url);
 
 			if (value == JUHUASUANSTATUS.RUNNING) {
-				return "redirect:http://" + url.getTaobaoUrl().trim();
+				ModelAndView modelAndView = new ModelAndView(
+						"user/taobao/redirect/taobao-redirect");
+				modelAndView.addObject("preUrl", url.getTaobaoUrl().trim());
+				modelAndView.addObject("lastUrl", "http://www.baidu.com");
+				return modelAndView;
+				// return "redirect:http://" + ;
 			}
 		}
-		return "redirect:" + WebEnv.getBuuyuuUrl();
-
+		// return "redirect:" + WebEnv.getBuuyuuUrl();
+		ModelAndView modelAndView = new ModelAndView(
+				"user/taobao/redirect/taobao-redirect");
+		modelAndView.addObject("preUrl", WebEnv.getBuuyuuUrl());
+		modelAndView.addObject("lastUrl", WebEnv.getBuuyuuUrl());
+		return modelAndView;
 	}
 }

@@ -5,7 +5,7 @@ import com.icloud.stock.model.JuhuasuanUrl;
 
 public class JuhuasuanSearchBean extends JuhuasuanUrlBean {
 	private String pageNo;
-	private int limit = 2;
+	private int limit = 20;
 
 	public String getPageNo() {
 		return pageNo;

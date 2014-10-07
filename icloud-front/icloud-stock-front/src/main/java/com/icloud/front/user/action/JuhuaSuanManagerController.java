@@ -28,7 +28,7 @@ public class JuhuaSuanManagerController extends BaseStockController {
 				.searchJuhuasuanUrl(urlBean, searchBean.getPageNo(),
 						searchBean.getLimit());
 		PageView pageView = PageView.convertPage(pagination);
-		
+
 		modelAndView.addObject("pagination", pagination);
 		modelAndView.addObject("pageView", pageView);
 		modelAndView.addObject("urlBean", urlBean);
@@ -98,4 +98,5 @@ public class JuhuaSuanManagerController extends BaseStockController {
 		return modelAndView;
 	}
 
+	
 }

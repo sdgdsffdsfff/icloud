@@ -33,6 +33,12 @@
                         </li>
                         <li>
                             <label>
+                                <div>原始链接:</div>
+                                 ${urlBean.originUrl!""}
+                            </label>
+                        </li>
+                        <li>
+                            <label>
                                 <div>转换链接:</div>
                                 <a href="${taobaohosthref}${urlBean.icloudUrl!""}" target="_blank">
                                 ${taobaohost}${urlBean.icloudUrl!""}

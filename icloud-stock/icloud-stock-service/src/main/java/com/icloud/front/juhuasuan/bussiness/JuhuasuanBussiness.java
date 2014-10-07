@@ -65,6 +65,9 @@ public class JuhuasuanBussiness extends BaseAction {
 			if (ICloudUtils.isNotNull(urlBean.getType())) {
 				originJuhuasuanUrl.setType(urlBean.getType());
 			}
+			if (ICloudUtils.isNotNull(urlBean.getOriginUrl())) {
+				originJuhuasuanUrl.setOriginUrl(urlBean.getOriginUrl());
+			}
 			originJuhuasuanUrl.setUpdateTime(new Date());
 			this.juhuasuanUrlService.update(originJuhuasuanUrl);
 			return originJuhuasuanUrl;
@@ -127,7 +130,7 @@ public class JuhuasuanBussiness extends BaseAction {
 		long count = this.juhuasuanUrlService.countByProperty(params, values);
 		pagination.setTotalItemCount(count);
 		List<JuhuasuanUrl> findAll = this.juhuasuanUrlService.findByProperty(
-				params, values, null, false, start, limit);
+				params, values, IJuhuasuanUrlDao.UPDATETIME, false, start, limit);
 		for (JuhuasuanUrl cs : findAll) {
 			resultList.add(cs);
 		}

@@ -15,5 +15,6 @@ public interface IJuhuasuanUrlDao extends StockBaseDao<JuhuasuanUrl> {
 	public static final String STATUS = "status";
 	public static final String TYPE = "type";
 	public static final String SOLIDIFY = "solidify";
+	public static final String ORIGINURL = "orginUrl";
 
 }

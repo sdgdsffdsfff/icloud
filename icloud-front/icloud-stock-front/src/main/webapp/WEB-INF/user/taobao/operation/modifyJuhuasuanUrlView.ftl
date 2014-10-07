@@ -29,6 +29,12 @@
                                 <input type="text" name="taobaoUrl" id="taobaoUrl" class="normal_txt" style="width:150px;" value='${urlBean.taobaoUrl!""}'/>
                             </label>
                         </li>
+                         <li>
+                            <label>
+                                <div>原始链接:</div>
+                                <input type="text" name="originUrl" id="originUrl" class="normal_txt" style="width:150px;" value='${urlBean.originUrl!""}'/>
+                            </label>
+                        </li>
                         <!--
                         <li>
                             <label>

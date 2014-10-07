@@ -1,6 +1,6 @@
 package com.icloud.stock.model;
 
-// Generated Oct 6, 2014 8:52:59 AM by Hibernate Tools 3.4.0.CR1
+// Generated Oct 7, 2014 5:54:48 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 
@@ -20,6 +20,7 @@ public class JuhuasuanUrl implements java.io.Serializable {
 	private String status;
 	private String type;
 	private String solidify;
+	private String originUrl;
 
 	public JuhuasuanUrl() {
 	}
@@ -35,7 +36,7 @@ public class JuhuasuanUrl implements java.io.Serializable {
 
 	public JuhuasuanUrl(String name, String taobaoUrl, String icloudUrl,
 			int userId, Date createTime, Date updateTime, String desText,
-			String status, String type, String solidify) {
+			String status, String type, String solidify, String originUrl) {
 		this.name = name;
 		this.taobaoUrl = taobaoUrl;
 		this.icloudUrl = icloudUrl;
@@ -46,6 +47,7 @@ public class JuhuasuanUrl implements java.io.Serializable {
 		this.status = status;
 		this.type = type;
 		this.solidify = solidify;
+		this.originUrl = originUrl;
 	}
 
 	public Integer getId() {
@@ -134,6 +136,14 @@ public class JuhuasuanUrl implements java.io.Serializable {
 
 	public void setSolidify(String solidify) {
 		this.solidify = solidify;
+	}
+
+	public String getOriginUrl() {
+		return this.originUrl;
+	}
+
+	public void setOriginUrl(String originUrl) {
+		this.originUrl = originUrl;
 	}
 
 }
