@@ -49,6 +49,7 @@ public class JuhuaSuanManagerController extends BaseStockController {
 					.convertJuhuasuanUrlBean(bean);
 			urlBean.setUserId(this.getUserId());
 			urlBean = this.juhuasuanBussiness.saveJuhuasuanUrl(urlBean);
+			modelAndView.addObject("tip", "添加成功");
 			modelAndView.addObject("urlBean", urlBean);
 		}
 		return modelAndView;
@@ -91,6 +92,7 @@ public class JuhuaSuanManagerController extends BaseStockController {
 				originJuhuasuanUrl = this.juhuasuanBussiness
 						.updateJuhuasuanUrl(originJuhuasuanUrl, urlBean);
 			}
+			modelAndView.addObject("tip", "链接修改成功");
 			modelAndView.addObject("urlBean", originJuhuasuanUrl);
 		}
 		return modelAndView;

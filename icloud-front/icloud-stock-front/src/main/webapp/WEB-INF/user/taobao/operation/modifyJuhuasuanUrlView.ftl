@@ -26,7 +26,7 @@
                         <li>
                             <label>
                                 <div>淘宝链接:</div>
-                                <input type="text" name="taobaoUrl" id="taobaoUrl" class="normal_txt" style="width:150px;" value=' ${urlBean.taobaoUrl!""}'/>
+                                <input type="text" name="taobaoUrl" id="taobaoUrl" class="normal_txt" style="width:150px;" value='${urlBean.taobaoUrl!""}'/>
                             </label>
                         </li>
                         <!--

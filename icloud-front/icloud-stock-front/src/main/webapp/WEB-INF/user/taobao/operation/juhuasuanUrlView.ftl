@@ -8,7 +8,11 @@
                     <strong>查看链接</strong>
                 </h3>
                 <div class="row" style="height:670px;">
+                
                     <ul class="find_password">
+                    <#if tip??>
+                      温馨提示:${tip}
+                    </#if>
                         <li>
                             <label>
                                 <div>链接名字:</div>
@@ -18,7 +22,7 @@
                         <li>
                             <label>
                                 <div>链接类型:</div>
-                                <@jst.typeSelect key='${urlBean.type!""}'/>
+                                ${staticValues('2','${urlBean.type!""}')}
                             </label>
                         </li>
                         <li>
@@ -30,7 +34,7 @@
                         <li>
                             <label>
                                 <div>转换链接:</div>
-                                <a href="${taobaohost}${urlBean.icloudUrl!""}" target="_blank">
+                                <a href="${taobaohosthref}${urlBean.icloudUrl!""}" target="_blank">
                                 ${taobaohost}${urlBean.icloudUrl!""}
                                 </a>
                             </label>
@@ -38,7 +42,7 @@
                         <li>
                              <label>
                                  <div>是否加固:</div>
-                                 <@jst.solidifySelect key='${urlBean.solidify!""}'/>
+                                 ${staticValues('3','${urlBean.solidify!""}')}
                              </label>
                          </li>
                         <li>
@@ -56,20 +60,20 @@
                          <li>
                              <label>
                                  <div>链接状态:</div>
-                                 <@jst.statusSelect key='${urlBean.status!""}' />
+                                 ${staticValues('1','${urlBean.status!""}')}
                              </label>
                          </li>
                          <li>
                              <label>
                                  <div>链接介绍:</div>
-                                 <textarea name="desText" id="desText" cols="30" rows="10" style="width:300px">${urlBean.desText!""}</textarea>
+                                 ${urlBean.desText!""}
                              </label>
                          </li>
                          <li>    
                             <div style="margin-left:153px;">
                                 <a href="${basepath}/usertb/modifyJuhusuanUrlView?code=${urlBean.icloudUrl!""}" class="adaptiveButton brightRed_btn" id="addjuhuasuanButton">
                                     <span class="left"></span>
-                                    <span class="center center_1">修&nbsp;&nbsp;改</span>
+                                    <span class="center center_1">去修改该链接</span>
                                     <span class="right"></span>
                                 </a>
                             </div>

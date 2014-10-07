@@ -87,12 +87,13 @@
                             <#else>
                              <td>${urlBean.taobaoUrl}</td>
                             </#if>
-                            <td><a href="${taobaohost}${urlBean.icloudUrl!""}" target="_blank">${taobaohost}${urlBean.icloudUrl!""}</a></td>
-                            <td><@jst.typeSelect key='${urlBean.type!""}'/></td>
-                            <td><@jst.solidifySelect key='${urlBean.solidify!""}'/></td>
-                            <td><@jst.statusSelect key='${urlBean.status!""}' /></td>
+                            <td><a href="${taobaohosthref}${urlBean.icloudUrl!""}" target="_blank">${taobaohost}${urlBean.icloudUrl!""}</a></td>
+                            <td>${staticValues('2','${urlBean.type!""}')}</td>
+                            <td>${staticValues('3','${urlBean.solidify!""}')}</td>
+                            <td>${staticValues('1','${urlBean.status!""}')}</td>
                             <td>${urlBean.updateTime?string('yyyy-MM-dd HH:mm')}</td>
-                            <td><a href="#" onclick="reviewTheUrl('${urlBean.icloudUrl}');">查看</a></td>
+                            <td><a href="#" onclick="reviewTheUrl('${urlBean.icloudUrl}');">查看</a>&nbsp;&nbsp;
+                            <a href="#" onclick="modifyTheUrl('${urlBean.icloudUrl}');">修改</a></td>
                         </tr>
                         </#list>
                         </#if>

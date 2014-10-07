@@ -88,6 +88,10 @@
 				<entry key="selectValues">
 					<bean class="com.icloud.front.common.freemarker.SelectValuesGetter"></bean>
 				</entry>
+				<entry key="staticValues">
+					<bean class="com.icloud.front.common.freemarker.StaticValuesGetter"></bean>
+				</entry>
+
 			</map>
 		</property>
 	</bean>

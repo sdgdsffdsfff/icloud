@@ -45,3 +45,17 @@ function reviewTheUrl(code){
 		}
 	});
 }
+function modifyTheUrl(code){
+	$.layer({
+		type : 2,
+		title : '链接操作',
+		shadeClose : true,
+		maxmin : true,
+		fix : false,
+		area : [ '1024px', ($(window).height() - 50) + 'px' ],
+		iframe : {
+			src : basepath + '/usertb/modifyJuhusuanUrlView?code='+code
+		}
+	});
+}
+
