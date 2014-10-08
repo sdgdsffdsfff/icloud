@@ -14,7 +14,6 @@ import com.icloud.front.juhuasuan.pojo.JuhuasuanConstants;
 import com.icloud.front.juhuasuan.pojo.JuhuasuanConstants.JUHUASUANSTATUS;
 import com.icloud.front.stock.baseaction.BaseStockController;
 import com.icloud.stock.model.JuhuasuanUrl;
-import com.sun.xml.internal.messaging.saaj.soap.Envelope;
 
 @Controller
 @RequestMapping("/t")
