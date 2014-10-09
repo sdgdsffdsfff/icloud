@@ -20,7 +20,7 @@ import com.icloud.stock.model.JuhuasuanUrl;
 public class JuhuaSuanFrontController extends BaseStockController {
 
 	@RequestMapping("/*")
-	public ModelAndView refer(HttpServletRequest request, HttpServletResponse response,
+	public String refer(HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
 
 		String uri = request.getRequestURI();
@@ -60,14 +60,15 @@ public class JuhuaSuanFrontController extends BaseStockController {
 				}
 				modelAndView.addObject("preUrl", url.getTaobaoUrl().trim());
 				modelAndView.addObject("lastUrl", originUrl);
-				return modelAndView;
+//				return modelAndView;
+				return "redirect:" + url.getTaobaoUrl().trim();
 			}
 		}
-		// return "redirect:" + WebEnv.getBuuyuuUrl();
-		ModelAndView modelAndView = new ModelAndView(
-				"user/taobao/redirect/taobao-redirect");
-		modelAndView.addObject("preUrl", WebEnv.getBuuyuuUrl());
-		modelAndView.addObject("lastUrl", WebEnv.getBuuyuuUrl());
-		return modelAndView;
+		 return "redirect:" + WebEnv.getBuuyuuUrl();
+		// ModelAndView modelAndView = new ModelAndView(
+		// "user/taobao/redirect/taobao-redirect");
+		// modelAndView.addObject("preUrl", WebEnv.getBuuyuuUrl());
+		// modelAndView.addObject("lastUrl", WebEnv.getBuuyuuUrl());
+		// return modelAndView;
 	}
 }

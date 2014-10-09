@@ -38,7 +38,7 @@ public class JuhuasuanConstants {
 		}
 	}
 	public enum JUHUASUANTYPE {
-		SINGLE("0", "单品"), SITE("1", "聚划算");
+		SINGLE("0", "店铺"), SITE("1", "聚划算");
 		private String id;
 		private String name;
 
