@@ -20,14 +20,18 @@ public class ICloudUtils {
 		return true;
 	}
 
-	public static int parseInt(String str) {
-		int id = -1;
+	public static int parseInt(String str, int defaultValue) {
+		int id = defaultValue;
 		try {
 			id = Integer.parseInt(str);
 		} catch (Exception e) {
-			id = -1;
+			id = defaultValue;
 		}
 		return id;
+	}
+
+	public static int parseInt(String str) {
+		return parseInt(str, -1);
 	}
 
 	public static boolean isNotNull(Object object) {

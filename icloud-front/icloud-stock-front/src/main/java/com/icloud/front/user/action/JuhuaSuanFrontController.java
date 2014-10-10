@@ -10,8 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.common.utils.WebEnv;
-import com.icloud.front.juhuasuan.pojo.JuhuasuanConstants;
-import com.icloud.front.juhuasuan.pojo.JuhuasuanConstants.JUHUASUANSTATUS;
+import com.icloud.front.juhuasuan.constant.JuhuasuanConstants;
+import com.icloud.front.juhuasuan.constant.JuhuasuanConstants.JUHUASUANSTATUS;
 import com.icloud.front.stock.baseaction.BaseStockController;
 import com.icloud.stock.model.JuhuasuanUrl;
 

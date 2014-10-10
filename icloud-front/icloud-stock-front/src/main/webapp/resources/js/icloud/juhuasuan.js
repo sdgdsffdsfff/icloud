@@ -8,11 +8,13 @@ function onclickButton() {
 			fix : false,
 			// area: ['1024px', 500],
 			area : [ '1024px', ($(window).height() - 50) + 'px' ],
+			close : function(index) {
+				reload();
+			},
 			iframe : {
 				src : basepath + '/usertb/addJuhuasuanUrlView'
 			}
 		});
-
 	});
 
 	$("#searchBeanButton").click(function() {
@@ -24,6 +26,10 @@ $(document).ready(function() {
 	onclickButton();
 });
 
+function reload(index) {
+	// 当前页面重新刷新
+	document.location.reload();
+}
 function juhuasuanSeachLoading(pageNo) {
 	/**
 	 * 设置值
@@ -32,7 +38,7 @@ function juhuasuanSeachLoading(pageNo) {
 	$("#searchBeanCopyForm").submit();
 }
 
-function reviewTheUrl(code){
+function reviewTheUrl(code) {
 	$.layer({
 		type : 2,
 		title : '链接操作',
@@ -41,11 +47,11 @@ function reviewTheUrl(code){
 		fix : false,
 		area : [ '1024px', ($(window).height() - 50) + 'px' ],
 		iframe : {
-			src : basepath + '/usertb/juhuasuanUrlView?code='+code
+			src : basepath + '/usertb/juhuasuanUrlView?code=' + code
 		}
 	});
 }
-function modifyTheUrl(code){
+function modifyTheUrl(code) {
 	$.layer({
 		type : 2,
 		title : '链接操作',
@@ -54,8 +60,7 @@ function modifyTheUrl(code){
 		fix : false,
 		area : [ '1024px', ($(window).height() - 50) + 'px' ],
 		iframe : {
-			src : basepath + '/usertb/modifyJuhusuanUrlView?code='+code
+			src : basepath + '/usertb/modifyJuhusuanUrlView?code=' + code
 		}
 	});
 }
-

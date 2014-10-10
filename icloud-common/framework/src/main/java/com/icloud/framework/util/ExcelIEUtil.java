@@ -1,7 +1,7 @@
 /**
-* author: Simon Lee
-* Date  : Aug 28, 2013
-*/
+ * author: Simon Lee
+ * Date  : Aug 28, 2013
+ */
 package com.icloud.framework.util;
 
 import java.io.ByteArrayOutputStream;
@@ -30,27 +30,35 @@ import org.joda.time.format.DateTimeFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.icloud.framework.vo.KeyValue;
+
 public class ExcelIEUtil {
 
 	private static Logger logger = LoggerFactory.getLogger(ExcelIEUtil.class);
 
 	private static int size = 1000;
 
-	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private static SimpleDateFormat sdf = new SimpleDateFormat(
+			"yyyy-MM-dd HH:mm:ss");
 
-	public static void export(Map<String, String> fields, List<?> data, String fullName) {
+	public static void export(Map<String, String> fields, List<?> data,
+			String fullName) {
 		exportExcel(fields, data, fullName, size);
 	}
 
 	/**
-	 *	导出数据到excel中，每个文件1000条数据，数据过多时，自动拆分文件
+	 * 导出数据到excel中，每个文件1000条数据，数据过多时，自动拆分文件
 	 *
-	 * @param fields 	导出的表的表头
-	 * @param data 		需要导出的数据
-	 * @param fullName  导出的文件全路径名
+	 * @param fields
+	 *            导出的表的表头
+	 * @param data
+	 *            需要导出的数据
+	 * @param fullName
+	 *            导出的文件全路径名
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static File exportExcel(Map<String, String> fields, List<?> data, String fullName, int fileSize) {
+	public static File exportExcel(Map<String, String> fields, List<?> data,
+			String fullName, int fileSize) {
 		try {
 			Object fObj = data.get(0);
 			Map<String, Field> fieldMap = new HashMap<String, Field>();
@@ -59,7 +67,8 @@ public class ExcelIEUtil {
 			// 拆分后的数据构成一个列表
 			List list = new ArrayList();
 			for (int i = 0; i * fileSize < data.size(); i++) {
-				int end = (i + 1) * fileSize > data.size() ? data.size() - 1 : (i + 1) * fileSize;
+				int end = (i + 1) * fileSize > data.size() ? data.size() - 1
+						: (i + 1) * fileSize;
 				list.add(data.subList(i * fileSize, end));
 			}
 
@@ -75,14 +84,15 @@ public class ExcelIEUtil {
 					} else if (dotIdx == 0) {
 						fileName.add("_" + i + fullName.substring(dotIdx));
 					} else {
-						fileName.add(fullName.substring(0, dotIdx) + "_" + i + fullName.substring(dotIdx));
+						fileName.add(fullName.substring(0, dotIdx) + "_" + i
+								+ fullName.substring(dotIdx));
 					}
 				}
 			}
 
 			// 设置每个文件内容
 			for (int i = 0; i < list.size(); i++) {
-				List dataI = (List)list.get(i);
+				List dataI = (List) list.get(i);
 				Workbook workbook = new HSSFWorkbook();
 				Sheet sheet = workbook.createSheet();
 				Row row0 = sheet.createRow(0);
@@ -107,24 +117,28 @@ public class ExcelIEUtil {
 						if (f.getType() == Date.class) {
 							cell.setCellValue(sdf.format(value));
 						} else if (f.getType() == DateTime.class) {
-							cell.setCellValue(((DateTime)value).toString("yyyy-MM-dd HH:mm:ss"));
+							cell.setCellValue(((DateTime) value)
+									.toString("yyyy-MM-dd HH:mm:ss"));
 						} else {
 							cell.setCellValue(value.toString());
 						}
 					}
 				}
-				FileOutputStream outputStream = new FileOutputStream(fileName.get(i));
+				FileOutputStream outputStream = new FileOutputStream(
+						fileName.get(i));
 				workbook.write(outputStream);
 				IOUtils.closeQuietly(outputStream);
 			}
 			if (fileName.size() == 1) {
 				return new File(fileName.get(0));
 			} else {
-				List<File> files = new ArrayList<File> ();
+				List<File> files = new ArrayList<File>();
 				for (String fn : fileName) {
 					files.add(new File(fn));
 				}
-				File result = GZIPUtil.compress(GZIPUtil.pack(files.toArray(new File[] {}), new File("/tmp/stu.tar")));
+				File result = GZIPUtil
+						.compress(GZIPUtil.pack(files.toArray(new File[] {}),
+								new File("/tmp/stu.tar")));
 				for (File f : files) {
 					f.delete();
 				}
@@ -137,12 +151,15 @@ public class ExcelIEUtil {
 	}
 
 	/**
-	 *	导出数据到excel中，并返回对应的二进制数据
+	 * 导出数据到excel中，并返回对应的二进制数据
 	 *
-	 * @param fields 	导出的表的表头
-	 * @param data 		需要导出的数据
+	 * @param fields
+	 *            导出的表的表头
+	 * @param data
+	 *            需要导出的数据 Map<String, String> fields
 	 */
-	public static byte[] exportBytes(Map<String, String> fields, List<?> data) {
+	public static byte[] exportBytes(List<KeyValue<String, String>> list,
+			List<?> data) {
 		try {
 			Object fObj = data.get(0);
 			Map<String, Field> fieldMap = new HashMap<String, Field>();
@@ -153,7 +170,8 @@ public class ExcelIEUtil {
 			Sheet sheet = workbook.createSheet();
 			Row headRow = sheet.createRow(0);
 			int coll1Num = 0;
-			for (Map.Entry<String, String> entry : fields.entrySet()) {
+			// for (Map.Entry<String, String> entry : fields.entrySet()) {
+			for (KeyValue<String, String> entry : list) {
 				Cell cell1 = headRow.createCell(coll1Num++);
 				cell1.setCellValue(entry.getValue());
 			}
@@ -161,7 +179,9 @@ public class ExcelIEUtil {
 			for (Object obj : data) {
 				Row row = sheet.createRow(rowNum++);
 				int collNum = 0;
-				for (String field : fields.keySet()) {
+				// for (String field : fields.keySet()) {
+				for (KeyValue<String, String> entry : list) {
+					String field = entry.getKey();
 					Cell cell = row.createCell(collNum++);
 					Field f = fieldMap.get(field);
 					f.setAccessible(true);
@@ -171,7 +191,8 @@ public class ExcelIEUtil {
 					} else if (f.getType() == Date.class) {
 						cell.setCellValue(sdf.format(value));
 					} else if (f.getType() == DateTime.class) {
-						cell.setCellValue(((DateTime)value).toString("yyyy-MM-dd HH:mm:ss"));
+						cell.setCellValue(((DateTime) value)
+								.toString("yyyy-MM-dd HH:mm:ss"));
 					} else {
 						cell.setCellValue(value.toString());
 					}
@@ -186,7 +207,8 @@ public class ExcelIEUtil {
 		}
 	}
 
-	public static <T extends Object> List<T> importFromInputStream(Class<T> clz, InputStream input) throws Exception {
+	public static <T extends Object> List<T> importFromInputStream(
+			Class<T> clz, InputStream input) throws Exception {
 		Map<String, Field> fields = new HashMap<String, Field>();
 		getFieldMap(clz, fields);
 		Workbook workbook = new HSSFWorkbook(input);
@@ -199,7 +221,8 @@ public class ExcelIEUtil {
 		List<Field> fieldList = new ArrayList<Field>();
 		int i = 0;
 		Cell cell0 = null;
-		while ((cell0 = row0.getCell(i ++)) != null && StringUtils.isNotBlank(cell0.getStringCellValue())) {
+		while ((cell0 = row0.getCell(i++)) != null
+				&& StringUtils.isNotBlank(cell0.getStringCellValue())) {
 			String name = cell0.getStringCellValue();
 			fieldList.add(fields.get(name));
 		}
@@ -235,7 +258,8 @@ public class ExcelIEUtil {
 					} else if (field.getType() == Date.class) {
 						value = sdf.parse(strValue);
 					} else if (field.getType() == DateTime.class) {
-						value = DateTime.parse(strValue, DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss"));
+						value = DateTime.parse(strValue, DateTimeFormat
+								.forPattern("yyyy-MM-dd HH:mm:ss"));
 					} else if (field.getType() == Boolean.class) {
 						value = Boolean.parseBoolean(strValue);
 					}
@@ -249,12 +273,14 @@ public class ExcelIEUtil {
 		return list;
 	}
 
-	public static <T extends Object> List<T> importFromExcel(Class<T> clz, String fileName) throws Exception {
+	public static <T extends Object> List<T> importFromExcel(Class<T> clz,
+			String fileName) throws Exception {
 		FileInputStream fis = new FileInputStream(fileName);
 		return importFromInputStream(clz, fis);
 	}
 
-	private static <T extends Object> void getFieldMap(Class<T> clz, Map<String, Field> result) {
+	private static <T extends Object> void getFieldMap(Class<T> clz,
+			Map<String, Field> result) {
 		for (Field field : clz.getDeclaredFields()) {
 			result.put(field.getName(), field);
 		}

@@ -1,4 +1,4 @@
-package com.icloud.front.juhuasuan.pojo;
+package com.icloud.front.juhuasuan.constant;
 
 public class JuhuasuanConstants {
 	public enum JUHUASUANSTATUS {

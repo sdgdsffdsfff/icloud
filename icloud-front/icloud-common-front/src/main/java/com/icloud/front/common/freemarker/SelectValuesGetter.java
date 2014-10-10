@@ -5,10 +5,10 @@ import java.util.List;
 
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.framework.vo.KeyValue;
-import com.icloud.front.juhuasuan.pojo.JuhuasuanConstants;
-import com.icloud.front.juhuasuan.pojo.JuhuasuanConstants.JUHUASUANSOLIDIFY;
-import com.icloud.front.juhuasuan.pojo.JuhuasuanConstants.JUHUASUANSTATUS;
-import com.icloud.front.juhuasuan.pojo.JuhuasuanConstants.JUHUASUANTYPE;
+import com.icloud.front.juhuasuan.constant.JuhuasuanConstants;
+import com.icloud.front.juhuasuan.constant.JuhuasuanConstants.JUHUASUANSOLIDIFY;
+import com.icloud.front.juhuasuan.constant.JuhuasuanConstants.JUHUASUANSTATUS;
+import com.icloud.front.juhuasuan.constant.JuhuasuanConstants.JUHUASUANTYPE;
 
 import freemarker.template.TemplateMethodModel;
 import freemarker.template.TemplateModelException;

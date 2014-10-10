@@ -3,7 +3,7 @@ package com.icloud.front.stock.pojo;
 import java.util.Date;
 
 import com.icloud.framework.util.ICloudUtils;
-import com.icloud.front.juhuasuan.pojo.JuhuasuanConstants;
+import com.icloud.front.juhuasuan.constant.JuhuasuanConstants;
 import com.icloud.stock.model.JuhuasuanUrl;
 
 public class JuhuasuanUrlBean {

@@ -10,7 +10,6 @@ import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.common.utils.ICloudUserContextHolder;
 import com.icloud.front.juhuasuan.bussiness.JuhuasuanBussiness;
-import com.icloud.front.stock.action.StockController;
 import com.icloud.front.stock.bussiness.BuuyuuSeoBussiness;
 import com.icloud.front.stock.bussiness.StockCommonBussiness;
 import com.icloud.front.stock.bussiness.StockDetailBussiness;
@@ -22,7 +21,7 @@ import com.icloud.stock.search.service.StockNameSearcher;
 
 public class BaseStockController {
 	protected static final Logger logger = RequestIdentityLogger
-			.getLogger(StockController.class);
+			.getLogger(BaseStockController.class);
 
 	protected static final String ERROR_URL = "redirect:/user/error";
 

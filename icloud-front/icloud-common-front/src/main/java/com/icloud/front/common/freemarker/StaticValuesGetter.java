@@ -3,7 +3,7 @@ package com.icloud.front.common.freemarker;
 import java.util.List;
 
 import com.icloud.framework.util.ICloudUtils;
-import com.icloud.front.juhuasuan.pojo.JuhuasuanConstants;
+import com.icloud.front.juhuasuan.constant.JuhuasuanConstants;
 
 import freemarker.template.TemplateMethodModel;
 import freemarker.template.TemplateModelException;

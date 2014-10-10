@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.util.ICloudUtils;
+import com.icloud.front.juhuasuan.vo.JuhuasuanUrlUtil;
 import com.icloud.juhuasuan.util.UrlCodeUtil;
 import com.icloud.stock.dao.IJuhuasuanSessionDao;
 import com.icloud.stock.dao.IJuhuasuanUrlDao;
@@ -75,14 +76,23 @@ public class JuhuasuanBussiness extends BaseAction {
 		return null;
 	}
 
-	public Pagination<JuhuasuanUrl> searchJuhuasuanUrl(JuhuasuanUrl searchBean,
-			String pageNo, int limit) {
-		int pn = 0;
-		try {
-			pn = Integer.parseInt(pageNo);
-		} catch (Exception e) {
-			pn = 0;
+	public List<JuhuasuanUrl> searchAllJuhuasuanUrl(JuhuasuanUrl searchBean) {
+		Pagination<JuhuasuanUrl> pagination = searchJuhuasuanUrl(searchBean, 0,
+				20);
+		// long count = pagination.getTotalItemCount();
+		int pageCount = pagination.getTotalPageCount();
+		List<JuhuasuanUrl> list = new ArrayList<JuhuasuanUrl>();
+		list.addAll(pagination.getData());
+		for (int i = 1; i < pageCount; i++) {
+			pagination = searchJuhuasuanUrl(searchBean, i, 1);
+			list.addAll(pagination.getData());
 		}
+		JuhuasuanUrlUtil.desc(list);
+		return list;
+	}
+
+	public Pagination<JuhuasuanUrl> searchJuhuasuanUrl(JuhuasuanUrl searchBean,
+			int pn, int limit) {
 		List<String> paramsList = new ArrayList<String>();
 		List<Object> values = new ArrayList<Object>();
 		paramsList.add(IJuhuasuanUrlDao.USERID);
@@ -107,8 +117,6 @@ public class JuhuasuanBussiness extends BaseAction {
 			paramsList.add(IJuhuasuanUrlDao.TYPE);
 			values.add(searchBean.getType());
 		}
-		// String[] params = { IJuhuasuanUrlDao.USERID };
-		// Object[] values = { userId };
 		String[] params = new String[paramsList.size()];
 		return searchJuhuasuanUrl(paramsList.toArray(params), values.toArray(),
 				pn, limit);
@@ -130,7 +138,8 @@ public class JuhuasuanBussiness extends BaseAction {
 		long count = this.juhuasuanUrlService.countByProperty(params, values);
 		pagination.setTotalItemCount(count);
 		List<JuhuasuanUrl> findAll = this.juhuasuanUrlService.findByProperty(
-				params, values, IJuhuasuanUrlDao.UPDATETIME, false, start, limit);
+				params, values, IJuhuasuanUrlDao.UPDATETIME, false, start,
+				limit);
 		for (JuhuasuanUrl cs : findAll) {
 			resultList.add(cs);
 		}
@@ -173,7 +182,7 @@ public class JuhuasuanBussiness extends BaseAction {
 			String sessionId, JuhuasuanUrl url) {
 		String perfer = url.getIcloudUrl();
 		String perferHost = request.getHeader("Referer");
-//		String localip = request.getRemoteAddr();
+		// String localip = request.getRemoteAddr();
 		String localip = request.getHeader("X-Real-IP");
 		String code = url.getIcloudUrl();
 		int user_id = url.getUserId();
@@ -187,5 +196,18 @@ public class JuhuasuanBussiness extends BaseAction {
 		detail.setUrlId(code);
 		detail.setUserId(user_id);
 		this.juhuasuanDetailService.save(detail);
+	}
+
+	/**
+	 * @param urlBean
+	 * @param pageNo
+	 * @param limit
+	 * @return Pagination<JuhuasuanUrlVO>
+	 * @throws
+	 */
+	public Pagination<JuhuasuanUrl> searchJuhuasuanUrl(JuhuasuanUrl urlBean,
+			String pageNo, int limit) {
+		int pn = ICloudUtils.parseInt(pageNo, 0);
+		return searchJuhuasuanUrl(urlBean, pn, limit);
 	}
 }
