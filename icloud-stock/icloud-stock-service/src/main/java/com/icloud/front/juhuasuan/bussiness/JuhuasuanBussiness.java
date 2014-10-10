@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.util.ICloudUtils;
-import com.icloud.front.juhuasuan.vo.JuhuasuanUrlUtil;
 import com.icloud.juhuasuan.util.UrlCodeUtil;
 import com.icloud.stock.dao.IJuhuasuanSessionDao;
 import com.icloud.stock.dao.IJuhuasuanUrlDao;
@@ -87,7 +86,7 @@ public class JuhuasuanBussiness extends BaseAction {
 			pagination = searchJuhuasuanUrl(searchBean, i, 1);
 			list.addAll(pagination.getData());
 		}
-		JuhuasuanUrlUtil.desc(list);
+		// JuhuasuanUrlUtil.desc(list);
 		return list;
 	}
 

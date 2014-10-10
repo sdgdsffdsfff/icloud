@@ -46,6 +46,9 @@ function reviewTheUrl(code) {
 		maxmin : true,
 		fix : false,
 		area : [ '1024px', ($(window).height() - 50) + 'px' ],
+		close : function(index) {
+			reload();
+		},
 		iframe : {
 			src : basepath + '/usertb/juhuasuanUrlView?code=' + code
 		}
@@ -59,6 +62,9 @@ function modifyTheUrl(code) {
 		maxmin : true,
 		fix : false,
 		area : [ '1024px', ($(window).height() - 50) + 'px' ],
+		close : function(index) {
+			reload();
+		},
 		iframe : {
 			src : basepath + '/usertb/modifyJuhusuanUrlView?code=' + code
 		}

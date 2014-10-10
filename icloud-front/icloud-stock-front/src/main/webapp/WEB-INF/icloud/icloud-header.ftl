@@ -7,6 +7,7 @@
          <ul class="clearfix">
          	<li <#if current=="行情">class="first active"</#if>><a href="${basepath}/stock/stockMenu">行情</a></li>
          	<li <#if current=="爬虫数据">class="first active"</#if>><a href="${basepath}/stock/openMenus">爬虫数据</a></li>
+         	<li <#if current=="短链接">class="first active"</#if>><a href="${basepath}/usertb/tbList">短链接</a></li>
             </ul>
        </nav>
        <div class="search">
@@ -28,7 +29,7 @@
                 <u>${(currentUserInfo().userName)}</u>
                 <i class="arrow-down"></i>
                 <div class="hyper-text">
-                    <a href="${basepath}/user/baseUserInfo">我的空间</a>
+                    <a href="${basepath}/usertb/tbList">我的空间</a>
                     <a href="${basepath}/user/icloudLogout">退出</a>
                 </div>
             </span></li>

@@ -50,7 +50,7 @@ public class FacadeUserController extends BaseStockController {
 			 * 加入cookie,并且下次自动登录
 			 */
 			ICloudMemberUtils.addSession(request, response, loginUser, user);
-			return "redirect:/stock/stockMenu";
+			return "redirect:/usertb/tbList";
 			// return "/user/manager/icloud-user-login";
 		} else {
 			return "forward:/facade/failLoginUser";

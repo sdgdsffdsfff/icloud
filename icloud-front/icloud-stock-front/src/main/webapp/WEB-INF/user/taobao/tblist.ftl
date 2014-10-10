@@ -2,8 +2,7 @@
 <#import "/user/user-template/user-center-menus.ftl" as ucm/>
 <#import "/user/taobao/template/juhuasuan-select-template.ftl" as jst/>
 <#import "/icloud/pageView.ftl" as pView/>
-
-<@imc.mainContainer current="行情"  jsFiles=['layer/layer.min.js','icloud/juhuasuan.js'] cssFiles=['icloud/icloud_usercenter.css',"icloud/stock.css"] >
+<@imc.mainContainer current="短链接"  jsFiles=['layer/layer.min.js','icloud/juhuasuan.js'] cssFiles=['icloud/icloud_usercenter.css',"icloud/stock.css"] >
 <@ucm.userCenterMenus current="所有链接"/>
 <main class="us-content">
     <h1 class="us-title">聚划算</h1>
