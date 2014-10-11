@@ -2,6 +2,8 @@ package com.icloud.framework.service;
 
 import java.util.List;
 
+import com.icloud.framework.dao.hibernate.HiberanateEnum.OperationEnum;
+
 public interface ISqlBaseService<T> {
 	public T getById(Integer id);
 
@@ -27,10 +29,34 @@ public interface ISqlBaseService<T> {
 			int limit);
 
 	public List<T> findAll(int start, int limit);
-	
+
 	public long countByProperty(String[] paramNames, Object[] values);
-	
+
 	public List<T> findByProperty(String[] paramNames, Object[] values,
 			String sortParam, boolean isAsc, int start, int limit);
+
+	/**
+	 * @param params
+	 * @param operations
+	 * @param values
+	 * @return long
+	 * @throws
+	 */
+	long countByProperty(String[] params, OperationEnum[] operations,
+			Object[] values);
+
+	/**
+	 * @param params
+	 * @param operations
+	 * @param values
+	 * @param createtime
+	 * @param b
+	 * @param i
+	 * @param pageSize
+	 * @return List<JuhuasuanDetail>
+	 * @throws
+	 */
+	List<T> findByProperty(String[] params, OperationEnum[] operations,
+			Object[] values, String createtime, boolean b, int i, int pageSize);
 
 }

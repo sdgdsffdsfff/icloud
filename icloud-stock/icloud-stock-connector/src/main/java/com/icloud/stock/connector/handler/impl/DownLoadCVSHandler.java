@@ -7,11 +7,11 @@ import java.util.Map;
 
 import org.springframework.util.StopWatch;
 
+import com.icloud.framework.net.http.TZHttpClient;
 import com.icloud.stock.connector.handler.StockHandler;
 import com.icloud.stock.connector.parser.Parser;
 import com.icloud.stock.model.StockDateHistory;
-import com.icloud.stock.model.constant.StockConstants.StockLocation;
-import com.icloud.framework.net.http.TZHttpClient;
+import com.icloud.stock.model.constant.StockEnum.StockLocation;
 
 public class DownLoadCVSHandler extends
 		StockHandler<ArrayList<StockDateHistory>> {

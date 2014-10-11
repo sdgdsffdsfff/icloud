@@ -3,7 +3,6 @@ package com.icloud.framework.core.wrapper;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -32,6 +31,17 @@ public class Pagination<T> implements Serializable {
 		this.pageSize = 10;
 		this.pageNo = 0;
 		this.totalPageCount = 1;
+	}
+
+	public static <T> Pagination<T> getInstance(int pageNo, int limit) {
+		if (pageNo < 0)
+			pageNo = 0;
+		if (limit <= 0)
+			limit = 40;
+		Pagination<T> pagination = new Pagination<T>();
+		pagination.setPageNo(pageNo);
+		pagination.setPageSize(limit);
+		return pagination;
 	}
 
 	public Pagination(Integer pageNo) {
@@ -148,7 +158,8 @@ public class Pagination<T> implements Serializable {
 		if (this.totalItemCount < 0)
 			this.totalItemCount = 0;
 		this.totalPageCount = (int) ((totalItemCount % pageSize > 0) ? totalItemCount
-				/ pageSize + 1 : totalItemCount / pageSize);
+				/ pageSize + 1
+				: totalItemCount / pageSize);
 	}
 
 }

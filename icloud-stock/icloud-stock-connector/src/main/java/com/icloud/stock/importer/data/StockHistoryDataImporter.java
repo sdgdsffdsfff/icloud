@@ -12,7 +12,7 @@ import com.icloud.stock.connector.handler.impl.DownLoadCVSHandler;
 import com.icloud.stock.ctx.BaseServiceImporter;
 import com.icloud.stock.model.Stock;
 import com.icloud.stock.model.StockDateHistory;
-import com.icloud.stock.model.constant.StockConstants.StockLocation;
+import com.icloud.stock.model.constant.StockEnum.StockLocation;
 
 public class StockHistoryDataImporter extends BaseServiceImporter {
 	public void saveAllHttpData(ArrayList<StockDateHistory> httpData) {

@@ -63,7 +63,7 @@
                         <span class="right"></span>
                 </a>
                 </section>
-                <section class="usResult">
+                <section class="usResult" id="juhuasuanItem">
                     <table>
                         <thead>
                             <tr>
@@ -93,6 +93,7 @@
                             <td>${urlBean.updateTime?string('yyyy-MM-dd HH:mm')}</td>
                             <td><a href="#" onclick="reviewTheUrl('${urlBean.icloudUrl}');">查看</a>&nbsp;&nbsp;
                             <a href="#" onclick="modifyTheUrl('${urlBean.icloudUrl}');">修改</a></td>
+                            <input name="juhuasuan-id" type="hidden" value="${(urlBean.icloudUrl)!''}"/>
                         </tr>
                         </#list>
                         </#if>

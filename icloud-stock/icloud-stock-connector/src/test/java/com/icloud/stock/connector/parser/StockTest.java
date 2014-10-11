@@ -11,7 +11,7 @@ import com.icloud.stock.connector.handler.impl.StockMetaInfoHandler;
 import com.icloud.stock.connector.model.StockCurrentInfo;
 import com.icloud.stock.connector.model.StockMetaInfo;
 import com.icloud.stock.model.StockDateHistory;
-import com.icloud.stock.model.constant.StockConstants.StockLocation;
+import com.icloud.stock.model.constant.StockEnum.StockLocation;
 
 public class StockTest {
 	@Test

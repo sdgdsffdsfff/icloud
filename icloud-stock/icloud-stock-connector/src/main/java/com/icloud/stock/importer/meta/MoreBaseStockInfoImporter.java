@@ -3,22 +3,16 @@ package com.icloud.stock.importer.meta;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.icloud.framework.file.TextFile;
 import com.icloud.stock.ctx.BaseServiceImporter;
-import com.icloud.stock.ctx.BeansUtil;
 import com.icloud.stock.model.Category;
 import com.icloud.stock.model.CategoryStock;
 import com.icloud.stock.model.Stock;
-import com.icloud.stock.model.constant.StockConstants.BaseCategory;
-import com.icloud.stock.model.constant.StockConstants.StockLocation;
-import com.icloud.stock.service.ICategoryService;
-import com.icloud.stock.service.ICategoryStockService;
-import com.icloud.stock.service.IStockService;
+import com.icloud.stock.model.constant.StockEnum.BaseCategory;
+import com.icloud.stock.model.constant.StockEnum.StockLocation;
 
 /**
  *

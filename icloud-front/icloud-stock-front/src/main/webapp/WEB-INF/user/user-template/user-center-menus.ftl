@@ -16,6 +16,9 @@
             <dd>
                 <a <#if current=="所有链接">class="current"</#if> href="${basepath}/usertb/tbList">所有链接</a>
             </dd>
+            <dd>
+                <a <#if current=="访问数据">class="current"</#if> href="${basepath}/usertb/trafficCurrentDay">访问数据</a>
+            </dd>
         </dl>
         
         <dl>

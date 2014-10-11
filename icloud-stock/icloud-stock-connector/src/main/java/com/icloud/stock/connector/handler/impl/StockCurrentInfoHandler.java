@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.icloud.stock.connector.handler.StockHandler;
 import com.icloud.stock.connector.model.StockCurrentInfo;
-import com.icloud.stock.model.constant.StockConstants.StockLocation;
+import com.icloud.stock.model.constant.StockEnum.StockLocation;
 
 public class StockCurrentInfoHandler extends StockHandler<StockCurrentInfo> {
 	private String code;

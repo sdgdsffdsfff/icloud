@@ -12,7 +12,7 @@ import com.icloud.front.stock.pojo.BaseStockMenu;
 import com.icloud.front.stock.pojo.StockMenuBean;
 import com.icloud.search.util.PinyinAutoCompletetor;
 import com.icloud.stock.model.Category;
-import com.icloud.stock.model.constant.StockConstants.BaseCategory;
+import com.icloud.stock.model.constant.StockEnum.BaseCategory;
 
 @Service("stockCommonBussiness")
 public class StockCommonBussiness extends BaseAction {

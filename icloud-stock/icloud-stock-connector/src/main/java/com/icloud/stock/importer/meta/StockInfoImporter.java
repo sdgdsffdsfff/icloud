@@ -2,11 +2,11 @@ package com.icloud.stock.importer.meta;
 
 import java.util.Date;
 
+import com.icloud.framework.file.TextFile;
 import com.icloud.stock.ctx.BeansUtil;
 import com.icloud.stock.model.Stock;
-import com.icloud.stock.model.constant.StockConstants.StockLocation;
+import com.icloud.stock.model.constant.StockEnum.StockLocation;
 import com.icloud.stock.service.IStockService;
-import com.icloud.framework.file.TextFile;
 
 /**
  *

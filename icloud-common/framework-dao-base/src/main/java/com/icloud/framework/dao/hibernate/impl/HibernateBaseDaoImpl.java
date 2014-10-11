@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import com.icloud.framework.dao.hibernate.HiberanateEnum.OperationEnum;
 import com.icloud.framework.dao.hibernate.IHibernateBaseDao;
 import com.icloud.framework.hibernate.util.GenericsUtils;
 import com.icloud.framework.util.ICloudUtils;
@@ -165,6 +166,37 @@ public class HibernateBaseDaoImpl<T> extends HibernateDaoSupport implements
 		return getHibernateTemplate().find(hql, values);
 	}
 
+	private String buildQuery(String[] paramNames, OperationEnum[] operations,
+			Object[] values, String sortParam, boolean isAsc) {
+
+		if (ICloudUtils.isNotNull(paramNames) && ICloudUtils.isNotNull(values)
+				&& paramNames.length == values.length) {
+			StringBuffer sb = new StringBuffer();
+			sb.append("from " + domainClass.getName() + " as model where ");
+
+			int len = paramNames.length;
+			for (int i = 0; i < len; i++) {
+				sb.append("model." + paramNames[i] + " "
+						+ operations[i].getOpeationValue() + " ?");
+				if (i != (len - 1)) {
+					sb.append(" and ");
+				}
+			}
+
+			if (ICloudUtils.isNotNull(sortParam)) {
+				String asc = "asc";
+				if (!isAsc) {
+					asc = "desc";
+				}
+				sb.append(" order by model." + sortParam + " " + asc);
+			}
+			return sb.toString();
+		}
+
+		return null;
+
+	}
+
 	private String buildQuery(String[] paramNames, Object[] values,
 			String sortParam, boolean isAsc) {
 		if (ICloudUtils.isNotNull(paramNames) && ICloudUtils.isNotNull(values)
@@ -203,6 +235,30 @@ public class HibernateBaseDaoImpl<T> extends HibernateDaoSupport implements
 	}
 
 	@Override
+	public List<T> findByProperty(String[] paramNames,
+			OperationEnum[] operations, Object[] values, String sortParam,
+			boolean isAsc, int start, int limit) {
+		String queryString = buildQuery(paramNames, operations, values,
+				sortParam, isAsc);
+		if (ICloudUtils.isNotNull(queryString)) {
+			return findByProperty(queryString, values, start, limit);
+		}
+		return null;
+	}
+
+	@Override
+	public long countByProperty(String[] paramNames,
+			OperationEnum[] operations, Object[] values) {
+		String queryString = buildQuery(paramNames, operations, values, null,
+				false);
+		if (ICloudUtils.isNotNull(queryString)) {
+			queryString = "select count(*) " + queryString;
+			return count(queryString, values);
+		}
+		return 0;
+	}
+
+	@Override
 	public List<T> findByProperty(String[] paramNames, Object[] values,
 			String sortParam, boolean isAsc) {
 		String queryString = buildQuery(paramNames, values, sortParam, isAsc);
@@ -237,4 +293,5 @@ public class HibernateBaseDaoImpl<T> extends HibernateDaoSupport implements
 			}
 		});
 	}
+
 }

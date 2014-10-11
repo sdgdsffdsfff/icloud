@@ -10,6 +10,7 @@ import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.stock.baseaction.BaseStockController;
 import com.icloud.front.stock.pojo.JuhuasuanSearchBean;
 import com.icloud.front.stock.pojo.JuhuasuanUrlBean;
+import com.icloud.stock.model.JuhuasuanDetail;
 import com.icloud.stock.model.JuhuasuanUrl;
 
 @Controller
@@ -98,5 +99,28 @@ public class JuhuaSuanManagerController extends BaseStockController {
 		return modelAndView;
 	}
 
-	
+	@RequestMapping("trafficCurrentDay")
+	public ModelAndView traffic(JuhuasuanSearchBean searhBean) {
+		ModelAndView modelAndView = getModelAndView("user/taobao/trafficCurrentDayView");
+		if (!ICloudUtils.isNotNull(searhBean)) {
+			searhBean = new JuhuasuanSearchBean();
+		}
+		long currentDayCount = this.juhuasuanBussiness
+				.getCountOfJuhusuanDetailInCurrentDay(this.getUserId());
+		long lastDayCount = this.juhuasuanBussiness
+				.getCountOfJuhusuanDetailInLastDay(this.getUserId());
+		long totalCount = this.juhuasuanBussiness.getCountOfJuhusuanDetail(
+				this.getUserId(), null, null);
+		Pagination<JuhuasuanDetail> pagination = this.juhuasuanBussiness
+				.getDurrentDayJuhuasuanDetailByUserId(this.getUserId(),
+						searhBean.getPageNo(), searhBean.getLimit());
+		modelAndView.addObject("pagination", pagination);
+		PageView pageView = PageView.convertPage(pagination);
+		modelAndView.addObject("pageView", pageView);
+		modelAndView.addObject("currentDayCount", currentDayCount);
+		modelAndView.addObject("lastDayCount", lastDayCount);
+		modelAndView.addObject("totalCount", totalCount);
+		modelAndView.addObject("url_name", "当天访问量");
+		return modelAndView;
+	}
 }

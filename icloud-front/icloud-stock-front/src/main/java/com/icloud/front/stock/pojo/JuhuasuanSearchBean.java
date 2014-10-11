@@ -4,14 +4,14 @@ import com.icloud.framework.util.ICloudUtils;
 import com.icloud.stock.model.JuhuasuanUrl;
 
 public class JuhuasuanSearchBean extends JuhuasuanUrlBean {
-	private String pageNo;
-	private int limit = 20;
+	private int pageNo;
+	private int limit = 4;
 
-	public String getPageNo() {
+	public int getPageNo() {
 		return pageNo;
 	}
 
-	public void setPageNo(String pageNo) {
+	public void setPageNo(int pageNo) {
 		this.pageNo = pageNo;
 	}
 

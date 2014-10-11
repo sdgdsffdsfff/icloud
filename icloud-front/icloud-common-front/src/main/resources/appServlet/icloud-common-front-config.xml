@@ -91,7 +91,9 @@
 				<entry key="staticValues">
 					<bean class="com.icloud.front.common.freemarker.StaticValuesGetter"></bean>
 				</entry>
-
+				<entry key="stringUtils">
+					<bean class="com.icloud.front.common.freemarker.StringUtilsGetter"></bean>
+				</entry>
 			</map>
 		</property>
 	</bean>

@@ -2,6 +2,8 @@ package com.icloud.framework.dao.hibernate;
 
 import java.util.List;
 
+import com.icloud.framework.dao.hibernate.HiberanateEnum.OperationEnum;
+
 public interface IHibernateBaseDao<T> {
 	Class<T> getDomainClass();
 
@@ -35,10 +37,17 @@ public interface IHibernateBaseDao<T> {
 	public List<T> findByProperty(String[] paramNames, Object[] values,
 			String sortParam, boolean isAsc, int start, int limit);
 
+	public List<T> findByProperty(String[] paramNames,
+			OperationEnum[] operations, Object[] values, String sortParam,
+			boolean isAsc, int start, int limit);
+
 	public List<T> findByProperty(String[] paramNames, Object[] values,
 			String sortParam, boolean isAsc);
 
 	public long countByProperty(String[] paramNames, Object[] values);
+
+	public long countByProperty(String[] paramNames,
+			OperationEnum[] operations, Object[] values);
 
 	public List<T> findAll(int start, int limit);
 

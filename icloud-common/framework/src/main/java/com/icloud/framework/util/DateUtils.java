@@ -630,6 +630,20 @@ public class DateUtils {
 		return weekDays[cal.get(Calendar.DAY_OF_WEEK)];
 	}
 
+	public static Date addDays(Date date, int amount) {
+		return add(date, Calendar.DAY_OF_MONTH, amount);
+	}
+
+	public static Date add(Date date, int calendarField, int amount) {
+		if (date == null) {
+			throw new IllegalArgumentException("The date must not be null");
+		}
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(calendarField, amount);
+		return c.getTime();
+	}
+
 	/**
 	 * 获取中文大写星期 DAY OF WEEK
 	 *
@@ -647,6 +661,8 @@ public class DateUtils {
 		System.out.println("month = " + getMonth(date));
 		System.out.println("day = " + getDay(date));
 		Date date2 = getDate(date, "yyyy-MM-dd");
+		System.out.println(date2);
+		date2 = DateUtils.addDays(date2, -7);
 		System.out.println(date2);
 	}
 

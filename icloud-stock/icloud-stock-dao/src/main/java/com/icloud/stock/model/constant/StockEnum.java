@@ -4,7 +4,7 @@ import com.icloud.framework.core.common.ReturnCode;
 import com.icloud.framework.core.exception.ICloudException;
 import com.icloud.framework.util.ICloudUtils;
 
-public final class StockConstants {
+public final class StockEnum {
 	public enum StockLocation {
 		SHA("sha"), //
 		SZX("szx");

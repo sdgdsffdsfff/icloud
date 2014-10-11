@@ -9,10 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 
 import com.icloud.framework.core.wrapper.Pagination;
+import com.icloud.framework.dao.hibernate.HiberanateEnum.OperationEnum;
+import com.icloud.framework.util.DateUtils;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.juhuasuan.util.UrlCodeUtil;
+import com.icloud.stock.dao.IJuhuasuanDetailDao;
 import com.icloud.stock.dao.IJuhuasuanSessionDao;
 import com.icloud.stock.dao.IJuhuasuanUrlDao;
+import com.icloud.stock.dict.StockConstants;
 import com.icloud.stock.model.JuhuasuanDetail;
 import com.icloud.stock.model.JuhuasuanSession;
 import com.icloud.stock.model.JuhuasuanUrl;
@@ -123,22 +127,16 @@ public class JuhuasuanBussiness extends BaseAction {
 
 	public Pagination<JuhuasuanUrl> searchJuhuasuanUrl(String[] params,
 			Object[] values, int pageNo, int limit) {
-		Pagination<JuhuasuanUrl> pagination = new Pagination<JuhuasuanUrl>();
-		pagination.setPageNo(pageNo);
-		pagination.setPageSize(limit);
-
-		if (pageNo < 0)
-			pageNo = 0;
-		if (limit <= 0)
-			limit = 40;
-		int start = limit * pageNo;
+		Pagination<JuhuasuanUrl> pagination = Pagination.getInstance(pageNo,
+				limit);
 		List<JuhuasuanUrl> resultList = null;
 		resultList = new ArrayList<JuhuasuanUrl>();
 		long count = this.juhuasuanUrlService.countByProperty(params, values);
 		pagination.setTotalItemCount(count);
 		List<JuhuasuanUrl> findAll = this.juhuasuanUrlService.findByProperty(
-				params, values, IJuhuasuanUrlDao.UPDATETIME, false, start,
-				limit);
+				params, values, IJuhuasuanUrlDao.UPDATETIME, false,
+				pagination.getPageNo() * pagination.getPageSize(),
+				pagination.getPageSize());
 		for (JuhuasuanUrl cs : findAll) {
 			resultList.add(cs);
 		}
@@ -208,5 +206,125 @@ public class JuhuasuanBussiness extends BaseAction {
 			String pageNo, int limit) {
 		int pn = ICloudUtils.parseInt(pageNo, 0);
 		return searchJuhuasuanUrl(urlBean, pn, limit);
+	}
+
+	/**
+	 * @param userId
+	 * @param pageNo
+	 * @param limit
+	 *            void
+	 * @throws
+	 */
+	public Pagination<JuhuasuanDetail> getDurrentDayJuhuasuanDetailByUserId(
+			int userId, int pageNo, int limit) {
+		Date startDate = DateUtils.getDate(new Date(),
+				StockConstants.STOCK_HISTORY_STRING);
+//		return getJuhuasuanDetail(startDate, null, userId, pageNo, limit);
+		return getJuhuasuanDetail(null, null, userId, pageNo, limit);
+	}
+
+	public long getCountOfJuhusuanDetailInCurrentDay(int userId) {
+		Date startDate = DateUtils.getDate(new Date(),
+				StockConstants.STOCK_HISTORY_STRING);
+		Date endDate = DateUtils.addDays(startDate, 1);
+		return getCountOfJuhusuanDetail(userId, startDate, endDate);
+	}
+
+	public long getCountOfJuhusuanDetailInLastDay(int userId) {
+		Date date = new Date();
+		date = DateUtils.addDays(date, -1);
+		Date startDate = DateUtils.getDate(date,
+				StockConstants.STOCK_HISTORY_STRING);
+		Date endDate = DateUtils.addDays(startDate, 1);
+		return getCountOfJuhusuanDetail(userId, startDate, endDate);
+	}
+
+	private void addOperationsValue(List<String> paramList,
+			List<OperationEnum> operationList, List<Object> valueList,
+			String param, OperationEnum enumValue, Object value) {
+		if (ICloudUtils.isNotNull(value)) {
+			paramList.add(param);
+			operationList.add(enumValue);
+			valueList.add(value);
+		}
+	}
+
+	public Pagination<JuhuasuanDetail> getJuhuasuanDetail(Date startDate,
+			Date endDate, int userId, int pageNo, int limit) {
+		Pagination<JuhuasuanDetail> pagination = Pagination.getInstance(pageNo,
+				limit);
+		List<String> paramList = new ArrayList<String>();
+		List<OperationEnum> operationList = new ArrayList<OperationEnum>();
+		List<Object> valueList = new ArrayList<Object>();
+		// paramList.add(IJuhuasuanDetailDao.USERID);
+		// operationList.add(OperationEnum.EQUALS);
+		// valueList.add(userId);
+
+		addOperationsValue(paramList, operationList, valueList,
+				IJuhuasuanDetailDao.USERID, OperationEnum.EQUALS, userId);
+		addOperationsValue(paramList, operationList, valueList,
+				IJuhuasuanDetailDao.CREATETIME,
+				OperationEnum.BIGGER_ADN_EQUALS, startDate);
+		addOperationsValue(paramList, operationList, valueList,
+				IJuhuasuanDetailDao.CREATETIME, OperationEnum.LESS, endDate);
+		// if (ICloudUtils.isNotNull(startDate)) {
+		// paramList.add(IJuhuasuanDetailDao.CREATETIME);
+		// operationList.add(OperationEnum.BIGGER_ADN_EQUALS);
+		// valueList.add(startDate);
+		// }
+		// if (ICloudUtils.isNotNull(endDate)) {
+		// paramList.add(IJuhuasuanDetailDao.CREATETIME);
+		// operationList.add(OperationEnum.LESS_ADN_EQUALS);
+		// valueList.add(endDate);
+		// }
+		String[] params = new String[paramList.size()];
+		paramList.toArray(params);
+		OperationEnum[] operations = new OperationEnum[operationList.size()];
+		operations = operationList.toArray(operations);
+		Object[] values = valueList.toArray();
+
+		long count = this.juhuasuanDetailService.countByProperty(params,
+				operations, values);
+		pagination.setTotalItemCount(count);
+
+		List<JuhuasuanDetail> detailList = this.juhuasuanDetailService
+				.findByProperty(params, operations, values,
+						IJuhuasuanDetailDao.CREATETIME, false,
+						pagination.getPageNo() * pagination.getPageSize(),
+						pagination.getPageSize());
+
+		pagination.setData(detailList);
+		pagination.build();
+		return pagination;
+	}
+
+	/**
+	 * @param userId
+	 * @param startDate
+	 * @param endDate
+	 * @return long
+	 * @throws
+	 */
+	public long getCountOfJuhusuanDetail(int userId, Date startDate,
+			Date endDate) {
+		List<String> paramList = new ArrayList<String>();
+		List<OperationEnum> operationList = new ArrayList<OperationEnum>();
+		List<Object> valueList = new ArrayList<Object>();
+
+		addOperationsValue(paramList, operationList, valueList,
+				IJuhuasuanDetailDao.USERID, OperationEnum.EQUALS, userId);
+		addOperationsValue(paramList, operationList, valueList,
+				IJuhuasuanDetailDao.CREATETIME,
+				OperationEnum.BIGGER_ADN_EQUALS, startDate);
+		addOperationsValue(paramList, operationList, valueList,
+				IJuhuasuanDetailDao.CREATETIME, OperationEnum.LESS, endDate);
+		String[] params = new String[paramList.size()];
+		paramList.toArray(params);
+		OperationEnum[] operations = new OperationEnum[operationList.size()];
+		operations = operationList.toArray(operations);
+		Object[] values = valueList.toArray();
+
+		return this.juhuasuanDetailService.countByProperty(params, operations,
+				values);
 	}
 }

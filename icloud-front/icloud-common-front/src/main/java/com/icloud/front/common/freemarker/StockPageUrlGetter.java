@@ -29,7 +29,12 @@ public class StockPageUrlGetter implements TemplateMethodModel {
 			return "href=\"openStockList?cateId=" + cateId + "&pageNo="
 					+ pageNo + "\"";
 		} else if ("4".equalsIgnoreCase(pageId)) {
-			return "onclick=\"juhuasuanSeachLoading(" + pageNo + ")\" href=\"#\"";
+			return "onclick=\"juhuasuanSeachLoading(" + pageNo
+					+ ")\" href=\"#\"";
+		} else if ("5".equalsIgnoreCase(pageId)) {
+			return "href=\"trafficCurrentDay?pageNo=" + pageNo + "\"";
+		} else if ("6".equalsIgnoreCase(pageId)) {
+			return "href=\"traffic30Day?pageNo=" + pageNo + "\"";
 		}
 		return "/stock/index";
 	}
