@@ -12,6 +12,7 @@ import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.dao.hibernate.HiberanateEnum.OperationEnum;
 import com.icloud.framework.util.DateUtils;
 import com.icloud.framework.util.ICloudUtils;
+import com.icloud.front.juhusuan.pojo.JuhuasuanFrontSession;
 import com.icloud.juhuasuan.util.UrlCodeUtil;
 import com.icloud.stock.dao.IJuhuasuanDetailDao;
 import com.icloud.stock.dao.IJuhuasuanSessionDao;
@@ -219,7 +220,18 @@ public class JuhuasuanBussiness extends BaseAction {
 			int userId, int pageNo, int limit) {
 		Date startDate = DateUtils.getDate(new Date(),
 				StockConstants.STOCK_HISTORY_STRING);
-//		return getJuhuasuanDetail(startDate, null, userId, pageNo, limit);
+		return getJuhuasuanDetail(startDate, null, userId, pageNo, limit);
+		// return getJuhuasuanDetail(null, null, userId, pageNo, limit);
+	}
+
+	public Pagination<JuhuasuanDetail> get30DaysJuhuasuanDetailByUserId(
+			int userId, int pageNo, int limit) {
+		Date date = new Date();
+		date = DateUtils.addDays(date, -30);
+		Date startDate = DateUtils.getDate(date,
+				StockConstants.STOCK_HISTORY_STRING);
+		Date endDate = DateUtils.addDays(startDate, 1);
+		// return getJuhuasuanDetail(startDate, null, userId, pageNo, limit);
 		return getJuhuasuanDetail(null, null, userId, pageNo, limit);
 	}
 
@@ -326,5 +338,42 @@ public class JuhuasuanBussiness extends BaseAction {
 
 		return this.juhuasuanDetailService.countByProperty(params, operations,
 				values);
+	}
+
+	public Pagination<JuhuasuanFrontSession> getJuhuaSessionByUserId(
+			int userId, int pageNo, int limit) {
+		Pagination<JuhuasuanFrontSession> pagination = Pagination.getInstance(
+				pageNo, limit);
+		String countHql = "select count(distinct juhuasuanId) from JuhuasuanSession as js where js.userId = "
+				+ userId;
+		long count = this.juhuasuanSessionService.count(countHql);
+		pagination.setTotalItemCount(count);
+
+		String hql = "select id,juhuasuanId,userId,sessionId,sum(js.count) as totalCount from JuhuasuanSession as js where js.userId = "
+				+ userId + " group by js.juhuasuanId order by sum(js.count) desc";
+		List<JuhuasuanSession> tmpList = this.juhuasuanSessionService
+				.findByProperty(hql,
+						pagination.getPageNo() * pagination.getPageSize(),
+						pagination.getPageSize());
+		List<JuhuasuanFrontSession> sessionList = new ArrayList<JuhuasuanFrontSession>();
+		for (Object object : tmpList) {
+			Object[] objs = (Object[]) object;
+			JuhuasuanFrontSession session = new JuhuasuanFrontSession();
+			session.setId((Integer) objs[0]);
+			Integer juhuasuanId = (Integer) objs[1];
+			JuhuasuanUrl url = this.juhuasuanUrlService.getById(juhuasuanId);
+			String code = juhuasuanId + "";
+			if (ICloudUtils.isNotNull(url)) {
+				code = url.getIcloudUrl();
+			}
+			session.setIcloudUrl(code);
+			session.setUserId((Integer) objs[2]);
+			session.setSessionId((String) objs[3]);
+			session.setCount((Long) objs[4]);
+			sessionList.add(session);
+		}
+		pagination.setData(sessionList);
+		pagination.build();
+		return pagination;
 	}
 }

@@ -102,4 +102,13 @@ public class JuhuasuanSession implements java.io.Serializable {
 		this.lastreadIp = lastreadIp;
 	}
 
+	@Override
+	public String toString() {
+		return "JuhuasuanSession [id=" + id + ", juhuasuanId=" + juhuasuanId
+				+ ", userId=" + userId + ", createTime=" + createTime
+				+ ", lastupdateTime=" + lastupdateTime + ", sessionId="
+				+ sessionId + ", count=" + count + ", lastreadIp=" + lastreadIp
+				+ "]";
+	}
+
 }

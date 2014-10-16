@@ -19,6 +19,9 @@
             <dd>
                 <a <#if current=="访问数据">class="current"</#if> href="${basepath}/usertb/trafficCurrentDay">访问数据</a>
             </dd>
+            <dd>
+                <a <#if current=="总体统计">class="current"</#if> href="${basepath}/usertb/allUrlStatistics">总体统计</a>
+            </dd>
         </dl>
         
         <dl>

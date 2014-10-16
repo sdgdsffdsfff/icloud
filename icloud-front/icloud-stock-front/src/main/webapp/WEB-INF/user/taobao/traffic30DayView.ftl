@@ -11,7 +11,7 @@
                 <#include "/user/taobao/template/juhusuan-detail-header-template.ftl"/>
                 <#include "/user/taobao/template/juhusuan-detail-template.ftl"/>
             </div>
-            <@pView.pagination param1='5' param2='0' param3='33'/>
+            <@pView.pagination param1='6' param2='0' param3='33'/>
         </div>
 </main>
 </@imc.mainContainer>

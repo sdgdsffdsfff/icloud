@@ -16,6 +16,12 @@ public interface ISqlBaseService<T> {
 	public List<T> findAll();
 
 	public void deleteById(Integer id);
+	
+	public long count(String hql);
+	
+	public List<T> findByProperty(String hql, int start, int limit);
+
+	public List<T> findByProperty(String hql);
 
 	public long count();
 

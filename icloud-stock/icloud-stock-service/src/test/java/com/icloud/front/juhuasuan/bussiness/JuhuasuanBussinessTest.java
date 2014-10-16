@@ -1,13 +1,16 @@
 package com.icloud.front.juhuasuan.bussiness;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.junit.Test;
 
+import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.picture.TZPhotoUtil;
 import com.icloud.framework.util.ExcelIEUtil;
 import com.icloud.framework.vo.KeyValue;
+import com.icloud.front.juhusuan.pojo.JuhuasuanFrontSession;
 import com.icloud.front.stock.StockBussinessTest;
 import com.icloud.stock.model.JuhuasuanUrl;
 
@@ -44,10 +47,19 @@ public class JuhuasuanBussinessTest extends StockBussinessTest {
 		list.add(new KeyValue<String, String>("type", "类型"));
 		list.add(new KeyValue<String, String>("solidify", "加固方式"));
 		list.add(new KeyValue<String, String>("originUrl", "原始链接"));
-		
-		byte[] bytes = ExcelIEUtil.exportBytes(list,
-				urls);
+
+		byte[] bytes = ExcelIEUtil.exportBytes(list, urls);
 		TZPhotoUtil.storeToFile("d:/test/icloud/t.xls", bytes);
 		logger.info("----------end to 生成xls----------");
+	}
+
+	@Test
+	public void getSession() {
+		Pagination<JuhuasuanFrontSession> pagination = this.juhuasuanBussiness
+				.getJuhuaSessionByUserId(1, 0, 2);
+		Collection<JuhuasuanFrontSession> data = pagination.getData();
+		for (JuhuasuanFrontSession session : data) {
+			System.out.println(session.toString());
+		}
 	}
 }
