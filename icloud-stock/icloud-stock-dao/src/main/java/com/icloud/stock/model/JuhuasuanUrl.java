@@ -146,4 +146,14 @@ public class JuhuasuanUrl implements java.io.Serializable {
 		this.originUrl = originUrl;
 	}
 
+	@Override
+	public String toString() {
+		return "JuhuasuanUrl [id=" + id + ", name=" + name + ", taobaoUrl="
+				+ taobaoUrl + ", icloudUrl=" + icloudUrl + ", userId=" + userId
+				+ ", createTime=" + createTime + ", updateTime=" + updateTime
+				+ ", desText=" + desText + ", status=" + status + ", type="
+				+ type + ", solidify=" + solidify + ", originUrl=" + originUrl
+				+ "]";
+	}
+
 }

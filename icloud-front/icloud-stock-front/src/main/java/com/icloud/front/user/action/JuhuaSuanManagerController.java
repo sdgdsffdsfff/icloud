@@ -1,12 +1,18 @@
 package com.icloud.front.user.action;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icloud.framework.core.wrapper.PageView;
 import com.icloud.framework.core.wrapper.Pagination;
+import com.icloud.framework.picture.TZPhotoUtil;
+import com.icloud.framework.util.ExcelIEUtil;
 import com.icloud.framework.util.ICloudUtils;
+import com.icloud.framework.vo.KeyValue;
 import com.icloud.front.juhusuan.pojo.JuhuasuanFrontSession;
 import com.icloud.front.stock.baseaction.BaseStockController;
 import com.icloud.front.stock.pojo.JuhuasuanSearchBean;
@@ -152,7 +158,7 @@ public class JuhuaSuanManagerController extends BaseStockController {
 
 	@RequestMapping("allUrlStatistics")
 	public ModelAndView allUrlStatistics(JuhuasuanSearchBean searhBean) {
-//		searhBean.setLimit(4);
+		// searhBean.setLimit(4);
 		ModelAndView modelAndView = getModelAndView("user/taobao/all-url-statistics-view");
 		if (!ICloudUtils.isNotNull(searhBean)) {
 			searhBean = new JuhuasuanSearchBean();
@@ -165,8 +171,8 @@ public class JuhuaSuanManagerController extends BaseStockController {
 				this.getUserId(), null, null);
 
 		Pagination<JuhuasuanFrontSession> pagination = this.juhuasuanBussiness
-				.getJuhuaSessionByUserId(this.getUserId(), searhBean.getPageNo(),
-						searhBean.getLimit());
+				.getJuhuaSessionByUserId(this.getUserId(),
+						searhBean.getPageNo(), searhBean.getLimit());
 		modelAndView.addObject("pagination", pagination);
 		PageView pageView = PageView.convertPage(pagination);
 		modelAndView.addObject("pageView", pageView);
@@ -175,5 +181,31 @@ public class JuhuaSuanManagerController extends BaseStockController {
 		modelAndView.addObject("totalCount", totalCount);
 		modelAndView.addObject("url_name", "总体统计");
 		return modelAndView;
+	}
+
+	@RequestMapping("downloadMyUrls")
+	public void downloadMyUrls() {
+		JuhuasuanUrl urlBean = new JuhuasuanUrl();
+		urlBean.setUserId(this.getUserId());
+		List<JuhuasuanUrl> urls = this.juhuasuanBussiness
+				.searchAllJuhuasuanUrl(urlBean);
+		// logger.info("----------start----------");
+		// for (JuhuasuanUrl url : urls) {
+		// logger.info("urlname:{},taobaoUrl:{}", url.getName(),
+		// url.getTaobaoUrl());
+		// }
+		// logger.info("count={}", urls.size());
+		// logger.info("----------end----------");
+		logger.info("----------start to 生成xls----------");
+		List<KeyValue<String, String>> list = new ArrayList<KeyValue<String, String>>();
+		list.add(new KeyValue<String, String>("icloudUrl", "本地代码"));
+		list.add(new KeyValue<String, String>("name", "链接名"));
+		list.add(new KeyValue<String, String>("taobaoUrl", "淘宝url"));
+		list.add(new KeyValue<String, String>("desText", "描述"));
+		list.add(new KeyValue<String, String>("originUrl", "原始链接"));
+		byte[] bytes = ExcelIEUtil.exportBytes(list, urls);
+		
+		
+//		TZPhotoUtil.storeToFile(path, bytes);
 	}
 }

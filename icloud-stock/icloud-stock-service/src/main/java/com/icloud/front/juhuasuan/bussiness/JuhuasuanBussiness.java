@@ -12,6 +12,7 @@ import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.dao.hibernate.HiberanateEnum.OperationEnum;
 import com.icloud.framework.util.DateUtils;
 import com.icloud.framework.util.ICloudUtils;
+import com.icloud.front.juhuasuan.constant.JuhuasuanConstants;
 import com.icloud.front.juhusuan.pojo.JuhuasuanFrontSession;
 import com.icloud.juhuasuan.util.UrlCodeUtil;
 import com.icloud.stock.dao.IJuhuasuanDetailDao;
@@ -350,7 +351,8 @@ public class JuhuasuanBussiness extends BaseAction {
 		pagination.setTotalItemCount(count);
 
 		String hql = "select id,juhuasuanId,userId,sessionId,sum(js.count) as totalCount from JuhuasuanSession as js where js.userId = "
-				+ userId + " group by js.juhuasuanId order by sum(js.count) desc";
+				+ userId
+				+ " group by js.juhuasuanId order by sum(js.count) desc";
 		List<JuhuasuanSession> tmpList = this.juhuasuanSessionService
 				.findByProperty(hql,
 						pagination.getPageNo() * pagination.getPageSize(),
@@ -375,5 +377,78 @@ public class JuhuasuanBussiness extends BaseAction {
 		pagination.setData(sessionList);
 		pagination.build();
 		return pagination;
+	}
+
+	public String batchUpdateUrl(List<JuhuasuanUrl> list, int userId) {
+		int errorCount = 0;
+		int updateCount = 0;
+		int addCount = 0;
+		int notUpdateCount = 0;
+		if (!ICloudUtils.isEmpty(list)) {
+			for (JuhuasuanUrl url : list) {
+				if (ICloudUtils.isNotNull(url.getIcloudUrl())) {
+					JuhuasuanUrl newUrl = getJuhuasuanUrlByCode(url
+							.getIcloudUrl());
+					if (initUpdateUrl(newUrl, url, userId)) {
+						newUrl.setUpdateTime(new Date());
+						this.juhuasuanUrlService.update(newUrl);
+						updateCount++;
+					} else {
+						notUpdateCount++;
+					}
+				} else {// 新增
+					if (ICloudUtils.isNotNull(url.getName())
+							&& ICloudUtils.isNotNull(url.getOriginUrl())) {
+						url.setStatus(JuhuasuanConstants.JUHUASUANSTATUS.RUNNING
+								.getId());
+						url.setSolidify(JuhuasuanConstants.JUHUASUANSOLIDIFY.SOLIDIFY
+								.getId());
+						url.setType(JuhuasuanConstants.JUHUASUANTYPE.SITE
+								.getId());
+						url.setUserId(userId);
+						saveJuhuasuanUrl(url);
+						addCount++;
+					} else {
+						errorCount++;
+					}
+				}
+
+			}
+		}
+		return "成功添加：" + addCount + "; 成功更新:" + updateCount + "; 不用更新:"
+				+ notUpdateCount + "; 出错:" + errorCount;
+	}
+
+	private boolean initUpdateUrl(JuhuasuanUrl newUrl, JuhuasuanUrl url,
+			int userId) {
+		if (!ICloudUtils.isNotNull(newUrl))
+			return false;
+		if (!ICloudUtils.isNotNull(url))
+			return false;
+		if (userId != newUrl.getUserId())
+			return false;
+		boolean flag = false;
+		if (ICloudUtils.isNotNull(url.getName())
+				&& !ICloudUtils.isSame(url.getName(), newUrl.getName())) {
+			flag = true;
+			newUrl.setName(url.getName());
+		}
+		if (ICloudUtils.isNotNull(url.getTaobaoUrl())
+				&& !ICloudUtils.isSame(url.getTaobaoUrl(),
+						newUrl.getTaobaoUrl())) {
+			flag = true;
+			newUrl.setTaobaoUrl(url.getTaobaoUrl());
+		}
+
+		if (!ICloudUtils.isSame(url.getDesText(), newUrl.getDesText())) {
+			flag = true;
+			newUrl.setDesText(url.getDesText());
+		}
+
+		if (!ICloudUtils.isSame(url.getOriginUrl(), newUrl.getOriginUrl())) {
+			flag = true;
+			newUrl.setOriginUrl(url.getOriginUrl());
+		}
+		return flag;
 	}
 }

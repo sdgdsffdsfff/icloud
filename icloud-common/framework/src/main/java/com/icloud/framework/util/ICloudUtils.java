@@ -116,4 +116,22 @@ public class ICloudUtils {
 		double d = 178333;
 		System.out.println(getDigitalString(d));
 	}
+
+	public static boolean isSame(String name, String name2) {
+		name = trim(name);
+		name2 = trim(name2);
+		if (name == null && name2 == null)
+			return true;
+		if (name == null)
+			return false;
+		if (name2 == null)
+			return false;
+		if (name.equalsIgnoreCase(name2))
+			return true;
+		return false;
+	}
+
+	public static String trim(String str) {
+		return str == null ? null : str.trim();
+	}
 }

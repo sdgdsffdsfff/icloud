@@ -23,22 +23,6 @@
                         <tr>
                             <th>链接名称：</th>
                             <td><input id="name" type="text" name="name" style="width:115px;" <#if urlBean??>value="${urlBean.name!""}"</#if>></td>
-                            <th>链接类型：</th>
-                            <td>
-                            <#if urlBean??>
-                             <@jst.typeSelect all='-1' key="${urlBean.type!'-1'}"/>
-                            <#else>
-                             <@jst.typeSelect all='-1' key='-1'/>
-                            </#if>
-                            </td>
-                            <th>加固方式：</th>
-                            <td>
-                             <#if urlBean??>
-                             <@jst.solidifySelect all='-1' key="${urlBean.solidify!'-1'}"/>
-                            <#else>
-                             <@jst.solidifySelect all='-1' key='-1'/>
-                            </#if>
-                            </td>
                             <th>链接状态：</th>
                             <td>
                             <#if urlBean??>
@@ -62,6 +46,18 @@
                         <span class="center center_1">增加链接</span>
                         <span class="right"></span>
                 </a>
+     			&nbsp;
+                <a class="adaptiveButton brightRed_btn" id="addJuhuasuanUrl_id">
+                        <span class="left"></span>
+                        <span class="center center_1">下载链接</span>
+                        <span class="right"></span>
+                </a>
+                &nbsp;
+                <a class="adaptiveButton brightRed_btn" id="addJuhuasuanUrl_id">
+                        <span class="left"></span>
+                        <span class="center center_1">批量导入链接</span>
+                        <span class="right"></span>
+                </a>
                 </section>
                 <section class="usResult" id="juhuasuanItem">
                     <table>
@@ -70,8 +66,10 @@
                                 <th>链接名称</th>
                                 <th>淘宝链接</th>
                                 <th>转换链接</th>
-                                <th>链接类型</th>
+                                <!--<th>链接类型</th>
+                                
                                 <th>加固方式</th>
+                                -->
                                 <th>链接状态</th>
                                 <th>修改日期</th>
                                 <th>操作</th>
@@ -82,13 +80,11 @@
                         <tr>
                             <td><a class="text1" href="#"> ${urlBean.name!""}</a></td>
                             <#if urlBean.taobaoUrl?length gt 10>
-                              <td>${urlBean.taobaoUrl?substring(0,10)}</td>
+                              <td>${urlBean.taobaoUrl?substring(0,20)}</td>
                             <#else>
                              <td>${urlBean.taobaoUrl}</td>
                             </#if>
                             <td><a href="${taobaohosthref}${urlBean.icloudUrl!""}" target="_blank">${taobaohost}${urlBean.icloudUrl!""}</a></td>
-                            <td>${staticValues('2','${urlBean.type!""}')}</td>
-                            <td>${staticValues('3','${urlBean.solidify!""}')}</td>
                             <td>${staticValues('1','${urlBean.status!""}')}</td>
                             <td>${urlBean.updateTime?string('yyyy-MM-dd HH:mm')}</td>
                             <td><a href="#" onclick="reviewTheUrl('${urlBean.icloudUrl}');">查看</a>&nbsp;&nbsp;

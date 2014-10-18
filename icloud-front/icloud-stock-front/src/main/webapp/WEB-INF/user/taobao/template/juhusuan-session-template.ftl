@@ -10,7 +10,7 @@
                         <#if pagination??>
                          <#list pagination.data as session> 
                         <tr>
-                            <td><a href="${taobaohosthref}${session.icloudUrl!""}" target="_blank">${session.icloudUrl!""}</a></td>
+                            <td><a href="${taobaohosthref}${session.icloudUrl!""}" target="_blank">${taobaohosthref}${session.icloudUrl!""}</a></td>
                             <td>${session.userId!""}</td>
                             <td>${session.count!""}</td>
                         </tr>

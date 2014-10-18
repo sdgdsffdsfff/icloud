@@ -4,14 +4,6 @@
         <h3>用户中心</h3>
         <dl>
             <dt>
-                <i class="ucnav_07"></i>我的股票</dt>
-            <dd>
-                <a <#if current=="关注的股票">class="current"</#if> href="${basepath}/user/myHome">关注的股票</a>
-            </dd>
-        </dl>
-        
-        <dl>
-            <dt>
                 <i class="ucnav_07"></i>我的淘宝</dt>
             <dd>
                 <a <#if current=="所有链接">class="current"</#if> href="${basepath}/usertb/tbList">所有链接</a>

@@ -208,6 +208,76 @@ public class ExcelIEUtil {
 	}
 
 	public static <T extends Object> List<T> importFromInputStream(
+			Class<T> clz, Map<String, String> fieldMap, InputStream input)
+			throws Exception {
+		Map<String, Field> fields = new HashMap<String, Field>();
+		getFieldMap(clz, fields);
+		Workbook workbook = new HSSFWorkbook(input);
+		Sheet sheet = workbook.getSheetAt(0);
+		if (sheet == null) {
+			logger.error("Nothing in the excel file at sheet[0]");
+			return null;
+		}
+		Row row0 = sheet.getRow(0);
+		List<Field> fieldList = new ArrayList<Field>();
+		int i = 0;
+		Cell cell0 = null;
+		while ((cell0 = row0.getCell(i++)) != null
+				&& StringUtils.isNotBlank(cell0.getStringCellValue())) {
+			String name = cell0.getStringCellValue();
+			fieldList.add(fields.get(fieldMap.get(name)));
+		}
+		int j = 1;
+		Row rowI = sheet.getRow(j++);
+		if (rowI == null) {
+			logger.error("data should start at the 3rd row");
+		}
+		List<T> list = new LinkedList<T>();
+		while (rowI != null) {
+			T obj = clz.newInstance();
+			int k = 0;
+			Cell cellK = null;
+			while (k < fieldList.size()) {
+				cellK = rowI.getCell(k);
+				if (cellK == null) {
+					k++;
+					continue;
+				}
+				Field field = fieldList.get(k);
+				field.setAccessible(true);
+				if (StringUtils.isNotBlank(cellK.getStringCellValue())) {
+					String strValue = cellK.getStringCellValue();
+					Object value = null;
+					if (field.getType() == Integer.class) {
+						value = Integer.parseInt(strValue);
+					} else if (field.getType() == Double.class) {
+						value = Double.parseDouble(strValue);
+					} else if (field.getType() == Float.class) {
+						value = Float.parseFloat(strValue);
+					} else if (field.getType() == String.class) {
+						value = strValue;
+					} else if (field.getType() == Date.class) {
+						value = sdf.parse(strValue);
+					} else if (field.getType() == DateTime.class) {
+						value = DateTime.parse(strValue, DateTimeFormat
+								.forPattern("yyyy-MM-dd HH:mm:ss"));
+					} else if (field.getType() == Boolean.class) {
+						value = Boolean.parseBoolean(strValue);
+					} else if (field.getType().getName()
+							.equalsIgnoreCase("int")) {
+						value = Integer.parseInt(strValue);
+					}
+					field.set(obj, value);
+				}
+				k++;
+			}
+			list.add(obj);
+			rowI = sheet.getRow(j++);
+		}
+		return list;
+	}
+
+	public static <T extends Object> List<T> importFromInputStream(
 			Class<T> clz, InputStream input) throws Exception {
 		Map<String, Field> fields = new HashMap<String, Field>();
 		getFieldMap(clz, fields);
@@ -271,6 +341,12 @@ public class ExcelIEUtil {
 			rowI = sheet.getRow(j++);
 		}
 		return list;
+	}
+
+	public static <T extends Object> List<T> importFromExcel(Class<T> clz,
+			Map<String, String> fieldMap, String fileName) throws Exception {
+		FileInputStream fis = new FileInputStream(fileName);
+		return importFromInputStream(clz, fieldMap, fis);
 	}
 
 	public static <T extends Object> List<T> importFromExcel(Class<T> clz,
