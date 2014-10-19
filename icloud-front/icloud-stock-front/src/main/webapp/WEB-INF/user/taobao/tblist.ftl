@@ -47,13 +47,13 @@
                         <span class="right"></span>
                 </a>
      			&nbsp;
-                <a class="adaptiveButton brightRed_btn" id="addJuhuasuanUrl_id">
+                <a href="${basepath}/usertb/downloadMyUrls" class="adaptiveButton brightRed_btn" id="addJuhuasuanUrl_id2">
                         <span class="left"></span>
                         <span class="center center_1">下载链接</span>
                         <span class="right"></span>
                 </a>
                 &nbsp;
-                <a class="adaptiveButton brightRed_btn" id="addJuhuasuanUrl_id">
+                <a class="adaptiveButton brightRed_btn" id="addJuhuasuanUrl_id3">
                         <span class="left"></span>
                         <span class="center center_1">批量导入链接</span>
                         <span class="right"></span>

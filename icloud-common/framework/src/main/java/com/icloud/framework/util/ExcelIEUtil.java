@@ -8,7 +8,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -158,7 +160,7 @@ public class ExcelIEUtil {
 	 * @param data
 	 *            需要导出的数据 Map<String, String> fields
 	 */
-	public static byte[] exportBytes(List<KeyValue<String, String>> list,
+	public static Workbook exportWorkbook(List<KeyValue<String, String>> list,
 			List<?> data) {
 		try {
 			Object fObj = data.get(0);
@@ -179,7 +181,6 @@ public class ExcelIEUtil {
 			for (Object obj : data) {
 				Row row = sheet.createRow(rowNum++);
 				int collNum = 0;
-				// for (String field : fields.keySet()) {
 				for (KeyValue<String, String> entry : list) {
 					String field = entry.getKey();
 					Cell cell = row.createCell(collNum++);
@@ -198,6 +199,43 @@ public class ExcelIEUtil {
 					}
 				}
 			}
+			return workbook;
+			// ByteArrayOutputStream opStrm = new ByteArrayOutputStream();
+			// workbook.write(opStrm);
+			// return opStrm.toByteArray();
+		} catch (Exception e) {
+			logger.error("", e);
+			return null;
+		}
+	}
+
+	public static void exportBytes(OutputStream os,
+			List<KeyValue<String, String>> list, List<?> data) throws IOException {
+		try {
+			Workbook workbook = exportWorkbook(list, data);
+			workbook.write(os);
+			os.flush();
+		} catch (Exception e) {
+			logger.error("", e);
+		} finally {
+			if (os != null) {
+				os.close();
+			}
+		}
+	}
+
+	/**
+	 * 导出数据到excel中，并返回对应的二进制数据
+	 *
+	 * @param fields
+	 *            导出的表的表头
+	 * @param data
+	 *            需要导出的数据 Map<String, String> fields
+	 */
+	public static byte[] exportBytes(List<KeyValue<String, String>> list,
+			List<?> data) {
+		try {
+			Workbook workbook = exportWorkbook(list, data);
 			ByteArrayOutputStream opStrm = new ByteArrayOutputStream();
 			workbook.write(opStrm);
 			return opStrm.toByteArray();

@@ -1,7 +1,11 @@
 package com.icloud.front.user.action;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -184,18 +188,11 @@ public class JuhuaSuanManagerController extends BaseStockController {
 	}
 
 	@RequestMapping("downloadMyUrls")
-	public void downloadMyUrls() {
+	public void downloadMyUrls(HttpServletResponse response) throws IOException {
 		JuhuasuanUrl urlBean = new JuhuasuanUrl();
 		urlBean.setUserId(this.getUserId());
 		List<JuhuasuanUrl> urls = this.juhuasuanBussiness
 				.searchAllJuhuasuanUrl(urlBean);
-		// logger.info("----------start----------");
-		// for (JuhuasuanUrl url : urls) {
-		// logger.info("urlname:{},taobaoUrl:{}", url.getName(),
-		// url.getTaobaoUrl());
-		// }
-		// logger.info("count={}", urls.size());
-		// logger.info("----------end----------");
 		logger.info("----------start to 生成xls----------");
 		List<KeyValue<String, String>> list = new ArrayList<KeyValue<String, String>>();
 		list.add(new KeyValue<String, String>("icloudUrl", "本地代码"));
@@ -203,9 +200,13 @@ public class JuhuaSuanManagerController extends BaseStockController {
 		list.add(new KeyValue<String, String>("taobaoUrl", "淘宝url"));
 		list.add(new KeyValue<String, String>("desText", "描述"));
 		list.add(new KeyValue<String, String>("originUrl", "原始链接"));
-		byte[] bytes = ExcelIEUtil.exportBytes(list, urls);
-		
-		
-//		TZPhotoUtil.storeToFile(path, bytes);
+
+		OutputStream os = response.getOutputStream();
+		response.reset();
+		response.setContentType("application/vnd.ms-excel");
+		response.setHeader("content-disposition", "attachment;filename=taobao_"
+				+ this.getUserId() + ".xls");
+		ExcelIEUtil.exportBytes(os, list, urls);
+		logger.info("----------end to 生成xls----------");
 	}
 }
