@@ -209,4 +209,10 @@ public class JuhuaSuanManagerController extends BaseStockController {
 		ExcelIEUtil.exportBytes(os, list, urls);
 		logger.info("----------end to 生成xls----------");
 	}
+
+	@RequestMapping("uploadUrlView")
+	public ModelAndView uploadUrlView(HttpServletResponse response) throws IOException {
+		ModelAndView modelAndView = getModelAndView("user/taobao/upload-url-view");
+		return modelAndView;
+	}
 }
