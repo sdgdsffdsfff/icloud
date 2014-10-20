@@ -14,13 +14,8 @@
                         <li>
                             <label>
                                 <div>链接名字:</div>
-                                ${urlBean.name!""}
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <div>链接类型:</div>
-                               <@jst.typeSelect key='${urlBean.type!""}'/>
+                                <input type="text" name="name" id="name" class="normal_txt" style="width:150px;" value='${urlBean.name!""}'/>
+                                
                             </label>
                         </li>
                         <li>
@@ -43,12 +38,6 @@
                             </label>
                         </li>
                         -->
-                         <li>
-                             <label>
-                                 <div>是否加固:</div>
-                                 <@jst.solidifySelect key='${urlBean.solidify!""}'/>
-                             </label>
-                         </li>
                          <li>
                              <label>
                                  <div>链接状态:</div>

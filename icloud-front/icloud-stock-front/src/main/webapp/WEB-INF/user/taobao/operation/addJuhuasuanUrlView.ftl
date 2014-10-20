@@ -18,12 +18,6 @@
                         </li>
                         <li>
                             <label>
-                                <div>链接类型:</div>
-                                 <@jst.typeSelect/>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
                                 <div>淘宝链接:</div>
                                 <input type="text" name="taobaoUrl" id="taobaoUrl" class="normal_txt" style="width:150px;" />
                             </label>
@@ -42,12 +36,6 @@
                             </label>
                         </li>
                         -->
-                         <li>
-                             <label>
-                                 <div>是否加固:</div>
-                                 <@jst.solidifySelect/>
-                             </label>
-                         </li>
                          <li>
                              <label>
                                  <div>链接状态:</div>

@@ -21,12 +21,6 @@
                         </li>
                         <li>
                             <label>
-                                <div>链接类型:</div>
-                                ${staticValues('2','${urlBean.type!""}')}
-                            </label>
-                        </li>
-                        <li>
-                            <label>
                                 <div>淘宝链接:</div>
                                 ${urlBean.taobaoUrl!""}
                             </label>
@@ -45,12 +39,6 @@
                                 </a>
                             </label>
                         </li>
-                        <li>
-                             <label>
-                                 <div>是否加固:</div>
-                                 ${staticValues('3','${urlBean.solidify!""}')}
-                             </label>
-                         </li>
                         <li>
                             <label>
                                 <div>创建日期:</div>

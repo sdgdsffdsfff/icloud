@@ -56,6 +56,9 @@ public class JuhuasuanBussiness extends BaseAction {
 			JuhuasuanUrl urlBean) {
 		if (ICloudUtils.isNotNull(originJuhuasuanUrl)
 				&& ICloudUtils.isNotNull(urlBean)) {
+			if (ICloudUtils.isNotNull(urlBean.getName())) {
+				originJuhuasuanUrl.setName(urlBean.getName());
+			}
 			if (ICloudUtils.isNotNull(urlBean.getDesText())) {
 				originJuhuasuanUrl.setDesText(urlBean.getDesText());
 			}
