@@ -16,6 +16,25 @@ function onclickButton() {
 			}
 		});
 	});
+	
+	$("#batchAddJuhuasuanUrl_id3").click(function() {
+		$.layer({
+			type : 2,
+			title : '批量导入链接',
+			shadeClose : true,
+			maxmin : true,
+			fix : false,
+			// area: ['1024px', 500],
+			area : [ '1024px', ($(window).height() - 50) + 'px' ],
+			close : function(index) {
+				reload();
+			},
+			iframe : {
+				src : basepath + '/usertb/uploadUrlView'
+			}
+		});
+	});
+
 
 	$("#searchBeanButton").click(function() {
 		$("#searchBeanForm").submit();

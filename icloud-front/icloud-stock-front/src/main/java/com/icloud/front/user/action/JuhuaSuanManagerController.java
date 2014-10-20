@@ -1,19 +1,26 @@
 package com.icloud.front.user.action;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icloud.framework.core.wrapper.PageView;
 import com.icloud.framework.core.wrapper.Pagination;
-import com.icloud.framework.picture.TZPhotoUtil;
 import com.icloud.framework.util.ExcelIEUtil;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.framework.vo.KeyValue;
@@ -21,6 +28,7 @@ import com.icloud.front.juhusuan.pojo.JuhuasuanFrontSession;
 import com.icloud.front.stock.baseaction.BaseStockController;
 import com.icloud.front.stock.pojo.JuhuasuanSearchBean;
 import com.icloud.front.stock.pojo.JuhuasuanUrlBean;
+import com.icloud.front.stock.pojo.UploadFileRequest;
 import com.icloud.stock.model.JuhuasuanDetail;
 import com.icloud.stock.model.JuhuasuanUrl;
 
@@ -211,8 +219,40 @@ public class JuhuaSuanManagerController extends BaseStockController {
 	}
 
 	@RequestMapping("uploadUrlView")
-	public ModelAndView uploadUrlView(HttpServletResponse response) throws IOException {
+	public ModelAndView uploadUrlView(HttpServletResponse response)
+			throws IOException {
 		ModelAndView modelAndView = getModelAndView("user/taobao/upload-url-view");
 		return modelAndView;
+	}
+
+	@RequestMapping(value = "/uploadXls", method = RequestMethod.POST)
+	@ResponseBody
+	public String uploadXls(UploadFileRequest request) throws Exception {
+		logger.debug(request.getName());
+		logger.debug("uerId is {}", this.getUserId());
+		MultipartFile file = request.getFiledata();
+		InputStream is = null;
+		try {
+			is = file.getInputStream();
+		} catch (IOException e) {
+			logger.error("上传文件出错！", e);
+			is = null;
+		}
+		Map<String, String> fieldMap = new HashMap<String, String>();
+		fieldMap.put("本地代码", "icloudUrl");
+		fieldMap.put("链接名", "name");
+		fieldMap.put("淘宝url", "taobaoUrl");
+		fieldMap.put("描述", "desText");
+		fieldMap.put("原始链接", "originUrl");
+
+		List<JuhuasuanUrl> list = ExcelIEUtil.importFromInputStream(
+				JuhuasuanUrl.class, fieldMap, is);
+		String result = this.juhuasuanBussiness.batchUpdateUrl(list,
+				this.getUserId());
+		return result;
+		// KeyValue kv = new KeyValue();
+		// kv.setKey("aaa");
+		// kv.setValue("bbb");
+		// return JSONObject.fromObject(kv).toString();
 	}
 }

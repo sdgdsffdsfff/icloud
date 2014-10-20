@@ -10,7 +10,7 @@ function fileQueueError(file, errorCode, message) {
 			alert(errorName);
 			return;
 		}
-		
+
 		switch (errorCode) {
 		case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
 			imageName = "<font color='red'>文件大小为0</font>";
@@ -24,7 +24,7 @@ function fileQueueError(file, errorCode, message) {
 			alert(message);
 			break;
 		}
-		addReadyFileInfo(file.id,file.name,imageName,"无法上传");
+		addReadyFileInfo(file.id, file.name, imageName, "无法上传");
 
 	} catch (ex) {
 		this.debug(ex);
@@ -32,26 +32,24 @@ function fileQueueError(file, errorCode, message) {
 }
 
 /**
- * 当文件选择对话框关闭消失时，如果选择的文件成功加入上传队列，
- * 那么针对每个成功加入的文件都会触发一次该事件（N个文件成功加入队列，就触发N次此事件）。
- * @param {} file
- * id : string,			    // SWFUpload控制的文件的id,通过指定该id可启动此文件的上传、退出上传等
- * index : number,			// 文件在选定文件队列（包括出错、退出、排队的文件）中的索引，getFile可使用此索引
- * name : string,			// 文件名，不包括文件的路径。
- * size : number,			// 文件字节数
- * type : string,			// 客户端操作系统设置的文件类型
- * creationdate : Date,		// 文件的创建时间
- * modificationdate : Date,	// 文件的最后修改时间
- * filestatus : number		// 文件的当前状态，对应的状态代码可查看SWFUpload.FILE_STATUS }
+ * 当文件选择对话框关闭消失时，如果选择的文件成功加入上传队列， 那么针对每个成功加入的文件都会触发一次该事件（N个文件成功加入队列，就触发N次此事件）。
+ * 
+ * @param {}
+ *            file id : string, // SWFUpload控制的文件的id,通过指定该id可启动此文件的上传、退出上传等
+ *            index : number, // 文件在选定文件队列（包括出错、退出、排队的文件）中的索引，getFile可使用此索引 name :
+ *            string, // 文件名，不包括文件的路径。 size : number, // 文件字节数 type : string, //
+ *            客户端操作系统设置的文件类型 creationdate : Date, // 文件的创建时间 modificationdate :
+ *            Date, // 文件的最后修改时间 filestatus : number //
+ *            文件的当前状态，对应的状态代码可查看SWFUpload.FILE_STATUS }
  */
-function fileQueued(file){
-	addReadyFileInfo(file.id,file.name,"成功加载到上传队列");
+function fileQueued(file) {
+	addReadyFileInfo(file.id, file.name, "成功加载到上传队列");
 }
 function fileDialogComplete(numFilesSelected, numFilesQueued) {
 	try {
 		if (numFilesQueued > 0) {
 			document.getElementById('btnCancel').disabled = "";
-			//this.startUpload();
+			// this.startUpload();
 		}
 	} catch (ex) {
 		this.debug(ex);
@@ -63,10 +61,10 @@ function uploadProgress(file, bytesLoaded) {
 	try {
 		var percent = Math.ceil((bytesLoaded / file.size) * 100);
 
-		var progress = new FileProgress(file,  this.customSettings.upload_target);
+		var progress = new FileProgress(file, this.customSettings.upload_target);
 		progress.setProgress(percent);
 		if (percent === 100) {
-			progress.setStatus("");//正在创建缩略图...
+			progress.setStatus("");// 正在创建缩略图...
 			progress.toggleCancel(false, this);
 		} else {
 			progress.setStatus("正在上传...");
@@ -79,19 +77,19 @@ function uploadProgress(file, bytesLoaded) {
 
 function uploadSuccess(file, serverData) {
 	try {
-		var progress = new FileProgress(file,  this.customSettings.upload_target);
-		addFileInfo(file.id,"文件上传完成");
+		var progress = new FileProgress(file, this.customSettings.upload_target);
+		addFileInfo(file.id, "文件上传完成" + serverData);
 	} catch (ex) {
 		this.debug(ex);
 	}
 }
 
-function addFileInfo(fileId,message){
+function addFileInfo(fileId, message) {
 	var row = document.getElementById(fileId);
-	row.cells[2].innerHTML = "<font color='green'>"+message+"</font>";
+	row.cells[2].innerHTML = "<font color='green'>" + message + "</font>";
 }
-function addReadyFileInfo(fileid,fileName,message,status){
-	//用表格显示
+function addReadyFileInfo(fileid, fileName, message, status) {
+	// 用表格显示
 	var infoTable = document.getElementById("infoTable");
 	var row = infoTable.insertRow();
 	row.id = fileid;
@@ -100,50 +98,56 @@ function addReadyFileInfo(fileid,fileName,message,status){
 	var col3 = row.insertCell();
 	var col4 = row.insertCell();
 	col4.align = "right";
-	col1.innerHTML = message+" : ";
+	col1.innerHTML = message + " : ";
 	col2.innerHTML = fileName;
-	if(status!=null&&status!=""){
-		col3.innerHTML="<font color='red'>"+status+"</font>";
-	}else{
-		col3.innerHTML="";
+	if (status != null && status != "") {
+		col3.innerHTML = "<font color='red'>" + status + "</font>";
+	} else {
+		col3.innerHTML = "";
 	}
-	col4.innerHTML = "<a href='javascript:deleteFile(\""+fileid+"\")'>删除</a>";
-	col1.style.width="150";
-	col2.style.width="250";
-	col3.style.width="80";
-	col4.style.width="50";
+	col4.innerHTML = "<a href='javascript:deleteFile(\"" + fileid
+			+ "\")'>删除</a>";
+	col1.style.width = "150";
+	col2.style.width = "250";
+	col3.style.width = "80";
+	col4.style.width = "50";
 }
 
-function cancelUpload(){
+function cancelUpload() {
 	var infoTable = document.getElementById("infoTable");
 	var rows = infoTable.rows;
 	var ids = new Array();
 	var row;
-	if(rows==null){
+	if (rows == null) {
 		return false;
 	}
-	for(var i=0;i<rows.length;i++){
+	for (var i = 0; i < rows.length; i++) {
 		ids[i] = rows[i].id;
-	}	
-	for(var i=0;i<ids.length;i++){
+	}
+	for (var i = 0; i < ids.length; i++) {
 		deleteFile(ids[i]);
-	}	
+	}
 }
-function deleteFile(fileId){
-	//用表格显示
+
+function deleteFile(fileId) {
+	// 用表格显示
 	var infoTable = document.getElementById("infoTable");
 	var row = document.getElementById(fileId);
 	infoTable.deleteRow(row.rowIndex);
-	swfu.cancelUpload(fileId,false);
+	swfu.cancelUpload(fileId, false);
 }
 
 function uploadComplete(file) {
 	try {
-		/*  I want the next upload to continue automatically so I'll call startUpload here */
+		/*
+		 * I want the next upload to continue automatically so I'll call
+		 * startUpload here
+		 */
 		if (this.getStats().files_queued > 0) {
 			this.startUpload();
 		} else {
-			var progress = new FileProgress(file,  this.customSettings.upload_target);
+			var progress = new FileProgress(file,
+					this.customSettings.upload_target);
 			progress.setComplete();
 			progress.setStatus("<font color='red'>所有文件上传完毕!</b></font>");
 			progress.toggleCancel(false);
@@ -154,29 +158,29 @@ function uploadComplete(file) {
 }
 
 function uploadError(file, errorCode, message) {
-	var imageName =  "<font color='red'>文件上传出错!</font>";
+	var imageName = "<font color='red'>文件上传出错!</font>";
 	var progress;
 	try {
 		switch (errorCode) {
 		case SWFUpload.UPLOAD_ERROR.FILE_CANCELLED:
 			try {
-				progress = new FileProgress(file,  this.customSettings.upload_target);
+				progress = new FileProgress(file,
+						this.customSettings.upload_target);
 				progress.setCancelled();
 				progress.setStatus("<font color='red'>取消上传!</font>");
 				progress.toggleCancel(false);
-			}
-			catch (ex1) {
+			} catch (ex1) {
 				this.debug(ex1);
 			}
 			break;
 		case SWFUpload.UPLOAD_ERROR.UPLOAD_STOPPED:
 			try {
-				progress = new FileProgress(file,  this.customSettings.upload_target);
+				progress = new FileProgress(file,
+						this.customSettings.upload_target);
 				progress.setCancelled();
 				progress.setStatus("<font color='red'>停止上传!</font>");
 				progress.toggleCancel(true);
-			}
-			catch (ex2) {
+			} catch (ex2) {
 				this.debug(ex2);
 			}
 		case SWFUpload.UPLOAD_ERROR.UPLOAD_LIMIT_EXCEEDED:
@@ -186,13 +190,12 @@ function uploadError(file, errorCode, message) {
 			alert(message);
 			break;
 		}
-		addFileInfo(file.id,imageName);
+		addFileInfo(file.id, imageName);
 	} catch (ex3) {
 		this.debug(ex3);
 	}
 
 }
-
 
 function addImage(src) {
 	var newImg = document.createElement("img");
@@ -203,14 +206,16 @@ function addImage(src) {
 		try {
 			newImg.filters.item("DXImageTransform.Microsoft.Alpha").opacity = 0;
 		} catch (e) {
-			// If it is not set initially, the browser will throw an error.  This will set it if it is not set yet.
-			newImg.style.filter = 'progid:DXImageTransform.Microsoft.Alpha(opacity=' + 0 + ')';
+			// If it is not set initially, the browser will throw an error. This
+			// will set it if it is not set yet.
+			newImg.style.filter = 'progid:DXImageTransform.Microsoft.Alpha(opacity='
+					+ 0 + ')';
 		}
 	} else {
 		newImg.style.opacity = 0;
 	}
 
-	newImg.onload = function () {
+	newImg.onload = function() {
 		fadeIn(newImg, 0);
 	};
 	newImg.src = src;
@@ -218,8 +223,7 @@ function addImage(src) {
 
 function fadeIn(element, opacity) {
 	var reduceOpacityBy = 5;
-	var rate = 30;	// 15 fps
-
+	var rate = 30; // 15 fps
 
 	if (opacity < 100) {
 		opacity += reduceOpacityBy;
@@ -231,8 +235,10 @@ function fadeIn(element, opacity) {
 			try {
 				element.filters.item("DXImageTransform.Microsoft.Alpha").opacity = opacity;
 			} catch (e) {
-				// If it is not set initially, the browser will throw an error.  This will set it if it is not set yet.
-				element.style.filter = 'progid:DXImageTransform.Microsoft.Alpha(opacity=' + opacity + ')';
+				// If it is not set initially, the browser will throw an error.
+				// This will set it if it is not set yet.
+				element.style.filter = 'progid:DXImageTransform.Microsoft.Alpha(opacity='
+						+ opacity + ')';
 			}
 		} else {
 			element.style.opacity = opacity / 100;
@@ -240,18 +246,16 @@ function fadeIn(element, opacity) {
 	}
 
 	if (opacity < 100) {
-		setTimeout(function () {
+		setTimeout(function() {
 			fadeIn(element, opacity);
 		}, rate);
 	}
 }
 
-
-
-/* ******************************************
- *	FileProgress Object
- *	Control object for displaying file info
- * ****************************************** */
+/*******************************************************************************
+ * FileProgress Object Control object for displaying file info
+ * ******************************************
+ */
 
 function FileProgress(file, targetID) {
 	this.fileProgressID = "divFileProgress";
@@ -273,7 +277,7 @@ function FileProgress(file, targetID) {
 
 		var progressText = document.createElement("div");
 		progressText.className = "progressName";
-		progressText.appendChild(document.createTextNode("上传文件: "+file.name));
+		progressText.appendChild(document.createTextNode("上传文件: " + file.name));
 
 		var progressBar = document.createElement("div");
 		progressBar.className = "progressBarInProgress";
@@ -294,44 +298,46 @@ function FileProgress(file, targetID) {
 
 	} else {
 		this.fileProgressElement = this.fileProgressWrapper.firstChild;
-		this.fileProgressElement.childNodes[1].firstChild.nodeValue = "上传文件: "+file.name;
+		this.fileProgressElement.childNodes[1].firstChild.nodeValue = "上传文件: "
+				+ file.name;
 	}
 
 	this.height = this.fileProgressWrapper.offsetHeight;
 
 }
-FileProgress.prototype.setProgress = function (percentage) {
+FileProgress.prototype.setProgress = function(percentage) {
 	this.fileProgressElement.className = "progressContainer green";
 	this.fileProgressElement.childNodes[3].className = "progressBarInProgress";
 	this.fileProgressElement.childNodes[3].style.width = percentage + "%";
 };
-FileProgress.prototype.setComplete = function () {
+FileProgress.prototype.setComplete = function() {
 	this.fileProgressElement.className = "progressContainer blue";
 	this.fileProgressElement.childNodes[3].className = "progressBarComplete";
 	this.fileProgressElement.childNodes[3].style.width = "";
 
 };
-FileProgress.prototype.setError = function () {
+FileProgress.prototype.setError = function() {
 	this.fileProgressElement.className = "progressContainer red";
 	this.fileProgressElement.childNodes[3].className = "progressBarError";
 	this.fileProgressElement.childNodes[3].style.width = "";
 
 };
-FileProgress.prototype.setCancelled = function () {
+FileProgress.prototype.setCancelled = function() {
 	this.fileProgressElement.className = "progressContainer";
 	this.fileProgressElement.childNodes[3].className = "progressBarError";
 	this.fileProgressElement.childNodes[3].style.width = "";
 
 };
-FileProgress.prototype.setStatus = function (status) {
+FileProgress.prototype.setStatus = function(status) {
 	this.fileProgressElement.childNodes[2].innerHTML = status;
 };
 
-FileProgress.prototype.toggleCancel = function (show, swfuploadInstance) {
-	this.fileProgressElement.childNodes[0].style.visibility = show ? "visible" : "hidden";
+FileProgress.prototype.toggleCancel = function(show, swfuploadInstance) {
+	this.fileProgressElement.childNodes[0].style.visibility = show ? "visible"
+			: "hidden";
 	if (swfuploadInstance) {
 		var fileID = this.fileProgressID;
-		this.fileProgressElement.childNodes[0].onclick = function () {
+		this.fileProgressElement.childNodes[0].onclick = function() {
 			swfuploadInstance.cancelUpload(fileID);
 			return false;
 		};

@@ -1,8 +1,9 @@
 <#import "/icloud/icloud-layer-window.ftl" as ilw/>
 <#import "/user/taobao/template/juhuasuan-select-template.ftl" as jst/>
-<@ilw.layerwindow jsFiles=['swfupload/swfupload.js','swfupload/handlers.js','icloud/uploadUrl.js'] cssFiles=['swtupload/default.css'] >
+<@ilw.layerwindow jsFiles=['swfupload/swfupload.js','swfupload/handlers.js','icloud/uploadUrl.js'] cssFiles=['swfupload/default.css'] >
+        <div id="content">1. <a href="${basepath}/usertb/downloadMyUrls">模板下载</a></div>
 		<div id="content">
-			<form>
+			<form enctype="multipart/form-data">
 				<div style="display: inline; border: solid 1px #7FAAFF; background-color: #C5D9FF; padding: 2px;">
 					<span id="spanButtonPlaceholder"></span>
 				</div>&nbsp;&nbsp;
