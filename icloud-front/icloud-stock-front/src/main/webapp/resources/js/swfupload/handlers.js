@@ -78,7 +78,7 @@ function uploadProgress(file, bytesLoaded) {
 function uploadSuccess(file, serverData) {
 	try {
 		var progress = new FileProgress(file, this.customSettings.upload_target);
-		addFileInfo(file.id, "文件上传完成" + serverData);
+		addFileInfo(file.id, "文件上传完成; " + serverData);
 	} catch (ex) {
 		this.debug(ex);
 	}
