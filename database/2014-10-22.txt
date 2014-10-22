@@ -1,0 +1,11 @@
+1.user
+ALTER TABLE `user` ADD COLUMN  `father_id`  INT(11) DEFAULT 0;
+ALTER TABLE `user` ADD COLUMN  `level`  INT(11) DEFAULT 0;
+ALTER TABLE `user` ADD COLUMN  `promotion`  INT(2) DEFAULT 1;
+
+ALTER TABLE `icloud`.`user` ADD COLUMN `open` INT(2) DEFAULT 1 NULL AFTER `promotion`, ADD COLUMN `redirect-url` VARCHAR(1000) NULL AFTER `open`; 
+
+
+2. urser-url-access-count
+
+CREATE TABLE `icloud`.`user-url-access-count`( `id` INT(11) NOT NULL AUTO_INCREMENT, `user_id` INT(11), `count` INT(11), `all_count` INT(11), `create_time` DATETIME, PRIMARY KEY (`id`) ) ENGINE=INNODB CHARSET=utf8 COLLATE=utf8_general_ci; 
