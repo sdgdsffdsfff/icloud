@@ -1,6 +1,6 @@
 package com.icloud.stock.model;
 
-// Generated Oct 7, 2014 5:54:48 PM by Hibernate Tools 3.4.0.CR1
+// Generated Oct 22, 2014 11:19:00 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -22,6 +22,11 @@ public class User implements java.io.Serializable {
 	private Date lastUpdateTime;
 	private String qq;
 	private String chinaName;
+	private Integer fatherId;
+	private Integer level;
+	private Integer promotion;
+	private Integer open;
+	private String redirectUrl;
 	private Set userAccesses = new HashSet(0);
 
 	public User() {
@@ -30,7 +35,8 @@ public class User implements java.io.Serializable {
 	public User(String userName, String userPassword, String userTel,
 			String userEmail, String userComing, String userSex,
 			Date createTime, Date lastUpdateTime, String qq, String chinaName,
-			Set userAccesses) {
+			Integer fatherId, Integer level, Integer promotion, Integer open,
+			String redirectUrl, Set userAccesses) {
 		this.userName = userName;
 		this.userPassword = userPassword;
 		this.userTel = userTel;
@@ -41,6 +47,11 @@ public class User implements java.io.Serializable {
 		this.lastUpdateTime = lastUpdateTime;
 		this.qq = qq;
 		this.chinaName = chinaName;
+		this.fatherId = fatherId;
+		this.level = level;
+		this.promotion = promotion;
+		this.open = open;
+		this.redirectUrl = redirectUrl;
 		this.userAccesses = userAccesses;
 	}
 
@@ -130,6 +141,46 @@ public class User implements java.io.Serializable {
 
 	public void setChinaName(String chinaName) {
 		this.chinaName = chinaName;
+	}
+
+	public Integer getFatherId() {
+		return this.fatherId;
+	}
+
+	public void setFatherId(Integer fatherId) {
+		this.fatherId = fatherId;
+	}
+
+	public Integer getLevel() {
+		return this.level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+	public Integer getPromotion() {
+		return this.promotion;
+	}
+
+	public void setPromotion(Integer promotion) {
+		this.promotion = promotion;
+	}
+
+	public Integer getOpen() {
+		return this.open;
+	}
+
+	public void setOpen(Integer open) {
+		this.open = open;
+	}
+
+	public String getRedirectUrl() {
+		return this.redirectUrl;
+	}
+
+	public void setRedirectUrl(String redirectUrl) {
+		this.redirectUrl = redirectUrl;
 	}
 
 	public Set getUserAccesses() {

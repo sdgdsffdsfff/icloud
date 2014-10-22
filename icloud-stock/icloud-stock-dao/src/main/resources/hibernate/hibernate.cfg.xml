@@ -25,6 +25,7 @@
 		<mapping resource="model/StockDivinePrice.hbm.xml" />
 		<mapping resource="model/User.hbm.xml" />
 		<mapping resource="model/UserAccess.hbm.xml" />
+		<mapping resource="model/UserUrlAccessCount.hbm.xml" />
 		<mapping resource="model/UserStockFocus.hbm.xml" />
 		<mapping resource="model/StockDetail.hbm.xml" />
 		<mapping resource="model/JuhuasuanDetail.hbm.xml" />
