@@ -1,10 +1,15 @@
 package com.icloud.front.user.bussiness;
 
+import java.util.ArrayDeque;
+import java.util.Collections;
 import java.util.Date;
+import java.util.Deque;
 import java.util.List;
+import java.util.Queue;
 
 import org.springframework.stereotype.Service;
 
+import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.framework.util.StringEncoder;
 import com.icloud.front.user.pojo.LoginUser;
@@ -12,6 +17,7 @@ import com.icloud.front.user.pojo.RegisterUser;
 import com.icloud.front.user.pojo.UserInfo;
 import com.icloud.stock.model.User;
 import com.icloud.user.dao.IUserDao;
+import com.icloud.user.dict.UserConstants;
 import com.icloud.user.util.UserUtils;
 
 @Service("userAdminBusiness")
@@ -135,11 +141,71 @@ public class UserAdminBusiness extends UserBusiness {
 		this.userService.modifyBaseInfo(registerUser, user);
 	}
 
-	public List<User> getChildrenUser(int fatch_Id) {
-		return this.userService.findByProperies(IUserDao.FATHERID, fatch_Id);
+	public List<User> getChildrenUser(int fatherId) {
+		return this.userService.findByProperies(IUserDao.FATHERID, fatherId);
 	}
 
-	public List<User> getAllOtherUsers(User user, int start, int limit) {
+	public Pagination<User> getUsersByUser(User user, int pageNo, int limit) {
+		if (ICloudUtils.isNotNull(user)) {
+			if (user.getLevel() == UserConstants.SUPER_USER) {
+				return getAllUsers(pageNo, limit);
+			} else {
+
+			}
+		}
 		return null;
+
+	}
+
+	public Pagination<User> getChidrenUser(int fatherId, int pageNo, int limit) {
+		Pagination<User> pagination = new Pagination<User>();
+		pagination.setPageNo(pageNo);
+		pagination.setPageSize(limit);
+		if (pageNo < 0)
+			pageNo = 0;
+		if (limit <= 0)
+			limit = 40;
+		int start = limit * pageNo;
+
+		List<User> users = getChildrenUser(fatherId);
+		if (ICloudUtils.isNotNull(users)) {
+			Deque<User> deque = new ArrayDeque<User>();
+			deque.addAll(users);
+			Queue<User> queue = Collections.asLifoQueue(deque);
+			User peekUser = queue.remove();
+			while (ICloudUtils.isNotNull(peekUser)) {
+				List tmpUsers = getChildrenUser(peekUser.getFatherId());
+				users.addAll(tmpUsers);
+				queue.addAll(tmpUsers);
+				peekUser = queue.remove();
+			}
+		}
+		int count = users.size();
+		long count2 = count;
+		pagination.setTotalItemCount(count2);
+		if (count < start) {
+			int end = (start + limit) > count ? count : (start + limit);
+			users = users.subList(start, end);
+		}	
+		pagination.setData(users);
+		pagination.build();
+		return pagination;
+	}
+
+	public Pagination<User> getAllUsers(int pageNo, int limit) {
+		Pagination<User> pagination = new Pagination<User>();
+		pagination.setPageNo(pageNo);
+		pagination.setPageSize(limit);
+		if (pageNo < 0)
+			pageNo = 0;
+		if (limit <= 0)
+			limit = 40;
+		int start = limit * pageNo;
+		long count = this.userService.count();
+		pagination.setTotalItemCount(count);
+		List<User> resultList = this.userService.findAll(start, limit);
+		pagination.setData(resultList);
+		pagination.build();
+		return pagination;
 	}
 }

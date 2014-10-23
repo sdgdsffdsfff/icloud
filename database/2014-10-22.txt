@@ -1,6 +1,6 @@
 1.user
 ALTER TABLE `user` ADD COLUMN  `father_id`  INT(11) DEFAULT 0;
-ALTER TABLE `user` ADD COLUMN  `level`  INT(11) DEFAULT 0;
+ALTER TABLE `user` ADD COLUMN  `level`  INT(11) DEFAULT 1;
 ALTER TABLE `user` ADD COLUMN  `promotion`  INT(2) DEFAULT 1;
 
 ALTER TABLE `icloud`.`user` ADD COLUMN `open` INT(2) DEFAULT 1 NULL AFTER `promotion`, ADD COLUMN `redirect-url` VARCHAR(1000) NULL AFTER `open`; 
