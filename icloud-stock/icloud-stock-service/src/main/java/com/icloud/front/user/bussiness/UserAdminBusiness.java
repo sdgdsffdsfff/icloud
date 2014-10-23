@@ -1,6 +1,7 @@
 package com.icloud.front.user.bussiness;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import com.icloud.front.user.pojo.LoginUser;
 import com.icloud.front.user.pojo.RegisterUser;
 import com.icloud.front.user.pojo.UserInfo;
 import com.icloud.stock.model.User;
+import com.icloud.user.dao.IUserDao;
 import com.icloud.user.util.UserUtils;
 
 @Service("userAdminBusiness")
@@ -131,5 +133,13 @@ public class UserAdminBusiness extends UserBusiness {
 
 	public void modifyBaseInfo(RegisterUser registerUser, User user) {
 		this.userService.modifyBaseInfo(registerUser, user);
+	}
+
+	public List<User> getChildrenUser(int fatch_Id) {
+		return this.userService.findByProperies(IUserDao.FATHERID, fatch_Id);
+	}
+
+	public List<User> getAllOtherUsers(User user, int start, int limit) {
+		return null;
 	}
 }
