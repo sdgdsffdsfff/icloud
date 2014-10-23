@@ -11,6 +11,15 @@ import java.util.List;
 public class NSum {
 	// Input: numbers={2, 7, 11, 15}, target=9
 	// Output: index1=1, index2=2
+	public int getIndex(int[] numbers, int target, int lastData) {
+		for (int i = 0; i < numbers.length; i++) {
+			if (target == numbers[i] && (i + 1) != lastData) {
+				return i + 1;
+			}
+		}
+		return -1;
+	}
+
 	/**
 	 * 思路： 算法：最初我们找到数组的第一个数字和最后一个数字。当两个数字的和大于输入的数字时，把较大的数字往前移动；当两个数字的和小于数字时，
 	 * 把较小的数字往后移动；当相等时，打完收工。这样扫描的顺序是从数组的两端向数组的中间扫描。 Given an array of integers,
@@ -22,14 +31,27 @@ public class NSum {
 	 * @throws
 	 */
 	public int[] twoSum(int[] numbers, int target) {
+		int[] copyNumbers = new int[numbers.length];
+		for (int i = 0; i < copyNumbers.length; i++) {
+			copyNumbers[i] = numbers[i];
+		}
 		Arrays.sort(numbers);
 		int i = 0;
 		int j = numbers.length - 1;
 		while (i < j) {
 			int tmp = numbers[i] + numbers[j];
 			if (tmp == target) {
-				int[] a = { i, j };
-				return a;
+				int last = getIndex(copyNumbers, numbers[i], -1);
+				int next = getIndex(copyNumbers, numbers[j], last);
+				if (last > next) {
+					int[] a = { next, last };
+					return a;
+				} else {
+					int[] a = { last, next };
+					return a;
+				}
+
+				// return a;
 				// break;
 			} else if (tmp > target) {
 				j--;
@@ -60,7 +82,10 @@ public class NSum {
 
 	public static void main(String[] args) {
 		NSum sum3 = new NSum();
-		int[] num = { 3, 4, 2 };
-		sum3.twoSum(num, 6);
+		int[] num = { 5, 75, 25 };
+		int[] twoSum = sum3.twoSum(num, 100);
+		for (int i : twoSum) {
+			System.out.println(i);
+		}
 	}
 }
