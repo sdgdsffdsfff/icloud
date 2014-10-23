@@ -1,4 +1,4 @@
-package com.icloud.lettcode.Symmetric;
+package com.icloud.leetcode.Symmetric;
 
 /**
  * @comment

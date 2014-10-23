@@ -1,4 +1,4 @@
-package com.icloud.lettcode.CountAndSay;
+package com.icloud.leetcode.CountAndSay;
 
 /**
  * @comment
@@ -39,8 +39,24 @@ public class Solution {
 		return sb.toString();
 	}
 
+	public int sqrt(int x) {
+		long i = 0;
+		long j = x / 2 + 1;
+		while (i < j) {
+			long mid = ((i + j) / 2);
+			long sq = mid * mid;
+			if (sq == x)
+				return (int) mid;
+			else if (sq < x)
+				i = mid + 1;
+			else
+				j = mid - 1;
+		}
+		return (int) (i * i > x ? i - 1 : i);
+	}
+
 	public static void main(String[] args) {
 		Solution solution = new Solution();
-		System.out.println(solution.countAndSay(5));
+		System.out.println(solution.sqrt(2147395599));
 	}
 }
