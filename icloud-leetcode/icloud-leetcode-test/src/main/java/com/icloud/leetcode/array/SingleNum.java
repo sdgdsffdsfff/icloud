@@ -7,5 +7,5 @@ package com.icloud.leetcode.array;
  * 2014年10月23日 上午11:30:58
  */
 public class SingleNum {
-
+	
 }
