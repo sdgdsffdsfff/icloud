@@ -99,6 +99,11 @@ public class DateUtils {
 		return getDate(formatDate(sDate, sFormat), sFormat);
 	}
 
+	public static Date getDate(Date sDate) {
+		String sFormat = "yyyy-MM-dd";
+		return getDate(sDate, sFormat);
+	}
+
 	public static String formatDate(long sDate, String sFormat) {
 		return formatDate(new Date(sDate), sFormat);
 	}
@@ -657,6 +662,8 @@ public class DateUtils {
 
 	public static void main(String[] args) {
 		Date date = new Date();
+		Date startDate = DateUtils.getDate(DateUtils.addDays(date, -1));
+		System.out.println(startDate);
 		System.out.println("year = " + getYear(date));
 		System.out.println("month = " + getMonth(date));
 		System.out.println("day = " + getDay(date));

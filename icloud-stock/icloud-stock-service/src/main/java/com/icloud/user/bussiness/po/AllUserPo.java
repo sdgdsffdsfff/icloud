@@ -33,11 +33,11 @@ public class AllUserPo {
 		}
 		if (start < count) {
 			List<User> partUserList = this.userService.findAll(start, limit);
+			start = start + limit;
 			if (ICloudUtils.isNotNull(partUserList)) {
 				users.addAll(partUserList);
 				return users.remove(0);
 			}
-			start = start + limit;
 		}
 		return null;
 	}

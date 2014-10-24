@@ -9,9 +9,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.front.juhuasuan.bussiness.JuhuasuanBussiness;
+import com.icloud.front.juhuasuan.bussiness.JuhuasuanStatBusiness;
 import com.icloud.front.stock.bussiness.StockCommonBussiness;
 import com.icloud.front.stock.bussiness.StockListBussiness;
-import com.icloud.stock.service.impl.UserUrlAccessCountServiceImpl;
 
 @ContextConfiguration(locations = { "classpath*:spring/icloud-stock-service-ctx-min.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,5 +25,8 @@ public class StockBussinessTest {
 
 	@Resource(name = "juhuasuanBussiness")
 	protected JuhuasuanBussiness juhuasuanBussiness;
-	
+
+	@Resource(name = "juhuasuanStatBusiness")
+	protected JuhuasuanStatBusiness juhuasuanStatBusiness;
+
 }

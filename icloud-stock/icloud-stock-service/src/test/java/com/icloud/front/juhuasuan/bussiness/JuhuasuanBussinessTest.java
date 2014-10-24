@@ -11,10 +11,13 @@ import org.junit.Test;
 import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.picture.TZPhotoUtil;
 import com.icloud.framework.util.ExcelIEUtil;
+import com.icloud.framework.util.ICloudUtils;
 import com.icloud.framework.vo.KeyValue;
 import com.icloud.front.juhusuan.pojo.JuhuasuanFrontSession;
 import com.icloud.front.stock.StockBussinessTest;
 import com.icloud.stock.model.JuhuasuanUrl;
+import com.icloud.stock.model.User;
+import com.icloud.user.bussiness.po.AllUserPo;
 
 /**
  * @comment
@@ -90,5 +93,20 @@ public class JuhuasuanBussinessTest extends StockBussinessTest {
 		for (JuhuasuanFrontSession session : data) {
 			System.out.println(session.toString());
 		}
+	}
+
+	@Test
+	public void getAllUsers() {
+		AllUserPo userPo = this.juhuasuanStatBusiness.getAllUserPo();
+		User nextUser = userPo.next();
+		while (ICloudUtils.isNotNull(nextUser)) {
+			System.out.println(nextUser.getChinaName());
+			nextUser = userPo.next();
+		}
+	}
+
+	@Test
+	public void updateUserUrlAccessCountDaily() {
+		this.juhuasuanStatBusiness.updateUserUrlAccessCountDaily();
 	}
 }
