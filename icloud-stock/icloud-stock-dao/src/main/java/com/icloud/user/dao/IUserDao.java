@@ -16,4 +16,5 @@ public interface IUserDao extends StockBaseDao<User> {
 	public static final String OPEN = "open";
 	public static final String REDIRECTURL = "redirectUrl";
 	public static final String USERACCESSES = "userAccesses";
+
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Queue;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.util.ICloudUtils;
@@ -16,6 +17,7 @@ import com.icloud.front.user.pojo.LoginUser;
 import com.icloud.front.user.pojo.RegisterUser;
 import com.icloud.front.user.pojo.UserInfo;
 import com.icloud.stock.model.User;
+import com.icloud.user.bussiness.po.ChildrenUserPo;
 import com.icloud.user.dao.IUserDao;
 import com.icloud.user.dict.UserConstants;
 import com.icloud.user.util.UserUtils;
@@ -141,8 +143,15 @@ public class UserAdminBusiness extends UserBusiness {
 		this.userService.modifyBaseInfo(registerUser, user);
 	}
 
+	@Transactional
 	public List<User> getChildrenUser(int fatherId) {
 		return this.userService.findByProperies(IUserDao.FATHERID, fatherId);
+	}
+
+	
+	public ChildrenUserPo getChildrenUserPo(User user) {
+		ChildrenUserPo userPo = new ChildrenUserPo(this, user, 20);
+		return userPo;
 	}
 
 	public Pagination<User> getUsersByUser(User user, int pageNo, int limit) {
@@ -150,7 +159,7 @@ public class UserAdminBusiness extends UserBusiness {
 			if (user.getLevel() == UserConstants.SUPER_USER) {
 				return getAllUsers(pageNo, limit);
 			} else {
-
+				return getChidrenUser(user.getId(), pageNo, limit);
 			}
 		}
 		return null;
@@ -186,7 +195,7 @@ public class UserAdminBusiness extends UserBusiness {
 		if (count < start) {
 			int end = (start + limit) > count ? count : (start + limit);
 			users = users.subList(start, end);
-		}	
+		}
 		pagination.setData(users);
 		pagination.build();
 		return pagination;

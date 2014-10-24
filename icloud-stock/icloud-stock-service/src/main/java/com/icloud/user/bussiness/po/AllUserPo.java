@@ -3,6 +3,8 @@ package com.icloud.user.bussiness.po;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.stock.model.User;
 import com.icloud.user.service.IUserService;
@@ -32,7 +34,7 @@ public class AllUserPo {
 			return users.remove(0);
 		}
 		if (start < count) {
-			List<User> partUserList = this.userService.findAll(start, limit);
+			List<User> partUserList = findAll(start, limit);
 			start = start + limit;
 			if (ICloudUtils.isNotNull(partUserList)) {
 				users.addAll(partUserList);
@@ -40,5 +42,11 @@ public class AllUserPo {
 			}
 		}
 		return null;
+	}
+
+	@Transactional
+	public List<User> findAll(int start, int limit) {
+		return this.userService.findAll(start, limit);
+
 	}
 }

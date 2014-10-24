@@ -8,14 +8,15 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ch.qos.logback.classic.Logger;
-
 import com.icloud.framework.util.DateUtils;
 import com.icloud.framework.util.ICloudUtils;
+import com.icloud.front.user.bussiness.UserAdminBusiness;
+import com.icloud.stock.dao.IUserUrlAccessCountDao;
 import com.icloud.stock.model.User;
 import com.icloud.stock.model.UserUrlAccessCount;
-import com.icloud.stock.service.IUserUrlAccessCountService;
 import com.icloud.user.bussiness.po.AllUserPo;
+import com.icloud.user.bussiness.po.ChildrenUserPo;
+import com.icloud.user.dict.UserConstants;
 
 /**
  * @comment
@@ -26,6 +27,8 @@ import com.icloud.user.bussiness.po.AllUserPo;
 public class JuhuasuanStatBusiness extends BaseAction {
 	@Resource(name = "juhuasuanBussiness")
 	protected JuhuasuanBussiness juhuasuanBussiness;
+	@Resource(name = "userAdminBusiness")
+	protected UserAdminBusiness userAdminBusiness;
 
 	public AllUserPo getAllUserPo() {
 		AllUserPo allUserPo = new AllUserPo(this.userService, 20);
@@ -45,16 +48,21 @@ public class JuhuasuanStatBusiness extends BaseAction {
 		int s = (int) count;
 		if (ICloudUtils.isNotNull(userUrlAccessCount)) {
 			userUrlAccessCount.setCount(s);
+			userUrlAccessCount
+					.setAllCount(IUserUrlAccessCountDao.DEF_ALL_COUNT);
 			this.userUrlAccessCountService.update(userUrlAccessCount);
 		} else {
 			userUrlAccessCount = new UserUrlAccessCount();
 			userUrlAccessCount.setCount(s);
 			userUrlAccessCount.setCreateTime(startDate);
 			userUrlAccessCount.setUserId(userId);
+			userUrlAccessCount
+					.setAllCount(IUserUrlAccessCountDao.DEF_ALL_COUNT);
 			this.userUrlAccessCountService.save(userUrlAccessCount);
 		}
 	}
 
+	@Transactional
 	public void updateSingleAccessCount(Integer userId, Date startDate,
 			Date endDate) {
 		if (ICloudUtils.isNotNull(userId) && ICloudUtils.isNotNull(startDate)
@@ -68,6 +76,7 @@ public class JuhuasuanStatBusiness extends BaseAction {
 		}
 	}
 
+	@Transactional
 	public void updateUserSingleAccessCount(User user, Date now) {
 		if (!ICloudUtils.isNotNull(user)) {
 			return;
@@ -88,11 +97,81 @@ public class JuhuasuanStatBusiness extends BaseAction {
 		updateSingleAccessCount(userId, startDate, endDate);
 	}
 
+	/**
+	 * @param nextUser
+	 * @param now
+	 *            void
+	 * @throws
+	 */
+	private void updateUserTotalAccessCount(User user) {
+		if (!ICloudUtils.isNotNull(user)) {
+			return;
+		}
+		int userId = user.getId();
+		List<UserUrlAccessCount> list = this.userUrlAccessCountService
+				.getUserAccessCountByNullTotalCount(userId);
+		if (!ICloudUtils.isEmpty(list)) {
+			boolean isSuper = false;
+			String userIds = null;
+			if (user.getLevel() == UserConstants.SUPER_USER) {
+				isSuper = true;
+			} else {
+				ChildrenUserPo userPo = this.userAdminBusiness
+						.getChildrenUserPo(user);
+				List<User> allUserList = userPo.getAllUser();
+				allUserList.add(user);
+				StringBuffer sb = new StringBuffer();
+				for (User tmpUser : allUserList) {
+					sb.append(tmpUser.getId() + ",");
+				}
+				userIds = sb.toString();
+				userIds = userIds.substring(0, userIds.length() - 1);
+			}
+			/**
+			 * 获得所有用户的子用户
+			 */
+			for (UserUrlAccessCount count : list) {
+				updateAllCount(count, userIds, isSuper);
+			}
+		}
+
+	}
+
+	/**
+	 * @param count
+	 * @param allUserList
+	 *            void
+	 * @throws
+	 */
+	@Transactional
+	private void updateAllCount(UserUrlAccessCount count, String userIds,
+			boolean isSuper) {
+		if (isSuper) {
+			int allCount = 0;
+			allCount = this.userUrlAccessCountService.getCountOfAllUser(count
+					.getCreateTime());
+			count.setAllCount(allCount);
+			this.userUrlAccessCountService.update(count);
+		} else {
+			int allCount = 0;
+			allCount = this.userUrlAccessCountService.getCountOfUserIds(
+					count.getCreateTime(), userIds);
+			count.setAllCount(allCount);
+			/**
+			 * 批量操作
+			 */
+			this.userUrlAccessCountService.update(count);
+		}
+
+	}
+
 	public void updateUserUrlAccessCountDaily() {
 		/**
 		 * 获得所有用户进行更新
 		 */
+		logger.info("start to updateUserUrlAccessCountDaily....");
 		Date now = new Date();
+		logger.info("start to process updateUserSingleAccessCount....");
 		AllUserPo userPo = this.getAllUserPo();
 		User nextUser = userPo.next();
 		while (ICloudUtils.isNotNull(nextUser)) {
@@ -104,5 +183,23 @@ public class JuhuasuanStatBusiness extends BaseAction {
 			updateUserSingleAccessCount(nextUser, now);
 			nextUser = userPo.next();
 		}
+		logger.info("end to process updateUserSingleAccessCount!!!");
+		/**
+		 * 获得所有用户
+		 */
+		userPo = this.getAllUserPo();
+		nextUser = userPo.next();
+		while (ICloudUtils.isNotNull(nextUser)) {
+			/**
+			 * 丰富这个用户的内容
+			 */
+			logger.info("updateUserTotalAccessCount, userId:{},userName:{}",
+					nextUser.getId(), nextUser.getChinaName());
+			updateUserTotalAccessCount(nextUser);
+			nextUser = userPo.next();
+		}
+		logger.info("end to updateUserUrlAccessCountDaily!!!");
+		logger.info("end to updateUserUrlAccessCountDaily!!!");
 	}
+
 }

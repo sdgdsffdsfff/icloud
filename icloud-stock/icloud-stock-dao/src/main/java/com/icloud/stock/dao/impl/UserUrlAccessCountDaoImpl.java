@@ -27,4 +27,32 @@ public class UserUrlAccessCountDaoImpl extends
 		}
 	}
 
+	@Override
+	public int getCountOfAllUser(Date createTime) {
+		String hql = "select sum(model.count) from " + domainClass.getName()
+				+ " as model where model.createTime = ?";
+		List list = getHibernateTemplate().find(hql, createTime);
+		if (ICloudUtils.isEmpty(list)) {
+			return -1;
+		} else {
+			long count = (Long) list.get(0);
+			int countS = (int) count;
+			return countS;
+		}
+	}
+
+	@Override
+	public int getCountOfUserIds(Date createTime, String userIds) {
+		String hql = "select sum(model.count) from " + domainClass.getName()
+				+ " as model where model.createTime = ? and model.userId in ?";
+		Object[] values = { createTime, userIds };
+		List list = getHibernateTemplate().find(hql, values);
+		if (ICloudUtils.isEmpty(list)) {
+			return -1;
+		} else {
+			long count = (Long) list.get(0);
+			int countS = (int) count;
+			return countS;
+		}
+	}
 }

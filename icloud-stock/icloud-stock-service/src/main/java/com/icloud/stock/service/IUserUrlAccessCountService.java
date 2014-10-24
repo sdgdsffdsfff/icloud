@@ -1,6 +1,7 @@
 package com.icloud.stock.service;
 
 import java.util.Date;
+import java.util.List;
 
 import com.icloud.framework.service.ISqlBaseService;
 import com.icloud.stock.model.UserUrlAccessCount;
@@ -23,5 +24,30 @@ public interface IUserUrlAccessCountService extends
 	 */
 	UserUrlAccessCount getUserAccessCountByUserIdAndDate(Integer userId,
 			Date startDate);
+
+	/** 
+	 * @param userId
+	 * @return
+	 * UserUrlAccessCount
+	 * @throws 
+	 */
+	List<UserUrlAccessCount> getUserAccessCountByNullTotalCount(int userId);
+
+	/** 
+	 * @param createTime
+	 * @return
+	 * int
+	 * @throws 
+	 */
+	int getCountOfAllUser(Date createTime);
+
+	/** 
+	 * @param createTime
+	 * @param userIds
+	 * @return
+	 * int
+	 * @throws 
+	 */
+	int getCountOfUserIds(Date createTime, String userIds);
 
 }
