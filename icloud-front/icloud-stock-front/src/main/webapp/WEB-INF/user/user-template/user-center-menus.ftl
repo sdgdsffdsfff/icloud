@@ -15,7 +15,21 @@
                 <a <#if current=="总体统计">class="current"</#if> href="${basepath}/usertb/allUrlStatistics">总体统计</a>
             </dd>
         </dl>
-        
+        <#if currentUserInfo().addUser==true>
+        <dl>
+            <dt>
+                <i class="ucnav_22"></i>下属管理</dt>
+            <dd>
+                <a <#if current=="增加成员">class="current"</#if> href="${basepath}/user/registerView">增加成员</a>
+            </dd>
+            <dd>
+                <a <#if current=="成名名单">class="current"</#if> href="${basepath}/user/baseUserInfo">成名名单</a>
+            </dd>
+            <dd>
+                <a <#if current=="成名名单">class="current"</#if> href="${basepath}/user/baseUserInfo">成名流量</a>
+            </dd>
+        </dl>
+        </#if>
         <dl>
             <dt>
                 <i class="ucnav_22"></i>账户资料</dt>
@@ -26,6 +40,7 @@
                 <a <#if current=="密码管理">class="current"</#if> href="${basepath}/user/modifyPassword">密码管理</a>
             </dd>
         </dl>
+        
     </nav>
 </aside>
 </#macro>

@@ -21,8 +21,7 @@
        <nav class="main-links">
           <ul class="clearfix">
           <#if !(currentUserInfo())?? >
-            <li class="first"><a href="${basepath}/userManager/registerView">注册</a></li>
-            <li><a href="${basepath}/facade/icloudLogin">登录</a></li>
+            <li class="first"><a href="${basepath}/facade/icloudLogin">登录</a></li>
             <li class="first">游客,你好</li>
           <#else>
             <li class="first"><span class="hyper-link">

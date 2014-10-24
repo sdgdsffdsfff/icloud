@@ -4,6 +4,7 @@ public class UserInfo {
 	private String userName;
 	private int userId;
 	private String email;
+	private boolean addUser;
 
 	public String getUserName() {
 		return userName;
@@ -27,6 +28,14 @@ public class UserInfo {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public boolean isAddUser() {
+		return addUser;
+	}
+
+	public void setAddUser(boolean addUser) {
+		this.addUser = addUser;
 	}
 
 }

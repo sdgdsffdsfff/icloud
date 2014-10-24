@@ -18,7 +18,6 @@ import com.icloud.user.dict.UserConstants;
 @Controller
 @RequestMapping("/userManager")
 public class ICloudUserManagerController extends BaseStockController {
-	private static final String SECURE_SEED = "Abc124456";
 
 	@RequestMapping("/registerView")
 	public ModelAndView registerView() {
@@ -70,7 +69,7 @@ public class ICloudUserManagerController extends BaseStockController {
 		}
 		logger.info("start to register, {}", registerUser.toString());
 		User user = this.userAdminBusiness.addUser(registerUser,
-				UserConstants.COMMING.COM_COMMING.getName());
+				UserConstants.COMMING.COM_COMMING.getName(), null);
 		if (ICloudUtils.isNotNull(user)) {
 			logger.info("success to register, {}", registerUser.toString());
 			return "redirect:/userManager/registersuccess";

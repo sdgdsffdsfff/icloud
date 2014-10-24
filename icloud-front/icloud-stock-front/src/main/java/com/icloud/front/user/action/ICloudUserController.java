@@ -12,10 +12,10 @@ import com.icloud.framework.util.ICloudUtils;
 import com.icloud.framework.util.StringEncoder;
 import com.icloud.front.common.utils.ICloudUserContextHolder;
 import com.icloud.front.stock.baseaction.BaseStockController;
-import com.icloud.front.user.pojo.LoginUser;
 import com.icloud.front.user.pojo.RegisterUser;
 import com.icloud.front.user.utils.ICloudMemberUtils;
 import com.icloud.stock.model.User;
+import com.icloud.user.dict.UserConstants;
 
 @Controller
 @RequestMapping("/user")
@@ -119,5 +119,44 @@ public class ICloudUserController extends BaseStockController {
 			}
 		}
 		return "redirect:/user/modifyPassword?result=failure";
+	}
+
+	@RequestMapping("/registerView")
+	public ModelAndView registerView() {
+		ModelAndView model = getModelAndView("user/myspace/icloud-user-register-view");
+		return model;
+	}
+
+	@RequestMapping("/doRegisterUser")
+	public String doRegisterUser(RegisterUser registerUser) {
+		if (!ICloudUtils.isNotNull(registerUser)) {
+			return ERROR_URL;
+		}
+		User ownUser = this.userAdminBusiness
+				.getUserByUserInfo(ICloudUserContextHolder.get());
+		logger.info("start to register, {}", registerUser.toString());
+		User user = this.userAdminBusiness.addUser(registerUser,
+				UserConstants.COMMING.COM_COMMING.getName(), ownUser);
+		if (ICloudUtils.isNotNull(user)) {
+			logger.info("success to register, {}", registerUser.toString());
+			return "redirect:/user/registersuccess";
+		} else {
+			logger.info("fail to register, {}", registerUser.toString());
+			return ERROR_URL;
+		}
+	}
+
+	@RequestMapping("/registersuccess")
+	public ModelAndView registersuccess() {
+		ModelAndView model = getModelAndView("user/myspace/icloud-user-register-view");
+		model.addObject("successModifyUserInfo", true);
+		return model;
+	}
+
+	@RequestMapping("/myFollowerList")
+	public ModelAndView myFollowerList() {
+		ModelAndView model = getModelAndView("user/myspace/icloud-user-follower-list-view");
+		
+		return model;
 	}
 }

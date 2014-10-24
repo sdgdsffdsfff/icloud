@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  */
 @Component("userUrlAccessCountJob")
 public class UserUrlAccessCountJob {
-	@Scheduled(cron = "0/3 * * * * ?")
+	@Scheduled(cron = "0 1 1 * * ?")
 	public void dailyUpdateUserUrlAccessCountTask() {
 		System.out.println("任务进行中。。。");
 	}

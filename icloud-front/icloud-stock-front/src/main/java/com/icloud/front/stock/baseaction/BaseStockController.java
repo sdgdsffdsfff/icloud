@@ -22,7 +22,8 @@ import com.icloud.stock.search.service.StockNameSearcher;
 public class BaseStockController {
 	protected static final Logger logger = RequestIdentityLogger
 			.getLogger(BaseStockController.class);
-
+	protected static final String SECURE_SEED = "Abc124456";
+	
 	protected static final String ERROR_URL = "redirect:/user/error";
 
 	@Resource(name = "stockCommonBussiness")

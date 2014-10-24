@@ -69,14 +69,15 @@ public class UserAdminBusiness extends UserBusiness {
 	 * @param user
 	 * @return
 	 */
-	public User addUser(RegisterUser registerUser, String coming) {
+	public User addUser(RegisterUser registerUser, String coming,
+			User fatherUser) {
 		if (ICloudUtils.isNotNull(registerUser)) {
 			/**
 			 * 校对用户名，电话号码，邮箱
 			 */
+			// && ICloudUtils.isNotNull(registerUser.getReadContract()
 			if (ICloudUtils.isNotNull(registerUser.getUsername())
 					&& ICloudUtils.isNotNull(registerUser.getEmail())
-					&& ICloudUtils.isNotNull(registerUser.getReadContract())
 					&& ICloudUtils.isNotNull(registerUser.getTelphone())
 					&& ICloudUtils.isNotNull(registerUser.getUsersex())
 					&& ICloudUtils
@@ -105,6 +106,12 @@ public class UserAdminBusiness extends UserBusiness {
 							.getUsersex()));
 					user.setUserTel(registerUser.getTelphone());
 					user.setQq(registerUser.getQq());
+					if (ICloudUtils.isNotNull(fatherUser)) {
+						user.setFatherId(fatherUser.getId());
+						user.setOpen(1);
+						user.setLevel(fatherUser.getLevel() + 1);
+						user.setPromotion(1);
+					}
 					return this.userService.save(user);
 				}
 			}
@@ -118,6 +125,12 @@ public class UserAdminBusiness extends UserBusiness {
 			if (ICloudUtils.isNotNull(user)
 					&& user.getUserName().equalsIgnoreCase(info.getUserName())) {
 				info.setEmail(user.getUserEmail());
+				if (user.getLevel() == UserConstants.USER_LEVEL_LIMIT
+						|| user.getPromotion() == 0) {
+					info.setAddUser(false);
+				} else {
+					info.setAddUser(true);
+				}
 				return info;
 			}
 		}
@@ -148,7 +161,6 @@ public class UserAdminBusiness extends UserBusiness {
 		return this.userService.findByProperies(IUserDao.FATHERID, fatherId);
 	}
 
-	
 	public ChildrenUserPo getChildrenUserPo(User user) {
 		ChildrenUserPo userPo = new ChildrenUserPo(this, user, 20);
 		return userPo;
