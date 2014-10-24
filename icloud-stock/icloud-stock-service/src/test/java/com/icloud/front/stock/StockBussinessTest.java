@@ -11,6 +11,7 @@ import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.front.juhuasuan.bussiness.JuhuasuanBussiness;
 import com.icloud.front.stock.bussiness.StockCommonBussiness;
 import com.icloud.front.stock.bussiness.StockListBussiness;
+import com.icloud.stock.service.impl.UserUrlAccessCountServiceImpl;
 
 @ContextConfiguration(locations = { "classpath*:spring/icloud-stock-service-ctx-min.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,5 +25,5 @@ public class StockBussinessTest {
 
 	@Resource(name = "juhuasuanBussiness")
 	protected JuhuasuanBussiness juhuasuanBussiness;
-
+	
 }
