@@ -23,10 +23,10 @@
                 <a <#if current=="增加成员">class="current"</#if> href="${basepath}/user/registerView">增加成员</a>
             </dd>
             <dd>
-                <a <#if current=="成名名单">class="current"</#if> href="${basepath}/user/baseUserInfo">成名名单</a>
+                <a <#if current=="成员名单">class="current"</#if> href="${basepath}/user/myFollowerList">成员名单</a>
             </dd>
             <dd>
-                <a <#if current=="成名名单">class="current"</#if> href="${basepath}/user/baseUserInfo">成名流量</a>
+                <a <#if current=="成员流量">class="current"</#if> href="${basepath}/user/baseUserInfo">成员流量</a>
             </dd>
         </dl>
         </#if>
