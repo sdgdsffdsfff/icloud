@@ -19,6 +19,8 @@ allprojects {
         //maven { url 'http://172.31.16.127:8081/nexus/content/groups/public' }
         maven { url 'http://localhost:8081/nexus/content/groups/public' }
         maven { url 'https://maven.alfresco.com/nexus/content/groups/public' }
+        maven { url 'https://clojars.org/repo/' }
+	      maven { url 'http://jcenter.bintray.com/'}
         mavenCentral()
     }
 

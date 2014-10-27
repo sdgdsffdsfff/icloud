@@ -5,6 +5,7 @@ include 'icloud-common:framework-core'
 
 include 'icloud-common:framework-timewindow'
 include 'icloud-common:framework-hadoop'
+include 'icloud-common:framework-storm'
 include 'icloud-common:framework-redis'
 include 'icloud-common:framework-gson'
 include 'icloud-common:framework-http'

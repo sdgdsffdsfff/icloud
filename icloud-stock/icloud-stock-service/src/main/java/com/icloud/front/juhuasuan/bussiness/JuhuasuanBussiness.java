@@ -27,6 +27,13 @@ import com.icloud.stock.model.JuhuasuanUrl;
 @Service("juhuasuanBussiness")
 public class JuhuasuanBussiness extends BaseAction {
 
+	/**
+	 * 这个是不需要加入锁机制的。
+	 * @param url
+	 * @return
+	 * JuhuasuanUrl
+	 * @throws
+	 */
 	public JuhuasuanUrl saveJuhuasuanUrl(JuhuasuanUrl url) {
 		if (ICloudUtils.isNotNull(url)) {
 			url.setCreateTime(new Date());

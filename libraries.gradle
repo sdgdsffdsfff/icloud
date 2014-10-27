@@ -405,6 +405,7 @@ ext {
     // sstable
     sstable:                'com.google:sstable:1.0.1',
 
+     storm:		    'storm:storm:0.9.0.1',
     /* T */
 
     // thrift

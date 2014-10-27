@@ -1,0 +1,35 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: "com.github.johnrengelman.shadow"
+
+buildscript {
+    repositories { jcenter() }
+    dependencies { classpath 'com.github.jengelman.gradle.plugins:shadow:1.0.3' }
+}
+
+version = "1.0-SNAPSHOT"
+group = 'com.travelzen'
+
+jar {
+	baseName =  "framework-storm"
+  }
+
+//shadowJar {
+//  baseName =  'framework-storm'
+//  appendManifest {
+//    attributes 'Main-Class': 'net.p5w.isns.cds.relationship.topology.UserRelationShipTopology'
+//    attributes 'Implementation-Version':'4.1'
+// }
+//  append('META-INF/spring.handlers')
+//  append('META-INF/spring.schemas')
+//}
+ 
+configurations {providedCompile}
+
+dependencies {
+	compile project(':icloud-common:framework-core')
+    compile libraries.storm
+}
+sourceSets.main.compileClasspath += configurations.providedCompile
+sourceSets.test.compileClasspath += configurations.providedCompile
+sourceSets.test.runtimeClasspath += configurations.providedCompile
