@@ -7,7 +7,9 @@ import freemarker.template.TemplateModelException;
 
 public class StaticResourceVersionGetter implements TemplateMethodModel {
 
-	private static final String VERSION = Long.toHexString(System.currentTimeMillis() / 1000 / 60 / 60 / 24);
+	// / 1000 / 60 / 60 / 24
+	private static final String VERSION = Long.toHexString(System
+			.currentTimeMillis());
 
 	@SuppressWarnings("rawtypes")
 	@Override

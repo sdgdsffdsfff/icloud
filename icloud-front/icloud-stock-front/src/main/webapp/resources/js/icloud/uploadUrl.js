@@ -2,7 +2,8 @@ var swfu;
 function uploadUrlView() {
 	swfu = new SWFUpload(
 			{
-				upload_url : basepath + "/usertb/uploadXls",
+				upload_url : basepath + "/usertb/uploadXls;jsessionid="
+						+ sessionId,
 				post_params : {
 					"name" : "zwm"
 				},

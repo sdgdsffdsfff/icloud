@@ -10,7 +10,7 @@
             <div class="tab_item">
                 <#include "/user/myspace/template/icloud-user-list-view.ftl"/>
             </div>
-           
+           <@pView.pagination param1='8' param2='0' param3='33'/>
         </div>
 </main>
 </@imc.mainContainer>

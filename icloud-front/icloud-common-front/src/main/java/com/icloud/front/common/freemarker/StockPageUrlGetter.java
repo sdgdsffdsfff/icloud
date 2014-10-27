@@ -35,8 +35,10 @@ public class StockPageUrlGetter implements TemplateMethodModel {
 			return "href=\"trafficCurrentDay?pageNo=" + pageNo + "\"";
 		} else if ("6".equalsIgnoreCase(pageId)) {
 			return "href=\"traffic30Day?pageNo=" + pageNo + "\"";
-		}else if ("7".equalsIgnoreCase(pageId)) {
+		} else if ("7".equalsIgnoreCase(pageId)) {
 			return "href=\"allUrlStatistics?pageNo=" + pageNo + "\"";
+		} else if ("8".equalsIgnoreCase(pageId)) {
+			return "href=\"myFollowerList?pageNo=" + pageNo + "\"";
 		}
 		return "/stock/index";
 	}

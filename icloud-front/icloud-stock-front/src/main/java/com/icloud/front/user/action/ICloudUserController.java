@@ -16,7 +16,9 @@ import com.icloud.front.stock.baseaction.BaseStockController;
 import com.icloud.front.stock.pojo.JuhuasuanSearchBean;
 import com.icloud.front.user.pojo.RegisterUser;
 import com.icloud.front.user.utils.ICloudMemberUtils;
+import com.icloud.front.utils.ModelAndViewUtils;
 import com.icloud.stock.model.User;
+import com.icloud.user.bussiness.po.UserInfoPo;
 import com.icloud.user.dict.UserConstants;
 
 @Controller
@@ -157,10 +159,12 @@ public class ICloudUserController extends BaseStockController {
 
 	@RequestMapping("/myFollowerList")
 	public ModelAndView myFollowerList(JuhuasuanSearchBean searchBean) {
+		searchBean.setLimit(1);
 		ModelAndView model = getModelAndView("user/myspace/icloud-user-follower-list-view");
-		Pagination<User> pagination = this.userAdminBusiness.getUsersByUser(
-				getUser(), searchBean.getPageNo(), searchBean.getLimit());
-		model.addObject("pagination", pagination);
+		Pagination<UserInfoPo> pagination = this.userAdminBusiness
+				.getUsersByUser(getUser(), searchBean.getPageNo(),
+						searchBean.getLimit());
+		ModelAndViewUtils.addPageView(model, pagination);
 		return model;
 	}
 }

@@ -1,6 +1,6 @@
 package com.icloud.stock.model;
 
-// Generated Oct 22, 2014 11:19:00 PM by Hibernate Tools 3.4.0.CR1
+// Generated Oct 27, 2014 7:04:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -27,6 +27,7 @@ public class User implements java.io.Serializable {
 	private Integer promotion;
 	private Integer open;
 	private String redirectUrl;
+	private String fatherName;
 	private Set userAccesses = new HashSet(0);
 
 	public User() {
@@ -36,7 +37,7 @@ public class User implements java.io.Serializable {
 			String userEmail, String userComing, String userSex,
 			Date createTime, Date lastUpdateTime, String qq, String chinaName,
 			Integer fatherId, Integer level, Integer promotion, Integer open,
-			String redirectUrl, Set userAccesses) {
+			String redirectUrl, String fatherName, Set userAccesses) {
 		this.userName = userName;
 		this.userPassword = userPassword;
 		this.userTel = userTel;
@@ -52,6 +53,7 @@ public class User implements java.io.Serializable {
 		this.promotion = promotion;
 		this.open = open;
 		this.redirectUrl = redirectUrl;
+		this.fatherName = fatherName;
 		this.userAccesses = userAccesses;
 	}
 
@@ -181,6 +183,14 @@ public class User implements java.io.Serializable {
 
 	public void setRedirectUrl(String redirectUrl) {
 		this.redirectUrl = redirectUrl;
+	}
+
+	public String getFatherName() {
+		return this.fatherName;
+	}
+
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
 	}
 
 	public Set getUserAccesses() {

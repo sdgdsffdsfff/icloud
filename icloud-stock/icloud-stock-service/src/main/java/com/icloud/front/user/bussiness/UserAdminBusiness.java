@@ -18,6 +18,7 @@ import com.icloud.front.user.pojo.RegisterUser;
 import com.icloud.front.user.pojo.UserInfo;
 import com.icloud.stock.model.User;
 import com.icloud.user.bussiness.po.ChildrenUserPo;
+import com.icloud.user.bussiness.po.UserInfoPo;
 import com.icloud.user.dao.IUserDao;
 import com.icloud.user.dict.UserConstants;
 import com.icloud.user.util.UserUtils;
@@ -111,6 +112,7 @@ public class UserAdminBusiness extends UserBusiness {
 						user.setOpen(1);
 						user.setLevel(fatherUser.getLevel() + 1);
 						user.setPromotion(1);
+						user.setFatherName(fatherUser.getUserName());
 					}
 					return this.userService.save(user);
 				}
@@ -166,7 +168,8 @@ public class UserAdminBusiness extends UserBusiness {
 		return userPo;
 	}
 
-	public Pagination<User> getUsersByUser(User user, int pageNo, int limit) {
+	public Pagination<UserInfoPo> getUsersByUser(User user, int pageNo,
+			int limit) {
 		if (ICloudUtils.isNotNull(user)) {
 			if (user.getLevel() == UserConstants.SUPER_USER) {
 				return getAllUsers(pageNo, limit);
@@ -178,8 +181,9 @@ public class UserAdminBusiness extends UserBusiness {
 
 	}
 
-	public Pagination<User> getChidrenUser(int fatherId, int pageNo, int limit) {
-		Pagination<User> pagination = new Pagination<User>();
+	public Pagination<UserInfoPo> getChidrenUser(int fatherId, int pageNo,
+			int limit) {
+		Pagination<UserInfoPo> pagination = new Pagination<UserInfoPo>();
 		pagination.setPageNo(pageNo);
 		pagination.setPageSize(limit);
 		if (pageNo < 0)
@@ -208,13 +212,13 @@ public class UserAdminBusiness extends UserBusiness {
 			int end = (start + limit) > count ? count : (start + limit);
 			users = users.subList(start, end);
 		}
-		pagination.setData(users);
+		pagination.setData(UserInfoPo.converUser(users));
 		pagination.build();
 		return pagination;
 	}
 
-	public Pagination<User> getAllUsers(int pageNo, int limit) {
-		Pagination<User> pagination = new Pagination<User>();
+	public Pagination<UserInfoPo> getAllUsers(int pageNo, int limit) {
+		Pagination<UserInfoPo> pagination = new Pagination<UserInfoPo>();
 		pagination.setPageNo(pageNo);
 		pagination.setPageSize(limit);
 		if (pageNo < 0)
@@ -225,7 +229,7 @@ public class UserAdminBusiness extends UserBusiness {
 		long count = this.userService.count();
 		pagination.setTotalItemCount(count);
 		List<User> resultList = this.userService.findAll(start, limit);
-		pagination.setData(resultList);
+		pagination.setData(UserInfoPo.converUser(resultList));
 		pagination.build();
 		return pagination;
 	}
