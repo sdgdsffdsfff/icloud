@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.framework.util.StringEncoder;
 import com.icloud.front.common.utils.ICloudUserContextHolder;
 import com.icloud.front.stock.baseaction.BaseStockController;
+import com.icloud.front.stock.pojo.JuhuasuanSearchBean;
 import com.icloud.front.user.pojo.RegisterUser;
 import com.icloud.front.user.utils.ICloudMemberUtils;
 import com.icloud.stock.model.User;
@@ -154,9 +156,11 @@ public class ICloudUserController extends BaseStockController {
 	}
 
 	@RequestMapping("/myFollowerList")
-	public ModelAndView myFollowerList() {
+	public ModelAndView myFollowerList(JuhuasuanSearchBean searchBean) {
 		ModelAndView model = getModelAndView("user/myspace/icloud-user-follower-list-view");
-		
+		Pagination<User> pagination = this.userAdminBusiness.getUsersByUser(
+				getUser(), searchBean.getPageNo(), searchBean.getLimit());
+		model.addObject("pagination", pagination);
 		return model;
 	}
 }
