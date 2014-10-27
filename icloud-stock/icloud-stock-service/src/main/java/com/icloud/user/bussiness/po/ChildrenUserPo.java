@@ -20,28 +20,28 @@ public class ChildrenUserPo {
 	private int pageNo = 0;
 	private int limit = 20;
 	private int pageCount;
-	private List<User> users;
+	private List<UserInfoPo> users;
 	private User user;
 
 	public ChildrenUserPo(UserAdminBusiness userAdminBusiness, User user,
 			int limit) {
 		this.userAdminBusiness = userAdminBusiness;
 		this.limit = limit;
-		users = new ArrayList<User>();
+		users = new ArrayList<UserInfoPo>();
 		this.user = user;
-		Pagination<User> pagination = this.userAdminBusiness.getUsersByUser(
+		Pagination<UserInfoPo> pagination = this.userAdminBusiness.getUsersByUser(
 				user, pageNo, limit);
 		pageCount = pagination.getTotalPageCount();
-		users = (List<User>) pagination.getData();
+		users = (List<UserInfoPo>) pagination.getData();
 		pageNo = pageNo++;
 	}
 
-	public User next() {
+	public UserInfoPo next() {
 		if (users.size() > 0) {
 			return users.remove(0);
 		}
 		if (pageNo < pageCount) {
-			Pagination<User> pagination = this.userAdminBusiness
+			Pagination<UserInfoPo> pagination = this.userAdminBusiness
 					.getUsersByUser(user, pageNo, limit);
 			pageNo = pageNo++;
 			if (ICloudUtils.isNotNull(pagination)
@@ -54,9 +54,9 @@ public class ChildrenUserPo {
 	}
 
 	@Transactional
-	public List<User> getAllUser() {
-		List<User> users = new ArrayList<User>();
-		User user = next();
+	public List<UserInfoPo> getAllUser() {
+		List<UserInfoPo> users = new ArrayList<UserInfoPo>();
+		UserInfoPo user = next();
 		while (ICloudUtils.isNotNull(user)) {
 			users.add(user);
 			user = next();

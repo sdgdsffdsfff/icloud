@@ -122,6 +122,7 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/user/*" />
 			<mvc:mapping path="/usertb/*" />
+			<mvc:mapping path="/userpt/*" />
 			<bean class="com.icloud.front.common.interceptor.LogOnInterCeptor">
 				<property name="redirectUrl" value="facade/icloudLogin"></property>
 			</bean>

@@ -16,6 +16,7 @@ import com.icloud.stock.model.User;
 import com.icloud.stock.model.UserUrlAccessCount;
 import com.icloud.user.bussiness.po.AllUserPo;
 import com.icloud.user.bussiness.po.ChildrenUserPo;
+import com.icloud.user.bussiness.po.UserInfoPo;
 import com.icloud.user.dict.UserConstants;
 
 /**
@@ -118,11 +119,11 @@ public class JuhuasuanStatBusiness extends BaseAction {
 			} else {
 				ChildrenUserPo userPo = this.userAdminBusiness
 						.getChildrenUserPo(user);
-				List<User> allUserList = userPo.getAllUser();
-				allUserList.add(user);
+				List<UserInfoPo> allUserList = userPo.getAllUser();
+				allUserList.add(UserInfoPo.convertUser(user));
 				StringBuffer sb = new StringBuffer();
-				for (User tmpUser : allUserList) {
-					sb.append(tmpUser.getId() + ",");
+				for (UserInfoPo tmpUser : allUserList) {
+					sb.append(tmpUser.getUserId() + ",");
 				}
 				userIds = sb.toString();
 				userIds = userIds.substring(0, userIds.length() - 1);

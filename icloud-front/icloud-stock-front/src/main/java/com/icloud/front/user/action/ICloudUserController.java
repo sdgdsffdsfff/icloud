@@ -159,7 +159,6 @@ public class ICloudUserController extends BaseStockController {
 
 	@RequestMapping("/myFollowerList")
 	public ModelAndView myFollowerList(JuhuasuanSearchBean searchBean) {
-		searchBean.setLimit(1);
 		ModelAndView model = getModelAndView("user/myspace/icloud-user-follower-list-view");
 		Pagination<UserInfoPo> pagination = this.userAdminBusiness
 				.getUsersByUser(getUser(), searchBean.getPageNo(),

@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.front.user.bussiness.UserAdminBusiness;
 import com.icloud.stock.model.User;
+import com.icloud.user.bussiness.po.UserInfoPo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:spring/icloud-stock-service-ctx-min.xml" })
@@ -28,10 +29,10 @@ public class UserTest {
 
 	@Test
 	public void getAllUsers() {
-		Pagination<User> pagination = this.userAdminBusiness
+		Pagination<UserInfoPo> pagination = this.userAdminBusiness
 				.getAllUsers(0, 100);
-		Collection<User> data = pagination.getData();
-		for (User user : data) {
+		Collection<UserInfoPo> data = pagination.getData();
+		for (UserInfoPo user : data) {
 			System.out.println(user.toString());
 		}
 	}

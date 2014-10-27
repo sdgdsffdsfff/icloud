@@ -26,7 +26,7 @@
                 <a <#if current=="成员名单">class="current"</#if> href="${basepath}/user/myFollowerList">成员名单</a>
             </dd>
             <dd>
-                <a <#if current=="成员流量">class="current"</#if> href="${basepath}/user/baseUserInfo">成员流量</a>
+                <a <#if current=="成员流量">class="current"</#if> href="${basepath}/usertb/trafficUserView">成员流量</a>
             </dd>
         </dl>
         </#if>

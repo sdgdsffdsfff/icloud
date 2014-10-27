@@ -195,6 +195,13 @@ public class JuhuaSuanManagerController extends BaseStockController {
 		return modelAndView;
 	}
 
+	@RequestMapping("trafficUserView")
+	public ModelAndView trafficUserView(JuhuasuanSearchBean searhBean) {
+		// searhBean.setLimit(4);
+		ModelAndView modelAndView = getModelAndView("user/taobao/trafficUserView");
+		return modelAndView;
+	}
+
 	@RequestMapping("downloadMyUrls")
 	public void downloadMyUrls(HttpServletResponse response) throws IOException {
 		JuhuasuanUrl urlBean = new JuhuasuanUrl();
@@ -250,9 +257,5 @@ public class JuhuaSuanManagerController extends BaseStockController {
 		String result = this.juhuasuanBussiness.batchUpdateUrl(list,
 				this.getUserId());
 		return result;
-		// KeyValue kv = new KeyValue();
-		// kv.setKey("aaa");
-		// kv.setValue("bbb");
-		// return JSONObject.fromObject(kv).toString();
 	}
 }
