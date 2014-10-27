@@ -8,7 +8,7 @@
     <h1 class="us-title">成员名单</h1>
         <div class="us-body">
             <div class="tab_item">
-                
+                <#include "/user/myspace/template/icloud-user-list-view.ftl"/>
             </div>
            
         </div>
