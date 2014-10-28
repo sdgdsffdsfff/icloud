@@ -6,6 +6,8 @@ import com.icloud.stock.model.JuhuasuanUrl;
 public class JuhuasuanSearchBean extends JuhuasuanUrlBean {
 	private int pageNo;
 	private int limit = 20;
+	private String memberId;
+	private String date;
 
 	public int getPageNo() {
 		return pageNo;
@@ -21,6 +23,22 @@ public class JuhuasuanSearchBean extends JuhuasuanUrlBean {
 
 	public void setLimit(int limit) {
 		this.limit = limit;
+	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public static JuhuasuanUrl convert(JuhuasuanSearchBean searchBean) {

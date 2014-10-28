@@ -14,7 +14,7 @@
                         <#if pagination??>
                          <#list pagination.data as user> 
                         <tr>
-                            <td><a href="${basepath}/userpt/dayStat?memberId=${user.userId}">${user.userName!""}</a></td>
+                            <td><a href="${basepath}/usertb/trafficUserView?memberId=${user.userId}">${user.userName!""}</a></td>
                             <td>${user.email!""}</td>
                             <td>${user.level!""}</td>
                             <td>${user.status!""}</td>

@@ -183,14 +183,7 @@ public class UserAdminBusiness extends UserBusiness {
 
 	public Pagination<UserInfoPo> getChidrenUser(int fatherId, int pageNo,
 			int limit) {
-		Pagination<UserInfoPo> pagination = new Pagination<UserInfoPo>();
-		pagination.setPageNo(pageNo);
-		pagination.setPageSize(limit);
-		if (pageNo < 0)
-			pageNo = 0;
-		if (limit <= 0)
-			limit = 40;
-		int start = limit * pageNo;
+		Pagination<UserInfoPo> pagination = Pagination.getInstance(pageNo, limit);
 
 		List<User> users = getChildrenUser(fatherId);
 		if (ICloudUtils.isNotNull(users)) {
@@ -208,9 +201,9 @@ public class UserAdminBusiness extends UserBusiness {
 		int count = users.size();
 		long count2 = count;
 		pagination.setTotalItemCount(count2);
-		if (count < start) {
-			int end = (start + limit) > count ? count : (start + limit);
-			users = users.subList(start, end);
+		if (count < pagination.getStart()) {
+			int end = (pagination.getStart() + limit) > count ? count : (pagination.getStart() + limit);
+			users = users.subList(pagination.getStart(), end);
 		}
 		pagination.setData(UserInfoPo.converUser(users));
 		pagination.build();
@@ -218,17 +211,10 @@ public class UserAdminBusiness extends UserBusiness {
 	}
 
 	public Pagination<UserInfoPo> getAllUsers(int pageNo, int limit) {
-		Pagination<UserInfoPo> pagination = new Pagination<UserInfoPo>();
-		pagination.setPageNo(pageNo);
-		pagination.setPageSize(limit);
-		if (pageNo < 0)
-			pageNo = 0;
-		if (limit <= 0)
-			limit = 40;
-		int start = limit * pageNo;
+		Pagination<UserInfoPo> pagination = Pagination.getInstance(pageNo, limit);
 		long count = this.userService.count();
 		pagination.setTotalItemCount(count);
-		List<User> resultList = this.userService.findAll(start, limit);
+		List<User> resultList = this.userService.findAll(pagination.getStart(), pagination.getPageSize());
 		pagination.setData(UserInfoPo.converUser(resultList));
 		pagination.build();
 		return pagination;

@@ -1,6 +1,7 @@
 package com.icloud.user.bussiness.po;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import com.icloud.framework.util.ICloudUtils;
@@ -22,6 +23,20 @@ public class UserInfoPo extends UserInfo {
 		} else {
 			this.setAddUser(true);
 		}
+	}
+
+	public static String getUserIds(Collection<UserInfoPo> list) {
+		if (ICloudUtils.isEmpty(list)) {
+			return null;
+		}
+		StringBuffer sb = new StringBuffer();
+		String userIds = null;
+		for (UserInfoPo tmpUser : list) {
+			sb.append(tmpUser.getUserId() + ",");
+		}
+		userIds = sb.toString();
+		userIds = userIds.substring(0, userIds.length() - 1);
+		return userIds;
 	}
 
 	public static List<UserInfoPo> converUser(List<User> users) {

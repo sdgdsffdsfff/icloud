@@ -13,6 +13,7 @@ import com.icloud.framework.dao.hibernate.HiberanateParamters;
 import com.icloud.framework.dao.hibernate.IHibernateBaseDao;
 import com.icloud.framework.service.impl.SqlBaseService;
 import com.icloud.framework.util.ICloudUtils;
+import com.icloud.front.juhuasuan.bussiness.po.UserUrlAccessCountPo;
 import com.icloud.stock.dao.IUserUrlAccessCountDao;
 import com.icloud.stock.model.UserUrlAccessCount;
 import com.icloud.stock.service.IUserUrlAccessCountService;
@@ -77,6 +78,13 @@ public class UserUrlAccessCountServiceImpl extends
 	public int getCountOfUserIds(Date createTime, String userIds) {
 		return this.userUrlAccessCountDao
 				.getCountOfUserIds(createTime, userIds);
+	}
+
+	@Override
+	public List<UserUrlAccessCount> getUserAccessCountDetailByUserIdAndDate(
+			String userIds, Date date) {
+		return this.userUrlAccessCountDao
+				.getUserAccessCountDetailByUserIdAndDate(userIds, date);
 	}
 
 }

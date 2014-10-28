@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.icloud.framework.util.ICloudUtils;
 import com.icloud.stock.model.User;
 import com.icloud.stock.model.UserUrlAccessCount;
+import com.icloud.user.bussiness.po.UserInfoPo;
 
 /**
  * @comment
@@ -21,6 +23,19 @@ public class UserUrlAccessCountPo {
 	private String userName;
 
 	public static UserUrlAccessCountPo convertUserUrlAccessCount(
+			UserUrlAccessCount userUrlAccessCount, UserInfoPo user) {
+		UserUrlAccessCountPo po = new UserUrlAccessCountPo();
+		po.setId(userUrlAccessCount.getId());
+		po.setUserId(userUrlAccessCount.getUserId());
+		po.setCount(userUrlAccessCount.getCount());
+		po.setAllCount(userUrlAccessCount.getAllCount());
+		po.setCreateTime(userUrlAccessCount.getCreateTime());
+		if (ICloudUtils.isNotNull(user))
+			po.setUserName(user.getUserName());
+		return po;
+	}
+	
+	public static UserUrlAccessCountPo convertUserUrlAccessCount(
 			UserUrlAccessCount userUrlAccessCount, User user) {
 		UserUrlAccessCountPo po = new UserUrlAccessCountPo();
 		po.setId(userUrlAccessCount.getId());
@@ -28,7 +43,8 @@ public class UserUrlAccessCountPo {
 		po.setCount(userUrlAccessCount.getCount());
 		po.setAllCount(userUrlAccessCount.getAllCount());
 		po.setCreateTime(userUrlAccessCount.getCreateTime());
-		po.setUserName(user.getUserName());
+		if (ICloudUtils.isNotNull(user))
+			po.setUserName(user.getUserName());
 		return po;
 	}
 

@@ -2,8 +2,10 @@ package com.icloud.front.juhuasuan.bussiness;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
@@ -16,6 +18,7 @@ import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.juhuasuan.bussiness.po.UserUrlAccessCountPo;
 import com.icloud.front.juhuasuan.constant.JuhuasuanConstants;
 import com.icloud.front.juhusuan.pojo.JuhuasuanFrontSession;
+import com.icloud.front.user.bussiness.UserAdminBusiness;
 import com.icloud.juhuasuan.util.UrlCodeUtil;
 import com.icloud.stock.dao.IJuhuasuanDetailDao;
 import com.icloud.stock.dao.IJuhuasuanSessionDao;
@@ -27,9 +30,12 @@ import com.icloud.stock.model.JuhuasuanSession;
 import com.icloud.stock.model.JuhuasuanUrl;
 import com.icloud.stock.model.User;
 import com.icloud.stock.model.UserUrlAccessCount;
+import com.icloud.user.bussiness.po.UserInfoPo;
 
 @Service("juhuasuanBussiness")
 public class JuhuasuanBussiness extends BaseAction {
+	@Resource(name = "userAdminBusiness")
+	protected UserAdminBusiness userAdminBusiness;
 
 	/**
 	 * 这个是不需要加入锁机制的。
@@ -462,6 +468,41 @@ public class JuhuasuanBussiness extends BaseAction {
 						pagination.getStart(), pagination.getPageSize());
 		pagination.setData(UserUrlAccessCountPo.convertUserUrlAccessCount(list,
 				user));
+		pagination.build();
+		return pagination;
+	}
+
+	/**
+	 * @param tmpUser
+	 * @param date
+	 * @param pageNo
+	 * @param limit
+	 * @return Pagination<UserUrlAccessCountPo>
+	 * @throws
+	 */
+	public Pagination<UserUrlAccessCountPo> getJuhuaSuanUserAccessCountDetaiByUserIdAndDate(
+			User tmpUser, Date date, int pageNo, int limit) {
+		Pagination<UserInfoPo> p = userAdminBusiness.getUsersByUser(tmpUser,
+				pageNo, limit);
+		Pagination<UserUrlAccessCountPo> pagination = Pagination.getInstance(
+				pageNo, limit);
+		pagination.setTotalItemCount(p.getTotalItemCount());
+		if (!ICloudUtils.isEmpty(p.getData())) {
+			String userIds = UserInfoPo.getUserIds(p.getData());
+			List<UserUrlAccessCount> list = this.userUrlAccessCountService
+					.getUserAccessCountDetailByUserIdAndDate(userIds, date);
+			HashMap<Integer, UserInfoPo> map = new HashMap<Integer, UserInfoPo>();
+			for (UserInfoPo user : p.getData()) {
+				map.put(user.getUserId(), user);
+			}
+			List<UserUrlAccessCountPo> userUrlAccessCountPos = new ArrayList<UserUrlAccessCountPo>();
+			for (UserUrlAccessCount count : list) {
+				userUrlAccessCountPos.add(UserUrlAccessCountPo
+						.convertUserUrlAccessCount(count,
+								map.get(count.getUserId())));
+			}
+			pagination.setData(userUrlAccessCountPos);
+		}
 		pagination.build();
 		return pagination;
 	}

@@ -4,13 +4,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
-
-import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.icloud.framework.core.wrapper.PageView;
 import com.icloud.framework.core.wrapper.Pagination;
+import com.icloud.framework.util.DateUtils;
 import com.icloud.framework.util.ExcelIEUtil;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.framework.vo.KeyValue;
@@ -30,9 +30,11 @@ import com.icloud.front.stock.baseaction.BaseStockController;
 import com.icloud.front.stock.pojo.JuhuasuanSearchBean;
 import com.icloud.front.stock.pojo.JuhuasuanUrlBean;
 import com.icloud.front.stock.pojo.UploadFileRequest;
+import com.icloud.front.user.pojo.UserInfo;
 import com.icloud.front.utils.ModelAndViewUtils;
 import com.icloud.stock.model.JuhuasuanDetail;
 import com.icloud.stock.model.JuhuasuanUrl;
+import com.icloud.stock.model.User;
 
 @Controller
 @RequestMapping("/usertb")
@@ -198,11 +200,46 @@ public class JuhuaSuanManagerController extends BaseStockController {
 	}
 
 	@RequestMapping("trafficUserView")
-	public ModelAndView trafficUserView(JuhuasuanSearchBean searhBean) {
+	public ModelAndView trafficUserView(JuhuasuanSearchBean searchBean) {
 		ModelAndView modelAndView = getModelAndView("user/taobao/trafficUserView");
+		User user = this.getUser();
+		User tmpUser = user;
+		int memberId = ICloudUtils.parseInt(searchBean.getMemberId());
+		if (memberId != -1 && user.getId() != memberId) {
+			UserInfo info = new UserInfo();
+			info.setUserId(memberId);
+			User u = this.userAdminBusiness.getUserByUserInfo(info);
+			if (ICloudUtils.isNotNull(tmpUser)) {
+				tmpUser = u;
+			}
+		}
 		Pagination<UserUrlAccessCountPo> pagination = this.juhuasuanBussiness
-				.getJuhuaSuanUserAccessCountByUserId(this.getUser(),
-						searhBean.getPageNo(), searhBean.getLimit());
+				.getJuhuaSuanUserAccessCountByUserId(tmpUser,
+						searchBean.getPageNo(), searchBean.getLimit());
+		modelAndView.addObject("tmpUser", tmpUser);
+		ModelAndViewUtils.addPageView(modelAndView, pagination);
+		return modelAndView;
+	}
+
+	@RequestMapping("trafficUserDetailView")
+	public ModelAndView trafficUserDetailView(JuhuasuanSearchBean searchBean) {
+		ModelAndView modelAndView = getModelAndView("user/taobao/trafficUserDetailView");
+		User user = this.getUser();
+		User tmpUser = user;
+		int memberId = ICloudUtils.parseInt(searchBean.getMemberId());
+		if (memberId != -1 && user.getId() != memberId) {
+			UserInfo info = new UserInfo();
+			info.setUserId(memberId);
+			User u = this.userAdminBusiness.getUserByUserInfo(info);
+			if (ICloudUtils.isNotNull(tmpUser)) {
+				tmpUser = u;
+			}
+		}
+		Date date = DateUtils.getJustDate(searchBean.getDate());
+		Pagination<UserUrlAccessCountPo> pagination = this.juhuasuanBussiness
+				.getJuhuaSuanUserAccessCountDetaiByUserIdAndDate(tmpUser, date,
+						searchBean.getPageNo(), searchBean.getLimit());
+		modelAndView.addObject("tmpUser", tmpUser);
 		ModelAndViewUtils.addPageView(modelAndView, pagination);
 		return modelAndView;
 	}

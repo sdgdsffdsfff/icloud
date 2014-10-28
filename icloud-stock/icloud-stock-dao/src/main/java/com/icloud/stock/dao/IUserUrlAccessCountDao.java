@@ -1,6 +1,7 @@
 ﻿package com.icloud.stock.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import com.icloud.dao.StockBaseDao;
 import com.icloud.stock.model.UserUrlAccessCount;
@@ -38,4 +39,14 @@ public interface IUserUrlAccessCountDao extends
 	 * @throws 
 	 */
 	int getCountOfUserIds(Date createTime, String userIds);
+
+	/** 
+	 * @param userIds
+	 * @param date
+	 * @return
+	 * List<UserUrlAccessCountPo>
+	 * @throws 
+	 */
+	List<UserUrlAccessCount> getUserAccessCountDetailByUserIdAndDate(
+			String userIds, Date date);
 }

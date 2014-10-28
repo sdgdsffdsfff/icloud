@@ -7,7 +7,6 @@
                                 <th>个人流量</th>
                                 <th>代理流量</th>
                                 <th>全部流量</th>
-                                <th>操作</th>
                             </tr>
                         </thead>
                         <#if pagination??>
@@ -18,7 +17,6 @@
                             <td>${accessCount.count!""}</td>
                             <td>${(accessCount.allCount-accessCount.count)}</td>
                             <td>${accessCount.allCount!""}</td>
-                            <td><a href="${basepath}/usertb/trafficUserDetailView?memberId=${accessCount.userId}&date=${accessCount.createTime?string('YYYY-MM-dd')}">详情</a></td>
                         </tr>
                         </#list>
                         </#if>

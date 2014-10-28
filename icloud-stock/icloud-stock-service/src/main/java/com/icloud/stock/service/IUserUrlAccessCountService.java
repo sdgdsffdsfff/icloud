@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.icloud.framework.service.ISqlBaseService;
+import com.icloud.front.juhuasuan.bussiness.po.UserUrlAccessCountPo;
 import com.icloud.stock.model.UserUrlAccessCount;
 
 public interface IUserUrlAccessCountService extends
@@ -49,5 +50,15 @@ public interface IUserUrlAccessCountService extends
 	 * @throws 
 	 */
 	int getCountOfUserIds(Date createTime, String userIds);
+
+	/** 
+	 * @param userIds
+	 * @param date
+	 * @return
+	 * List<UserUrlAccessCountPo>
+	 * @throws 
+	 */
+	List<UserUrlAccessCount> getUserAccessCountDetailByUserIdAndDate(
+			String userIds, Date date);
 
 }

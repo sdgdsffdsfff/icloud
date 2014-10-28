@@ -121,12 +121,7 @@ public class JuhuasuanStatBusiness extends BaseAction {
 						.getChildrenUserPo(user);
 				List<UserInfoPo> allUserList = userPo.getAllUser();
 				allUserList.add(UserInfoPo.convertUser(user));
-				StringBuffer sb = new StringBuffer();
-				for (UserInfoPo tmpUser : allUserList) {
-					sb.append(tmpUser.getUserId() + ",");
-				}
-				userIds = sb.toString();
-				userIds = userIds.substring(0, userIds.length() - 1);
+				userIds = UserInfoPo.getUserIds(allUserList);
 			}
 			/**
 			 * 获得所有用户的子用户

@@ -8,9 +8,9 @@
     <h1 class="us-title">成员流量-${tmpUser.userName!""}</h1>
         <div class="us-body">
             <div class="tab_item">
-                  <#include "/user/taobao/template/juhusuan-access-count-template.ftl"/>
+                  <#include "/user/taobao/template/juhusuan-access-count-detail-template.ftl"/>
             </div>
-            <@pView.pagination param1='9' param2='${tmpUser.id}' param3='33'/>
+            <@pView.pagination param1='10' param2='${tmpUser.id}' param3='33'/>
         </div>
 </main>
 </@imc.mainContainer>
