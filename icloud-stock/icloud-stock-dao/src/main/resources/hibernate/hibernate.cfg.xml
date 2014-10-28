@@ -5,18 +5,34 @@
 	<session-factory>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.password">Qaz12345</property>
-		<!--<property name="hibernate.connection.url">jdbc:mysql://103.242.109.49:3306/icloud?autoReconnect=true&amp;characterEncoding=UTF-8&amp;</property>-->
+		<!--<property name="hibernate.connection.url">jdbc:mysql://103.242.109.49:3306/icloud?autoReconnect=true&amp;characterEncoding=UTF-8&amp;</property> -->
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/icloud?autoReconnect=true&amp;characterEncoding=UTF-8&amp;</property>
 		<property name="hibernate.connection.username">wordpress</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="show_sql">false</property>
-		<property name="c3p0.min_size">5</property>
-		<property name="c3p0.max_size">30</property>
-		<property name="c3p0.timeout">3800</property>
-		<property name="c3p0.max_statements">50</property>
+		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+		<!--连接池的最小连接数 -->
+		<property name="hibernate.c3p0.min_size">5</property>
+		<!--最大连接数 -->
+		<property name="hibernate.c3p0.max_size">30</property>
+		<!--连接超时时间 -->
+		<property name="hibernate.c3p0.timeout">1800</property>
+		<!--statemnets缓存大小 -->
+		<property name="hibernate.c3p0.max_statements">100</property>
+		<!--每隔多少秒检测连接是否可正常使用 -->
+		<property name="hibernate.c3p0.idle_test_period">121</property>
+		<!--当池中的连接耗尽的时候，一次性增加的连接数量,默认为3 -->
+		<property name="hibernate.c3p0.acquire_increment">1</property>
+		<!-- 下面这句很重要，后面有解释 -->
+		<property name="hibernate.c3p0.testConnectionOnCheckout">true</property>
+		<property name="hibernate.c3p0.validate">true</property>
+		<!-- <property name="c3p0.min_size">5</property> <property name="c3p0.max_size">30</property> 
+			<property name="c3p0.timeout">3800</property> <property name="c3p0.max_statements">50</property> -->
 		<property name="hbm2ddl.auto">update</property>
 		<property name="jdbc.batch_size">110</property>
 		<property name="connection.autocommit">true</property>
+		
+
 		<mapping resource="model/Category.hbm.xml" />
 		<mapping resource="model/CategoryStock.hbm.xml" />
 		<mapping resource="model/Session.hbm.xml" />

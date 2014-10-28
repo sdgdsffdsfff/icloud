@@ -43,7 +43,7 @@ ext {
     /* C */
 
     // c3p0
-    c3p0:                   'c3p0:c3p0:0.9.1.2',
+    c3p0:                   'c3p0:c3p0:0.9.1',
 
     // chinapnr
     chinapnr01:             'com.chinapnr:chinapnr01:1.0',

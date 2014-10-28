@@ -22,5 +22,9 @@ dependencies {
 	    exclude group:'log4j'
 		exclude group:'org.slf4j'
 	}
+	
+	compile (libraries.hibernate_c3p0) {
+	    exclude group:'c3p0'
+	}
 
 }
