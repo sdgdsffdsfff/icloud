@@ -13,25 +13,29 @@ import com.icloud.framework.dao.hibernate.HiberanateEnum.OperationEnum;
 import com.icloud.framework.dao.hibernate.HiberanateParamters;
 import com.icloud.framework.util.DateUtils;
 import com.icloud.framework.util.ICloudUtils;
+import com.icloud.front.juhuasuan.bussiness.po.UserUrlAccessCountPo;
 import com.icloud.front.juhuasuan.constant.JuhuasuanConstants;
 import com.icloud.front.juhusuan.pojo.JuhuasuanFrontSession;
 import com.icloud.juhuasuan.util.UrlCodeUtil;
 import com.icloud.stock.dao.IJuhuasuanDetailDao;
 import com.icloud.stock.dao.IJuhuasuanSessionDao;
 import com.icloud.stock.dao.IJuhuasuanUrlDao;
+import com.icloud.stock.dao.IUserUrlAccessCountDao;
 import com.icloud.stock.dict.StockConstants;
 import com.icloud.stock.model.JuhuasuanDetail;
 import com.icloud.stock.model.JuhuasuanSession;
 import com.icloud.stock.model.JuhuasuanUrl;
+import com.icloud.stock.model.User;
+import com.icloud.stock.model.UserUrlAccessCount;
 
 @Service("juhuasuanBussiness")
 public class JuhuasuanBussiness extends BaseAction {
 
 	/**
 	 * 这个是不需要加入锁机制的。
+	 * 
 	 * @param url
-	 * @return
-	 * JuhuasuanUrl
+	 * @return JuhuasuanUrl
 	 * @throws
 	 */
 	public JuhuasuanUrl saveJuhuasuanUrl(JuhuasuanUrl url) {
@@ -428,5 +432,37 @@ public class JuhuasuanBussiness extends BaseAction {
 			newUrl.setOriginUrl(url.getOriginUrl());
 		}
 		return flag;
+	}
+
+	/**
+	 * @param userId
+	 * @param pageNo
+	 * @param limit
+	 *            void
+	 * @throws
+	 */
+	public Pagination<UserUrlAccessCountPo> getJuhuaSuanUserAccessCountByUserId(
+			User user, int pageNo, int limit) {
+		Pagination<UserUrlAccessCountPo> pagination = Pagination.getInstance(
+				pageNo, limit);
+		HiberanateParamters hiberanateParamters = new HiberanateParamters();
+
+		hiberanateParamters.addOperationsValue(IUserUrlAccessCountDao.USERID,
+				OperationEnum.EQUALS, user.getId());
+		long count = this.userUrlAccessCountService.countByProperty(
+				hiberanateParamters.getParams(),
+				hiberanateParamters.getOperations(),
+				hiberanateParamters.getValues());
+		pagination.setTotalItemCount(count);
+		List<UserUrlAccessCount> list = this.userUrlAccessCountService
+				.findByProperty(hiberanateParamters.getParams(),
+						hiberanateParamters.getOperations(),
+						hiberanateParamters.getValues(),
+						IUserUrlAccessCountDao.CREATETIME, false,
+						pagination.getStart(), pagination.getPageSize());
+		pagination.setData(UserUrlAccessCountPo.convertUserUrlAccessCount(list,
+				user));
+		pagination.build();
+		return pagination;
 	}
 }

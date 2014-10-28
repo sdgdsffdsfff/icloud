@@ -24,11 +24,13 @@ import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.util.ExcelIEUtil;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.framework.vo.KeyValue;
+import com.icloud.front.juhuasuan.bussiness.po.UserUrlAccessCountPo;
 import com.icloud.front.juhusuan.pojo.JuhuasuanFrontSession;
 import com.icloud.front.stock.baseaction.BaseStockController;
 import com.icloud.front.stock.pojo.JuhuasuanSearchBean;
 import com.icloud.front.stock.pojo.JuhuasuanUrlBean;
 import com.icloud.front.stock.pojo.UploadFileRequest;
+import com.icloud.front.utils.ModelAndViewUtils;
 import com.icloud.stock.model.JuhuasuanDetail;
 import com.icloud.stock.model.JuhuasuanUrl;
 
@@ -197,8 +199,11 @@ public class JuhuaSuanManagerController extends BaseStockController {
 
 	@RequestMapping("trafficUserView")
 	public ModelAndView trafficUserView(JuhuasuanSearchBean searhBean) {
-		// searhBean.setLimit(4);
 		ModelAndView modelAndView = getModelAndView("user/taobao/trafficUserView");
+		Pagination<UserUrlAccessCountPo> pagination = this.juhuasuanBussiness
+				.getJuhuaSuanUserAccessCountByUserId(this.getUser(),
+						searhBean.getPageNo(), searhBean.getLimit());
+		ModelAndViewUtils.addPageView(modelAndView, pagination);
 		return modelAndView;
 	}
 
@@ -229,6 +234,7 @@ public class JuhuaSuanManagerController extends BaseStockController {
 	public ModelAndView uploadUrlView(HttpServletResponse response)
 			throws IOException {
 		ModelAndView modelAndView = getModelAndView("user/taobao/upload-url-view");
+
 		return modelAndView;
 	}
 

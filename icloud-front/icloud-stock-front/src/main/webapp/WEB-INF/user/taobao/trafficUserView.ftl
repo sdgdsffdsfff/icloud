@@ -3,14 +3,14 @@
 <#import "/user/taobao/template/juhuasuan-select-template.ftl" as jst/>
 <#import "/icloud/pageView.ftl" as pView/>
 <@imc.mainContainer current="短链接"  jsFiles=['layer/layer.min.js','icloud/juhuasuan-detail.js'] cssFiles=['icloud/icloud_usercenter.css',"icloud/stock.css"] >
-<@ucm.userCenterMenus current="访问数据"/>
+<@ucm.userCenterMenus current="成员流量"/>
 <main class="us-content">
-    <h1 class="us-title">成员流量-${url_name!"当天访问量"}</h1>
+    <h1 class="us-title">成员流量</h1>
         <div class="us-body">
             <div class="tab_item">
-                
+                  <#include "/user/taobao/template/juhusuan-access-count-template.ftl"/>
             </div>
-            
+            <@pView.pagination param1='-1' param2='0' param3='33'/>
         </div>
 </main>
 </@imc.mainContainer>

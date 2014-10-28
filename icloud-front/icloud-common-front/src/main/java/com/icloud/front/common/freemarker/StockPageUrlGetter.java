@@ -2,6 +2,11 @@ package com.icloud.front.common.freemarker;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 import com.icloud.framework.core.util.TZUtil;
 
 import freemarker.template.TemplateMethodModel;
@@ -39,6 +44,10 @@ public class StockPageUrlGetter implements TemplateMethodModel {
 			return "href=\"allUrlStatistics?pageNo=" + pageNo + "\"";
 		} else if ("8".equalsIgnoreCase(pageId)) {
 			return "href=\"myFollowerList?pageNo=" + pageNo + "\"";
+		} else if ("-1".equalsIgnoreCase(pageId)) {
+			// HttpServletRequest request = ((ServletRequestAttributes)
+			// RequestContextHolder.getRequestAttributes()).getRequest();
+			return "href=\"?pageNo=" + pageNo + "\"";
 		}
 		return "/stock/index";
 	}
