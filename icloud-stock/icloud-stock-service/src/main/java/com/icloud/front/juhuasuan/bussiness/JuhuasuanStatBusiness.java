@@ -37,13 +37,22 @@ public class JuhuasuanStatBusiness extends BaseAction {
 	}
 
 	@Transactional
+	public UserUrlAccessCount getUserAccessCountByUserIdAndDate(Integer userId,
+			Date startDate) {
+		UserUrlAccessCount userUrlAccessCount = this.userUrlAccessCountService
+				.getUserAccessCountByUserIdAndDate(userId, startDate);
+		return userUrlAccessCount;
+	}
+
+	@Transactional
 	public void updateUserUrlAccessCount(Integer userId, Date startDate,
 			Date tmpDate) {
 		/**
 		 * 需要保证唯一性
 		 */
-		UserUrlAccessCount userUrlAccessCount = this.userUrlAccessCountService
-				.getUserAccessCountByUserIdAndDate(userId, startDate);
+		logger.info("userId:{},startDate:{}", userId, startDate);
+		UserUrlAccessCount userUrlAccessCount = getUserAccessCountByUserIdAndDate(
+				userId, startDate);
 		long count = this.juhuasuanBussiness.getCountOfJuhusuanDetail(userId,
 				startDate, tmpDate);
 		int s = (int) count;
@@ -63,7 +72,6 @@ public class JuhuasuanStatBusiness extends BaseAction {
 		}
 	}
 
-	@Transactional
 	public void updateSingleAccessCount(Integer userId, Date startDate,
 			Date endDate) {
 		if (ICloudUtils.isNotNull(userId) && ICloudUtils.isNotNull(startDate)
@@ -77,7 +85,6 @@ public class JuhuasuanStatBusiness extends BaseAction {
 		}
 	}
 
-	@Transactional
 	public void updateUserSingleAccessCount(User user, Date now) {
 		if (!ICloudUtils.isNotNull(user)) {
 			return;

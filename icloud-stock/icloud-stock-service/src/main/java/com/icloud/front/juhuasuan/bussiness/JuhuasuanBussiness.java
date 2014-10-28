@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.dao.hibernate.HiberanateEnum.OperationEnum;
@@ -312,6 +313,7 @@ public class JuhuasuanBussiness extends BaseAction {
 	 * @return long
 	 * @throws
 	 */
+	@Transactional
 	public long getCountOfJuhusuanDetail(int userId, Date startDate,
 			Date endDate) {
 		HiberanateParamters hiberanateParamters = new HiberanateParamters();

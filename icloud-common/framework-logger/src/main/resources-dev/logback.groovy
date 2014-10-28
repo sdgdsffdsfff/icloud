@@ -21,7 +21,7 @@ appender("stdout", ConsoleAppender) {
     pattern = "%d{YYYY-MM-dd HH:mm:ss} [%level] %logger{50} [%file:%line]-> %X{rpid} %msg %n%ex"
   }
 }
-root(INFO, ["stdout"])
+root(DEBUG, ["stdout"])
 logger("com.icloud", DEBUG)
 logger("com.ibatis", DEBUG)
 logger("java.sql.Connection", DEBUG)

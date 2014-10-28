@@ -108,5 +108,16 @@ public class JuhuasuanBussinessTest extends StockBussinessTest {
 	@Test
 	public void updateUserUrlAccessCountDaily() {
 		this.juhuasuanStatBusiness.updateUserUrlAccessCountDaily();
+		// for (int i = 0; i < 1000000; i++) {
+		// // long count = this.juhuasuanStatBusiness.userService.count();
+		// // User user = this.juhuasuanStatBusiness.userService.getById(1);
+		// AllUserPo userPo = juhuasuanStatBusiness.getAllUserPo();
+		//
+		// User nextUser = userPo.next();
+		// while (ICloudUtils.isNotNull(nextUser)) {
+		// nextUser = userPo.next();
+		// }
+		// logger.info("i: {}", i);
+		// }
 	}
 }
