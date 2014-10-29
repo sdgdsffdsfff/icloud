@@ -42,6 +42,14 @@
                         <td class="td_head">手机：</td>
                         <td>${(icloudUser.userTel)!''}</td>
                     </tr>
+                     <tr>
+                        <td class="td_head">运行状态：</td>
+                        <td><#if icloudUser.open==0>暂停服务<#else>正常</#if></td>
+                    </tr>
+                    <tr>
+                        <td class="td_head">代理资格：</td>
+                        <td>${(icloudUser.level)!''}级代理</td>
+                    </tr>
                 </tbody>
             </table>
             <form action="${basepath}/user/modifyBaseInfo" method="post" id="baseInfoForm">

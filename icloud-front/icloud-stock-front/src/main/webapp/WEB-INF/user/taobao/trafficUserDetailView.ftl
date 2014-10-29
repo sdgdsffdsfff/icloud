@@ -5,13 +5,14 @@
 <@imc.mainContainer current="短链接"  jsFiles=['layer/layer.min.js'] cssFiles=['icloud/icloud_usercenter.css',"icloud/stock.css"] >
 <@ucm.userCenterMenus current="成员流量"/>
 <main class="us-content">
-    <h1 class="us-title">流量详情-
+    <h1 class="us-title">流量详情(${date!""})-
     <#if parentsUsers??>
     	<#list parentsUsers as u>
-    		${u.userName!""}>
+    		<a href="${basepath}/usertb/trafficUserView?memberId=${u.id}">${u.userName!""}></a>
     	</#list>
+    	>  <a href="${basepath}/usertb/trafficUserView?memberId=${tmpUser.id}">${tmpUser.userName!""}</a>
     <#else>
-      ${tmpUser.userName!""}
+      <a href="${basepath}/usertb/trafficUserView?memberId=${tmpUser.id}">${tmpUser.userName!""}</a>
     </#if>
     </h1>
         <div class="us-body">

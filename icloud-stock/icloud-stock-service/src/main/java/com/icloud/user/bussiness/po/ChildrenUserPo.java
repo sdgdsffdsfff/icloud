@@ -29,10 +29,12 @@ public class ChildrenUserPo {
 		this.limit = limit;
 		users = new ArrayList<UserInfoPo>();
 		this.user = user;
-		Pagination<UserInfoPo> pagination = this.userAdminBusiness.getUsersByUser(
-				user, pageNo, limit);
+		Pagination<UserInfoPo> pagination = this.userAdminBusiness
+				.getUsersByUser(user, pageNo, limit);
 		pageCount = pagination.getTotalPageCount();
-		users = (List<UserInfoPo>) pagination.getData();
+		if (!ICloudUtils.isEmpty(pagination.getData())) {
+			users = (List<UserInfoPo>) pagination.getData();
+		}
 		pageNo = pageNo++;
 	}
 

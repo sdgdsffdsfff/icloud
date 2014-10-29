@@ -1,18 +1,23 @@
 package com.icloud.front.user.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.framework.util.StringEncoder;
 import com.icloud.front.common.utils.ICloudUserContextHolder;
 import com.icloud.front.stock.baseaction.BaseStockController;
+import com.icloud.front.stock.pojo.JsonResponseResult;
 import com.icloud.front.stock.pojo.JuhuasuanSearchBean;
 import com.icloud.front.user.pojo.RegisterUser;
 import com.icloud.front.user.utils.ICloudMemberUtils;
@@ -168,7 +173,43 @@ public class ICloudUserController extends BaseStockController {
 	}
 
 	@RequestMapping("/operateUser")
-	public void operateUser(int operatorId, int userId, int operation) {
+	@ResponseBody
+	public String operateUser(int operatorId, int userId, int operation,
+			HttpServletResponse response) {
 		User user = this.getUser();
+		User operationUser = this.userAdminBusiness.getUser(userId);
+		JsonResponseResult result = new JsonResponseResult();
+		result.setResult(0);
+		result.setTip("对不起，你没有权限进行此操作");
+		if (this.userAdminBusiness.auth(user, operationUser)) {
+			if (operatorId == 1) { // 取消
+				if (operation == 1) { // 暂停运行
+					operationUser.setOpen(0);
+					this.userAdminBusiness.update(operationUser);
+					result.setResult(1);
+					result.setTip("成功暂停该用户");
+				} else if (operation == 0) {
+					operationUser.setOpen(1);
+					this.userAdminBusiness.update(operationUser);
+					result.setResult(1);
+					result.setTip("成功启动该用户");
+				}
+			} else if (operatorId == 2) {
+				if (operation == 1) { // 取消level
+					operationUser.setPromotion(0);
+					this.userAdminBusiness.update(operationUser);
+					result.setResult(1);
+					result.setTip("成功取消用户的代理资格");
+				} else if (operation == 0) { // 加入level
+					operationUser.setPromotion(1);
+					this.userAdminBusiness.update(operationUser);
+					result.setResult(1);
+					result.setTip("成功为该用户添加代理资格");
+				}
+			}
+		}
+
+		Gson gson = new Gson();
+		return gson.toJson(result);
 	}
 }

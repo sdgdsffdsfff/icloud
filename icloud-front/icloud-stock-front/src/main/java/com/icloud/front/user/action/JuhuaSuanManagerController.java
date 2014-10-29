@@ -226,7 +226,9 @@ public class JuhuaSuanManagerController extends BaseStockController {
 				.getJuhuaSuanUserAccessCountByUserId(tmpUser,
 						searchBean.getPageNo(), searchBean.getLimit());
 		modelAndView.addObject("tmpUser", tmpUser);
-		modelAndView.addObject("parentsUsers", parentsUsers);
+		if (!ICloudUtils.isEmpty(parentsUsers)) {
+			modelAndView.addObject("parentsUsers", parentsUsers);
+		}
 		ModelAndViewUtils.addPageView(modelAndView, pagination);
 		return modelAndView;
 	}
@@ -242,8 +244,11 @@ public class JuhuaSuanManagerController extends BaseStockController {
 						searchBean.getPageNo(), searchBean.getLimit());
 		List<User> parentsUsers = this.userAdminBusiness.findParentsUsers(user,
 				tmpUser);
-		modelAndView.addObject("parentsUsers", parentsUsers);
+		if (!ICloudUtils.isEmpty(parentsUsers)) {
+			modelAndView.addObject("parentsUsers", parentsUsers);
+		}
 		modelAndView.addObject("tmpUser", tmpUser);
+		modelAndView.addObject("date",searchBean.getDate());
 		ModelAndViewUtils.addPageView(modelAndView, pagination);
 		return modelAndView;
 	}

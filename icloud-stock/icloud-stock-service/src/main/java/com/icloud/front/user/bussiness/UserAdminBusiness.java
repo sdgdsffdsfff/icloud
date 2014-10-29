@@ -34,6 +34,10 @@ public class UserAdminBusiness extends UserBusiness {
 		return null;
 	}
 
+	public User getUser(int userId) {
+		return this.userService.getById(userId);
+	}
+
 	public User getUser(LoginUser loginUser) {
 		if (ICloudUtils.isNotNull(loginUser)
 				&& ICloudUtils.isNotNull(loginUser.getEmail())
@@ -134,6 +138,11 @@ public class UserAdminBusiness extends UserBusiness {
 				} else {
 					info.setAddUser(true);
 				}
+				if (user.getOpen() == 1) {
+					info.setOpen(true);
+				} else {
+					info.setOpen(false);
+				}
 				return info;
 			}
 		}
@@ -188,16 +197,22 @@ public class UserAdminBusiness extends UserBusiness {
 				limit);
 
 		List<User> users = getChildrenUser(fatherId);
-		if (ICloudUtils.isNotNull(users)) {
+		if (!ICloudUtils.isEmpty(users)) {
 			Deque<User> deque = new ArrayDeque<User>();
 			deque.addAll(users);
 			Queue<User> queue = Collections.asLifoQueue(deque);
 			User peekUser = queue.remove();
 			while (ICloudUtils.isNotNull(peekUser)) {
-				List tmpUsers = getChildrenUser(peekUser.getFatherId());
-				users.addAll(tmpUsers);
-				queue.addAll(tmpUsers);
-				peekUser = queue.remove();
+				List tmpUsers = getChildrenUser(peekUser.getId());
+				if (!ICloudUtils.isEmpty(tmpUsers)) {
+					users.addAll(tmpUsers);
+					queue.addAll(tmpUsers);
+				}
+				if (queue.size() > 0) {
+					peekUser = queue.remove();
+				} else {
+					peekUser = null;
+				}
 			}
 		}
 		int count = users.size();
@@ -232,9 +247,9 @@ public class UserAdminBusiness extends UserBusiness {
 	 * @throws
 	 */
 	public List<User> findParentsUsers(User user, User childUser) {
+		List<User> list = new LinkedList<User>();
 		if (ICloudUtils.isNotNull(user) && ICloudUtils.isNotNull(childUser)) {
-			List<User> list = new LinkedList<User>();
-			list.add(childUser);
+			// list.add(childUser);
 			User tmp = childUser;
 			while (user.getId() != childUser.getId()
 					&& ICloudUtils.isNotNull(childUser.getFatherId())
@@ -250,5 +265,27 @@ public class UserAdminBusiness extends UserBusiness {
 			return list;
 		}
 		return null;
+	}
+
+	public boolean auth(User user, User operationUser) {
+		if (ICloudUtils.isNotNull(user) && ICloudUtils.isNotNull(operationUser)) {
+			if (operationUser.getId() == 1)
+				return false;
+			if (user.getId() == operationUser.getId())
+				return true;
+			if (user.getId() == 1)
+				return true;
+
+			List<User> list = this.findParentsUsers(user, operationUser);
+			for (User tmp : list) {
+				if (tmp.getId() == user.getId())
+					return true;
+			}
+		}
+		return false;
+	}
+
+	public void update(User user) {
+		this.userService.update(user);
 	}
 }

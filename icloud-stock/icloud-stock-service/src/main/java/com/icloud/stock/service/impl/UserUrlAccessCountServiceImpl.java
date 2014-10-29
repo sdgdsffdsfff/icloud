@@ -75,14 +75,14 @@ public class UserUrlAccessCountServiceImpl extends
 	}
 
 	@Override
-	public int getCountOfUserIds(Date createTime, String userIds) {
+	public int getCountOfUserIds(Date createTime, List<Integer> userIds) {
 		return this.userUrlAccessCountDao
 				.getCountOfUserIds(createTime, userIds);
 	}
 
 	@Override
 	public List<UserUrlAccessCount> getUserAccessCountDetailByUserIdAndDate(
-			String userIds, Date date) {
+			List<Integer> userIds, Date date) {
 		return this.userUrlAccessCountDao
 				.getUserAccessCountDetailByUserIdAndDate(userIds, date);
 	}

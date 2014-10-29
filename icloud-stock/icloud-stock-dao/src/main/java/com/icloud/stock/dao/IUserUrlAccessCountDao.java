@@ -23,30 +23,27 @@ public interface IUserUrlAccessCountDao extends
 	 */
 	Date getMaxStatTime(Integer userId);
 
-	/** 
+	/**
 	 * @param createTime2
-	 * @return
-	 * int
-	 * @throws 
+	 * @return int
+	 * @throws
 	 */
 	int getCountOfAllUser(Date createTime);
 
-	/** 
+	/**
 	 * @param createTime2
 	 * @param userIds
-	 * @return
-	 * int
-	 * @throws 
+	 * @return int
+	 * @throws
 	 */
-	int getCountOfUserIds(Date createTime, String userIds);
+	int getCountOfUserIds(Date createTime, List<Integer> userIds);
 
-	/** 
+	/**
 	 * @param userIds
 	 * @param date
-	 * @return
-	 * List<UserUrlAccessCountPo>
-	 * @throws 
+	 * @return List<UserUrlAccessCountPo>
+	 * @throws
 	 */
 	List<UserUrlAccessCount> getUserAccessCountDetailByUserIdAndDate(
-			String userIds, Date date);
+			List<Integer> userIds, Date date);
 }

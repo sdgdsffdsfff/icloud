@@ -11,7 +11,7 @@
                                 <th>操作</th>
                             </tr>
                         </thead>
-                        <#if pagination??>
+                        <#if pagination.data??>
                          <#list pagination.data as user> 
                         <tr>
                             <td><a href="${basepath}/usertb/trafficUserView?memberId=${user.userId}">${user.userName!""}</a></td>
@@ -20,8 +20,10 @@
                             <td>${user.status!""}</td>
                             <td>${user.promotion!""}</td>
                             <td>${user.fatherName!""}</td>
-                            <td><a href="#" onclick="pauseUser('${user.userId}',0);">暂停</a>&nbsp;&nbsp;
-                            <a href="#" onclick="promoteUser('${user.userId}',1);">禁止拉人</a>
+                            <td><a href="javascript:void(0)" onclick="pauseUser('${user.userId}','${user.statusId}');">${user.statusOp}</a>&nbsp;&nbsp;
+                            <#if user.promotionOp??>
+                            <a href="javascript:void(0)" onclick="promoteUser('${user.userId}','${user.promotionId}');">${user.promotionOp}</a>
+                            </#if>
                             </td>
                         </tr>
                         </#list>

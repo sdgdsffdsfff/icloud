@@ -49,7 +49,7 @@ public interface IUserUrlAccessCountService extends
 	 * int
 	 * @throws 
 	 */
-	int getCountOfUserIds(Date createTime, String userIds);
+	int getCountOfUserIds(Date createTime, List<Integer> userIds);
 
 	/** 
 	 * @param userIds
@@ -59,6 +59,6 @@ public interface IUserUrlAccessCountService extends
 	 * @throws 
 	 */
 	List<UserUrlAccessCount> getUserAccessCountDetailByUserIdAndDate(
-			String userIds, Date date);
+			List<Integer> userIds, Date date);
 
 }

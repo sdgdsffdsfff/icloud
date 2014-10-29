@@ -29,18 +29,15 @@ public class UserInfoPo extends UserInfo {
 		}
 	}
 
-	public static String getUserIds(Collection<UserInfoPo> list) {
+	public static List<Integer> getUserIds(Collection<UserInfoPo> list) {
 		if (ICloudUtils.isEmpty(list)) {
 			return null;
 		}
-		StringBuffer sb = new StringBuffer();
-		String userIds = null;
-		for (UserInfoPo tmpUser : list) {
-			sb.append(tmpUser.getUserId() + ",");
+		List<Integer> ins = new ArrayList<Integer>();
+		for (UserInfoPo po : list) {
+			ins.add(po.getUserId());
 		}
-		userIds = sb.toString();
-		userIds = userIds.substring(0, userIds.length() - 1);
-		return userIds;
+		return ins;
 	}
 
 	public static List<UserInfoPo> converUser(List<User> users) {
@@ -69,25 +66,25 @@ public class UserInfoPo extends UserInfo {
 			if (user.getOpen() == 1) {
 				po.setStatus("正常");
 				po.setStatusId(1);
-				po.setStatusOp("暂停");
+				po.setStatusOp("暂停运行");
 			} else {
 				po.setStatus("暂停服务");
 				po.setStatusId(0);
-				po.setStatusOp("启用");
+				po.setStatusOp("启用帐号");
 			}
 			if (user.getPromotion() == 1
 					&& user.getLevel() < UserConstants.USER_LEVEL_LIMIT) {
 				po.setPromotion("正常代理");
 				po.setPromotionId(1);
-				po.setPromotionOp("暂停代理");
+				po.setPromotionOp("取消代理");
 			} else if (user.getPromotion() == 1
 					&& user.getLevel() >= UserConstants.USER_LEVEL_LIMIT) {
 				po.setPromotion("不能代理");
 				po.setPromotionId(-1);
-			} else {				
-				po.setPromotion("暂停代理");
+			} else {
+				po.setPromotion("取消代理");
 				po.setPromotionId(0);
-				po.setPromotionOp("暂停代理");
+				po.setPromotionOp("加入代理");
 			}
 
 			po.setFatherId(user.getFatherId());

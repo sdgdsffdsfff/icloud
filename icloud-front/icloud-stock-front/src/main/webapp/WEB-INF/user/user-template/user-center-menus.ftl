@@ -5,6 +5,11 @@
         <dl>
             <dt>
                 <i class="ucnav_07"></i>我的淘宝</dt>
+            <#if (currentUserInfo())??>
+            	<#if !(currentUserInfo().open)>
+            	   该帐号已经暂停，请联系您的代理人！
+            	</#if>
+            </#if>
             <dd>
                 <a <#if current=="所有链接">class="current"</#if> href="${basepath}/usertb/tbList">所有链接</a>
             </dd>

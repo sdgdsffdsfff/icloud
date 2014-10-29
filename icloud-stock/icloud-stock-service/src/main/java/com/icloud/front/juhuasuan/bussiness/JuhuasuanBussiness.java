@@ -490,7 +490,7 @@ public class JuhuasuanBussiness extends BaseAction {
 				pageNo, limit);
 		pagination.setTotalItemCount(p.getTotalItemCount());
 		if (!ICloudUtils.isEmpty(p.getData())) {
-			String userIds = UserInfoPo.getUserIds(p.getData());
+			List<Integer> userIds = UserInfoPo.getUserIds(p.getData());
 			List<UserUrlAccessCount> list = this.userUrlAccessCountService
 					.getUserAccessCountDetailByUserIdAndDate(userIds, date);
 			HashMap<Integer, UserInfoPo> map = new HashMap<Integer, UserInfoPo>();

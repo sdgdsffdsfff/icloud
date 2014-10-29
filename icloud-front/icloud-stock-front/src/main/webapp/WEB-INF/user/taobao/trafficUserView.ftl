@@ -8,10 +8,11 @@
     <h1 class="us-title">流量:
     <#if parentsUsers??>
     	<#list parentsUsers as u>
-    		${u.userName!""}>
+    		<a href="${basepath}/usertb/trafficUserView?memberId=${u.id}">${u.userName!""}></a>
     	</#list>
+    	>  ${tmpUser.userName!""}
     <#else>
-            ${tmpUser.userName!""}
+        ${tmpUser.userName!""}
     </#if>
     </h1>
         <div class="us-body">

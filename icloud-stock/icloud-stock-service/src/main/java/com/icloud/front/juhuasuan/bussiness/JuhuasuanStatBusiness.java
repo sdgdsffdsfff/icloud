@@ -120,7 +120,7 @@ public class JuhuasuanStatBusiness extends BaseAction {
 				.getUserAccessCountByNullTotalCount(userId);
 		if (!ICloudUtils.isEmpty(list)) {
 			boolean isSuper = false;
-			String userIds = null;
+			List<Integer> userIds = null;
 			if (user.getLevel() == UserConstants.SUPER_USER) {
 				isSuper = true;
 			} else {
@@ -147,7 +147,7 @@ public class JuhuasuanStatBusiness extends BaseAction {
 	 * @throws
 	 */
 	@Transactional
-	private void updateAllCount(UserUrlAccessCount count, String userIds,
+	private void updateAllCount(UserUrlAccessCount count, List<Integer> userIds,
 			boolean isSuper) {
 		if (isSuper) {
 			int allCount = 0;

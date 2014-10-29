@@ -3,6 +3,10 @@ package com.icloud.stock.dao.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.stereotype.Repository;
 
 import com.icloud.dao.impl.StockBaseDaoImpl;
@@ -42,19 +46,22 @@ public class UserUrlAccessCountDaoImpl extends
 	}
 
 	@Override
-	public int getCountOfUserIds(Date createTime, String userIds) {
-		String hql = "select sum(model.count) from " + domainClass.getName()
-				+ " as model where model.createTime = ? and model.userId "
-				+ "in ?";
-		Object[] values = { createTime, userIds };
-		if (isSingle(userIds)) {
-			hql = "select sum(model.count) from " + domainClass.getName()
-					+ " as model where model.createTime = ? and model.userId "
-					+ "= ?";
-			Object[] values2 = { createTime, ICloudUtils.parseInt(userIds) };
-			values = values2;
-		}
-		List list = getHibernateTemplate().find(hql, values);
+	public int getCountOfUserIds(final Date createTime,
+			final List<Integer> userIds) {
+		final String hql = "select sum(model.count) from "
+				+ domainClass.getName()
+				+ " as model where model.createTime = (:ctime) and model.userId "
+				+ "in (:ids)";
+		List list = this.getHibernateTemplate().execute(
+				new HibernateCallback() {
+					public Object doInHibernate(Session session)
+							throws HibernateException {
+						Query queryObject = session.createQuery(hql);
+						queryObject.setParameterList("ids", userIds);
+						queryObject.setParameter("ctime", createTime);
+						return queryObject.list();
+					}
+				});
 		if (ICloudUtils.isEmpty(list)) {
 			return -1;
 		} else {
@@ -66,37 +73,20 @@ public class UserUrlAccessCountDaoImpl extends
 
 	@Override
 	public List<UserUrlAccessCount> getUserAccessCountDetailByUserIdAndDate(
-			String userIds, Date createTime) {
-		if (isSingle(userIds)) {
-			String hql = "from " + domainClass.getName()
-					+ " as model where model.createTime = ? and model.userId "
-					+ "= ?";
-			Object[] values = { createTime, ICloudUtils.parseInt(userIds) };
-			return this.findByProperty(hql, values);
-		} else {
-			String hql = "from " + domainClass.getName()
-					+ " as model where model.createTime = ? and model.userId "
-					+ "in ?";
-			Object[] values = { createTime, userIds };
-			return this.findByProperty(hql, values);
-		}
-
-	}
-
-	private boolean isSingle(String userIds) {
-
-		if (ICloudUtils.isNotNull(userIds)) {
-			String[] list = userIds.split(",");
-			int count = 0;
-			for (String str : list) {
-				if (ICloudUtils.isNotNull(str)) {
-					count++;
-					if (count > 1)
-						return false;
-				}
+			final List<Integer> userIds, final Date createTime) {
+		final String hql = "from " + domainClass.getName()
+				+ " as model where model.createTime = (:ctime) and model.userId "
+				+ "in (:ids)";
+		return this.getHibernateTemplate().execute(new HibernateCallback() {
+			public Object doInHibernate(Session session)
+					throws HibernateException {
+				Query queryObject = session.createQuery(hql);
+				queryObject.setParameterList("ids", userIds);
+				queryObject.setParameter("ctime", createTime);
+				return queryObject.list();
 			}
-			return true;
-		}
-		return true;
+		});
+		// Object[] values = { createTime, userIds };
+		// return this.findByProperty(hql, values);
 	}
 }
