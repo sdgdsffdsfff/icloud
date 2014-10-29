@@ -199,10 +199,7 @@ public class JuhuaSuanManagerController extends BaseStockController {
 		return modelAndView;
 	}
 
-	@RequestMapping("trafficUserView")
-	public ModelAndView trafficUserView(JuhuasuanSearchBean searchBean) {
-		ModelAndView modelAndView = getModelAndView("user/taobao/trafficUserView");
-		User user = this.getUser();
+	private User getStandardUser(JuhuasuanSearchBean searchBean, User user) {
 		User tmpUser = user;
 		int memberId = ICloudUtils.parseInt(searchBean.getMemberId());
 		if (memberId != -1 && user.getId() != memberId) {
@@ -213,10 +210,23 @@ public class JuhuaSuanManagerController extends BaseStockController {
 				tmpUser = u;
 			}
 		}
+		return tmpUser;
+	}
+
+	@RequestMapping("trafficUserView")
+	public ModelAndView trafficUserView(JuhuasuanSearchBean searchBean) {
+		ModelAndView modelAndView = getModelAndView("user/taobao/trafficUserView");
+		User user = this.getUser();
+		User tmpUser = getStandardUser(searchBean, user);
+
+		List<User> parentsUsers = this.userAdminBusiness.findParentsUsers(user,
+				tmpUser);
+
 		Pagination<UserUrlAccessCountPo> pagination = this.juhuasuanBussiness
 				.getJuhuaSuanUserAccessCountByUserId(tmpUser,
 						searchBean.getPageNo(), searchBean.getLimit());
 		modelAndView.addObject("tmpUser", tmpUser);
+		modelAndView.addObject("parentsUsers", parentsUsers);
 		ModelAndViewUtils.addPageView(modelAndView, pagination);
 		return modelAndView;
 	}
@@ -225,20 +235,14 @@ public class JuhuaSuanManagerController extends BaseStockController {
 	public ModelAndView trafficUserDetailView(JuhuasuanSearchBean searchBean) {
 		ModelAndView modelAndView = getModelAndView("user/taobao/trafficUserDetailView");
 		User user = this.getUser();
-		User tmpUser = user;
-		int memberId = ICloudUtils.parseInt(searchBean.getMemberId());
-		if (memberId != -1 && user.getId() != memberId) {
-			UserInfo info = new UserInfo();
-			info.setUserId(memberId);
-			User u = this.userAdminBusiness.getUserByUserInfo(info);
-			if (ICloudUtils.isNotNull(tmpUser)) {
-				tmpUser = u;
-			}
-		}
+		User tmpUser = getStandardUser(searchBean, user);
 		Date date = DateUtils.getJustDate(searchBean.getDate());
 		Pagination<UserUrlAccessCountPo> pagination = this.juhuasuanBussiness
 				.getJuhuaSuanUserAccessCountDetaiByUserIdAndDate(tmpUser, date,
 						searchBean.getPageNo(), searchBean.getLimit());
+		List<User> parentsUsers = this.userAdminBusiness.findParentsUsers(user,
+				tmpUser);
+		modelAndView.addObject("parentsUsers", parentsUsers);
 		modelAndView.addObject("tmpUser", tmpUser);
 		ModelAndViewUtils.addPageView(modelAndView, pagination);
 		return modelAndView;
@@ -271,7 +275,6 @@ public class JuhuaSuanManagerController extends BaseStockController {
 	public ModelAndView uploadUrlView(HttpServletResponse response)
 			throws IOException {
 		ModelAndView modelAndView = getModelAndView("user/taobao/upload-url-view");
-
 		return modelAndView;
 	}
 

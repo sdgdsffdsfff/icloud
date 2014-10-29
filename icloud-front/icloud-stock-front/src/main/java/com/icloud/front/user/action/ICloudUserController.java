@@ -166,4 +166,8 @@ public class ICloudUserController extends BaseStockController {
 		ModelAndViewUtils.addPageView(model, pagination);
 		return model;
 	}
+
+	@RequestMapping("/operateUser")
+	public void operateUser(int operatorId, int userId, int operation) {
+	}
 }

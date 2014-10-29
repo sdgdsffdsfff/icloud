@@ -4,6 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
@@ -183,7 +184,8 @@ public class UserAdminBusiness extends UserBusiness {
 
 	public Pagination<UserInfoPo> getChidrenUser(int fatherId, int pageNo,
 			int limit) {
-		Pagination<UserInfoPo> pagination = Pagination.getInstance(pageNo, limit);
+		Pagination<UserInfoPo> pagination = Pagination.getInstance(pageNo,
+				limit);
 
 		List<User> users = getChildrenUser(fatherId);
 		if (ICloudUtils.isNotNull(users)) {
@@ -202,7 +204,8 @@ public class UserAdminBusiness extends UserBusiness {
 		long count2 = count;
 		pagination.setTotalItemCount(count2);
 		if (count < pagination.getStart()) {
-			int end = (pagination.getStart() + limit) > count ? count : (pagination.getStart() + limit);
+			int end = (pagination.getStart() + limit) > count ? count
+					: (pagination.getStart() + limit);
 			users = users.subList(pagination.getStart(), end);
 		}
 		pagination.setData(UserInfoPo.converUser(users));
@@ -211,12 +214,41 @@ public class UserAdminBusiness extends UserBusiness {
 	}
 
 	public Pagination<UserInfoPo> getAllUsers(int pageNo, int limit) {
-		Pagination<UserInfoPo> pagination = Pagination.getInstance(pageNo, limit);
+		Pagination<UserInfoPo> pagination = Pagination.getInstance(pageNo,
+				limit);
 		long count = this.userService.count();
 		pagination.setTotalItemCount(count);
-		List<User> resultList = this.userService.findAll(pagination.getStart(), pagination.getPageSize());
+		List<User> resultList = this.userService.findAll(pagination.getStart(),
+				pagination.getPageSize());
 		pagination.setData(UserInfoPo.converUser(resultList));
 		pagination.build();
 		return pagination;
+	}
+
+	/**
+	 * @param user
+	 * @param tmpUser
+	 * @return List<User>
+	 * @throws
+	 */
+	public List<User> findParentsUsers(User user, User childUser) {
+		if (ICloudUtils.isNotNull(user) && ICloudUtils.isNotNull(childUser)) {
+			List<User> list = new LinkedList<User>();
+			list.add(childUser);
+			User tmp = childUser;
+			while (user.getId() != childUser.getId()
+					&& ICloudUtils.isNotNull(childUser.getFatherId())
+					&& childUser.getFatherId() != 0) {
+				User father = this.userService.getById(childUser.getFatherId());
+				if (ICloudUtils.isNotNull(father)) {
+					list.add(0, father);
+					childUser = father;
+				} else {
+					break;
+				}
+			}
+			return list;
+		}
+		return null;
 	}
 }

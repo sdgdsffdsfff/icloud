@@ -5,7 +5,15 @@
 <@imc.mainContainer current="短链接"  jsFiles=['layer/layer.min.js'] cssFiles=['icloud/icloud_usercenter.css',"icloud/stock.css"] >
 <@ucm.userCenterMenus current="成员流量"/>
 <main class="us-content">
-    <h1 class="us-title">成员流量-${tmpUser.userName!""}</h1>
+    <h1 class="us-title">流量:
+    <#if parentsUsers??>
+    	<#list parentsUsers as u>
+    		${u.userName!""}>
+    	</#list>
+    <#else>
+            ${tmpUser.userName!""}
+    </#if>
+    </h1>
         <div class="us-body">
             <div class="tab_item">
                   <#include "/user/taobao/template/juhusuan-access-count-template.ftl"/>
