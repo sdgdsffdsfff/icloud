@@ -20,8 +20,8 @@
                             <td>${user.status!""}</td>
                             <td>${user.promotion!""}</td>
                             <td>${user.fatherName!""}</td>
-                            <td><a href="#" onclick="reviewTheUrl('${user.userId}');">暂停</a>&nbsp;&nbsp;
-                            <a href="#" onclick="modifyTheUrl('${user.userId}');">禁止拉人</a>
+                            <td><a href="#" onclick="pauseUser('${user.userId}',0);">暂停</a>&nbsp;&nbsp;
+                            <a href="#" onclick="promoteUser('${user.userId}',1);">禁止拉人</a>
                             </td>
                         </tr>
                         </#list>

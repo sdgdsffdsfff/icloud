@@ -169,5 +169,6 @@ public class ICloudUserController extends BaseStockController {
 
 	@RequestMapping("/operateUser")
 	public void operateUser(int operatorId, int userId, int operation) {
+		User user = this.getUser();
 	}
 }

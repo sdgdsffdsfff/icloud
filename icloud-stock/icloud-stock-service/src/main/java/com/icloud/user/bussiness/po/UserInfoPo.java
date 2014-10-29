@@ -15,6 +15,10 @@ public class UserInfoPo extends UserInfo {
 	private String promotion;
 	private String fatherName;
 	private Integer fatherId;
+	private Integer promotionId;
+	private Integer statusId;
+	private String statusOp;
+	private String promotionOp;
 
 	public void setAddUser(User user) {
 		if (user.getLevel() == UserConstants.USER_LEVEL_LIMIT
@@ -64,14 +68,28 @@ public class UserInfoPo extends UserInfo {
 			po.setLevel(user.getLevel() + "级代理");
 			if (user.getOpen() == 1) {
 				po.setStatus("正常");
+				po.setStatusId(1);
+				po.setStatusOp("暂停");
 			} else {
 				po.setStatus("暂停服务");
+				po.setStatusId(0);
+				po.setStatusOp("启用");
 			}
-			if (po.isAddUser()) {
+			if (user.getPromotion() == 1
+					&& user.getLevel() < UserConstants.USER_LEVEL_LIMIT) {
 				po.setPromotion("正常代理");
-			} else {
+				po.setPromotionId(1);
+				po.setPromotionOp("暂停代理");
+			} else if (user.getPromotion() == 1
+					&& user.getLevel() >= UserConstants.USER_LEVEL_LIMIT) {
 				po.setPromotion("不能代理");
+				po.setPromotionId(-1);
+			} else {				
+				po.setPromotion("暂停代理");
+				po.setPromotionId(0);
+				po.setPromotionOp("暂停代理");
 			}
+
 			po.setFatherId(user.getFatherId());
 			po.setFatherName(user.getFatherName());
 			return po;
@@ -117,6 +135,38 @@ public class UserInfoPo extends UserInfo {
 
 	public void setFatherId(Integer fatherId) {
 		this.fatherId = fatherId;
+	}
+
+	public Integer getPromotionId() {
+		return promotionId;
+	}
+
+	public void setPromotionId(Integer promotionId) {
+		this.promotionId = promotionId;
+	}
+
+	public Integer getStatusId() {
+		return statusId;
+	}
+
+	public void setStatusId(Integer statusId) {
+		this.statusId = statusId;
+	}
+
+	public String getStatusOp() {
+		return statusOp;
+	}
+
+	public void setStatusOp(String statusOp) {
+		this.statusOp = statusOp;
+	}
+
+	public String getPromotionOp() {
+		return promotionOp;
+	}
+
+	public void setPromotionOp(String promotionOp) {
+		this.promotionOp = promotionOp;
 	}
 
 }
