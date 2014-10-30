@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.icloud.framework.util.ICloudUtils;
+import com.icloud.front.juhuasuan.bussiness.JuhuasuanBussiness;
 import com.icloud.front.user.pojo.UserInfo;
 import com.icloud.stock.model.User;
 import com.icloud.user.dict.UserConstants;
@@ -19,6 +20,8 @@ public class UserInfoPo extends UserInfo {
 	private Integer statusId;
 	private String statusOp;
 	private String promotionOp;
+	private long lastDayCount;
+	private long currentDayCount;
 
 	public void setAddUser(User user) {
 		if (user.getLevel() == UserConstants.USER_LEVEL_LIMIT
@@ -40,7 +43,8 @@ public class UserInfoPo extends UserInfo {
 		return ins;
 	}
 
-	public static List<UserInfoPo> converUser(List<User> users) {
+	public static List<UserInfoPo> converUser(List<User> users,
+			JuhuasuanBussiness juhuasuanBussiness) {
 		if (ICloudUtils.isEmpty(users)) {
 			return null;
 		}
@@ -48,7 +52,15 @@ public class UserInfoPo extends UserInfo {
 		UserInfoPo po = null;
 		for (User user : users) {
 			po = convertUser(user);
+
 			if (ICloudUtils.isNotNull(po)) {
+				long currentDayCount = juhuasuanBussiness
+						.getCountOfJuhusuanDetailInCurrentDay(po.getUserId());
+				long lastDayCount = juhuasuanBussiness
+						.getCountOfJuhusuanDetailInLastDay(po.getUserId());
+
+				po.setLastDayCount(lastDayCount);
+				po.setCurrentDayCount(currentDayCount);
 				list.add(po);
 			}
 		}
@@ -164,6 +176,22 @@ public class UserInfoPo extends UserInfo {
 
 	public void setPromotionOp(String promotionOp) {
 		this.promotionOp = promotionOp;
+	}
+
+	public long getLastDayCount() {
+		return lastDayCount;
+	}
+
+	public void setLastDayCount(long lastDayCount) {
+		this.lastDayCount = lastDayCount;
+	}
+
+	public long getCurrentDayCount() {
+		return currentDayCount;
+	}
+
+	public void setCurrentDayCount(long currentDayCount) {
+		this.currentDayCount = currentDayCount;
 	}
 
 }

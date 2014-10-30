@@ -1,9 +1,13 @@
 package com.icloud.front.juhuasuan.bussiness;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Queue;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +36,7 @@ import com.icloud.stock.model.JuhuasuanUrl;
 import com.icloud.stock.model.User;
 import com.icloud.stock.model.UserUrlAccessCount;
 import com.icloud.user.bussiness.po.UserInfoPo;
+import com.icloud.user.dict.UserConstants;
 
 @Service("juhuasuanBussiness")
 public class JuhuasuanBussiness extends BaseAction {
@@ -484,8 +489,7 @@ public class JuhuasuanBussiness extends BaseAction {
 	 */
 	public Pagination<UserUrlAccessCountPo> getJuhuaSuanUserAccessCountDetaiByUserIdAndDate(
 			User tmpUser, Date date, int pageNo, int limit) {
-		Pagination<UserInfoPo> p = userAdminBusiness.getUsersByUser(tmpUser,
-				pageNo, limit);
+		Pagination<UserInfoPo> p = userAdminBusiness.getUsersByUser(tmpUser, pageNo, limit);
 		Pagination<UserUrlAccessCountPo> pagination = Pagination.getInstance(
 				pageNo, limit);
 		pagination.setTotalItemCount(p.getTotalItemCount());
@@ -508,4 +512,6 @@ public class JuhuasuanBussiness extends BaseAction {
 		pagination.build();
 		return pagination;
 	}
+
+	
 }

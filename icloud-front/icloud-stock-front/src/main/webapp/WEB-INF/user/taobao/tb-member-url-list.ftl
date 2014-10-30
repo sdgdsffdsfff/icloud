@@ -8,9 +8,9 @@
     <h1 class="us-title">链接详情:
     <#if parentsUsers??>
     	<#list parentsUsers as u>
-    		<a href="${basepath}/usertb/tbMemberList?memberId=${u.id}">${u.userName!""}></a>
+    		<a href="${basepath}/usertb/tbMemberList?memberId=${u.id}">${u.userName!""}</a> >
     	</#list>
-    	>  ${tmpUser.userName!""}
+    	 ${tmpUser.userName!""}
     <#else>
         ${tmpUser.userName!""}
     </#if>

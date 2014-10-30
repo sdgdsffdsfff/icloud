@@ -8,12 +8,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.framework.util.StringEncoder;
+import com.icloud.front.juhuasuan.bussiness.JuhuasuanBussiness;
 import com.icloud.front.user.pojo.LoginUser;
 import com.icloud.front.user.pojo.RegisterUser;
 import com.icloud.front.user.pojo.UserInfo;
@@ -26,6 +29,8 @@ import com.icloud.user.util.UserUtils;
 
 @Service("userAdminBusiness")
 public class UserAdminBusiness extends UserBusiness {
+	@Resource(name = "juhuasuanBussiness")
+	protected JuhuasuanBussiness juhuasuanBussiness;
 
 	public User addUser(String userName, String password) {
 		if (ICloudUtils.isNotNull(userName) && ICloudUtils.isNotNull(password)) {
@@ -223,7 +228,8 @@ public class UserAdminBusiness extends UserBusiness {
 					: (pagination.getStart() + limit);
 			users = users.subList(pagination.getStart(), end);
 		}
-		pagination.setData(UserInfoPo.converUser(users));
+		pagination.setData(UserInfoPo
+				.converUser(users, this.juhuasuanBussiness));
 		pagination.build();
 		return pagination;
 	}
@@ -235,7 +241,8 @@ public class UserAdminBusiness extends UserBusiness {
 		pagination.setTotalItemCount(count);
 		List<User> resultList = this.userService.findAll(pagination.getStart(),
 				pagination.getPageSize());
-		pagination.setData(UserInfoPo.converUser(resultList));
+		pagination.setData(UserInfoPo.converUser(resultList,
+				this.juhuasuanBussiness));
 		pagination.build();
 		return pagination;
 	}
@@ -250,8 +257,8 @@ public class UserAdminBusiness extends UserBusiness {
 		List<User> list = new LinkedList<User>();
 		if (ICloudUtils.isNotNull(user) && ICloudUtils.isNotNull(childUser)) {
 			// list.add(childUser);
-			User tmp = childUser;
-			while (user.getId() != childUser.getId()
+			// User tmp = childUser;
+			while (user.getId().intValue() != childUser.getId().intValue()
 					&& ICloudUtils.isNotNull(childUser.getFatherId())
 					&& childUser.getFatherId() != 0) {
 				User father = this.userService.getById(childUser.getFatherId());
@@ -278,7 +285,7 @@ public class UserAdminBusiness extends UserBusiness {
 
 			List<User> list = this.findParentsUsers(user, operationUser);
 			for (User tmp : list) {
-				if (tmp.getId() == user.getId())
+				if (tmp.getId().intValue() == user.getId().intValue())
 					return true;
 			}
 		}
