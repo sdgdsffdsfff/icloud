@@ -53,8 +53,8 @@ public class UserUrlAccessCountDaoImpl extends
 				+ " as model where model.createTime = (:ctime) and model.userId "
 				+ "in (:ids)";
 		List list = this.getHibernateTemplate().execute(
-				new HibernateCallback() {
-					public Object doInHibernate(Session session)
+				new HibernateCallback<List>() {
+					public List doInHibernate(Session session)
 							throws HibernateException {
 						Query queryObject = session.createQuery(hql);
 						queryObject.setParameterList("ids", userIds);
@@ -74,18 +74,20 @@ public class UserUrlAccessCountDaoImpl extends
 	@Override
 	public List<UserUrlAccessCount> getUserAccessCountDetailByUserIdAndDate(
 			final List<Integer> userIds, final Date createTime) {
-		final String hql = "from " + domainClass.getName()
+		final String hql = "from "
+				+ domainClass.getName()
 				+ " as model where model.createTime = (:ctime) and model.userId "
 				+ "in (:ids)";
-		return this.getHibernateTemplate().execute(new HibernateCallback() {
-			public Object doInHibernate(Session session)
-					throws HibernateException {
-				Query queryObject = session.createQuery(hql);
-				queryObject.setParameterList("ids", userIds);
-				queryObject.setParameter("ctime", createTime);
-				return queryObject.list();
-			}
-		});
+		return this.getHibernateTemplate().execute(
+				new HibernateCallback<List>() {
+					public List doInHibernate(Session session)
+							throws HibernateException {
+						Query queryObject = session.createQuery(hql);
+						queryObject.setParameterList("ids", userIds);
+						queryObject.setParameter("ctime", createTime);
+						return queryObject.list();
+					}
+				});
 		// Object[] values = { createTime, userIds };
 		// return this.findByProperty(hql, values);
 	}

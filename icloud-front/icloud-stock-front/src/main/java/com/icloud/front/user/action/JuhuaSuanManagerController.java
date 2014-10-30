@@ -212,7 +212,7 @@ public class JuhuaSuanManagerController extends BaseStockController {
 
 	@RequestMapping("/tbMemberList")
 	public ModelAndView tbMemberList(JuhuasuanSearchBean searchBean) {
-		searchBean.setLimit(1);
+//		searchBean.setLimit(1);
 		ModelAndView modelAndView = getModelAndView("user/taobao/tb-member-url-list");
 		User user = this.getUser();
 		User tmpUser = getStandardUser(searchBean, user);

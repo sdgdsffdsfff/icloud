@@ -1,4 +1,4 @@
-﻿package com.icloud.stock.dao;
+package com.icloud.stock.dao;
 
 import java.util.Date;
 import java.util.List;
