@@ -51,10 +51,7 @@ public class JuhuaSuanManagerController extends BaseStockController {
 		Pagination<JuhuasuanUrl> pagination = this.juhuasuanBussiness
 				.searchJuhuasuanUrl(urlBean, searchBean.getPageNo(),
 						searchBean.getLimit());
-		PageView pageView = PageView.convertPage(pagination);
-
-		modelAndView.addObject("pagination", pagination);
-		modelAndView.addObject("pageView", pageView);
+		ModelAndViewUtils.addPageView(modelAndView, pagination);
 		modelAndView.addObject("urlBean", urlBean);
 		return modelAndView;
 	}
@@ -213,6 +210,32 @@ public class JuhuaSuanManagerController extends BaseStockController {
 		return tmpUser;
 	}
 
+	@RequestMapping("/tbMemberList")
+	public ModelAndView tbMemberList(JuhuasuanSearchBean searchBean) {
+		searchBean.setLimit(1);
+		ModelAndView modelAndView = getModelAndView("user/taobao/tb-member-url-list");
+		User user = this.getUser();
+		User tmpUser = getStandardUser(searchBean, user);
+
+		JuhuasuanUrl urlBean = JuhuasuanSearchBean.convert(searchBean);
+		if (!ICloudUtils.isNotNull(urlBean)) {
+			urlBean = new JuhuasuanUrl();
+		}
+		urlBean.setUserId(tmpUser.getId());
+		Pagination<JuhuasuanUrl> pagination = this.juhuasuanBussiness
+				.searchJuhuasuanUrl(urlBean, searchBean.getPageNo(),
+						searchBean.getLimit());
+		ModelAndViewUtils.addPageView(modelAndView, pagination);
+		
+		List<User> parentsUsers = this.userAdminBusiness.findParentsUsers(user,
+				tmpUser);
+		if (!ICloudUtils.isEmpty(parentsUsers)) {
+			modelAndView.addObject("parentsUsers", parentsUsers);
+		}
+		modelAndView.addObject("tmpUser", tmpUser);
+		return modelAndView;
+	}
+
 	@RequestMapping("trafficUserView")
 	public ModelAndView trafficUserView(JuhuasuanSearchBean searchBean) {
 		ModelAndView modelAndView = getModelAndView("user/taobao/trafficUserView");
@@ -248,7 +271,7 @@ public class JuhuaSuanManagerController extends BaseStockController {
 			modelAndView.addObject("parentsUsers", parentsUsers);
 		}
 		modelAndView.addObject("tmpUser", tmpUser);
-		modelAndView.addObject("date",searchBean.getDate());
+		modelAndView.addObject("date", searchBean.getDate());
 		ModelAndViewUtils.addPageView(modelAndView, pagination);
 		return modelAndView;
 	}

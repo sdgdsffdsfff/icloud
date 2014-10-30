@@ -48,6 +48,10 @@ public class StockPageUrlGetter implements TemplateMethodModel {
 			String memberId = (String) args.get(1);
 			return "href=\"trafficUserView?memberId=" + memberId + "&pageNo="
 					+ pageNo + "\"";
+		} else if ("10".equalsIgnoreCase(pageId)) {
+			String memberId = (String) args.get(1);
+			return "href=\"tbMemberList?memberId=" + memberId + "&pageNo="
+					+ pageNo + "\"";
 		} else if ("-1".equalsIgnoreCase(pageId)) {
 			// HttpServletRequest request = ((ServletRequestAttributes)
 			// RequestContextHolder.getRequestAttributes()).getRequest();

@@ -14,7 +14,7 @@
                         <#if pagination.data??>
                          <#list pagination.data as user> 
                         <tr>
-                            <td><a href="${basepath}/usertb/trafficUserView?memberId=${user.userId}">${user.userName!""}</a></td>
+                            <td><a href="${basepath}/usertb/tbMemberList?memberId=${user.userId}">${user.userName!""}</a></td>
                             <td>${user.email!""}</td>
                             <td>${user.level!""}</td>
                             <td>${user.status!""}</td>
@@ -24,6 +24,8 @@
                             <#if user.promotionOp??>
                             <a href="javascript:void(0)" onclick="promoteUser('${user.userId}','${user.promotionId}');">${user.promotionOp}</a>
                             </#if>
+                            &nbsp;
+                            <a href="${basepath}/usertb/trafficUserView?memberId=${user.userId}">流量</>
                             </td>
                         </tr>
                         </#list>
