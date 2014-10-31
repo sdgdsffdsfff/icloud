@@ -489,7 +489,8 @@ public class JuhuasuanBussiness extends BaseAction {
 	 */
 	public Pagination<UserUrlAccessCountPo> getJuhuaSuanUserAccessCountDetaiByUserIdAndDate(
 			User tmpUser, Date date, int pageNo, int limit) {
-		Pagination<UserInfoPo> p = userAdminBusiness.getUsersByUser(tmpUser, pageNo, limit);
+		Pagination<UserInfoPo> p = userAdminBusiness.getUsersByUser(tmpUser,
+				pageNo, limit);
 		Pagination<UserUrlAccessCountPo> pagination = Pagination.getInstance(
 				pageNo, limit);
 		pagination.setTotalItemCount(p.getTotalItemCount());
@@ -513,5 +514,8 @@ public class JuhuasuanBussiness extends BaseAction {
 		return pagination;
 	}
 
-	
+	public void deleteUrl(JuhuasuanUrl url) {
+		this.juhuasuanUrlService.delete(url);
+	}
+
 }

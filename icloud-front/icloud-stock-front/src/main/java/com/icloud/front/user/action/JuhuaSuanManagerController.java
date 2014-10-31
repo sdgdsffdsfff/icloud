@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.icloud.framework.core.wrapper.PageView;
 import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.util.DateUtils;
@@ -27,6 +28,7 @@ import com.icloud.framework.vo.KeyValue;
 import com.icloud.front.juhuasuan.bussiness.po.UserUrlAccessCountPo;
 import com.icloud.front.juhusuan.pojo.JuhuasuanFrontSession;
 import com.icloud.front.stock.baseaction.BaseStockController;
+import com.icloud.front.stock.pojo.JsonResponseResult;
 import com.icloud.front.stock.pojo.JuhuasuanSearchBean;
 import com.icloud.front.stock.pojo.JuhuasuanUrlBean;
 import com.icloud.front.stock.pojo.UploadFileRequest;
@@ -54,6 +56,25 @@ public class JuhuaSuanManagerController extends BaseStockController {
 		ModelAndViewUtils.addPageView(modelAndView, pagination);
 		modelAndView.addObject("urlBean", urlBean);
 		return modelAndView;
+	}
+
+	@RequestMapping("/deleteTUrl")
+	@ResponseBody
+	public String operateUser(String code, HttpServletResponse response) {
+		User user = this.getUser();
+		JuhuasuanUrl url = this.juhuasuanBussiness.getJuhuasuanUrlByCode(code);
+		JsonResponseResult result = new JsonResponseResult();
+		result.setResult(0);
+		result.setTip("对不起，你没有权限进行此操作");
+		if (ICloudUtils.isNotNull(user) && ICloudUtils.isNotNull(url)
+				&& url.getUserId() == user.getId().intValue()) {
+			this.juhuasuanBussiness.deleteUrl(url);
+			result.setResult(1);
+			result.setTip("成功删除该链接");
+		}
+
+		Gson gson = new Gson();
+		return gson.toJson(result);
 	}
 
 	@RequestMapping("/addJuhuasuanUrlView")
@@ -212,7 +233,7 @@ public class JuhuaSuanManagerController extends BaseStockController {
 
 	@RequestMapping("/tbMemberList")
 	public ModelAndView tbMemberList(JuhuasuanSearchBean searchBean) {
-//		searchBean.setLimit(1);
+		// searchBean.setLimit(1);
 		ModelAndView modelAndView = getModelAndView("user/taobao/tb-member-url-list");
 		User user = this.getUser();
 		User tmpUser = getStandardUser(searchBean, user);
@@ -226,7 +247,7 @@ public class JuhuaSuanManagerController extends BaseStockController {
 				.searchJuhuasuanUrl(urlBean, searchBean.getPageNo(),
 						searchBean.getLimit());
 		ModelAndViewUtils.addPageView(modelAndView, pagination);
-		
+
 		List<User> parentsUsers = this.userAdminBusiness.findParentsUsers(user,
 				tmpUser);
 		if (!ICloudUtils.isEmpty(parentsUsers)) {

@@ -16,7 +16,7 @@ function onclickButton() {
 			}
 		});
 	});
-	
+
 	$("#batchAddJuhuasuanUrl_id3").click(function() {
 		$.layer({
 			type : 2,
@@ -34,7 +34,6 @@ function onclickButton() {
 			}
 		});
 	});
-
 
 	$("#searchBeanButton").click(function() {
 		$("#searchBeanForm").submit();
@@ -86,6 +85,31 @@ function modifyTheUrl(code) {
 		},
 		iframe : {
 			src : basepath + '/usertb/modifyJuhusuanUrlView?code=' + code
+		}
+	});
+}
+
+function deleteTheUrl(code) {
+	var tip = "确定要 删除该链接？"
+	$.layer({
+		shade : [ 0 ],
+		area : [ 'auto', 'auto' ],
+		dialog : {
+			msg : tip,
+			btns : 2,
+			type : 4,
+			btn : [ '确定', '取消' ],
+			yes : function() {
+				var data = {
+					code : code
+				};
+				$.getJSON(basepath + "/usertb/deleteTUrl", data, function(data) {
+					layer.msg(data.tip, 1, 1);
+					reload();
+				});
+			},
+			no : function() {
+			}
 		}
 	});
 }
