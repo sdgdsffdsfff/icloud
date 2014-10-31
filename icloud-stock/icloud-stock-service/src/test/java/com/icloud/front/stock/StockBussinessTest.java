@@ -12,6 +12,7 @@ import com.icloud.front.juhuasuan.bussiness.JuhuasuanBussiness;
 import com.icloud.front.juhuasuan.bussiness.JuhuasuanStatBusiness;
 import com.icloud.front.stock.bussiness.StockCommonBussiness;
 import com.icloud.front.stock.bussiness.StockListBussiness;
+import com.icloud.front.user.bussiness.UserAdminBusiness;
 
 @ContextConfiguration(locations = { "classpath*:spring/icloud-stock-service-ctx-min.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -20,6 +21,7 @@ public class StockBussinessTest {
 			.getClass());
 	@Resource(name = "stockCommonBussiness")
 	protected StockCommonBussiness stockCommonBussiness;
+
 	@Resource(name = "stockListBussiness")
 	protected StockListBussiness stockListBussiness;
 
@@ -28,5 +30,8 @@ public class StockBussinessTest {
 
 	@Resource(name = "juhuasuanStatBusiness")
 	protected JuhuasuanStatBusiness juhuasuanStatBusiness;
+
+	@Resource(name = "userAdminBusiness")
+	protected UserAdminBusiness userAdminBusiness;
 
 }

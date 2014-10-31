@@ -67,7 +67,8 @@ public class Pagination<T> implements Serializable {
 	}
 
 	public int getStart() {
-		return pageSize * (pageNo - 1);
+		// return pageSize * (pageNo - 1);
+		return pageSize * pageNo;
 	}
 
 	public int getTotalPageCount() {
@@ -84,11 +85,11 @@ public class Pagination<T> implements Serializable {
 		return pageNo;
 	}
 
-	public void setPageNo(Integer pageNo) {
-		if (pageNo != null) {
-			this.pageNo = pageNo < 1 ? 1 : pageNo;
-		}
-	}
+	// public void setPageNo(Integer pageNo) {
+	// if (pageNo != null) {
+	// this.pageNo = pageNo < 0 ? 0 : pageNo;
+	// }
+	// }
 
 	public void setPageNo(int pageNo) {
 		this.pageNo = pageNo;

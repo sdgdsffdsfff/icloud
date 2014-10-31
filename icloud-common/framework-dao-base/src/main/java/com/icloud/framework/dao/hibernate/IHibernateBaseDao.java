@@ -40,6 +40,10 @@ public interface IHibernateBaseDao<T> {
 	public List<T> findByProperty(String[] paramNames,
 			OperationEnum[] operations, Object[] values, String sortParam,
 			boolean isAsc, int start, int limit);
+	
+	public List<T> findByPropertyNoLazy(String[] paramNames,
+			OperationEnum[] operations, Object[] values, String sortParam,
+			boolean isAsc, int start, int limit);
 
 	public List<T> findByProperty(String[] paramNames, Object[] values,
 			String sortParam, boolean isAsc);
@@ -52,6 +56,8 @@ public interface IHibernateBaseDao<T> {
 	public List<T> findAll(int start, int limit);
 
 	public List<T> findByProperty(String hql, int start, int limit);
+	
+	public List<T> findByPropertyNoLazy(String hql, int start, int limit);
 
 	public List<T> findByProperty(String hql);
 

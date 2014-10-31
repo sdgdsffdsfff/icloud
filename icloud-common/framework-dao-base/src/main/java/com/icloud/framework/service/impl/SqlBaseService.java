@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
-import com.icloud.framework.dao.hibernate.IHibernateBaseDao;
 import com.icloud.framework.dao.hibernate.HiberanateEnum.OperationEnum;
+import com.icloud.framework.dao.hibernate.IHibernateBaseDao;
 import com.icloud.framework.service.ISqlBaseService;
 
 public abstract class SqlBaseService<T> implements ISqlBaseService<T> {
@@ -107,6 +107,13 @@ public abstract class SqlBaseService<T> implements ISqlBaseService<T> {
 			OperationEnum[] operations, Object[] values, String sortParam,
 			boolean isAsc, int start, int limit) {
 		return this.baseDao.findByProperty(paramNames, operations, values,
+				sortParam, isAsc, start, limit);
+	}
+	
+	public List<T> findByPropertyNoLazy(String[] paramNames,
+			OperationEnum[] operations, Object[] values, String sortParam,
+			boolean isAsc, int start, int limit) {
+		return this.baseDao.findByPropertyNoLazy(paramNames, operations, values,
 				sortParam, isAsc, start, limit);
 	}
 

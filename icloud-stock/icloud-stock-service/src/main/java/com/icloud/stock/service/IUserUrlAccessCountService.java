@@ -61,4 +61,7 @@ public interface IUserUrlAccessCountService extends
 	List<UserUrlAccessCount> getUserAccessCountDetailByUserIdAndDate(
 			List<Integer> userIds, Date date);
 
+	UserUrlAccessCount getUserAccessCountByUserIdAndDateNoLazy(Integer userId,
+			Date startDate);
+
 }

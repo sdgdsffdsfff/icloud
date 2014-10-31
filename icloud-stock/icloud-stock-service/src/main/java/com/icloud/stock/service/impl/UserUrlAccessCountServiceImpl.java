@@ -56,6 +56,22 @@ public class UserUrlAccessCountServiceImpl extends
 
 	@Override
 	@Transactional
+	public UserUrlAccessCount getUserAccessCountByUserIdAndDateNoLazy(
+			Integer userId, Date startDate) {
+		HiberanateParamters hiberanateParamters = new HiberanateParamters();
+		hiberanateParamters.addOperationsValue(IUserUrlAccessCountDao.USERID,
+				OperationEnum.EQUALS, userId);
+		hiberanateParamters.addOperationsValue(
+				IUserUrlAccessCountDao.CREATETIME, OperationEnum.EQUALS,
+				startDate);
+		return ICloudUtils.getFirstElement(findByPropertyNoLazy(
+				hiberanateParamters.getParams(),
+				hiberanateParamters.getOperations(),
+				hiberanateParamters.getValues(), null, false, 0, 20));
+	}
+
+	@Override
+	@Transactional
 	public List<UserUrlAccessCount> getUserAccessCountByNullTotalCount(
 			int userId) {
 		HiberanateParamters hiberanateParamters = new HiberanateParamters();

@@ -16,9 +16,9 @@ public interface ISqlBaseService<T> {
 	public List<T> findAll();
 
 	public void deleteById(Integer id);
-	
+
 	public long count(String hql);
-	
+
 	public List<T> findByProperty(String hql, int start, int limit);
 
 	public List<T> findByProperty(String hql);
@@ -64,5 +64,9 @@ public interface ISqlBaseService<T> {
 	 */
 	List<T> findByProperty(String[] params, OperationEnum[] operations,
 			Object[] values, String createtime, boolean b, int i, int pageSize);
+
+	List<T> findByPropertyNoLazy(String[] paramNames,
+			OperationEnum[] operations, Object[] values, String sortParam,
+			boolean isAsc, int start, int limit);
 
 }

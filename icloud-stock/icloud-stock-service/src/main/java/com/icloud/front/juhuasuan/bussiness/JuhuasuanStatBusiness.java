@@ -40,7 +40,7 @@ public class JuhuasuanStatBusiness extends BaseAction {
 	public UserUrlAccessCount getUserAccessCountByUserIdAndDate(Integer userId,
 			Date startDate) {
 		UserUrlAccessCount userUrlAccessCount = this.userUrlAccessCountService
-				.getUserAccessCountByUserIdAndDate(userId, startDate);
+				.getUserAccessCountByUserIdAndDateNoLazy(userId, startDate);
 		return userUrlAccessCount;
 	}
 
@@ -147,8 +147,8 @@ public class JuhuasuanStatBusiness extends BaseAction {
 	 * @throws
 	 */
 	@Transactional
-	private void updateAllCount(UserUrlAccessCount count, List<Integer> userIds,
-			boolean isSuper) {
+	private void updateAllCount(UserUrlAccessCount count,
+			List<Integer> userIds, boolean isSuper) {
 		if (isSuper) {
 			int allCount = 0;
 			allCount = this.userUrlAccessCountService.getCountOfAllUser(count
@@ -168,6 +168,7 @@ public class JuhuasuanStatBusiness extends BaseAction {
 
 	}
 
+	@Transactional
 	public void updateUserUrlAccessCountDaily() {
 		/**
 		 * 获得所有用户进行更新

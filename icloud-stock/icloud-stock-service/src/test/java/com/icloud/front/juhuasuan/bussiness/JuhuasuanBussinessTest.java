@@ -18,6 +18,8 @@ import com.icloud.front.stock.StockBussinessTest;
 import com.icloud.stock.model.JuhuasuanUrl;
 import com.icloud.stock.model.User;
 import com.icloud.user.bussiness.po.AllUserPo;
+import com.icloud.user.bussiness.po.ChildrenUserPo;
+import com.icloud.user.bussiness.po.UserInfoPo;
 
 /**
  * @comment
@@ -119,5 +121,16 @@ public class JuhuasuanBussinessTest extends StockBussinessTest {
 		// }
 		// logger.info("i: {}", i);
 		// }
+	}
+
+	@Test
+	public void getChildren() {
+		User user = userAdminBusiness.getUser(2);
+		ChildrenUserPo userPo = userAdminBusiness.getChildrenUserPo(user);
+		System.out.println("-=---");
+		List<UserInfoPo> allUserList = userPo.getAllUser();
+		for (UserInfoPo po : allUserList) {
+			System.out.println(po.getUserId());
+		}
 	}
 }

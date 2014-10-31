@@ -35,7 +35,7 @@ public class ChildrenUserPo {
 		if (!ICloudUtils.isEmpty(pagination.getData())) {
 			users = (List<UserInfoPo>) pagination.getData();
 		}
-		pageNo = pageNo++;
+		pageNo = pageNo + 1;
 	}
 
 	public UserInfoPo next() {
@@ -45,7 +45,7 @@ public class ChildrenUserPo {
 		if (pageNo < pageCount) {
 			Pagination<UserInfoPo> pagination = this.userAdminBusiness
 					.getUsersByUser(user, pageNo, limit);
-			pageNo = pageNo++;
+			pageNo = pageNo + 1;
 			if (ICloudUtils.isNotNull(pagination)
 					&& !ICloudUtils.isEmpty(pagination.getData())) {
 				users.addAll(pagination.getData());
