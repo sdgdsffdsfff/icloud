@@ -6,9 +6,15 @@
                 </form>
                 </#if>
                 <span>
-                    <as class="taobaoDesc">当日访问量:</as><strong title="" class="taobaoName">${currentDayCount!'0'}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <as class="taobaoDesc">昨日访问量:</as><strong title="" class="taobaoName">${lastDayCount!'0'}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <as class="taobaoDesc">当日访问量:</as><strong title="" class="taobaoName">${currentDayCount!'0'}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <as class="taobaoDesc">昨日访问量:</as><strong title="" class="taobaoName">${lastDayCount!'0'}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <as class="taobaoDesc">总共访问量:</as><strong title="" class="taobaoName">${totalCount!'0'}</strong>
+                </span>
+                <p>
+                 <span>
+                    <as class="taobaoDesc">当日有效访问:</as><strong title="" class="taobaoName">${currentDayValidCount!'0'}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <as class="taobaoDesc">昨日有效访问:</as><strong title="" class="taobaoName">${lasyDayValidCount!'0'}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     <as class="taobaoDesc">总共有效访问:</as><strong title="" class="taobaoName">${totalValidCount!'0'}</strong>
                 </span>
                 </section>
                

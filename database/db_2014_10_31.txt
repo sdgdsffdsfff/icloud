@@ -1,0 +1,6 @@
+1. 修改数据
+ALTER TABLE `icloud`.`juhuasuan-detail` ADD COLUMN `valid` INT(2) DEFAULT 0 NULL AFTER `user-id`; 
+ALTER TABLE `icloud`.`juhuasuan-detail` ADD INDEX `valid` (`valid`); 
+
+2. 修改数据
+ALTER TABLE `icloud`.`user-url-access-count` ADD COLUMN `valid_count` INT(11) DEFAULT -1 NULL AFTER `create_time`, ADD COLUMN `valid_all_count` INT(11) DEFAULT -1 NULL AFTER `valid_count`; 

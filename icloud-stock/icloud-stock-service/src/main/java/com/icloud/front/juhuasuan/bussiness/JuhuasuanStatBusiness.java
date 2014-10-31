@@ -55,19 +55,28 @@ public class JuhuasuanStatBusiness extends BaseAction {
 				userId, startDate);
 		long count = this.juhuasuanBussiness.getCountOfJuhusuanDetail(userId,
 				startDate, tmpDate);
+		long valid_count = this.juhuasuanBussiness
+				.getCountOfJuhusuanDetailInValid(userId, startDate, tmpDate);
 		int s = (int) count;
+		int valid_s = (int) valid_count;
 		if (ICloudUtils.isNotNull(userUrlAccessCount)) {
 			userUrlAccessCount.setCount(s);
+			userUrlAccessCount.setValidCount(valid_s);
 			userUrlAccessCount
 					.setAllCount(IUserUrlAccessCountDao.DEF_ALL_COUNT);
+			userUrlAccessCount
+					.setValidAllCount(IUserUrlAccessCountDao.DEF_ALL_COUNT);
 			this.userUrlAccessCountService.update(userUrlAccessCount);
 		} else {
 			userUrlAccessCount = new UserUrlAccessCount();
 			userUrlAccessCount.setCount(s);
+			userUrlAccessCount.setValidCount(valid_s);
 			userUrlAccessCount.setCreateTime(startDate);
 			userUrlAccessCount.setUserId(userId);
 			userUrlAccessCount
 					.setAllCount(IUserUrlAccessCountDao.DEF_ALL_COUNT);
+			userUrlAccessCount
+					.setValidAllCount(IUserUrlAccessCountDao.DEF_ALL_COUNT);
 			this.userUrlAccessCountService.save(userUrlAccessCount);
 		}
 	}
@@ -153,13 +162,19 @@ public class JuhuasuanStatBusiness extends BaseAction {
 			int allCount = 0;
 			allCount = this.userUrlAccessCountService.getCountOfAllUser(count
 					.getCreateTime());
+			int valid_allCount = this.userUrlAccessCountService
+					.getCountOfAllUserInValid(count.getCreateTime());
 			count.setAllCount(allCount);
+			count.setValidAllCount(valid_allCount);
 			this.userUrlAccessCountService.update(count);
 		} else {
 			int allCount = 0;
 			allCount = this.userUrlAccessCountService.getCountOfUserIds(
 					count.getCreateTime(), userIds);
+			int valid_allCount = this.userUrlAccessCountService
+					.getCountOfUserIdsInValid(count.getCreateTime(), userIds);
 			count.setAllCount(allCount);
+			count.setValidAllCount(valid_allCount);
 			/**
 			 * 批量操作
 			 */

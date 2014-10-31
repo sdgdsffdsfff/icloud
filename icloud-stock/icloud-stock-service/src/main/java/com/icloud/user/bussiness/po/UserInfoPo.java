@@ -22,6 +22,8 @@ public class UserInfoPo extends UserInfo {
 	private String promotionOp;
 	private long lastDayCount;
 	private long currentDayCount;
+	private long currentDayValidCount;
+	private long lastDayValidCount;
 
 	public void setAddUser(User user) {
 		if (user.getLevel() == UserConstants.USER_LEVEL_LIMIT
@@ -58,9 +60,15 @@ public class UserInfoPo extends UserInfo {
 						.getCountOfJuhusuanDetailInCurrentDay(po.getUserId());
 				long lastDayCount = juhuasuanBussiness
 						.getCountOfJuhusuanDetailInLastDay(po.getUserId());
-
+				long currentDayValidCount = juhuasuanBussiness
+						.getValidCountOfJuhusuanDetailInCurrentDay(po
+								.getUserId());
+				long lastDayValidCount = juhuasuanBussiness
+						.getValidCountOfJuhusuanDetailInLastDay(po.getUserId());
 				po.setLastDayCount(lastDayCount);
 				po.setCurrentDayCount(currentDayCount);
+				po.setCurrentDayValidCount(currentDayValidCount);
+				po.setLastDayValidCount(lastDayValidCount);
 				list.add(po);
 			}
 		}
@@ -192,6 +200,22 @@ public class UserInfoPo extends UserInfo {
 
 	public void setCurrentDayCount(long currentDayCount) {
 		this.currentDayCount = currentDayCount;
+	}
+
+	public long getCurrentDayValidCount() {
+		return currentDayValidCount;
+	}
+
+	public void setCurrentDayValidCount(long currentDayValidCount) {
+		this.currentDayValidCount = currentDayValidCount;
+	}
+
+	public long getLastDayValidCount() {
+		return lastDayValidCount;
+	}
+
+	public void setLastDayValidCount(long lastDayValidCount) {
+		this.lastDayValidCount = lastDayValidCount;
 	}
 
 }

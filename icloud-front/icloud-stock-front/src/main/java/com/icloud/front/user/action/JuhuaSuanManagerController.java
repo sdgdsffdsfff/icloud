@@ -148,10 +148,16 @@ public class JuhuaSuanManagerController extends BaseStockController {
 		}
 		long currentDayCount = this.juhuasuanBussiness
 				.getCountOfJuhusuanDetailInCurrentDay(this.getUserId());
+		long currentDayValidCount = this.juhuasuanBussiness
+				.getValidCountOfJuhusuanDetailInCurrentDay(this.getUserId());
 		long lastDayCount = this.juhuasuanBussiness
 				.getCountOfJuhusuanDetailInLastDay(this.getUserId());
+		long lasyDayValidCount = this.juhuasuanBussiness
+				.getValidCountOfJuhusuanDetailInLastDay(this.getUserId());
 		long totalCount = this.juhuasuanBussiness.getCountOfJuhusuanDetail(
 				this.getUserId(), null, null);
+		long totalValidCount = this.juhuasuanBussiness
+				.getValidCountOfJuhusuanDetail(this.getUserId(), null, null);
 		Pagination<JuhuasuanDetail> pagination = this.juhuasuanBussiness
 				.getDurrentDayJuhuasuanDetailByUserId(this.getUserId(),
 						searhBean.getPageNo(), searhBean.getLimit());
@@ -161,6 +167,9 @@ public class JuhuaSuanManagerController extends BaseStockController {
 		modelAndView.addObject("currentDayCount", currentDayCount);
 		modelAndView.addObject("lastDayCount", lastDayCount);
 		modelAndView.addObject("totalCount", totalCount);
+		modelAndView.addObject("currentDayValidCount", currentDayValidCount);
+		modelAndView.addObject("lasyDayValidCount", lasyDayValidCount);
+		modelAndView.addObject("totalValidCount", totalValidCount);
 		modelAndView.addObject("url_name", "当天访问量");
 		return modelAndView;
 	}

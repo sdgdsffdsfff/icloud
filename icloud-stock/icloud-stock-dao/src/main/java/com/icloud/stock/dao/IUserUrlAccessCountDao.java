@@ -46,4 +46,8 @@ public interface IUserUrlAccessCountDao extends
 	 */
 	List<UserUrlAccessCount> getUserAccessCountDetailByUserIdAndDate(
 			List<Integer> userIds, Date date);
+
+	int getCountOfUserIdsInValid(Date createTime2, List<Integer> userIds);
+
+	int getCountOfAllUserInValid(Date createTime);
 }

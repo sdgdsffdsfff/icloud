@@ -1,13 +1,9 @@
 package com.icloud.front.juhuasuan.bussiness;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Queue;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +20,7 @@ import com.icloud.front.juhuasuan.bussiness.po.UserUrlAccessCountPo;
 import com.icloud.front.juhuasuan.constant.JuhuasuanConstants;
 import com.icloud.front.juhusuan.pojo.JuhuasuanFrontSession;
 import com.icloud.front.user.bussiness.UserAdminBusiness;
+import com.icloud.juhuasuan.util.ReferUtil;
 import com.icloud.juhuasuan.util.UrlCodeUtil;
 import com.icloud.stock.dao.IJuhuasuanDetailDao;
 import com.icloud.stock.dao.IJuhuasuanSessionDao;
@@ -36,7 +33,6 @@ import com.icloud.stock.model.JuhuasuanUrl;
 import com.icloud.stock.model.User;
 import com.icloud.stock.model.UserUrlAccessCount;
 import com.icloud.user.bussiness.po.UserInfoPo;
-import com.icloud.user.dict.UserConstants;
 
 @Service("juhuasuanBussiness")
 public class JuhuasuanBussiness extends BaseAction {
@@ -221,6 +217,7 @@ public class JuhuasuanBussiness extends BaseAction {
 		detail.setPerferIp(localip);
 		detail.setUrlId(code);
 		detail.setUserId(user_id);
+		detail.setValid(ReferUtil.isValid(perferHost));
 		this.juhuasuanDetailService.save(detail);
 	}
 
@@ -270,6 +267,13 @@ public class JuhuasuanBussiness extends BaseAction {
 		return getCountOfJuhusuanDetail(userId, startDate, endDate);
 	}
 
+	public long getValidCountOfJuhusuanDetailInCurrentDay(int userId) {
+		Date startDate = DateUtils.getDate(new Date(),
+				StockConstants.STOCK_HISTORY_STRING);
+		Date endDate = DateUtils.addDays(startDate, 1);
+		return getValidCountOfJuhusuanDetail(userId, startDate, endDate);
+	}
+
 	public long getCountOfJuhusuanDetailInLastDay(int userId) {
 		Date date = new Date();
 		date = DateUtils.addDays(date, -1);
@@ -277,6 +281,15 @@ public class JuhuasuanBussiness extends BaseAction {
 				StockConstants.STOCK_HISTORY_STRING);
 		Date endDate = DateUtils.addDays(startDate, 1);
 		return getCountOfJuhusuanDetail(userId, startDate, endDate);
+	}
+
+	public long getValidCountOfJuhusuanDetailInLastDay(int userId) {
+		Date date = new Date();
+		date = DateUtils.addDays(date, -1);
+		Date startDate = DateUtils.getDate(date,
+				StockConstants.STOCK_HISTORY_STRING);
+		Date endDate = DateUtils.addDays(startDate, 1);
+		return getValidCountOfJuhusuanDetail(userId, startDate, endDate);
 	}
 
 	public Pagination<JuhuasuanDetail> getJuhuasuanDetail(Date startDate,
@@ -329,6 +342,26 @@ public class JuhuasuanBussiness extends BaseAction {
 				OperationEnum.BIGGER_ADN_EQUALS, startDate);
 		hiberanateParamters.addOperationsValue(IJuhuasuanDetailDao.CREATETIME,
 				OperationEnum.LESS, endDate);
+
+		return this.juhuasuanDetailService.countByProperty(
+				hiberanateParamters.getParams(),
+				hiberanateParamters.getOperations(),
+				hiberanateParamters.getValues());
+	}
+
+	@Transactional
+	public long getValidCountOfJuhusuanDetail(int userId, Date startDate,
+			Date endDate) {
+		HiberanateParamters hiberanateParamters = new HiberanateParamters();
+
+		hiberanateParamters.addOperationsValue(IJuhuasuanDetailDao.USERID,
+				OperationEnum.EQUALS, userId);
+		hiberanateParamters.addOperationsValue(IJuhuasuanDetailDao.CREATETIME,
+				OperationEnum.BIGGER_ADN_EQUALS, startDate);
+		hiberanateParamters.addOperationsValue(IJuhuasuanDetailDao.CREATETIME,
+				OperationEnum.LESS, endDate);
+		hiberanateParamters.addOperationsValue(IJuhuasuanDetailDao.VALID,
+				OperationEnum.EQUALS, 1);
 
 		return this.juhuasuanDetailService.countByProperty(
 				hiberanateParamters.getParams(),
@@ -516,6 +549,37 @@ public class JuhuasuanBussiness extends BaseAction {
 
 	public void deleteUrl(JuhuasuanUrl url) {
 		this.juhuasuanUrlService.delete(url);
+	}
+
+	public void updateAllJuhuasuanDetail() {
+		List<JuhuasuanDetail> list = this.juhuasuanDetailService.findAll();
+		for (JuhuasuanDetail detail : list) {
+			detail.setValid(ReferUtil.isValid(detail.getPerferHost()));
+			this.updateJuhuasuanDetail(detail);
+		}
+	}
+
+	private void updateJuhuasuanDetail(JuhuasuanDetail detail) {
+		this.juhuasuanDetailService.update(detail);
+	}
+
+	public long getCountOfJuhusuanDetailInValid(Integer userId, Date startDate,
+			Date endDate) {
+		HiberanateParamters hiberanateParamters = new HiberanateParamters();
+
+		hiberanateParamters.addOperationsValue(IJuhuasuanDetailDao.USERID,
+				OperationEnum.EQUALS, userId);
+		hiberanateParamters.addOperationsValue(IJuhuasuanDetailDao.CREATETIME,
+				OperationEnum.BIGGER_ADN_EQUALS, startDate);
+		hiberanateParamters.addOperationsValue(IJuhuasuanDetailDao.CREATETIME,
+				OperationEnum.LESS, endDate);
+		hiberanateParamters.addOperationsValue(IJuhuasuanDetailDao.VALID,
+				OperationEnum.EQUALS, 1);
+
+		return this.juhuasuanDetailService.countByProperty(
+				hiberanateParamters.getParams(),
+				hiberanateParamters.getOperations(),
+				hiberanateParamters.getValues());
 	}
 
 }

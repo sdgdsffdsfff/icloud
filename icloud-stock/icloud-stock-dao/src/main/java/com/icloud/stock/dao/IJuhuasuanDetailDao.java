@@ -12,4 +12,5 @@ public interface IJuhuasuanDetailDao extends StockBaseDao<JuhuasuanDetail> {
 	public static final String CREATETIME = "createTime";
 	public static final String OTHERPARAM = "otherParam";
 	public static final String USERID = "userId";
+	public static final String VALID = "valid";
 }

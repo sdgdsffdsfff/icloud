@@ -46,6 +46,20 @@ public class UserUrlAccessCountDaoImpl extends
 	}
 
 	@Override
+	public int getCountOfAllUserInValid(Date createTime) {
+		String hql = "select sum(model.validCount) from " + domainClass.getName()
+				+ " as model where model.createTime = ?";
+		List list = getHibernateTemplate().find(hql, createTime);
+		if (ICloudUtils.isEmpty(list)) {
+			return -1;
+		} else {
+			long count = (Long) list.get(0);
+			int countS = (int) count;
+			return countS;
+		}
+	}
+
+	@Override
 	public int getCountOfUserIds(final Date createTime,
 			final List<Integer> userIds) {
 		final String hql = "select sum(model.count) from "
@@ -91,4 +105,31 @@ public class UserUrlAccessCountDaoImpl extends
 		// Object[] values = { createTime, userIds };
 		// return this.findByProperty(hql, values);
 	}
+
+	@Override
+	public int getCountOfUserIdsInValid(final Date createTime,
+			final List<Integer> userIds) {
+		final String hql = "select sum(model.validCount) from "
+				+ domainClass.getName()
+				+ " as model where model.createTime = (:ctime) and model.userId "
+				+ "in (:ids)";
+		List list = this.getHibernateTemplate().execute(
+				new HibernateCallback<List>() {
+					public List doInHibernate(Session session)
+							throws HibernateException {
+						Query queryObject = session.createQuery(hql);
+						queryObject.setParameterList("ids", userIds);
+						queryObject.setParameter("ctime", createTime);
+						return queryObject.list();
+					}
+				});
+		if (ICloudUtils.isEmpty(list)) {
+			return -1;
+		} else {
+			long count = (Long) list.get(0);
+			int countS = (int) count;
+			return countS;
+		}
+	}
+
 }

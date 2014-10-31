@@ -12,4 +12,5 @@ public interface IStockDetailDao extends StockBaseDao<StockDetail> {
 	public static final String DETAILCONTENT = "detailContent";
 	public static final String CREATETIME = "createTime";
 	public static final String UPDATETIME = "updateTime";
+	
 }

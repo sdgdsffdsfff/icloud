@@ -1,6 +1,6 @@
 package com.icloud.stock.model;
 
-// Generated Oct 27, 2014 7:04:04 PM by Hibernate Tools 3.4.0.CR1
+// Generated Oct 31, 2014 9:40:03 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 
@@ -14,16 +14,20 @@ public class UserUrlAccessCount implements java.io.Serializable {
 	private Integer count;
 	private Integer allCount;
 	private Date createTime;
+	private Integer validCount;
+	private Integer validAllCount;
 
 	public UserUrlAccessCount() {
 	}
 
 	public UserUrlAccessCount(Integer userId, Integer count, Integer allCount,
-			Date createTime) {
+			Date createTime, Integer validCount, Integer validAllCount) {
 		this.userId = userId;
 		this.count = count;
 		this.allCount = allCount;
 		this.createTime = createTime;
+		this.validCount = validCount;
+		this.validAllCount = validAllCount;
 	}
 
 	public Integer getId() {
@@ -64,6 +68,22 @@ public class UserUrlAccessCount implements java.io.Serializable {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public Integer getValidCount() {
+		return this.validCount;
+	}
+
+	public void setValidCount(Integer validCount) {
+		this.validCount = validCount;
+	}
+
+	public Integer getValidAllCount() {
+		return this.validAllCount;
+	}
+
+	public void setValidAllCount(Integer validAllCount) {
+		this.validAllCount = validAllCount;
 	}
 
 }

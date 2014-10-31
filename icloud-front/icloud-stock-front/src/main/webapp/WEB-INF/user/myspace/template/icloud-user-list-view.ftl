@@ -8,6 +8,7 @@
                                 <th>状态</th>
                                 <th>分销</th>
                                 <th>当天流量</th>
+                                <th>当天有效流量</th>
                                 <th>推荐人</th>
                                 <th>操作</th>
                             </tr>
@@ -21,6 +22,7 @@
                             <td>${user.status!""}</td>
                             <td>${user.promotion!""}</td>
                             <td>${user.currentDayCount!""}</td>
+                            <td>${user.currentDayValidCount!""}</td>
                             <td>${user.fatherName!""}</td>
                             <td><a href="javascript:void(0)" onclick="pauseUser('${user.userId}','${user.statusId}');">${user.statusOp}</a>&nbsp;&nbsp;
                             <#if user.promotionOp??>

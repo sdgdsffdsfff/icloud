@@ -97,10 +97,21 @@ public class UserUrlAccessCountServiceImpl extends
 	}
 
 	@Override
+	public int getCountOfUserIdsInValid(Date createTime, List<Integer> userIds) {
+		return this.userUrlAccessCountDao.getCountOfUserIdsInValid(createTime,
+				userIds);
+	}
+
+	@Override
 	public List<UserUrlAccessCount> getUserAccessCountDetailByUserIdAndDate(
 			List<Integer> userIds, Date date) {
 		return this.userUrlAccessCountDao
 				.getUserAccessCountDetailByUserIdAndDate(userIds, date);
+	}
+
+	@Override
+	public int getCountOfAllUserInValid(Date createTime) {
+		return this.userUrlAccessCountDao.getCountOfAllUserInValid(createTime);
 	}
 
 }

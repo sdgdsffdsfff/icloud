@@ -1,6 +1,6 @@
 package com.icloud.stock.model;
-// default package
-// Generated Oct 4, 2014 1:08:15 AM by Hibernate Tools 3.4.0.CR1
+
+// Generated Oct 31, 2014 9:40:03 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 
@@ -17,12 +17,14 @@ public class JuhuasuanDetail implements java.io.Serializable {
 	private Date createTime;
 	private String otherParam;
 	private Integer userId;
+	private Integer valid;
 
 	public JuhuasuanDetail() {
 	}
 
 	public JuhuasuanDetail(String perfer, String perferHost, String perferIp,
-			String urlId, Date createTime, String otherParam, Integer userId) {
+			String urlId, Date createTime, String otherParam, Integer userId,
+			Integer valid) {
 		this.perfer = perfer;
 		this.perferHost = perferHost;
 		this.perferIp = perferIp;
@@ -30,6 +32,7 @@ public class JuhuasuanDetail implements java.io.Serializable {
 		this.createTime = createTime;
 		this.otherParam = otherParam;
 		this.userId = userId;
+		this.valid = valid;
 	}
 
 	public Integer getId() {
@@ -94,6 +97,14 @@ public class JuhuasuanDetail implements java.io.Serializable {
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	public Integer getValid() {
+		return this.valid;
+	}
+
+	public void setValid(Integer valid) {
+		this.valid = valid;
 	}
 
 }

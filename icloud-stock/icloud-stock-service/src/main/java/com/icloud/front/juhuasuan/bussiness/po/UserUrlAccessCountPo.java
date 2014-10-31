@@ -19,6 +19,8 @@ public class UserUrlAccessCountPo {
 	private Integer userId;
 	private Integer count;
 	private Integer allCount;
+	private Integer validCount;
+	private Integer allValidCount;
 	private Date createTime;
 	private String userName;
 
@@ -30,11 +32,13 @@ public class UserUrlAccessCountPo {
 		po.setCount(userUrlAccessCount.getCount());
 		po.setAllCount(userUrlAccessCount.getAllCount());
 		po.setCreateTime(userUrlAccessCount.getCreateTime());
+		po.setValidCount(userUrlAccessCount.getValidCount());
+		po.setAllValidCount(userUrlAccessCount.getValidAllCount());
 		if (ICloudUtils.isNotNull(user))
 			po.setUserName(user.getUserName());
 		return po;
 	}
-	
+
 	public static UserUrlAccessCountPo convertUserUrlAccessCount(
 			UserUrlAccessCount userUrlAccessCount, User user) {
 		UserUrlAccessCountPo po = new UserUrlAccessCountPo();
@@ -43,6 +47,8 @@ public class UserUrlAccessCountPo {
 		po.setCount(userUrlAccessCount.getCount());
 		po.setAllCount(userUrlAccessCount.getAllCount());
 		po.setCreateTime(userUrlAccessCount.getCreateTime());
+		po.setValidCount(userUrlAccessCount.getValidCount());
+		po.setAllValidCount(userUrlAccessCount.getValidAllCount());
 		if (ICloudUtils.isNotNull(user))
 			po.setUserName(user.getUserName());
 		return po;
@@ -103,6 +109,22 @@ public class UserUrlAccessCountPo {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public Integer getValidCount() {
+		return validCount;
+	}
+
+	public void setValidCount(Integer validCount) {
+		this.validCount = validCount;
+	}
+
+	public Integer getAllValidCount() {
+		return allValidCount;
+	}
+
+	public void setAllValidCount(Integer allValidCount) {
+		this.allValidCount = allValidCount;
 	}
 
 }
