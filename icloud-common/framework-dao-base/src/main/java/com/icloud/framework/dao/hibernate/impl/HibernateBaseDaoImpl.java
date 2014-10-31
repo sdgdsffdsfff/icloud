@@ -135,37 +135,49 @@ public class HibernateBaseDaoImpl<T> extends HibernateDaoSupport implements
 
 	public List<T> findByProperty(final String hql, final int start,
 			final int limit) {
-		List<T> list = this.getSession().createQuery(hql).setFirstResult(start)
-				.setMaxResults(limit).list();
+		List<T> list = (List<T>) this.getHibernateTemplate().execute(
+				new HibernateCallback() {
+					public Object doInHibernate(Session session)
+							throws HibernateException {
+						Query queryObject = session.createQuery(hql);
+						queryObject.setFirstResult(start);
+						queryObject.setMaxResults(limit);
+						return queryObject.list();
+					}
+				});
 		return list;
+		// List<T> list =
+		// this.getSession().createQuery(hql).setFirstResult(start)
+		// .setMaxResults(limit).list();
+		// return list;
 
 	}
 
 	public List<T> findByProperty(final String hql, final Object[] values,
 			final int start, final int limit) {
-		// List<T> list = (List<T>) this.getHibernateTemplate().execute(
-		// new HibernateCallback() {
-		// public Object doInHibernate(Session session)
-		// throws HibernateException {
-		// Query queryObject = session.createQuery(hql);
+		List<T> list = (List<T>) this.getHibernateTemplate().execute(
+				new HibernateCallback() {
+					public Object doInHibernate(Session session)
+							throws HibernateException {
+						Query queryObject = session.createQuery(hql);
+						if (values != null) {
+							for (int i = 0; i < values.length; i++) {
+								queryObject.setParameter(i, values[i]);
+							}
+						}
+						queryObject.setFirstResult(start);
+						queryObject.setMaxResults(limit);
+						return queryObject.list();
+					}
+				});
+		return list;
+		// Query queryObject = this.getSession().createQuery(hql);
 		// if (values != null) {
 		// for (int i = 0; i < values.length; i++) {
 		// queryObject.setParameter(i, values[i]);
 		// }
 		// }
-		// queryObject.setFirstResult(start);
-		// queryObject.setMaxResults(limit);
-		// return queryObject.list();
-		// }
-		// });
-		// return list;
-		Query queryObject = this.getSession().createQuery(hql);
-		if (values != null) {
-			for (int i = 0; i < values.length; i++) {
-				queryObject.setParameter(i, values[i]);
-			}
-		}
-		return queryObject.setFirstResult(start).setMaxResults(limit).list();
+		// return queryObject.setFirstResult(start).setMaxResults(limit).list();
 	}
 
 	public List<T> findByPropertyNoLazy(final String hql,
