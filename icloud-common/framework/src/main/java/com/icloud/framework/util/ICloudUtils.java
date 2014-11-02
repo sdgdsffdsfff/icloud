@@ -115,6 +115,8 @@ public class ICloudUtils {
 	public static void main(String[] args) {
 		double d = 178333;
 		System.out.println(getDigitalString(d));
+		int d1 =2;
+		System.out.println(getDigitalString(d1));
 	}
 
 	public static boolean isSame(String name, String name2) {

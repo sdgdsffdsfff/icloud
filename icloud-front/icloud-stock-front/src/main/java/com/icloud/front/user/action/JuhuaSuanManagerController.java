@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,6 +28,7 @@ import com.icloud.framework.util.ExcelIEUtil;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.framework.vo.KeyValue;
 import com.icloud.front.juhuasuan.bussiness.po.UserUrlAccessCountPo;
+import com.icloud.front.juhuasuan.pojo.UserUrlAccessCountResult;
 import com.icloud.front.juhusuan.pojo.JuhuasuanFrontSession;
 import com.icloud.front.stock.baseaction.BaseStockController;
 import com.icloud.front.stock.pojo.JsonResponseResult;
@@ -284,6 +287,21 @@ public class JuhuaSuanManagerController extends BaseStockController {
 		}
 		ModelAndViewUtils.addPageView(modelAndView, pagination);
 		return modelAndView;
+	}
+
+	@RequestMapping("/getJuhuasuanUseTraffic")
+	@ResponseBody
+	public String getJuhuasuanUseTraffic(
+			@RequestParam(required = true) int userId) {
+		User tmpUser = this.userAdminBusiness.getUser(userId);
+		Pagination<UserUrlAccessCountPo> pagination = this.juhuasuanBussiness
+				.getJuhuaSuanUserAccessCountByUserId(tmpUser, 0, 90);
+		List<UserUrlAccessCountPo> data = (List<UserUrlAccessCountPo>) pagination
+				.getData();
+		UserUrlAccessCountResult result = UserUrlAccessCountResult
+				.convertToUserUrlAccessCountResult(tmpUser.getUserName(), data);
+		Gson gson = new Gson();
+		return gson.toJson(result);
 	}
 
 	@RequestMapping("trafficUserDetailView")

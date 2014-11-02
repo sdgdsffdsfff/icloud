@@ -417,3 +417,10 @@ tr {
 	font-size: 18px;
 	/* float: left; */
 }
+
+/** chart*/
+
+.userChart {
+    margin-bottom: 10px;
+    height: 250px;
+}
