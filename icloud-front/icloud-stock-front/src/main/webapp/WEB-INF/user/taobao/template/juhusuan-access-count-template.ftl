@@ -16,7 +16,7 @@
                          <#list pagination.data as accessCount> 
                         <tr>
                             <td>${accessCount.userName!""}</td>
-                            <td>${accessCount.createTime?string('MM-dd HH:mm')}</td>
+                            <td>${accessCount.weekTime}(${accessCount.createTime?string('YYYY-MM-dd')})</td>
                             <td>${accessCount.count!""}</td>
                             <td>${accessCount.validCount!""}</td>
                             <td>${(accessCount.allCount-accessCount.count)}</td>

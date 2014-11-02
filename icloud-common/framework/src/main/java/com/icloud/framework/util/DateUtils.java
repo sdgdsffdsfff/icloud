@@ -632,7 +632,7 @@ public class DateUtils {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		String[] weekDays = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
-		return weekDays[cal.get(Calendar.DAY_OF_WEEK)];
+		return weekDays[cal.get(Calendar.DAY_OF_WEEK) - 1];
 	}
 
 	public static Date addDays(Date date, int amount) {
@@ -662,15 +662,17 @@ public class DateUtils {
 
 	public static void main(String[] args) {
 		Date date = new Date();
-		Date startDate = DateUtils.getDate(DateUtils.addDays(date, -1));
-		System.out.println(startDate);
-		System.out.println("year = " + getYear(date));
-		System.out.println("month = " + getMonth(date));
-		System.out.println("day = " + getDay(date));
-		Date date2 = getDate(date, "yyyy-MM-dd");
-		System.out.println(date2);
-		date2 = DateUtils.addDays(date2, -7);
-		System.out.println(date2);
+		// Date startDate = DateUtils.getDate(DateUtils.addDays(date, -1));
+		// System.out.println(startDate);
+		// System.out.println("year = " + getYear(date));
+		// System.out.println("month = " + getMonth(date));
+		// System.out.println("day = " + getDay(date));
+		// Date date2 = getDate(date, "yyyy-MM-dd");
+		// System.out.println(date2);
+		// date2 = DateUtils.addDays(date2, -7);
+		// System.out.println(date2);
+
+		System.out.println(getDayOfWeek(date));
 	}
 
 }
