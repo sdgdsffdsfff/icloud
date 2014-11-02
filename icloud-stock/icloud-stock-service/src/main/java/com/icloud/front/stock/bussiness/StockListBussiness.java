@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.stock.model.CategoryStock;
 import com.icloud.stock.model.Stock;
+import com.icloud.stock.vo.StockVO;
 
 @Service("stockListBussiness")
 public class StockListBussiness extends BaseAction {
@@ -33,13 +34,16 @@ public class StockListBussiness extends BaseAction {
 			List<CategoryStock> findAll = this.categoryStockService
 					.findByProperties(CATEGORY_ID, cateId, start, limit);
 			for (CategoryStock cs : findAll) {
-				resultList.add(cs.getStock());
+				int userId = cs.getStock().getId();
+				resultList.add(this.stockService.getById(userId));
+				// resultList.add(StockVO.convert(cs.getStock()));
 			}
 			pagination.setData(resultList);
 		} else {
 			pagination.setTotalItemCount(this.stockService.count());
-			resultList = this.stockService.findAll(start, limit);
-			pagination.setData(resultList);
+			List<Stock> list = this.stockService.findAll(start, limit);
+			// resultList = StockVO.convert(list);
+			pagination.setData(list);
 		}
 		pagination.build();
 		return pagination;

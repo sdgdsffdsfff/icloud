@@ -23,6 +23,7 @@ import com.icloud.stock.model.Stock;
 import com.icloud.stock.model.StockDateHistory;
 import com.icloud.stock.model.StockDetail;
 import com.icloud.stock.model.constant.StockEnum.BaseCategory;
+import com.icloud.stock.vo.StockVO;
 
 @Controller
 @RequestMapping("/stock")

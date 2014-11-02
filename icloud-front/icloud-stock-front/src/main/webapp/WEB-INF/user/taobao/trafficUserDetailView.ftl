@@ -10,7 +10,7 @@
     	<#list parentsUsers as u>
     		<a href="${basepath}/usertb/trafficUserView?memberId=${u.id}">${u.userName!""}></a>
     	</#list>
-    	>  <a href="${basepath}/usertb/trafficUserView?memberId=${tmpUser.id}">${tmpUser.userName!""}</a>
+    	<a href="${basepath}/usertb/trafficUserView?memberId=${tmpUser.id}">${tmpUser.userName!""}</a>
     <#else>
       <a href="${basepath}/usertb/trafficUserView?memberId=${tmpUser.id}">${tmpUser.userName!""}</a>
     </#if>

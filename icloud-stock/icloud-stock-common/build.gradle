@@ -9,5 +9,6 @@ jar {
 }
 dependencies {
   compile project(':icloud-common:framework-logger')
+  compile libraries.dozer
 
 }
