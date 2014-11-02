@@ -18,4 +18,10 @@ public class ICloudCommonController {
 		ModelAndView model = new ModelAndView("icloud-base/icloud-contractus");
 		return model;
 	}
+	
+	@RequestMapping("/qa")
+	public ModelAndView qa() {
+		ModelAndView model = new ModelAndView("icloud-base/icloud-qa");
+		return model;
+	}
 }
