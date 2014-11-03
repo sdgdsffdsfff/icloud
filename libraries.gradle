@@ -428,14 +428,16 @@ ext {
 
     // xstream
     xstream:                'com.thoughtworks.xstream:xstream:1.4.4',
-
+    
+    // xerces
+    xerces:		    'xerces:xercesImpl:2.9.1',
     /* Y */
 
     /* Z */
 
     // zookeeper
     zookeeper:              'org.apache.zookeeper:zookeeper:3.4.5',
-    
+     
 
     // maria jdbc
     maria_jdbc:             'org.jumpmind.symmetric.jdbc:mariadb-java-client:1.1.1'

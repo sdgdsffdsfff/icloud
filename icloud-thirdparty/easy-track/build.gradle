@@ -1,0 +1,16 @@
+sourceSets.main.java.srcDirs 'gen-java'
+
+dependencies {
+	compile project(':icloud-common:framework-thrift')
+	compile project(':icloud-common:framework-search')
+	compile project(':icloud-common:framework-mongo-support')
+	compile project(':icloud-common:framework-hadoop')
+
+	compile libraries.httpclient
+	compile libraries.jedis
+	compile libraries.spring_context
+	compile libraries.rabbitmq
+	compile libraries.json_lib
+	compile libraries.groovy
+	compile libraries.xerces
+}
