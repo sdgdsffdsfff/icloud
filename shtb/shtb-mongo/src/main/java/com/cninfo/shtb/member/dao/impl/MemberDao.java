@@ -16,7 +16,6 @@ import com.cninfo.shtb.mongo.entity.Member;
 import com.github.jmkgreen.morphia.mapping.Mapper;
 import com.github.jmkgreen.morphia.query.Query;
 import com.mongodb.BasicDBList;
-import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.MapReduceCommand.OutputType;
 import com.mongodb.MapReduceOutput;

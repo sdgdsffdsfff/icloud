@@ -8,7 +8,7 @@ if [ -z $1 ]; then
    lastarg=""
 fi
 
-echo "$bin -t $tops -s /opt/stock-front -w icloud-stock-front -p icloud-front/icloud-stock-front -r test --host www.buuyuu.com -u root -a eiyb4gxk $lastarg"
-$bin -t $tops -s /opt/stock-front -w icloud-stock-front -p icloud-front/icloud-stock-front -r test --host www.buuyuu.com -u root -a eiyb4gxk $lastarg
+echo "$bin -t $tops -s /opt/stock-front -w icloud-stock-front -p icloud-front/icloud-stock-front -r test --host www.buuyuu.com -u root -a 9ms5t2zw $lastarg"
+$bin -t $tops -s /opt/stock-front -w icloud-stock-front -p icloud-front/icloud-stock-front -r test --host www.buuyuu.com -u root -a 9ms5t2zw $lastarg
 
-$bin -t $tops -s /opt/stock-front -w icloud-stock-front -p icloud-front/icloud-stock-front -r test --host www.buuyuu.com -u root -a eiyb4gxk -e
+$bin -t $tops -s /opt/stock-front -w icloud-stock-front -p icloud-front/icloud-stock-front -r test --host www.buuyuu.com -u root -a 9ms5t2zw -e
