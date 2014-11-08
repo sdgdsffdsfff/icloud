@@ -33,7 +33,7 @@
                          <#list pagination.data as urlBean> 
                         <tr>
                             <td>${urlBean.name!""}</td>
-                            <#if urlBean.taobaoUrl?length gt 10>
+                            <#if urlBean.taobaoUrl?length gt 30>
                               <td>${urlBean.taobaoUrl?substring(0,30)}</td>
                             <#else>
                              <td>${urlBean.taobaoUrl}</td>
