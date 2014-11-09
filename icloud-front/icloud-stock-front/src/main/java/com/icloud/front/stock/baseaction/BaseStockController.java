@@ -1,6 +1,9 @@
 package com.icloud.front.stock.baseaction;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
@@ -9,13 +12,17 @@ import com.google.gson.Gson;
 import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.common.utils.ICloudUserContextHolder;
+import com.icloud.front.common.utils.WebEnv;
 import com.icloud.front.juhuasuan.bussiness.JuhuasuanBussiness;
+import com.icloud.front.juhuasuan.constant.JuhuasuanConstants;
+import com.icloud.front.juhuasuan.constant.JuhuasuanConstants.JUHUASUANSTATUS;
 import com.icloud.front.stock.bussiness.BuuyuuSeoBussiness;
 import com.icloud.front.stock.bussiness.StockCommonBussiness;
 import com.icloud.front.stock.bussiness.StockDetailBussiness;
 import com.icloud.front.stock.bussiness.StockListBussiness;
 import com.icloud.front.user.bussiness.UserAdminBusiness;
 import com.icloud.front.user.bussiness.UserLogOperationBusiness;
+import com.icloud.stock.model.JuhuasuanUrl;
 import com.icloud.stock.model.User;
 import com.icloud.stock.search.service.StockNameSearcher;
 
@@ -23,7 +30,7 @@ public class BaseStockController {
 	protected static final Logger logger = RequestIdentityLogger
 			.getLogger(BaseStockController.class);
 	protected static final String SECURE_SEED = "Abc124456";
-	
+
 	protected static final String ERROR_URL = "redirect:/user/error";
 
 	@Resource(name = "stockCommonBussiness")
@@ -70,5 +77,59 @@ public class BaseStockController {
 
 	protected int getUserId() {
 		return getUser().getId();
+	}
+
+	protected String redirectToUrl(HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) {
+		String uri = request.getRequestURI();
+		String code = "";
+		if (uri.lastIndexOf("/") != -1) {
+			code = uri.substring(uri.lastIndexOf("/") + 1);
+		}
+		JuhuasuanUrl url = this.juhuasuanBussiness.getJuhuasuanUrlByCode(code);
+		if (ICloudUtils.isNotNull(url)) {
+			/**
+			 * 检查权限
+			 */
+			User user = this.userAdminBusiness.getUser(url.getUserId());
+			if (ICloudUtils.isNotNull(user) && user.getOpen() == 0) {
+				return "redirect:" + WebEnv.getBuuyuuUrl();
+			}
+			/**
+			 * 填充数据
+			 */
+			JUHUASUANSTATUS value = JuhuasuanConstants.JUHUASUANSTATUS
+					.value(url.getStatus());
+
+			String sessionId = session.getId();
+			String localip = request.getHeader("X-Real-IP");
+			if (ICloudUtils.isNotNull(localip)) {
+				localip = request.getRemoteAddr();
+			}
+			this.juhuasuanBussiness.processJuhuasuanSession(url, sessionId,
+					localip);
+			this.juhuasuanBussiness.processJuhuasuanDetail(request, sessionId,
+					url);
+
+			if (value == JUHUASUANSTATUS.RUNNING) {
+				ModelAndView modelAndView = new ModelAndView(
+						"user/taobao/redirect/taobao-redirect");
+				String originUrl = url.getOriginUrl();
+				if (!ICloudUtils.isNotNull(originUrl)) {
+					if (url.getType().equalsIgnoreCase(
+							JuhuasuanConstants.JUHUASUANTYPE.SINGLE.getId())) {
+						originUrl = WebEnv.get("href.path.taobao.single");
+					} else {
+						originUrl = WebEnv.get("href.path.taobao.ju");
+					}
+				} else {
+					originUrl = originUrl.trim();
+				}
+				modelAndView.addObject("preUrl", url.getTaobaoUrl().trim());
+				modelAndView.addObject("lastUrl", originUrl);
+				return "redirect:" + url.getTaobaoUrl().trim();
+			}
+		}
+		return "redirect:" + WebEnv.getBuuyuuUrl();
 	}
 }
