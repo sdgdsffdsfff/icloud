@@ -1,10 +1,6 @@
 package com.icloud.front.sheduler;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import com.icloud.front.juhuasuan.bussiness.JuhuasuanStatBusiness;
 
 /**
  * @comment
@@ -13,10 +9,10 @@ import com.icloud.front.juhuasuan.bussiness.JuhuasuanStatBusiness;
  */
 @Component("userUrlAccessCountJob")
 public class UserUrlAccessCountJob {
-	@Autowired
-	private JuhuasuanStatBusiness juhuasuanStatBusiness;
-	@Scheduled(cron = "0 10 0 * * ?")
-	public void dailyUpdateUserUrlAccessCountTask() {
-		this.juhuasuanStatBusiness.updateUserUrlAccessCountDaily();
-	}
+	// @Autowired
+	// private JuhuasuanStatBusiness juhuasuanStatBusiness;
+	// @Scheduled(cron = "0 10 0 * * ?")
+	// public void dailyUpdateUserUrlAccessCountTask() {
+	// this.juhuasuanStatBusiness.updateUserUrlAccessCountDaily();
+	// }
 }

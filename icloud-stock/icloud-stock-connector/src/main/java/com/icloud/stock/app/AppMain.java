@@ -6,6 +6,7 @@ import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.stock.analysis.StockAnalysis;
 import com.icloud.stock.importer.data.StockHistoryDataImporter;
+import com.icloud.stock.taobao.TaobaoUrlImporter;
 
 public class AppMain {
 	protected static final Logger LOGGER = RequestIdentityLogger
@@ -13,6 +14,7 @@ public class AppMain {
 	public static final String ANALYSIS = "analysis";
 	public static final String FETCHHISTORY = "fetchHistory";
 	public static final String ALL = "all";
+	public static final String TAOBAO_PRO = "taobao";
 
 	public static void pringUsge() {
 		LOGGER.info("error: ");
@@ -26,6 +28,11 @@ public class AppMain {
 			return;
 		}
 		String common = args[0];
+		if (common.equalsIgnoreCase(TAOBAO_PRO)) {
+			TaobaoUrlImporter importer = new TaobaoUrlImporter();
+			importer.update();
+			return;
+		}
 		if (common.equalsIgnoreCase(FETCHHISTORY)
 				|| common.equalsIgnoreCase(ALL)) {
 			StockHistoryDataImporter importer = new StockHistoryDataImporter();

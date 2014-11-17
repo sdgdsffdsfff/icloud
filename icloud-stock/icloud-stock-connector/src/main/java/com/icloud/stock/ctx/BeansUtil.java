@@ -3,6 +3,7 @@ package com.icloud.stock.ctx;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.icloud.front.juhuasuan.bussiness.JuhuasuanStatBusiness;
 import com.icloud.stock.service.ICategoryService;
 import com.icloud.stock.service.ICategoryStockService;
 import com.icloud.stock.service.IStockDateHistoryService;
@@ -44,4 +45,9 @@ public class BeansUtil {
 	public static IStockDetailService getStockDetailService() {
 		return (IStockDetailService) app.getBean("stockDetailService");
 	}
+
+	public static JuhuasuanStatBusiness getJuhuasuanStatBusiness() {
+		return (JuhuasuanStatBusiness) app.getBean("juhuasuanStatBusiness");
+	}
+
 }

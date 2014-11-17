@@ -12,7 +12,7 @@ start() {
 test -d /data/log/stock/fetch/ || mkdir /data/log/stock/fetch/ -p
 /app/jdk1.7.0_21/bin/java -Xms128M -Xmx1024M -classpath $libpath $libclass $1>> /data/log/stock/fetch/history.log 2>&1 &
 }
- 
+
 stop() {
 kill -9 `ps aux | grep $libclass | grep -v grep | awk '{print $2}'`
 }
@@ -32,5 +32,6 @@ fetchHistory)    start fetchHistory;;
 analysis)    start analysis;;
 all) 	start all;;
 stop)     stop;;
+taobao)   start taobao;;
 *)        usage;;
 esac

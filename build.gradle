@@ -83,13 +83,13 @@ allprojects {
     }
     zip.doFirst {
         if (new File("$projectDir/script").exists()) {
-            classpath = new File("$projectDir/script/.classpath")
-            if (!classpath.exists()) classpath.createNewFile()
-            cp = 'CLASSPATH='
-            for(file in new File("$projectDir/lib").listFiles()) cp += '../lib/' + file.name + ';'
-            for(file in configurations.compile) cp += '../lib/' + file.name + ';'
-            for(file in jar.outputs.files) cp += '../lib/' + file.name + ';'
-            classpath.text = cp.substring(0, cp.length() - 1)
+            //classpath = new File("$projectDir/script/.classpath")
+            //if (!classpath.exists()) classpath.createNewFile()
+            //cp = 'CLASSPATH='
+            //for(file in new File("$projectDir/lib").listFiles()) cp += '../lib/' + file.name + ';'
+            //for(file in configurations.compile) cp += '../lib/' + file.name + ';'
+            //for(file in jar.outputs.files) cp += '../lib/' + file.name + ';'
+            //classpath.text = cp.substring(0, cp.length() - 1)
         }
     }
 
