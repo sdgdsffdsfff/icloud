@@ -8,6 +8,7 @@ import com.icloud.framework.core.wrapper.Pagination;
 
 public class ModelAndViewUtils {
 
+	@SuppressWarnings("hiding")
 	public static <T> void addPageView(ModelAndView modelAndView,
 			Pagination<T> pagination) {
 		modelAndView.addObject("pagination", pagination);

@@ -29,7 +29,6 @@ public class MemberAuthUtils {
 		// cookie.setSecure(useSecure);
 		response.addCookie(cookie);
 		logger.info("cookieName={}, token={}", getRememberMeCookieName(), token);
-		;
 		return cookie;
 	}
 
