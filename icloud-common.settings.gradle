@@ -12,6 +12,7 @@ include 'icloud-common:framework-http'
 
 include 'icloud-common:framework-thrift'
 include 'icloud-common:framework-thrift-standardserver'
+include 'icloud-common:framework-isis'
 
 include 'icloud-common:framework'
 include 'icloud-common:framework-search'
