@@ -1,5 +1,8 @@
 package com.icloud.framework.util;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.NumberFormat;
 import java.util.Collection;
 import java.util.List;
@@ -112,11 +115,29 @@ public class ICloudUtils {
 		return nFormat.format(d);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnsupportedEncodingException {
 		double d = 178333;
 		System.out.println(getDigitalString(d));
-		int d1 =2;
+		int d1 = 2;
 		System.out.println(getDigitalString(d1));
+		String keyWord = URLDecoder.decode("%2e", "gb2312");
+		System.out.println(keyWord);
+		String s = ".";
+		// String s1 = URLDecoder.decode(s, "ios-a");
+		String s1 = new String(s.getBytes(), "iso-8859-1");
+		System.out.println(s1);
+		s1 = "卓越 新书C#入门";
+		s1 = ".";
+		s1 = "。";
+		String sf = "gb2312";
+		// s1 = "%2e";
+		sf = "UTF-8";
+		String codes = URLEncoder.encode(s1, sf);
+		System.out.println(codes);
+		String text = URLDecoder.decode(s1, sf);
+		System.out.println(text);
+		text = URLEncoder.encode(text, sf);
+		System.out.println(text);
 	}
 
 	public static boolean isSame(String name, String name2) {
@@ -136,4 +157,5 @@ public class ICloudUtils {
 	public static String trim(String str) {
 		return str == null ? null : str.trim();
 	}
+
 }

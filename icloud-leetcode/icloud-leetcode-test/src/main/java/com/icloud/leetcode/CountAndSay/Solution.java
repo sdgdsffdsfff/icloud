@@ -55,6 +55,33 @@ public class Solution {
 		return (int) (i * i > x ? i - 1 : i);
 	}
 
+	public void merge(int A[], int m, int B[], int n) {
+		int pA = m - 1;
+		int pB = n - 1;
+		int p = pA + pB + 1;
+
+		while (pA >= 0 && pB >= 0) {
+			if (A[pA] > B[pB]) {
+				A[p] = A[pA];
+				pA--;
+			} else {
+				A[p] = B[pB];
+				pB--;
+			}
+			p--;
+		}
+		// while (pA >= 0) {
+		// A[p] = A[pA];
+		// pointerA--;
+		// p--;
+		// }
+		while (pB >= 0) {
+			A[p] = B[pB];
+			pB--;
+			p--;
+		}
+	}
+
 	public static void main(String[] args) {
 		Solution solution = new Solution();
 		System.out.println(solution.sqrt(2147395599));
