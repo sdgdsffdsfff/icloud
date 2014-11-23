@@ -46,7 +46,7 @@ public class JuhuasuanConstantBussiness extends BaseBussiness {
 		TaobaoConstant taobaoConstant = getTaobaoConstant(info);
 		if (ICloudUtils.isNotNull(taobaoUrl)
 				&& ICloudUtils.isNotNull(taobaoConstant)
-				&& !taobaoUrl.equalsIgnoreCase(taobaoConstant.getValue())) {
+				&& !taobaoUrl.equals(taobaoConstant.getValue())) {
 			if (info.isUrlOper()) {
 				taobaoConstant.setValue(taobaoUrl);
 				taobaoConstant.setUpdateTime(new Date());
