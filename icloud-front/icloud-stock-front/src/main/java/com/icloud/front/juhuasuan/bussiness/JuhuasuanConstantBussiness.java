@@ -65,8 +65,8 @@ public class JuhuasuanConstantBussiness extends BaseBussiness {
 			if (!ICloudUtils.isNotNull(url)) {
 				url = WebEnv.get(DEFAULT_TAOBAO_URL_NAME);
 			}
-			if (!url.endsWith("/"))
-				url = url + "/";
+//			if (!url.endsWith("/"))
+//				url = url + "/";
 			info.setTaobaoUrl(url);
 			String href = url;
 			if (!href.startsWith("http://")) {
