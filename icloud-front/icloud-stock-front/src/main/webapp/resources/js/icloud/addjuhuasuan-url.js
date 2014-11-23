@@ -21,12 +21,12 @@ function onclickButton() {
 			}
 		}
 	});
-
 	$("#addjuhuasuanButton").click(function() {
 		if ($("#juhuasuanUrlForm").valid()) {
 			$("#juhuasuanUrlForm").submit();
 		}
 	});
+
 }
 
 $(document).ready(function() {

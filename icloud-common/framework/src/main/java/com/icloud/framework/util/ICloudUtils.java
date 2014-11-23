@@ -6,8 +6,10 @@ import java.net.URLEncoder;
 import java.text.NumberFormat;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 public class ICloudUtils {
+	public static Random random = new Random();
 
 	public static <T> boolean isEmpty(Collection<T> collection) {
 		if (collection == null)
@@ -138,6 +140,14 @@ public class ICloudUtils {
 		System.out.println(text);
 		text = URLEncoder.encode(text, sf);
 		System.out.println(text);
+		System.out.println("----------");
+		System.out.println(getRandom(2));
+		System.out.println(getRandom(2));
+		System.out.println(getRandom(2));
+		System.out.println(getRandom(2));
+		System.out.println(getRandom(2));
+		System.out.println(getRandom(2));
+		System.out.println(getRandom(2));
 	}
 
 	public static boolean isSame(String name, String name2) {
@@ -156,6 +166,16 @@ public class ICloudUtils {
 
 	public static String trim(String str) {
 		return str == null ? null : str.trim();
+	}
+
+	/**
+	 * 获得随机数
+	 * 
+	 * @param size
+	 * @return
+	 */
+	public static int getRandom(int size) {
+		return Math.abs(random.nextInt()) % size;
 	}
 
 }

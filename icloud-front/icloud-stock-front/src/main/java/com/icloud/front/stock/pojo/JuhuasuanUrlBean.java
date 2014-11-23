@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.juhuasuan.constant.JuhuasuanConstants;
+import com.icloud.stock.dao.IJuhuasuanUrlDao;
 import com.icloud.stock.model.JuhuasuanUrl;
 
 public class JuhuasuanUrlBean {
@@ -15,6 +16,8 @@ public class JuhuasuanUrlBean {
 	private String solidify;
 	private String id;
 	private String originUrl;
+	private String moreflag;
+	private String moreUrl;
 
 	public String getName() {
 		return name;
@@ -80,6 +83,22 @@ public class JuhuasuanUrlBean {
 		this.originUrl = originUrl;
 	}
 
+	public String getMoreflag() {
+		return moreflag;
+	}
+
+	public void setMoreflag(String moreflag) {
+		this.moreflag = moreflag;
+	}
+
+	public String getMoreUrl() {
+		return moreUrl;
+	}
+
+	public void setMoreUrl(String moreUrl) {
+		this.moreUrl = moreUrl;
+	}
+
 	public static JuhuasuanUrl convertJuhuasuanUrlBean(JuhuasuanUrlBean bean) {
 		if (ICloudUtils.isNotNull(bean)) {
 			JuhuasuanUrl url = new JuhuasuanUrl();
@@ -101,9 +120,18 @@ public class JuhuasuanUrlBean {
 			} else {
 				url.setId(null);
 			}
+			String moreUrl = bean.getMoreUrl();
+			if (ICloudUtils.isNotNull(moreUrl)) {
+				if (moreUrl.endsWith(IJuhuasuanUrlDao.URL_SEP)) {
+					moreUrl = moreUrl.substring(0, moreUrl.length()
+							- IJuhuasuanUrlDao.URL_SEP.length());
+				}
+			}
+			url.setMoreFlag(JuhuasuanConstants.JUHUASUANURLTYPE.value(
+					ICloudUtils.parseInt(bean.getMoreflag(), 0)).getId());
+			url.setMoreUrl(moreUrl);
 			return url;
 		}
 		return null;
 	}
-
 }

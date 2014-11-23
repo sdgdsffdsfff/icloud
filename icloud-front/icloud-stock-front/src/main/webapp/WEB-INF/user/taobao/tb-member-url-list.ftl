@@ -25,6 +25,7 @@
                                 <th>链接名称</th>
                                 <th>淘宝链接</th>
                                 <th>转换链接</th>
+                                <th>链接类型</th>
                                 <th>链接状态</th>
                                 <th>修改日期</th>
                             </tr>
@@ -39,6 +40,7 @@
                              <td>${urlBean.taobaoUrl}</td>
                             </#if>
                             <td><a href="${taobaohosthref}${urlBean.icloudUrl!""}" target="_blank">${taobaohost}${urlBean.icloudUrl!""}</a></td>
+                            <td>${staticValues('4','${urlBean.moreFlag!""}')}</td>
                             <td>${staticValues('1','${urlBean.status!""}')}</td>
                             <td>${urlBean.updateTime?string('yyyy-MM-dd HH:mm')}</td>
                         </tr>

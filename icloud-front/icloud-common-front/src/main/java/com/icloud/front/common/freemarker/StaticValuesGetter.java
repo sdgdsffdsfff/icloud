@@ -23,8 +23,11 @@ public class StaticValuesGetter implements TemplateMethodModel {
 			return JuhuasuanConstants.JUHUASUANTYPE.value(key).getName();
 		} else if ("3".equalsIgnoreCase(type)) {
 			return JuhuasuanConstants.JUHUASUANSOLIDIFY.value(key).getName();
+		} else if ("4".equalsIgnoreCase(type)) {
+			return JuhuasuanConstants.JUHUASUANURLTYPE.value(
+					ICloudUtils.parseInt(key, 0)).getName();
 		}
-		return null;	
+		return null;
 	}
 
 }

@@ -105,6 +105,10 @@ public class JuhuaSuanManagerController extends BaseStockController {
 		if (ICloudUtils.isNotNull(code)) {
 			JuhuasuanUrl urlBean = this.juhuasuanBussiness
 					.getJuhuasuanUrlByCode(code);
+			List<String> list = juhuasuanBussiness.getMoreUrl(urlBean);
+			if (!ICloudUtils.isEmpty(list)) {
+				modelAndView.addObject(key + "_moreUrls", list);
+			}
 			modelAndView.addObject(key, urlBean);
 		}
 	}
@@ -139,6 +143,8 @@ public class JuhuaSuanManagerController extends BaseStockController {
 			}
 			modelAndView.addObject("tip", "链接修改成功");
 			modelAndView.addObject("urlBean", originJuhuasuanUrl);
+			addmodelAndViewByCode(originJuhuasuanUrl.getIcloudUrl(), "urlBean",
+					modelAndView);
 		}
 		return modelAndView;
 	}

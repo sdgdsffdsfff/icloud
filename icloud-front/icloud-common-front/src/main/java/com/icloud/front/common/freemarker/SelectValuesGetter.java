@@ -9,6 +9,7 @@ import com.icloud.front.juhuasuan.constant.JuhuasuanConstants;
 import com.icloud.front.juhuasuan.constant.JuhuasuanConstants.JUHUASUANSOLIDIFY;
 import com.icloud.front.juhuasuan.constant.JuhuasuanConstants.JUHUASUANSTATUS;
 import com.icloud.front.juhuasuan.constant.JuhuasuanConstants.JUHUASUANTYPE;
+import com.icloud.front.juhuasuan.constant.JuhuasuanConstants.JUHUASUANURLTYPE;
 
 import freemarker.template.TemplateMethodModel;
 import freemarker.template.TemplateModelException;
@@ -48,6 +49,16 @@ public class SelectValuesGetter implements TemplateMethodModel {
 			for (JUHUASUANSOLIDIFY value : values) {
 				KeyValue<String, String> kv = new KeyValue<String, String>();
 				kv.setKey(value.getId());
+				kv.setValue(value.getName());
+				list.add(kv);
+			}
+
+		} else if (keyStr.equalsIgnoreCase("4")) {
+			JUHUASUANURLTYPE[] values = JuhuasuanConstants.JUHUASUANURLTYPE
+					.values();
+			for (JUHUASUANURLTYPE value : values) {
+				KeyValue<String, String> kv = new KeyValue<String, String>();
+				kv.setKey(value.getId() + "");
 				kv.setValue(value.getName());
 				list.add(kv);
 			}

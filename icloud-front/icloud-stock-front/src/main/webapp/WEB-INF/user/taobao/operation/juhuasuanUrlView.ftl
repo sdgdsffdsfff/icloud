@@ -7,7 +7,7 @@
                 <h3 class="title">
                     <strong>查看链接</strong>
                 </h3>
-                <div class="row" style="height:670px;">
+                <div class="row" style="min-height:670px;">
                 
                     <ul class="find_password">
                     <#if tip??>
@@ -58,12 +58,33 @@
                              </label>
                          </li>
                          <li>
+                            <label>
+                                 <div>链接类型:</div>
+                                 <td>${staticValues('4','${urlBean.moreFlag!""}')}</td>
+                             </label>
+                             <#if urlBean_moreUrls??>
+                             <div style="margin-left:153px;">
+                         	<table id="infoTable" border="0" width="530" style="display: inline;  padding: 2px;margin-top:8px;">
+                         	 <#list urlBean_moreUrls as moreUrl>
+                         	<tr>
+                         		<td id='0' style="width:250px;word-break: break-all;word-wrap : break-word; overflow:hidden;">
+                         		  ${moreUrl}
+                         		</td>
+                         	</tr>
+                         	</#list>
+						    </table>
+						    </div>
+						    </#if>
+                         </li>
+                         <li>
                              <label>
                                  <div>链接介绍:</div>
                                  ${urlBean.desText!""}
                              </label>
                          </li>
-                         <li>    
+                         <li>
+                         	
+                         </li>    
                             <div style="margin-left:153px;">
                                 <a href="${basepath}/usertb/modifyJuhusuanUrlView?code=${urlBean.icloudUrl!""}" class="adaptiveButton brightRed_btn" id="addjuhuasuanButton">
                                     <span class="left"></span>

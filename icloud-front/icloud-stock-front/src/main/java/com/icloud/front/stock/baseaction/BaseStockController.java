@@ -1,5 +1,7 @@
 package com.icloud.front.stock.baseaction;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -120,22 +122,39 @@ public class BaseStockController {
 					url);
 
 			if (value == JUHUASUANSTATUS.RUNNING) {
-				ModelAndView modelAndView = new ModelAndView(
-						"user/taobao/redirect/taobao-redirect");
-				String originUrl = url.getOriginUrl();
-				if (!ICloudUtils.isNotNull(originUrl)) {
-					if (url.getType().equalsIgnoreCase(
-							JuhuasuanConstants.JUHUASUANTYPE.SINGLE.getId())) {
-						originUrl = WebEnv.get("href.path.taobao.single");
-					} else {
-						originUrl = WebEnv.get("href.path.taobao.ju");
+				String taobaoUrl = url.getTaobaoUrl().trim();
+				/**
+				 * 如果是超级链接
+				 */
+				if (ICloudUtils.isNotNull(url.getMoreFlag())
+						&& url.getMoreFlag() == 1) {
+					List<String> list = this.juhuasuanBussiness.getMoreUrl(url);
+					if (!ICloudUtils.isEmpty(list)) {
+						list.add(taobaoUrl);
+						/**
+						 * 获得随机数
+						 */
+						int index = ICloudUtils.getRandom(list.size());
+						taobaoUrl = list.get(index);
 					}
-				} else {
-					originUrl = originUrl.trim();
 				}
-				modelAndView.addObject("preUrl", url.getTaobaoUrl().trim());
-				modelAndView.addObject("lastUrl", originUrl);
-				return "redirect:" + url.getTaobaoUrl().trim();
+				// ModelAndView modelAndView = new ModelAndView(
+				// "user/taobao/redirect/taobao-redirect");
+				// String originUrl = url.getOriginUrl();
+				// if (!ICloudUtils.isNotNull(originUrl)) {
+				// if (url.getType().equalsIgnoreCase(
+				// JuhuasuanConstants.JUHUASUANTYPE.SINGLE.getId())) {
+				// originUrl = WebEnv.get("href.path.taobao.single");
+				// } else {
+				// originUrl = WebEnv.get("href.path.taobao.ju");
+				// }
+				// } else {
+				// originUrl = originUrl.trim();
+				// }
+				// modelAndView.addObject("preUrl", url.getTaobaoUrl().trim());
+				// modelAndView.addObject("lastUrl", originUrl);
+				// return "redirect:" + url.getTaobaoUrl().trim();
+				return "redirect:" + taobaoUrl;
 			}
 		}
 		return "redirect:" + WebEnv.getBuuyuuUrl();

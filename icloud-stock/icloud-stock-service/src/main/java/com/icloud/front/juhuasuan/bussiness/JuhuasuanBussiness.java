@@ -68,6 +68,21 @@ public class JuhuasuanBussiness extends BaseBussiness {
 				.findByProperies(IJuhuasuanUrlDao.ICLOUDURL, code));
 	}
 
+	public List<String> getMoreUrl(JuhuasuanUrl url) {
+		if (ICloudUtils.isNotNull(url)&&ICloudUtils.isNotNull(url.getMoreUrl())) {
+			String moreUrl = url.getMoreUrl();
+			String[] tmpUrls = moreUrl.split(IJuhuasuanUrlDao.URL_SEP);
+			if (ICloudUtils.isNotNull(tmpUrls)) {
+				List<String> list = new ArrayList<String>();
+				for (String tu : tmpUrls) {
+					list.add(tu);
+				}
+				return list;
+			}
+		}
+		return null;
+	}
+
 	public JuhuasuanUrl getJuhuasuanUrlById(int id) {
 		return this.juhuasuanUrlService.getById(id);
 	}
@@ -97,6 +112,10 @@ public class JuhuasuanBussiness extends BaseBussiness {
 			if (ICloudUtils.isNotNull(urlBean.getOriginUrl())) {
 				originJuhuasuanUrl.setOriginUrl(urlBean.getOriginUrl());
 			}
+			if (ICloudUtils.isNotNull(urlBean.getMoreUrl())) {
+				originJuhuasuanUrl.setMoreUrl(urlBean.getMoreUrl());
+			}
+			originJuhuasuanUrl.setMoreFlag(urlBean.getMoreFlag());
 			originJuhuasuanUrl.setUpdateTime(new Date());
 			this.juhuasuanUrlService.update(originJuhuasuanUrl);
 			return originJuhuasuanUrl;

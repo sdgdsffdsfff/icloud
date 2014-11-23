@@ -19,4 +19,6 @@ public interface IJuhuasuanUrlDao extends StockBaseDao<JuhuasuanUrl> {
 	public static final String MOREURL = "moreUrl";
 	public static final String MOREFLAG = "moreFlag";
 
+	public static final String URL_SEP = "#####";
+
 }
