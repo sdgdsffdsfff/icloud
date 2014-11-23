@@ -11,7 +11,7 @@ import com.icloud.stock.service.IJuhuasuanUrlService;
 import com.icloud.stock.service.IUserUrlAccessCountService;
 import com.icloud.user.service.IUserService;
 
-public class BaseAction {
+public class BaseBussiness {
 	protected Logger logger = RequestIdentityLogger.getLogger(this.getClass());
 	@Resource(name = "juhuasuanUrlService")
 	protected IJuhuasuanUrlService juhuasuanUrlService;

@@ -148,6 +148,12 @@ public class UserAdminBusiness extends UserBusiness {
 				} else {
 					info.setOpen(false);
 				}
+				if (user.getLevel() == UserConstants.SUPER_USER
+						|| user.getLevel() == 1) {
+					info.setUrlOper(true);
+				} else {
+					info.setUrlOper(false);
+				}
 				return info;
 			}
 		}

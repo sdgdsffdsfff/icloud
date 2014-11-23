@@ -25,7 +25,7 @@ import com.icloud.user.dict.UserConstants;
  * @email cuijiangning@cninfo.com.cn 2014年10月24日 下午2:42:51
  */
 @Service("juhuasuanStatBusiness")
-public class JuhuasuanStatBusiness extends BaseAction {
+public class JuhuasuanStatBusiness extends BaseBussiness {
 	@Resource(name = "juhuasuanBussiness")
 	protected JuhuasuanBussiness juhuasuanBussiness;
 	@Resource(name = "userAdminBusiness")

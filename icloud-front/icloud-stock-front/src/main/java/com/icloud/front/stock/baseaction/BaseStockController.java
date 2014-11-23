@@ -14,6 +14,7 @@ import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.common.utils.ICloudUserContextHolder;
 import com.icloud.front.common.utils.WebEnv;
 import com.icloud.front.juhuasuan.bussiness.JuhuasuanBussiness;
+import com.icloud.front.juhuasuan.bussiness.JuhuasuanConstantBussiness;
 import com.icloud.front.juhuasuan.constant.JuhuasuanConstants;
 import com.icloud.front.juhuasuan.constant.JuhuasuanConstants.JUHUASUANSTATUS;
 import com.icloud.front.stock.bussiness.BuuyuuSeoBussiness;
@@ -22,6 +23,7 @@ import com.icloud.front.stock.bussiness.StockDetailBussiness;
 import com.icloud.front.stock.bussiness.StockListBussiness;
 import com.icloud.front.user.bussiness.UserAdminBusiness;
 import com.icloud.front.user.bussiness.UserLogOperationBusiness;
+import com.icloud.front.user.pojo.UserInfo;
 import com.icloud.stock.model.JuhuasuanUrl;
 import com.icloud.stock.model.User;
 import com.icloud.stock.search.service.StockNameSearcher;
@@ -49,6 +51,8 @@ public class BaseStockController {
 	protected UserLogOperationBusiness userLogOperationBusiness;
 	@Resource(name = "juhuasuanBussiness")
 	protected JuhuasuanBussiness juhuasuanBussiness;
+	@Resource(name = "juhuasuanConstantBussiness")
+	protected JuhuasuanConstantBussiness juhuasuanConstantBussiness;
 
 	protected static Gson gson = new Gson();
 
@@ -73,6 +77,10 @@ public class BaseStockController {
 		User user = this.userAdminBusiness
 				.getUserByUserInfo(ICloudUserContextHolder.get());
 		return user;
+	}
+
+	protected UserInfo getUserInfo() {
+		return ICloudUserContextHolder.get();
 	}
 
 	protected int getUserId() {

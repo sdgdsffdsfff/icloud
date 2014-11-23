@@ -1,7 +1,5 @@
 package com.icloud.front.user.action;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -170,6 +168,31 @@ public class ICloudUserController extends BaseStockController {
 						searchBean.getLimit());
 		ModelAndViewUtils.addPageView(model, pagination);
 		return model;
+	}
+
+	@RequestMapping("/taobaoUrlView")
+	public ModelAndView taobaoUrlView() {
+		ModelAndView model = getModelAndView("user/myspace/icloud-user-taobao-constant-view");
+		String taobaoUrl = this.juhuasuanConstantBussiness
+				.getTaobaoServerHost(this.getUserInfo());
+		model.addObject("taobaoUrl", taobaoUrl);
+		return model;
+	}
+
+	@RequestMapping("/doModifyTaobaoUrl")
+	@ResponseBody
+	public String doModifyTaobaoUrl(String taobaoUrl) {
+		boolean flag = this.juhuasuanConstantBussiness.update(taobaoUrl,
+				this.getUserInfo());
+		JsonResponseResult result = new JsonResponseResult();
+		if (flag) {
+			result.setResult(1);
+			result.setTip("恭喜你，修改成功");
+		} else {
+			result.setResult(0);
+			result.setTip("对不起，你的操作有误，请确认是否有权限或者操作正确");
+		}
+		return gson.toJson(result);
 	}
 
 	@RequestMapping("/operateUser")

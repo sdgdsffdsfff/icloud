@@ -1,6 +1,6 @@
 package com.icloud.stock.model;
 
-// Generated Oct 31, 2014 9:40:03 PM by Hibernate Tools 3.4.0.CR1
+// Generated Nov 22, 2014 10:22:56 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 
@@ -21,6 +21,8 @@ public class JuhuasuanUrl implements java.io.Serializable {
 	private String type;
 	private String solidify;
 	private String originUrl;
+	private String moreUrl;
+	private Integer moreFlag;
 
 	public JuhuasuanUrl() {
 	}
@@ -36,7 +38,8 @@ public class JuhuasuanUrl implements java.io.Serializable {
 
 	public JuhuasuanUrl(String name, String taobaoUrl, String icloudUrl,
 			int userId, Date createTime, Date updateTime, String desText,
-			String status, String type, String solidify, String originUrl) {
+			String status, String type, String solidify, String originUrl,
+			String moreUrl, Integer moreFlag) {
 		this.name = name;
 		this.taobaoUrl = taobaoUrl;
 		this.icloudUrl = icloudUrl;
@@ -48,6 +51,8 @@ public class JuhuasuanUrl implements java.io.Serializable {
 		this.type = type;
 		this.solidify = solidify;
 		this.originUrl = originUrl;
+		this.moreUrl = moreUrl;
+		this.moreFlag = moreFlag;
 	}
 
 	public Integer getId() {
@@ -144,6 +149,22 @@ public class JuhuasuanUrl implements java.io.Serializable {
 
 	public void setOriginUrl(String originUrl) {
 		this.originUrl = originUrl;
+	}
+
+	public String getMoreUrl() {
+		return this.moreUrl;
+	}
+
+	public void setMoreUrl(String moreUrl) {
+		this.moreUrl = moreUrl;
+	}
+
+	public Integer getMoreFlag() {
+		return this.moreFlag;
+	}
+
+	public void setMoreFlag(Integer moreFlag) {
+		this.moreFlag = moreFlag;
 	}
 
 }

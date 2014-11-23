@@ -6,6 +6,9 @@ public class UserInfo {
 	private String email;
 	private boolean addUser;
 	private boolean open;
+	private boolean urlOper;
+	private String taobaoUrl;
+	private String taobaohosthref;
 
 	public String getUserName() {
 		return userName;
@@ -45,6 +48,30 @@ public class UserInfo {
 
 	public void setOpen(boolean open) {
 		this.open = open;
+	}
+
+	public boolean isUrlOper() {
+		return urlOper;
+	}
+
+	public void setUrlOper(boolean urlOper) {
+		this.urlOper = urlOper;
+	}
+
+	public String getTaobaoUrl() {
+		return taobaoUrl;
+	}
+
+	public void setTaobaoUrl(String taobaoUrl) {
+		this.taobaoUrl = taobaoUrl;
+	}
+
+	public String getTaobaohosthref() {
+		return taobaohosthref;
+	}
+
+	public void setTaobaohosthref(String taobaohosthref) {
+		this.taobaohosthref = taobaohosthref;
 	}
 
 }

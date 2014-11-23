@@ -44,7 +44,12 @@
             <dd>
                 <a <#if current=="密码管理">class="current"</#if> href="${basepath}/user/modifyPassword">密码管理</a>
             </dd>
-             <dd>
+            <#if currentUserInfo().urlOper == true>
+            <dd>
+                <a <#if current=="链接前缀">class="current"</#if> href="${basepath}/user/taobaoUrlView">链接前缀</a>
+            </dd>
+            </#if>
+            <dd>
                 <a <#if current=="网站疑问解答">class="current"</#if> href="${basepath}/icloud	/qa">网站疑问解答</a>
             </dd>
         </dl>

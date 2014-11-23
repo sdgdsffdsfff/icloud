@@ -35,7 +35,7 @@ import com.icloud.stock.model.UserUrlAccessCount;
 import com.icloud.user.bussiness.po.UserInfoPo;
 
 @Service("juhuasuanBussiness")
-public class JuhuasuanBussiness extends BaseAction {
+public class JuhuasuanBussiness extends BaseBussiness {
 	@Resource(name = "userAdminBusiness")
 	protected UserAdminBusiness userAdminBusiness;
 

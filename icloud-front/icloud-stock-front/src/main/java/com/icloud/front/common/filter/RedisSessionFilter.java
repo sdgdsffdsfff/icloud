@@ -23,6 +23,7 @@ import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.common.config.FilterNotMappingConfig;
 import com.icloud.front.common.utils.ICloudUserContextHolder;
+import com.icloud.front.juhuasuan.bussiness.JuhuasuanConstantBussiness;
 import com.icloud.front.user.bussiness.UserAdminBusiness;
 import com.icloud.front.user.pojo.UserInfo;
 import com.icloud.front.user.utils.ICloudMemberUtils;
@@ -33,6 +34,7 @@ public class RedisSessionFilter implements Filter {
 	private static Random RDM = new Random();
 
 	protected UserAdminBusiness userAdminBusiness;
+	protected JuhuasuanConstantBussiness juhuasuanConstantBussiness;
 
 	@SuppressWarnings({ "unchecked", "unused" })
 	@Override
@@ -88,6 +90,7 @@ public class RedisSessionFilter implements Filter {
 			UserInfo info = ICloudMemberUtils.getUserInfoFromToken(cookie
 					.getValue());
 			info = userAdminBusiness.fillUserInfo(info);
+			info = juhuasuanConstantBussiness.fillTaobaoUrl(info);
 			if (ICloudUtils.isNotNull(info)) {
 				ICloudUserContextHolder.set(info);
 			}
@@ -123,7 +126,6 @@ public class RedisSessionFilter implements Filter {
 		RequestIdentityHolder.remove();
 	}
 
-	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		ServletContext context = filterConfig.getServletContext();
@@ -131,6 +133,8 @@ public class RedisSessionFilter implements Filter {
 				.getWebApplicationContext(context);
 		userAdminBusiness = (UserAdminBusiness) ctx
 				.getBean("userAdminBusiness");
+		juhuasuanConstantBussiness = (JuhuasuanConstantBussiness) ctx
+				.getBean("juhuasuanConstantBussiness");
 	}
 
 	@Override

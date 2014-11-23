@@ -1,6 +1,6 @@
 package com.icloud.stock.model;
 
-// Generated Oct 31, 2014 9:40:03 PM by Hibernate Tools 3.4.0.CR1
+// Generated Nov 22, 2014 10:22:56 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
