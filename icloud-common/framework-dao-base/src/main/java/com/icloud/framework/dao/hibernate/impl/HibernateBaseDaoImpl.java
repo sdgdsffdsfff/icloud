@@ -1,6 +1,7 @@
 package com.icloud.framework.dao.hibernate.impl;
 
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -46,6 +47,11 @@ public class HibernateBaseDaoImpl<T> extends HibernateDaoSupport implements
 	@Override
 	public void save(T t) {
 		getHibernateTemplate().save(t);
+	}
+
+	@Override
+	public void save(Collection entities) {
+		getHibernateTemplate().saveOrUpdateAll(entities);
 	}
 
 	@Override

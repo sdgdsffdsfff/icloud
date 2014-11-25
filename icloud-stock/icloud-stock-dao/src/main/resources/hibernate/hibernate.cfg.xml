@@ -48,5 +48,7 @@
 		<mapping resource="model/JuhuasuanSession.hbm.xml" />
 		<mapping resource="model/JuhuasuanUrl.hbm.xml" />
 		<mapping resource="model/TaobaoConstant.hbm.xml" />
+		<mapping resource="model/MarketingChannel.hbm.xml" />
+		<mapping resource="model/MarketingEmail.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

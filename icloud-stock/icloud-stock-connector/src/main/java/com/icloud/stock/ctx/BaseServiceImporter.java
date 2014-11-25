@@ -3,6 +3,7 @@ package com.icloud.stock.ctx;
 import org.slf4j.Logger;
 
 import com.icloud.framework.logger.ri.RequestIdentityLogger;
+import com.icloud.front.marketing.bussiness.MarketingBusiness;
 import com.icloud.stock.service.ICategoryService;
 import com.icloud.stock.service.ICategoryStockService;
 import com.icloud.stock.service.IStockDateHistoryService;
@@ -20,6 +21,7 @@ public class BaseServiceImporter {
 	protected IStockDateHistoryService stockDateHistoryService;
 	protected IStockDivinePriceService stockDivinePriceService;
 	protected IStockDetailService stockDetailService;
+	protected MarketingBusiness marketingBusiness;
 
 	public BaseServiceImporter() {
 		stockService = BeansUtil.getStockService();
@@ -28,5 +30,6 @@ public class BaseServiceImporter {
 		stockDateHistoryService = BeansUtil.getStockDateHistoryService();
 		stockDivinePriceService = BeansUtil.getStockDivinePriceService();
 		stockDetailService = BeansUtil.getStockDetailService();
+		marketingBusiness = BeansUtil.getMarketingBusiness();
 	}
 }

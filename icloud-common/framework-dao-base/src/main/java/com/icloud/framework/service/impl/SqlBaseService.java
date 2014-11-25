@@ -1,5 +1,6 @@
 package com.icloud.framework.service.impl;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -34,6 +35,10 @@ public abstract class SqlBaseService<T> implements ISqlBaseService<T> {
 	public T save(T t) {
 		this.baseDao.save(t);
 		return t;
+	}
+
+	public void save(Collection entities) {
+		this.baseDao.save(entities);
 	}
 
 	@Override
@@ -109,12 +114,12 @@ public abstract class SqlBaseService<T> implements ISqlBaseService<T> {
 		return this.baseDao.findByProperty(paramNames, operations, values,
 				sortParam, isAsc, start, limit);
 	}
-	
+
 	public List<T> findByPropertyNoLazy(String[] paramNames,
 			OperationEnum[] operations, Object[] values, String sortParam,
 			boolean isAsc, int start, int limit) {
-		return this.baseDao.findByPropertyNoLazy(paramNames, operations, values,
-				sortParam, isAsc, start, limit);
+		return this.baseDao.findByPropertyNoLazy(paramNames, operations,
+				values, sortParam, isAsc, start, limit);
 	}
 
 	public long count(String hql) {

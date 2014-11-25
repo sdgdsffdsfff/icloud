@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 25, 2014 4:56:53 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.icloud.stock.model.MarketingEmail" table="`marketing-email`" catalog="icloud">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="email" type="string">
+            <column name="email" length="500" />
+        </property>
+        <property name="ditch" type="string">
+            <column name="ditch" length="100" />
+        </property>
+        <property name="active" type="java.lang.Integer">
+            <column name="active" />
+        </property>
+        <property name="accessCount" type="java.lang.Integer">
+            <column name="`access-count`" />
+        </property>
+        <property name="lastUpdateTime" type="timestamp">
+            <column name="`last-update-time`" length="19" />
+        </property>
+        <property name="lastSendTime" type="timestamp">
+            <column name="`last-send-time`" length="19" />
+        </property>
+        <property name="acccessDetail" type="string">
+            <column name="`acccess-detail`" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

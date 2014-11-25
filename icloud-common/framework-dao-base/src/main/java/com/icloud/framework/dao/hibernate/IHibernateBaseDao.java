@@ -1,5 +1,6 @@
 package com.icloud.framework.dao.hibernate;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.icloud.framework.dao.hibernate.HiberanateEnum.OperationEnum;
@@ -12,6 +13,8 @@ public interface IHibernateBaseDao<T> {
 	public void update(T t);
 
 	public void save(T t);
+
+	public void save(Collection entities);
 
 	public void delete(T t);
 
@@ -40,7 +43,7 @@ public interface IHibernateBaseDao<T> {
 	public List<T> findByProperty(String[] paramNames,
 			OperationEnum[] operations, Object[] values, String sortParam,
 			boolean isAsc, int start, int limit);
-	
+
 	public List<T> findByPropertyNoLazy(String[] paramNames,
 			OperationEnum[] operations, Object[] values, String sortParam,
 			boolean isAsc, int start, int limit);
@@ -56,7 +59,7 @@ public interface IHibernateBaseDao<T> {
 	public List<T> findAll(int start, int limit);
 
 	public List<T> findByProperty(String hql, int start, int limit);
-	
+
 	public List<T> findByPropertyNoLazy(String hql, int start, int limit);
 
 	public List<T> findByProperty(String hql);

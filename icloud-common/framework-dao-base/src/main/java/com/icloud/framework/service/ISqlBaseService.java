@@ -1,5 +1,6 @@
 package com.icloud.framework.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.icloud.framework.dao.hibernate.HiberanateEnum.OperationEnum;
@@ -11,6 +12,8 @@ public interface ISqlBaseService<T> {
 
 	public T save(T t);
 
+	public void save(Collection entities);
+	
 	public void delete(T t);
 
 	public List<T> findAll();

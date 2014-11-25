@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 public class LogFileWriter {
 	private OutputStreamWriter out;
@@ -66,6 +67,12 @@ public class LogFileWriter {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+
+	public void apendln(List<String> emails) {
+		for (String email : emails) {
+			this.apendln(email);
 		}
 	}
 }
