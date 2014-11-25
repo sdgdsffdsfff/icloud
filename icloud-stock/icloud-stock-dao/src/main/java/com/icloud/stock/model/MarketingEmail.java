@@ -11,12 +11,12 @@ public class MarketingEmail implements java.io.Serializable {
 
 	private Integer id;
 	private String email;
-	private String ditch;
+	private String ditch; // ditch
 	private Integer active;
 	private Integer accessCount;
 	private Date lastUpdateTime;
 	private Date lastSendTime;
-	private String acccessDetail;
+	private String acccessDetail;// channel:1###
 
 	public MarketingEmail() {
 	}

@@ -19,6 +19,7 @@ import com.icloud.front.juhuasuan.bussiness.JuhuasuanBussiness;
 import com.icloud.front.juhuasuan.bussiness.JuhuasuanConstantBussiness;
 import com.icloud.front.juhuasuan.constant.JuhuasuanConstants;
 import com.icloud.front.juhuasuan.constant.JuhuasuanConstants.JUHUASUANSTATUS;
+import com.icloud.front.marketing.bussiness.MarketingBusiness;
 import com.icloud.front.stock.bussiness.BuuyuuSeoBussiness;
 import com.icloud.front.stock.bussiness.StockCommonBussiness;
 import com.icloud.front.stock.bussiness.StockDetailBussiness;
@@ -55,6 +56,9 @@ public class BaseStockController {
 	protected JuhuasuanBussiness juhuasuanBussiness;
 	@Resource(name = "juhuasuanConstantBussiness")
 	protected JuhuasuanConstantBussiness juhuasuanConstantBussiness;
+
+	@Resource(name = "marketingBusiness")
+	protected MarketingBusiness marketingBusiness;
 
 	protected static Gson gson = new Gson();
 
