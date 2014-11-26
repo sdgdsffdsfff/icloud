@@ -75,8 +75,8 @@ public class FileUtil {
 		super();
 	}
 
-	public static int copyFiles(final File srcDir, Set<String> srcFile, final File dest)
-			throws IOException {
+	public static int copyFiles(final File srcDir, Set<String> srcFile,
+			final File dest) throws IOException {
 		int count = 0;
 		for (Iterator<String> i = srcFile.iterator(); i.hasNext();) {
 			String name = i.next();
@@ -1062,5 +1062,16 @@ public class FileUtil {
 	 */
 	public static String basename(File file) {
 		return basename(file.getName());
+	}
+
+	/**
+	 * rename
+	 */
+
+	public static void rename(String srcPath, String destPath) {
+		File file = new File(destPath);
+		file.delete();
+		file = new File(srcPath);
+		file.renameTo(new File(destPath));
 	}
 }
