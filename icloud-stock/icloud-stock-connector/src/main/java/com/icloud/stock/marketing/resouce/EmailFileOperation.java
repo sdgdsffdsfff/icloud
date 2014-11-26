@@ -1,4 +1,4 @@
-package com.icloud.stock.marketing.email;
+package com.icloud.stock.marketing.resouce;
 
 import java.io.BufferedReader;
 import java.io.File;
