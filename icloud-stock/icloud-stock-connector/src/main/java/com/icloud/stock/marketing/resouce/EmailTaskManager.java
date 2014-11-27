@@ -3,9 +3,9 @@ package com.icloud.stock.marketing.resouce;
 import java.io.IOException;
 import java.util.List;
 
-import com.icloud.stock.marketing.task.TaskManager;
-import com.icloud.stock.marketing.task.TaskRunnable;
-import com.icloud.stock.marketing.task.ThreadStat;
+import com.icloud.stock.marketing.runnable.TaskManager;
+import com.icloud.stock.marketing.runnable.TaskRunnable;
+import com.icloud.stock.marketing.runnable.ThreadStat;
 
 public class EmailTaskManager extends TaskManager {
 

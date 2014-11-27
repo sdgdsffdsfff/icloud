@@ -22,6 +22,11 @@ public class EmailSendUtil {
 	}
 
 	public static boolean sendMailUtil(String to, String title, String html) {
-		return sendMailUtil(emailList.getEmail(), to, title, html);
+		try {
+			return sendMailUtil(emailList.getEmail(), to, title, html);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

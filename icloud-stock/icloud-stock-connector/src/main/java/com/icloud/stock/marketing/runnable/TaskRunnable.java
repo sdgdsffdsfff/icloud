@@ -1,4 +1,4 @@
-package com.icloud.stock.marketing.task;
+package com.icloud.stock.marketing.runnable;
 
 
 public abstract class TaskRunnable implements Runnable {

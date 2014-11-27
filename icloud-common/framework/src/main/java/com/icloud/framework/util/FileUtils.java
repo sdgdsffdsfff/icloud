@@ -202,6 +202,19 @@ public class FileUtils {
 	}
 
 	/**
+	 * read the content from file
+	 *
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws UnsupportedEncodingException
+	 */
+	public static String readString(String file) throws FileNotFoundException,
+			UnsupportedEncodingException {
+		FileInputStream in = new FileInputStream(file);
+		return readContent(in, "");
+	}
+
+	/**
 	 * read the content from resource
 	 *
 	 * @param filePath
@@ -225,6 +238,11 @@ public class FileUtils {
 		return readContent(input);
 	}
 
+	public static String readContent(InputStream in)
+			throws UnsupportedEncodingException {
+		return readContent(in, "\n");
+	}
+
 	/**
 	 * read the content from inputstream
 	 *
@@ -232,7 +250,7 @@ public class FileUtils {
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 */
-	public static String readContent(InputStream in)
+	public static String readContent(InputStream in, String replace)
 			throws UnsupportedEncodingException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in,
 				"UTF-8"));
@@ -241,7 +259,8 @@ public class FileUtils {
 		String s = null;
 		try {
 			while ((s = reader.readLine()) != null) {
-				sb.append(s + "\n");
+				// sb.append(s + "\n");
+				sb.append(s + replace);
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
