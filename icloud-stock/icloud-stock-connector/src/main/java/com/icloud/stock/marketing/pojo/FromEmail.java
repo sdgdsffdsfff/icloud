@@ -42,6 +42,8 @@ public class FromEmail {
 		FromEmail mail = new FromEmail();
 		mail.setEmail(email);
 		mail.setPassword("Abc12345");
+		mail.setHost("");
+		mail.setUsename("傻逼是啥哈");
 		return mail;
 	}
 
