@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 public class ICloudUtils {
-	public static Random random = new Random();
+	private static Random random = new Random();
 
 	public static <T> boolean isEmpty(Collection<T> collection) {
 		if (collection == null)
