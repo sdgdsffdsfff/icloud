@@ -26,8 +26,10 @@ public class EmailRunnable extends TaskRunnable {
 			// 发送邮件
 			boolean flag = sender.send(line);
 			if (flag)
-				return 1 + "";
+				return "成功";
+			else
+				return "失败";
 		}
-		return 0 + "";
+		return "为空";
 	}
 }

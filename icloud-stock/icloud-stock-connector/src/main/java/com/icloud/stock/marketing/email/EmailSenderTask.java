@@ -17,7 +17,7 @@ public class EmailSenderTask {
 			String ditch, String srcPath, String destPath, int number, int sum)
 			throws IOException {
 		EmailSenderImpl sender = new EmailSenderImpl(template, channel, ditch);
-		EmailTaskManager manager = new EmailTaskManager(10, 10000, srcPath,
+		EmailTaskManager manager = new EmailTaskManager(number, sum, srcPath,
 				destPath, sender);
 		manager.run();
 	}
@@ -28,7 +28,7 @@ public class EmailSenderTask {
 		EmailContentTemplate contentTemplate = new TestContentTemplate();
 		String channel = "1";
 		String ditch = "oschina";
-		int number = 10;
+		int number = 40;
 		int sum = 10000;
 		send(contentTemplate, channel, ditch, srcPath, destPath, number, sum);
 	}

@@ -24,8 +24,9 @@ public class TestContentTemplate implements EmailContentTemplate {
 	}
 
 	@Override
-	public String getContent(String email, String channle, String ditch) {
-		return contentTemplate;
+	public String getContent(String email, String channel, String ditch) {
+		return contentTemplate.replaceAll("#email#", email)
+				.replace("#channel#", channel).replace("#ditch#", ditch);
 	}
 
 	public static void main(String[] args) throws FileNotFoundException,
@@ -37,7 +38,7 @@ public class TestContentTemplate implements EmailContentTemplate {
 		System.out.println("----");
 		System.out.println(template.getTilte(email, channel, ditch));
 		System.out.println("----");
-		System.out.println(template.getContent("cuijiangning", "0", "oschina"));
+		System.out.println(template.getContent(email, channel, ditch));
 		System.out.println("----");
 	}
 }
