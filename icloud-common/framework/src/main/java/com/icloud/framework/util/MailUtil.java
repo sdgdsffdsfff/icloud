@@ -33,7 +33,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class MailUtil {
-	private final static Logger logger = LoggerFactory.getLogger(MailUtil.class);
+	private final static Logger logger = LoggerFactory
+			.getLogger(MailUtil.class);
 
 	private final static String defaultContentType = "text/plain;charset=utf-8";
 
@@ -68,7 +69,8 @@ public class MailUtil {
 		this.username = username;
 	}
 
-	public MailUtil(String to, String from, String smtpServer, String username, String subject) {
+	public MailUtil(String to, String from, String smtpServer, String username,
+			String subject) {
 		this.to = to;
 		this.from = from;
 		this.host = smtpServer;
@@ -76,16 +78,22 @@ public class MailUtil {
 		this.subject = subject;
 	}
 
-	public MailUtil(String to, String from, String smtpServer, String username, String subject, String content) {
-		this(to, from, smtpServer, username, subject, content, defaultContentType, new HashMap<String, String>(), new ArrayList<String>());
+	public MailUtil(String to, String from, String smtpServer, String username,
+			String subject, String content) {
+		this(to, from, smtpServer, username, subject, content,
+				defaultContentType, new HashMap<String, String>(),
+				new ArrayList<String>());
 	}
 
-	public MailUtil(String to, String from, String smtpServer, String username, String subject, String content, String contentType) {
-		this(to, from, smtpServer, username, subject, content, contentType, new HashMap<String, String>(), new ArrayList<String>());
+	public MailUtil(String to, String from, String smtpServer, String username,
+			String subject, String content, String contentType) {
+		this(to, from, smtpServer, username, subject, content, contentType,
+				new HashMap<String, String>(), new ArrayList<String>());
 	}
 
-	public MailUtil(String to, String from, String smtpServer, String username, String subject, String content, String contentType, Map<String, String> images,
-			List<String> attachments) {
+	public MailUtil(String to, String from, String smtpServer, String username,
+			String subject, String content, String contentType,
+			Map<String, String> images, List<String> attachments) {
 		this.to = to;
 		this.from = from;
 		this.host = smtpServer;
@@ -157,11 +165,12 @@ public class MailUtil {
 		Properties properties = new Properties();
 		properties.put("mail.smtp.host", host);
 		properties.put("mail.smtp.auth", "true");
-		Session session = Session.getDefaultInstance(properties, new Authenticator() {
-			public PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(username, password);
-			}
-		});
+		Session session = Session.getDefaultInstance(properties,
+				new Authenticator() {
+					public PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(username, password);
+					}
+				});
 		Transport transport = null;
 		try {
 			// MimeMessage mp = new MimeMessage(session);
@@ -183,7 +192,45 @@ public class MailUtil {
 		return true;
 	}
 
-	private MimeMessage createMessage(Session session) throws AddressException, MessagingException {
+	public boolean sendMailByProxy(String ip, int port) {
+		Properties properties = new Properties();
+		properties.put("mail.smtp.host", host);
+		properties.put("mail.smtp.auth", "true");
+		/**
+		 * 使用代理
+		 */
+		properties.put("http.proxySet", "true");
+		properties.put("http.proxyHost", ip);
+		properties.put("http.proxyPort", port);
+		Session session = Session.getDefaultInstance(properties,
+				new Authenticator() {
+					public PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(username, password);
+					}
+				});
+		Transport transport = null;
+		try {
+			// MimeMessage mp = new MimeMessage(session);
+			MimeMessage mp = createMessage(session);
+			transport = session.getTransport("smtp");
+			transport.connect(host, username, password);
+			transport.sendMessage(mp, mp.getAllRecipients());
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return false;
+		} finally {
+			if (transport != null)
+				try {
+					transport.close();
+				} catch (MessagingException e) {
+					logger.error(e.getMessage(), e);
+				}
+		}
+		return true;
+	}
+
+	private MimeMessage createMessage(Session session) throws AddressException,
+			MessagingException {
 		MimeMessage msg = new MimeMessage(session);
 		msg.setRecipients(Message.RecipientType.BCC, InternetAddress.parse(to));
 		msg.setFrom(new InternetAddress(from));
@@ -201,11 +248,12 @@ public class MailUtil {
 		msg.setContent(allMultipart);
 
 		// 设置发送时间
-		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",
+				Locale.CHINA);
 		fm.setTimeZone(TimeZone.getTimeZone("GMT+8"));
-		String moditime=fm.format(new Date());
+		String moditime = fm.format(new Date());
 		msg.setSentDate(new Date(Timestamp.valueOf(moditime).getTime()));
-//		msg.setSentDate(new Date());
+		// msg.setSentDate(new Date());
 		msg.saveChanges();
 		return msg;
 	}
@@ -217,7 +265,8 @@ public class MailUtil {
 	 * @return
 	 * @throws MessagingException
 	 */
-	private MimeBodyPart createContent(String content) throws MessagingException {
+	private MimeBodyPart createContent(String content)
+			throws MessagingException {
 		MimeBodyPart contentPart = new MimeBodyPart();
 		Multipart contentMultipart = new MimeMultipart("related");
 
@@ -253,7 +302,8 @@ public class MailUtil {
 	 * @return
 	 * @throws MessagingException
 	 */
-	private BodyPart createAttachment(String fileName) throws MessagingException {
+	private BodyPart createAttachment(String fileName)
+			throws MessagingException {
 		MimeBodyPart attachmentPart = new MimeBodyPart();
 		attachmentPart.setFileName(fileName);
 		FileDataSource fds = new FileDataSource(fileName);

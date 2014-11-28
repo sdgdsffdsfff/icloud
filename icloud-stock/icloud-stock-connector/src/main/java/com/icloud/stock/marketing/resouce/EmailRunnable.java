@@ -25,6 +25,12 @@ public class EmailRunnable extends TaskRunnable {
 			// System.out.println(line);
 			// 发送邮件
 			boolean flag = sender.send(line);
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if (flag)
 				return "成功";
 			else

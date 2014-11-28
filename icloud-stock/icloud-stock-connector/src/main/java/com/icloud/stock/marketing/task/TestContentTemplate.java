@@ -29,7 +29,7 @@ public class TestContentTemplate implements EmailContentTemplate {
 		if (email.indexOf("qq") != -1) {
 			return qqtitleTemplate;
 		}
-		return titleTemplate;
+		return qqtitleTemplate;
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class TestContentTemplate implements EmailContentTemplate {
 			return qqcontentTemplate.replaceAll("#email#", email)
 					.replace("#channel#", channel).replace("#ditch#", ditch);
 		}
-		return contentTemplate.replaceAll("#email#", email)
+		return qqcontentTemplate.replaceAll("#email#", email)
 				.replace("#channel#", channel).replace("#ditch#", ditch);
 	}
 

@@ -33,7 +33,7 @@ public class ThreadStat {
 			return false;
 		}
 		running++;
-		if (running % 500 == 0)
+		if (running % 50 == 0)
 			LOGGER.info("running " + running + "/" + sum);
 		return true;
 	}

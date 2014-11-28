@@ -20,21 +20,24 @@ public class EmailSenderTask {
 		EmailTaskManager manager = new EmailTaskManager(number, sum, srcPath,
 				destPath, sender);
 		manager.run();
+		
 	}
 
 	public void testSend() throws IOException {
-		String srcPath = "/data/mywork/task/emailtask1/os.txt";
-		String destPath = "/data/mywork/task/emailtask1/work.txt";
+		String srcPath = "/data/mywork/task/emailtask1/qq/qq.txt";
+		String destPath = "/data/mywork/task/emailtask1/qq/work.txt";
 		EmailContentTemplate contentTemplate = new TestContentTemplate();
 		String channel = "1";
 		String ditch = "oschina";
-		int number = 40;
-		int sum = 10000;
+		int number = 2;
+		int sum = 10;
 		send(contentTemplate, channel, ditch, srcPath, destPath, number, sum);
 	}
 
 	public static void main(String[] args) throws IOException {
 		EmailSenderTask sender = new EmailSenderTask();
-		sender.testSend();
+		for (int i = 0; i < 4000; i++) {
+			sender.testSend();
+		}
 	}
 }
