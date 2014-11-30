@@ -22,6 +22,12 @@ public class EmailSendUtil {
 			String title, String html) {
 		// if (to.indexOf("163.com") != -1)
 		// return false;
+		// fromEmail.setEmail("qq10@tmalllo.me");
+		// fromEmail.setHost("mail.tmalllo.me");
+		// // fromEmail.setPassword("@123Gabc12345");
+		// fromEmail.setPassword("Abc12345");
+		// fromEmail.setUsename("qq10@tmalllo.me");
+		LOGGER.info(fromEmail.getEmail());
 		MailUtil mailUtil = new MailUtil();
 		mailUtil.setHost(fromEmail.getHost());
 		mailUtil.setUsername(fromEmail.getUsename());
@@ -60,9 +66,12 @@ public class EmailSendUtil {
 		EmailContentTemplate contentTemplate = new TestContentTemplate();
 		String channel = "1";
 		String ditch = "oschina";
-		String email = "cuijiangning08@163.com";
-		// String email = "363255417@qq.com";
+		// String email = "cuijiangning08@163.com";
+		// String email = "qq002@tmalllo.me";
+		String email = "363255417@qq.com";
+		// String email = "ball1949@21cn.com";
 		sendMailUtil(email, contentTemplate.getTilte(email, channel, ditch),
 				contentTemplate.getContent(email, channel, ditch));
+		// sendMailUtil(email, "test", "test");
 	}
 }

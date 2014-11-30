@@ -22,10 +22,13 @@ public class EmailList {
 	void initEmailList() {
 		list = new ArrayList<FromEmail>();
 		proxylist = new ArrayList<Proxy>();
-		TextFile emailFile = new TextFile(
-				"/data/mywork/marketing/mail/list.txt");
-		for (String email : emailFile) {
-			list.add(FromEmail.generateEmail(email));
+		// TextFile emailFile = new TextFile(
+		// "/data/mywork/marketing/mail/list.txt");
+		// for (String email : emailFile) {
+		// list.add(FromEmail.generateEmail(email));
+		// }
+		for (int i = 1; i < 2000; i++) {
+			list.add(FromEmail.generateEmail(i));
 		}
 		size = list.size();
 		TextFile proxyFile = new TextFile(

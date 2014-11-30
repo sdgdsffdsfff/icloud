@@ -42,10 +42,19 @@ public class FromEmail {
 		FromEmail mail = new FromEmail();
 		mail.setEmail(email);
 		mail.setPassword("Abc12345");
-		mail.setHost("smtp.163.com");
-//		mail.setUsename("tmalllo特供");
+		mail.setHost("mail.tmalllo.me");
+		// mail.setUsename("tmalllo特供");
 		mail.setUsename(email);
+		// fromEmail.setEmail("qq003@tmalllo.me");
+		// fromEmail.setHost("mail.tmalllo.me");
+		// // fromEmail.setPassword("@123Gabc12345");
+		// fromEmail.setPassword("Abc12345");
+		// fromEmail.setUsename("qq003@tmalllo.me");
 		return mail;
+	}
+
+	public static FromEmail generateEmail(int i) {
+		return generateEmail("qq" + i + "@tmalllo.me");
 	}
 
 }
