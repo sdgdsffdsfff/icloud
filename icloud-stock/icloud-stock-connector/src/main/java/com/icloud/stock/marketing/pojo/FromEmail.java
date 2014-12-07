@@ -42,7 +42,8 @@ public class FromEmail {
 		FromEmail mail = new FromEmail();
 		mail.setEmail(email);
 		mail.setPassword("Abc12345");
-		mail.setHost("mail.tmalllo.me");
+		// mail.setHost("mail.buuyuu.com");
+		mail.setHost("smtp.163.com");
 		// mail.setUsename("tmalllo特供");
 		mail.setUsename(email);
 		// fromEmail.setEmail("qq003@tmalllo.me");
@@ -54,7 +55,7 @@ public class FromEmail {
 	}
 
 	public static FromEmail generateEmail(int i) {
-		return generateEmail("qq" + i + "@tmalllo.me");
+		return generateEmail("qq" + i + "@buuyuu.com");
 	}
 
 }

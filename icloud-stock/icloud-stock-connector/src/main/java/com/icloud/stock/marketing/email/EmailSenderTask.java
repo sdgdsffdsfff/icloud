@@ -29,14 +29,14 @@ public class EmailSenderTask {
 		EmailContentTemplate contentTemplate = new TestContentTemplate();
 		String channel = "1";
 		String ditch = "oschina";
-		int number = 2;
+		int number = 1;
 		int sum = 100;
 		send(contentTemplate, channel, ditch, srcPath, destPath, number, sum);
 	}
 
 	public static void main(String[] args) throws IOException {
 		EmailSenderTask sender = new EmailSenderTask();
-		for (int i = 0; i < 4000; i++) {
+		for (int i = 0; i < 400; i++) {
 			sender.testSend();
 		}
 	}
