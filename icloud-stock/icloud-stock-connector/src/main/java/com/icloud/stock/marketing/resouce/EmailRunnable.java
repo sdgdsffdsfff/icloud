@@ -1,8 +1,8 @@
 package com.icloud.stock.marketing.resouce;
 
+import com.icloud.framework.performance.runnable.TaskRunnable;
+import com.icloud.framework.performance.runnable.ThreadStat;
 import com.icloud.framework.util.ICloudUtils;
-import com.icloud.stock.marketing.runnable.TaskRunnable;
-import com.icloud.stock.marketing.runnable.ThreadStat;
 
 public class EmailRunnable extends TaskRunnable {
 	private EmailResource resouce;

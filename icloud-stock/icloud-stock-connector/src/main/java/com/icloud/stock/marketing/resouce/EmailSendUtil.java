@@ -6,11 +6,11 @@ import java.io.UnsupportedEncodingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.icloud.framework.performance.runnable.ThreadStat;
 import com.icloud.framework.util.MailUtil;
 import com.icloud.stock.marketing.content.EmailContentTemplate;
 import com.icloud.stock.marketing.pojo.FromEmail;
 import com.icloud.stock.marketing.pojo.Proxy;
-import com.icloud.stock.marketing.runnable.ThreadStat;
 import com.icloud.stock.marketing.task.TestContentTemplate;
 
 public class EmailSendUtil {
