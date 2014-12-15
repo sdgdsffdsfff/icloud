@@ -3,16 +3,23 @@ package com.icloud.search.util;
 import java.io.IOException;
 import java.util.List;
 
-import org.wltea.analyzer.lucene.IKAnalyzer;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.util.Version;
+
+//import org.wltea.analyzer.lucene.IKAnalyzer;
 
 public class HotelTokenizor {
-	private IKAnalyzer analyzer;
+	// private IKAnalyzer analyzer;
+	private Analyzer analyzer;
 
 	public HotelTokenizor() {
-		analyzer = new IKAnalyzer(true);
+		// analyzer = new IKAnalyzer(true);
+		analyzer = new StandardAnalyzer(Version.LUCENE_36);
 	}
 
-	public float similarity(String hotelNameA, String hotelNameB) throws IOException {
+	public float similarity(String hotelNameA, String hotelNameB)
+			throws IOException {
 		if (hotelNameA != null && hotelNameB != null) {
 			hotelNameA = SearchUtil.traditionalToSimple(hotelNameA);
 			hotelNameB = SearchUtil.traditionalToSimple(hotelNameB);
@@ -20,7 +27,8 @@ public class HotelTokenizor {
 				return 1.0f;
 			}
 
-			if (hotelNameA.indexOf(hotelNameB) != -1 || hotelNameB.indexOf(hotelNameA) != -1) {
+			if (hotelNameA.indexOf(hotelNameB) != -1
+					|| hotelNameB.indexOf(hotelNameA) != -1) {
 				int len = StringUtil.LD(hotelNameA, hotelNameB);
 				int size1 = hotelNameA.length();
 				int size2 = hotelNameB.length();
@@ -56,7 +64,8 @@ public class HotelTokenizor {
 		return 0.0f;
 	}
 
-	public boolean isSameHotel(String hotelNameA, String hotelNameB) throws IOException {
+	public boolean isSameHotel(String hotelNameA, String hotelNameB)
+			throws IOException {
 		if (hotelNameA != null && hotelNameB != null) {
 			hotelNameA = SearchUtil.traditionalToSimple(hotelNameA);
 			hotelNameB = SearchUtil.traditionalToSimple(hotelNameB);
@@ -64,7 +73,8 @@ public class HotelTokenizor {
 				return true;
 			}
 
-			if (hotelNameA.indexOf(hotelNameB) != -1 || hotelNameB.indexOf(hotelNameA) != -1) {
+			if (hotelNameA.indexOf(hotelNameB) != -1
+					|| hotelNameB.indexOf(hotelNameA) != -1) {
 				return true;
 			}
 
@@ -98,7 +108,8 @@ public class HotelTokenizor {
 					// System.out.println(sb1.toString());
 					// System.out.println(sb2.toString());
 					// int len = StringUtil.LD(sb1.toString(), sb2.toString());
-					int len = StringUtil.LCS_len(sb1.toString(), sb2.toString());
+					int len = StringUtil
+							.LCS_len(sb1.toString(), sb2.toString());
 					// System.out.println(len);
 					int size1 = sb1.toString().length();
 					int size2 = sb2.toString().length();
@@ -118,8 +129,8 @@ public class HotelTokenizor {
 	public static void main(String args[]) throws IOException {
 		String hotelName = "上海易里酒店式公寓 （原长宁贵都酒店式公寓）";
 		String hotelName1 = "上海易里酒店式公寓";
-//		String hotelName = "美卡商务酒店(新华路)";
-//		String hotelName1 = "陕西商务酒店";
+		// String hotelName = "美卡商务酒店(新华路)";
+		// String hotelName1 = "陕西商务酒店";
 		HotelTokenizor hotelTokenizor = new HotelTokenizor();
 		boolean flag = hotelTokenizor.isSameHotel(hotelName, hotelName1);
 		System.out.println(flag);

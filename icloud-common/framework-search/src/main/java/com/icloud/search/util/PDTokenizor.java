@@ -7,9 +7,10 @@ import java.util.List;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.TermAttribute;
-import org.wltea.analyzer.lucene.IKAnalyzer;
+import org.apache.lucene.util.Version;
 
 public class PDTokenizor {
 
@@ -98,7 +99,8 @@ public class PDTokenizor {
 		System.out.println(query);
 		// String query = "apple";
 		// String query = "性感美女";
-		IKAnalyzer paoding = new IKAnalyzer();
+//		IKAnalyzer paoding = new IKAnalyzer();
+		Analyzer paoding = new StandardAnalyzer(Version.LUCENE_36);
 		// paoding.setMode(2);
 		try {
 			List<String> set = getTokens(paoding, query);

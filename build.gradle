@@ -12,12 +12,14 @@ allprojects {
     apply plugin: 'idea'
     apply plugin: 'maven'
 
-    sourceCompatibility = '1.7'
-    targetCompatibility = '1.7'
+    sourceCompatibility = '1.6'
+    targetCompatibility = '1.6'
 
     repositories {
         //maven { url 'http://172.31.16.127:8081/nexus/content/groups/public' }
-        maven { url 'http://localhost:8081/nexus/content/groups/public' }
+       // maven { url 'http://localhost:8081/nexus/content/groups/public' }
+        maven { url 'http://maven.oschina.net/content/groups/public/' }
+        maven { url 'http://mirrors.ibiblio.org/maven2/' }
         maven { url 'https://maven.alfresco.com/nexus/content/groups/public' }
         maven { url 'https://clojars.org/repo/' }
 	maven { url 'http://jcenter.bintray.com/'}

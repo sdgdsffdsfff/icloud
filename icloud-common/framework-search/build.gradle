@@ -13,9 +13,9 @@ dependencies {
 	compile project(':icloud-common:framework')
 
 	compile libraries.luecne_core
-	compile libraries.IKAnalyzer
+	// compile libraries.IKAnalyzer
 	compile libraries.commons_io
 	compile libraries.jchardet
-	compile libraries.myhtmlcleaner
+	compile libraries.htmlcleaner
 	compile libraries.poi_ooxml
 }

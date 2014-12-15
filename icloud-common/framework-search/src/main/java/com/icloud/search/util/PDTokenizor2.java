@@ -7,9 +7,10 @@ import java.util.List;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.TermAttribute;
-import org.wltea.analyzer.lucene.IKAnalyzer;
+import org.apache.lucene.util.Version;
 
 public class PDTokenizor2 {
 
@@ -93,7 +94,8 @@ public class PDTokenizor2 {
 
 	public static void main(String args[]) {
 		String query = "永久网址 www.6080.cn 性感美女 内衣模特 性感车模 网络美女 清纯美女 动漫图片";
-		IKAnalyzer paoding = new IKAnalyzer();
+		// IKAnalyzer paoding = new IKAnalyzer();
+		Analyzer paoding = new StandardAnalyzer(Version.LUCENE_36);
 		try {
 			List<String> set = getTokens(paoding, query);
 			if (set != null) {
