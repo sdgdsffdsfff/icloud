@@ -5,7 +5,7 @@ group = 'com.icloud.stock'
 version = "1.0-SNAPSHOT"
 
 jar {
- baseName =  'icloud-stock-config'
+ baseName =  'icloud-stock-common'
 }
 dependencies {
   compile project(':icloud-common:framework-logger')
