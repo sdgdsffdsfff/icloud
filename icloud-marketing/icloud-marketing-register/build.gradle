@@ -1,0 +1,22 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+shadowJar {
+ baseName =  'register'
+  appendManifest {
+    attributes 'Main-Class': 'net.p5w.isns.cds.relationship.topology.UserRelationShipTopology'
+    attributes 'Implementation-Version':'4.1'
+ }
+  append('META-INF/spring.handlers')
+  append('META-INF/spring.schemas')
+}
+
+dependencies {
+  compile project(':icloud-common:framework')
+
+  compile libraries.commons_lang
+  compile libraries.xstream
+  compile libraries.webdriver
+  compile libraries.httpclient
+  compile libraries.swt
+}

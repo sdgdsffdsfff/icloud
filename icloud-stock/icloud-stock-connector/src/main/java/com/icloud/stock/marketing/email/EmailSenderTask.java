@@ -29,7 +29,7 @@ public class EmailSenderTask {
 		EmailContentTemplate contentTemplate = new TestContentTemplate();
 		String channel = "1";
 		String ditch = "oschina";
-		int number = 1;
+		int number = 2;
 		int sum = 100;
 		send(contentTemplate, channel, ditch, srcPath, destPath, number, sum);
 	}

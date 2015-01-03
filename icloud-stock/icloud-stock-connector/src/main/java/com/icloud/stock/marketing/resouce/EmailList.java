@@ -24,8 +24,11 @@ public class EmailList {
 		proxylist = new ArrayList<Proxy>();
 		TextFile emailFile = new TextFile(
 				"/data/mywork/marketing/mail/list2.txt");
+		int i = 0;
 		for (String email : emailFile) {
-			list.add(FromEmail.generateEmail(email));
+			i++;
+			if (i > 25)
+				list.add(FromEmail.generateEmail(email));
 		}
 		// for (int i = 1; i < 2000; i++) {
 		// list.add(FromEmail.generateEmail(i));
