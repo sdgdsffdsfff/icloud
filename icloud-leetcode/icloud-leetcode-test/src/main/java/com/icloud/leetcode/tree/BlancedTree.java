@@ -8,6 +8,22 @@ import com.icloud.leetcode.Symmetric.TreeNode;
  * @email cuijiangning@cninfo.com.cn 2014年11月7日 下午1:42:39
  */
 public class BlancedTree {
+	public int maxDepth(TreeNode root) {
+		if (root == null)
+			return 0;
+		int maxDepath = 0;
+		if (root.left != null) {
+			int tmp = maxDepth(root.left);
+			if (tmp > maxDepath)
+				maxDepath = tmp;
+		}
+		if (root.right != null) {
+			int tmp = maxDepth(root.right);
+			if (tmp > maxDepath)
+				maxDepath = tmp;
+		}
+		return maxDepath + 1;
+	}
 
 	public boolean isBalanced(TreeNode root) {
 		HeightEntity entity = new HeightEntity();

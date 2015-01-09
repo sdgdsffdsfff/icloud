@@ -66,6 +66,20 @@ public class ZigZag {
 		return sb.toString();
 	}
 
+	public int titleToNumber(String s) {
+		int len = s.length();
+		if (len < 1)
+			return 0;
+		int num = 0;
+		for (int i = 0; i < len; i++) {
+			char ch = s.charAt(i);
+
+			int ss = ch - 'A' + 1;
+			num = num * 26 + ss;
+		}
+		return num;
+	}
+
 	public static void main(String[] args) {
 		String s = "PAYPALISHIRING";
 		int nRows = 3;
