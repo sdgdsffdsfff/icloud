@@ -1,0 +1,12 @@
+ext {
+    versions = [
+    aspectj:                '1.7.2',
+    spring_security:        '3.1.3.RELEASE'
+    ]
+
+    libraries = [
+    /* A */
+    allinpay01:             'com.allinpay:allinpay01:1.0'
+    
+    ]
+}

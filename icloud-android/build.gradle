@@ -1,0 +1,107 @@
+apply from: 'libraries.gradle'
+group = 'com.icloud.android'
+version = '1.0'
+
+buildscript {
+	repositories {
+	      //maven { url 'http://172.31.16.127:8081/nexus/content/groups/public' }
+       // maven { url 'http://localhost:8081/nexus/content/groups/public' }
+	      maven { url 'http://maven.oschina.net/content/groups/public/' }
+        maven { url 'http://mirrors.ibiblio.org/maven2/' }
+        maven { url 'https://maven.alfresco.com/nexus/content/groups/public' }
+        maven { url 'https://clojars.org/repo/' }
+      	maven { url 'http://jcenter.bintray.com/'}
+		    mavenCentral()
+	}
+	dependencies {
+		classpath 'com.android.tools.build:gradle:1.0.0'
+	}
+}
+
+apply plugin: 'com.android.application'
+
+android {
+	compileSdkVersion 21
+	buildToolsVersion "21.0.2"
+	
+	defaultConfig {
+		targetSdkVersion 21
+	}
+	
+	
+	//签名  
+    signingConfigs {  
+	      myConfig {  
+	         storeFile file("xxx")      //签名文件  
+           storePassword "xxxx"      
+	         keyAlias "xxxx"               
+           keyPassword "xxxxx"  //签名密码  
+       }  
+    }        
+    buildTypes{   
+       release {  
+              signingConfig  signingConfigs.myConfig  
+                  
+	              //代码混淆--集成了Proguard，配置文件proguard.cfg网上有很多参考，我就不贴了  
+	                 //注：我把某个jar包混淆了导致程序一直闪退  
+	                 //开始以为是so文件加载失败,这个问题找了一天才找到 泪奔...  
+	             runProguard true  
+	           proguardFile 'proguard.cfg'       
+	       }  
+	     }  
+	           
+	    sourceSets {  
+        main {  
+	           manifest.srcFile 'AndroidManifest.xml'  
+	           java.srcDirs = ['src']  
+             resources.srcDirs = ['src']  
+	           aidl.srcDirs = ['src']  
+	           renderscript.srcDirs = ['src']  
+	           res.srcDirs = ['res']  
+             assets.srcDirs = ['assets']             
+	        }  
+	   
+	       //批量打包--指定配置文件  
+	       //不同的渠道商对应的各自AndroidManifest  
+	       //AndroidManifest的application标签只用配置渠道号的值  
+	       //其他公共配置都放在公共的AndroidManifest.xml中  
+	    selfTest {  
+	      manifest.srcFile 'product/AndroidManifest_selfTest.xml'  
+     }  
+      MMstore {  
+	       manifest.srcFile 'product/AndroidManifest_MMstore.xml'  
+	     }  
+	    
+	    instrumentTest.setRoot('tests')  
+	   }  
+	       
+      //批量打包--声明  
+	    productFlavors {  
+	    selfTest {  
+	             //这里可以配置不同的包名  
+	    }  
+	     MMstore {  
+	     }  
+	     }  
+	           
+	     lintOptions {  
+	          
+	       abortOnError false  
+	          
+	         // if true, only report errors  
+	        ignoreWarnings true  
+	     }  
+	      
+	       //加载so文件      
+	      task copyNativeLibs(type: Copy) {     
+	           from fileTree(dir: 'libs', include: '**/*.so' )  into  'build/native-libs'    
+	      }    
+	      tasks.withType(Compile) { compileTask -> compileTask.dependsOn copyNativeLibs }    
+	      
+	     clean.dependsOn 'cleanCopyNativeLibs'    
+	       
+	     tasks.withType(com.android.build.gradle.tasks.PackageApplication) { pkgTask ->    
+	            pkgTask.jniFolders = new HashSet()    
+	        pkgTask.jniFolders.add(new File(projectDir, 'build/native-libs'))    
+	    }    
+}

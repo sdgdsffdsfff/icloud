@@ -1,7 +1,7 @@
 apply from: 'libraries.gradle'
 
 
-group = 'com.travelzen'
+group = 'com.icloud'
 version = '1.0'
 
 allprojects {
