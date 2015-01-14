@@ -1,101 +1,107 @@
+apply from: 'libraries.gradle'
+allprojects {
+    version = '1.0'
+}
+
 buildscript {
 	repositories {
-	        maven { url 'http://maven.oschina.net/content/groups/public/' }
-        maven { url 'http://mirrors.ibiblio.org/maven2/' }
-        maven { url 'https://maven.alfresco.com/nexus/content/groups/public' }
-        maven { url 'https://clojars.org/repo/' }
-	maven { url 'http://jcenter.bintray.com/'}
+        	maven { url 'http://localhost:8081/nexus/content/groups/public' }
+		maven { url 'http://maven.oschina.net/content/groups/public/' }
+       		maven { url 'http://mirrors.ibiblio.org/maven2/' }
+        	maven { url 'https://maven.alfresco.com/nexus/content/groups/public' }
+        	maven { url 'https://clojars.org/repo/' }
+      		maven { url 'http://jcenter.bintray.com/'}
 		mavenCentral()
 	}
 	dependencies {
-		classpath 'com.android.tools.build:gradle:1.0.0'
+		classpath 'com.android.tools.build:gradle:0.13.3+'
 	}
 }
-
-apply plugin: 'com.android.application'
-
+apply plugin: 'eclipse'
+apply plugin: 'android'
 android {
 	compileSdkVersion 21
-	buildToolsVersion "21.0.2"
+	buildToolsVersion "21.1.2"
 	
 	defaultConfig {
 		targetSdkVersion 21
 	}
 	
 	
-	//Ç©Ãû  
-    signingConfigs {  
-	      myConfig {  
-	         storeFile file("xxx")      //Ç©ÃûÎÄ¼þ  
-           storePassword "xxxx"      
-	         keyAlias "xxxx"               
-           keyPassword "xxxxx"  //Ç©ÃûÃÜÂë  
-       }  
-    }        
-    buildTypes{   
-       release {  
-              signingConfig  signingConfigs.myConfig  
+	//ç­¾å  
+        signingConfigs {  
+	     myConfig {  
+	         storeFile file("cjnfile")      //ç­¾åæ–‡ä»¶  
+         	 storePassword "cjnfilepwd"      
+	         keyAlias "cjn"               
+                 keyPassword "cuijiangning"  //ç­¾åå¯†ç   
+             }  
+        }        
+    
+       buildTypes{   
+           release {  
+                 signingConfig  signingConfigs.myConfig  
                   
-	              //´úÂë»ìÏý--¼¯³ÉÁËProguard£¬ÅäÖÃÎÄ¼þproguard.cfgÍøÉÏÓÐºÜ¶à²Î¿¼£¬ÎÒ¾Í²»ÌùÁË  
-	                 //×¢£ºÎÒ°ÑÄ³¸öjar°ü»ìÏýÁËµ¼ÖÂ³ÌÐòÒ»Ö±ÉÁÍË  
-	                 //¿ªÊ¼ÒÔÎªÊÇsoÎÄ¼þ¼ÓÔØÊ§°Ü,Õâ¸öÎÊÌâÕÒÁËÒ»Ìì²ÅÕÒµ½ Àá±¼...  
-	             runProguard true  
-	           proguardFile 'proguard.cfg'       
-	       }  
-	     }  
+	         //ä»£ç æ··æ·†--é›†æˆäº†Proguardï¼Œé…ç½®æ–‡ä»¶proguard.cfgç½‘ä¸Šæœ‰å¾ˆå¤šå‚è€ƒï¼Œæˆ‘å°±ä¸è´´äº†  
+	         //æ³¨ï¼šæˆ‘æŠŠæŸä¸ªjaråŒ…æ··æ·†äº†å¯¼è‡´ç¨‹åºä¸€ç›´é—ªé€€  
+	         //å¼€å§‹ä»¥ä¸ºæ˜¯soæ–‡ä»¶åŠ è½½å¤±è´¥,è¿™ä¸ªé—®é¢˜æ‰¾äº†ä¸€å¤©æ‰æ‰¾åˆ° æ³ªå¥”...  
+	         runProguard true  
+	         proguardFile 'proguard.cfg'       
+	   }   
+       }  
 	           
-	    sourceSets {  
-        main {  
-	           manifest.srcFile 'AndroidManifest.xml'  
-	           java.srcDirs = ['src']  
-             resources.srcDirs = ['src']  
-	           aidl.srcDirs = ['src']  
-	           renderscript.srcDirs = ['src']  
-	           res.srcDirs = ['res']  
-             assets.srcDirs = ['assets']             
+       sourceSets {  
+    		main {  
+	            	manifest.srcFile 'AndroidManifest.xml'  
+	           	java.srcDirs = ['src']  
+             		resources.srcDirs = ['src']  
+	           	aidl.srcDirs = ['src']  
+	           	renderscript.srcDirs = ['src']  
+	           	res.srcDirs = ['res']  
+             		assets.srcDirs = ['assets']             
 	        }  
 	   
-	       //ÅúÁ¿´ò°ü--Ö¸¶¨ÅäÖÃÎÄ¼þ  
-	       //²»Í¬µÄÇþµÀÉÌ¶ÔÓ¦µÄ¸÷×ÔAndroidManifest  
-	       //AndroidManifestµÄapplication±êÇ©Ö»ÓÃÅäÖÃÇþµÀºÅµÄÖµ  
-	       //ÆäËû¹«¹²ÅäÖÃ¶¼·ÅÔÚ¹«¹²µÄAndroidManifest.xmlÖÐ  
-	    selfTest {  
-	      manifest.srcFile 'product/AndroidManifest_selfTest.xml'  
-     }  
-      MMstore {  
-	       manifest.srcFile 'product/AndroidManifest_MMstore.xml'  
-	     }  
+	       	//æ‰¹é‡æ‰“åŒ…--æŒ‡å®šé…ç½®æ–‡ä»¶  
+	       	//ä¸åŒçš„æ¸ é“å•†å¯¹åº”çš„å„è‡ªAndroidManifest  
+	       	//AndroidManifestçš„applicationæ ‡ç­¾åªç”¨é…ç½®æ¸ é“å·çš„å€¼  
+	       	//å…¶ä»–å…¬å…±é…ç½®éƒ½æ”¾åœ¨å…¬å…±çš„AndroidManifest.xmlä¸­  
+	        selfTest {  
+	      	  manifest.srcFile 'product/AndroidManifest_selfTest.xml'  
+     	        }  
+      	    	MMstore {  
+	          manifest.srcFile 'product/AndroidManifest_MMstore.xml'  
+	     	}  
 	    
-	    instrumentTest.setRoot('tests')  
-	   }  
+	      	instrumentTest.setRoot('tests')  
+	}  
 	       
-      //ÅúÁ¿´ò°ü--ÉùÃ÷  
-	    productFlavors {  
-	    selfTest {  
-	             //ÕâÀï¿ÉÒÔÅäÖÃ²»Í¬µÄ°üÃû  
-	    }  
-	     MMstore {  
-	     }  
-	     }  
+        //æ‰¹é‡æ‰“åŒ…--å£°æ˜Ž  
+	 productFlavors {  
+	        selfTest {  
+	             //è¿™é‡Œå¯ä»¥é…ç½®ä¸åŒçš„åŒ…å  
+	    	}  
+	     	MMstore {  
+	        }  
+	 }  
 	           
-	     lintOptions {  
+	 lintOptions {  
 	          
 	       abortOnError false  
 	          
-	         // if true, only report errors  
-	        ignoreWarnings true  
-	     }  
+	       // if true, only report errors  
+               ignoreWarnings true  
+          }  
 	      
-	       //¼ÓÔØsoÎÄ¼þ      
-	      task copyNativeLibs(type: Copy) {     
-	           from fileTree(dir: 'libs', include: '**/*.so' )  into  'build/native-libs'    
-	      }    
-	      tasks.withType(Compile) { compileTask -> compileTask.dependsOn copyNativeLibs }    
+	  //åŠ è½½soæ–‡ä»¶      
+	  task copyNativeLibs(type: Copy) {     
+	       from fileTree(dir: 'libs', include: '**/*.so' )  into  'build/native-libs'    
+	  }    
+	  tasks.withType(JavaCompile) { compileTask -> compileTask.dependsOn copyNativeLibs }    
 	      
-	     clean.dependsOn 'cleanCopyNativeLibs'    
+	  clean.dependsOn 'cleanCopyNativeLibs'    
 	       
-	     tasks.withType(com.android.build.gradle.tasks.PackageApplication) { pkgTask ->    
+	  tasks.withType(com.android.build.gradle.tasks.PackageApplication) { pkgTask ->    
 	            pkgTask.jniFolders = new HashSet()    
 	        pkgTask.jniFolders.add(new File(projectDir, 'build/native-libs'))    
-	    }    
+	 }    
 }

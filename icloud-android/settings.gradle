@@ -1,1 +1,2 @@
-apply from: 'icloud-common.settings.gradle'
+apply from: 'sirius-common.settings.gradle'
+apply from: 'sirius-test.settings.gradle'
