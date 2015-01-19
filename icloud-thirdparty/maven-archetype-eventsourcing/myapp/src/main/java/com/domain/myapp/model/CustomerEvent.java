@@ -1,4 +1,4 @@
-package com.domain.myap.model;
+package com.domain.myapp.model;
 
 import no.ks.eventstore2.Event;
 

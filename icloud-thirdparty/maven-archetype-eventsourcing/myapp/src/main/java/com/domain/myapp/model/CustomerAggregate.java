@@ -1,6 +1,4 @@
-package com.domain.myap.model;
-
-import akka.actor.ActorRef;
+package com.domain.myapp.model;
 
 public class CustomerAggregate {
 	public static final String NAME = "name";
@@ -38,6 +36,5 @@ public class CustomerAggregate {
 				+ ", customerName=" + customerName + ", customerYear="
 				+ customerYear + "]";
 	}
-
 
 }

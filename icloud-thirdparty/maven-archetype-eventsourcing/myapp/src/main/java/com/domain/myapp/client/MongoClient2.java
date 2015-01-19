@@ -2,9 +2,12 @@ package com.domain.myapp.client;
 
 import java.net.UnknownHostException;
 import java.util.Arrays;
+import java.util.List;
 
 import no.ks.eventstore2.DeadLetterLogger;
+import no.ks.eventstore2.Event;
 import no.ks.eventstore2.ask.Asker;
+import no.ks.eventstore2.eventstore.EventBatch;
 import no.ks.eventstore2.eventstore.EventStore;
 import no.ks.eventstore2.eventstore.KryoClassRegistration;
 import no.ks.eventstore2.eventstore.MongoDBJournal;
@@ -12,21 +15,22 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 
-import com.domain.myap.model.CustomerAggregate;
-import com.domain.myap.model.CustomerProjection;
 import com.domain.myapp.config.eventstore.ActorSystemInitializer;
+import com.domain.myapp.model.AggregateType;
+import com.domain.myapp.model.CustomerAggregate;
+import com.domain.myapp.model.CustomerID;
+import com.domain.myapp.model.CustomerProjection;
 import com.esotericsoftware.kryo.Kryo;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
-
-import scala.concurrent.Future;
 
 public class MongoClient2 {
 	// static ActorSystem _system = ActorSystem.create("TestSys", ConfigFactory
 	// .load().getConfig("TestSys"));
 	static ActorSystem _system = new ActorSystemInitializer().getActorSystem();
 	MongoDBJournal mongodbJournal;
+	MongoDBJournal monggodbArregateJournal;
 	MongoClient mongoClient;
 	private KryoClassRegistration kryoClassRegistration = new KryoClassRegistration() {
 		@Override
@@ -40,8 +44,20 @@ public class MongoClient2 {
 
 		DB journal = mongoClient.getDB("Journal");
 		mongodbJournal = new MongoDBJournal(journal, kryoClassRegistration,
-				Arrays.asList(new String[] { "Customer" }), 10);
+				Arrays.asList(new String[] { "Customer", "CustomerIDs" }), 10);
 		mongodbJournal.open();
+
+	}
+
+	public void addIDs() {
+		CustomerID id = new CustomerID();
+		mongodbJournal.saveEvent(id);
+		EventBatch eventBatch = mongodbJournal.loadEventsForAggregateId(
+				AggregateType.Customer_ID, "2", "0");
+		List<Event> events = eventBatch.getEvents();
+		for (Event e : events) {
+			System.out.println(e);
+		}
 	}
 
 	public void testSendingIncompleteEvent() throws Exception {
@@ -76,6 +92,7 @@ public class MongoClient2 {
 	public static void main(String[] args) throws Exception {
 		MongoClient2 client = new MongoClient2();
 		client.setUp();
-		client.testSendingIncompleteEvent();
+		// client.testSendingIncompleteEvent();
+		client.addIDs();
 	}
 }
