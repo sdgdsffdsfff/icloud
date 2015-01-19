@@ -83,4 +83,14 @@ public class CustomerService {
 		ActorRef customerAggregate = getCustomerProjection(aid);
 		CustomerProjection.changeCustomerYear(customerAggregate, year);
 	}
+
+	public void takesn(String aid, int version) {
+		ActorRef customerAggregate = getCustomerProjection(aid);
+		CustomerProjection.takeSnapshot(customerAggregate);
+	}
+
+	public CustomerAggregate getSN(String aid) {
+		ActorRef customerAggregate = getCustomerProjection(aid);
+		return CustomerProjection.getSN(customerAggregate);
+	}
 }

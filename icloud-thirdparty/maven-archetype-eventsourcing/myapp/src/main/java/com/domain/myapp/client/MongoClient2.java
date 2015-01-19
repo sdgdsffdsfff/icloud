@@ -80,7 +80,7 @@ public class MongoClient2 {
 		System.out.println("------------------");
 		Boolean single = Asker.askProjection(customerAggregate, "changeName",
 				"nihao3").single(Boolean.class);
-		// CustomerProjection.takeSnapshot(customerAggregate);
+		 CustomerProjection.takeSnapshot(customerAggregate);
 		// System.out.println(customer);
 		// Future<Object> formStatus = ask(customerAggregate,
 		// call("changeName", "nihao8"), 3000);

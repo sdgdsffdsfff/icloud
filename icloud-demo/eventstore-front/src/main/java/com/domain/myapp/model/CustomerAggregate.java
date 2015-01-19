@@ -6,6 +6,7 @@ public class CustomerAggregate {
 	private String aggreagetRootId;
 	private String customerName;
 	private int customerYear;
+	private String version;
 
 	public String getAggreagetRootId() {
 		return aggreagetRootId;
@@ -36,6 +37,14 @@ public class CustomerAggregate {
 		return "CustomerAggregate [aggreagetRootId=" + aggreagetRootId
 				+ ", customerName=" + customerName + ", customerYear="
 				+ customerYear + "]";
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
 }

@@ -56,9 +56,18 @@ public class CustomerController {
 		ModelAndView model = new ModelAndView("event/view-customer");
 		CustomerAggregate customer = customerService.getCustomer(aid);
 		List<Event> events = customerService.getAllEventByAid(aid);
+		CustomerAggregate snap = customerService.getSN(aid);
 		model.addObject("customer", customer);
 		model.addObject("events", events);
+		if (ICloudUtils.isNotNull(snap))
+			model.addObject("snap", snap);
 		return model;
+	}
+
+	@RequestMapping("/takesn")
+	public String takesn(String aid, int version) {
+		this.customerService.takesn(aid, version);
+		return "redirect:/customer/viewCustomer?aid=" + aid;
 	}
 
 	@RequestMapping("/changeAttr")

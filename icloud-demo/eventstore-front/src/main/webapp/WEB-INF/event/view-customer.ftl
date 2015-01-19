@@ -1,13 +1,13 @@
 <#import "/icloud/icloud-main-container.ftl" as imc/>
-<@imc.mainContainer current = "" jsFiles=[""] cssFiles=[""]>
+<@imc.mainContainer current = "" jsFiles=['layer/layer.min.js','event/viewcu.js'] cssFiles=[""]>
  <h1 class="au-title">
-   <span><a href="${basepath}/customer/listCustomers">返回列表</a>&nbsp;&nbsp; 用户详情 &nbsp;&nbsp;&nbsp;<a href="${basepath}/customer/addCustomer">建立快照</a></span>
+   <span><a href="${basepath}/customer/listCustomers">返回列表</a>&nbsp;&nbsp; 用户详情 &nbsp;&nbsp;&nbsp;<a href="#" onclick="jianliSn('${customer.aggreagetRootId}');">建立快照</a></span>
    </h1>
    <div class="au-block clearfix"/>
    <p>
    用户信息:
    <p>
-   	&nbsp;&nbsp;&nbsp;&nbsp;编号:${customer.aggreagetRootId!""}&nbsp;&nbsp;&nbsp;&nbsp;姓名:${customer.customerName!""}&nbsp;&nbsp;&nbsp;&nbsp;年龄:${customer.customerYear!""}
+   	&nbsp;&nbsp;&nbsp;&nbsp;版本:${customer.version!""}&nbsp;&nbsp;&nbsp;&nbsp;姓名:${customer.customerName!""}&nbsp;&nbsp;&nbsp;&nbsp;年龄:${customer.customerYear!""}
    <p>
    <form action="${basepath}/customer/changeAttr">
    <input type="hidden" name="aid" value="${customer.aggreagetRootId!""}"/>
@@ -18,6 +18,9 @@
    &nbsp;<input name="changeValue" value=""/>&nbsp;
    &nbsp;<input type="submit" value="确定"/>
    </from>
+   <#if snap.version??>
+     已有快照---->版本:${snap.version!""}&nbsp;&nbsp;&nbsp;&nbsp;姓名:${snap.customerName!""}&nbsp;&nbsp;&nbsp;&nbsp;年龄:${snap.customerYear!""}
+   </#if>
    <p>
    事件流：
    <p>

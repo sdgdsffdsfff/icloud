@@ -29,6 +29,7 @@ public class CustomerProjection extends MongoDbProjection2 {
 			.getLogger(CustomerProjection.class);
 
 	private CustomerAggregate customer = new CustomerAggregate();
+	private CustomerAggregate snapshot = new CustomerAggregate();
 	private String version = "00";
 	private MongoClient mongoClient;
 
@@ -61,6 +62,8 @@ public class CustomerProjection extends MongoDbProjection2 {
 	protected void deSerializeData(byte[] bytes) {
 		Input input = new Input(bytes);
 		customer = (CustomerAggregate) kryo.readClassAndObject(input);
+		input = new Input(bytes);
+		snapshot = (CustomerAggregate) kryo.readClassAndObject(input);
 	}
 
 	@Override
@@ -109,6 +112,7 @@ public class CustomerProjection extends MongoDbProjection2 {
 				CustomerAggregate.YEAR)) {
 			customer.setCustomerYear((Integer) customerEvent.getNewValue());
 		}
+		customer.setVersion(event.getJournalid());
 	}
 
 	public void apply(Event event) {
@@ -118,6 +122,10 @@ public class CustomerProjection extends MongoDbProjection2 {
 
 	public List<Event> getEvents() {
 		return events;
+	}
+
+	public CustomerAggregate getSnapShot() {
+		return this.snapshot;
 	}
 
 	public CustomerAggregate getCustomerAggregate() {
@@ -146,6 +154,15 @@ public class CustomerProjection extends MongoDbProjection2 {
 		}
 	}
 
+	public static CustomerAggregate getSN(ActorRef projection) {
+		try {
+			return Asker.askProjection(projection, "getSnapShot").single(
+					CustomerAggregate.class);
+		} catch (Exception e) {
+			throw new RuntimeException("Error when asking projection " + e);
+		}
+	}
+
 	public static boolean changeCustomerName(ActorRef projection,
 			String customerValue) {
 		return changeAttribute(projection, "changeName", customerValue);
@@ -165,6 +182,8 @@ public class CustomerProjection extends MongoDbProjection2 {
 	}
 
 	public static void takeSnapshot(ActorRef projection) {
+		CustomerAggregate customer = CustomerProjection
+				.askCustomerAggregate(projection);
 		projection.tell(new TakeSnapshot(), null);
 	}
 
