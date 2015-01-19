@@ -74,4 +74,13 @@ public class CustomerEvent extends Event {
 		this.aggregateType = aggregateType;
 	}
 
+	@Override
+	public String toString() {
+		return "CustomerEvent [aggregateRootId=" + aggregateRootId
+				+ ", aggregateType=" + aggregateType + ", oldValue=" + oldValue
+				+ ", NewValue=" + NewValue + ", changeKey=" + changeKey
+				+ ", getCreated()=" + getCreated() + ", getJournalid()="
+				+ getJournalid() + "]";
+	}
+
 }

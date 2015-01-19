@@ -1,5 +1,7 @@
 package com.domain.myap.model;
 
+import akka.actor.ActorRef;
+
 public class CustomerAggregate {
 	public static final String NAME = "name";
 	private String aggreagetRootId;
@@ -36,5 +38,6 @@ public class CustomerAggregate {
 				+ ", customerName=" + customerName + ", customerYear="
 				+ customerYear + "]";
 	}
+
 
 }
