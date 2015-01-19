@@ -33,4 +33,6 @@ public class EventStoreInitializer {
         eventStore.tell(new ApplicationHasStartedEvent(), null);
         return eventStore;
     }
+  
+    
 }

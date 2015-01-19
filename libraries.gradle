@@ -103,6 +103,8 @@ ext {
     // easymock
     easymock:               'org.easymock:easymock:3.0',
 
+    // eventstore2
+    eventstore2:	    'no.ks:eventstore2:2.3.2',
     // ebuildapi
     ebuildapi:              'com.travelsky:ebuildapi:1.0',
 

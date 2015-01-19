@@ -30,7 +30,7 @@ public class MongoClient2 {
 	// .load().getConfig("TestSys"));
 	static ActorSystem _system = new ActorSystemInitializer().getActorSystem();
 	MongoDBJournal mongodbJournal;
-	MongoDBJournal monggodbArregateJournal;
+	// MongoDBJournal monggodbArregateJournal;
 	MongoClient mongoClient;
 	private KryoClassRegistration kryoClassRegistration = new KryoClassRegistration() {
 		@Override
