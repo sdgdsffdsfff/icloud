@@ -72,8 +72,6 @@ public class CustomerProjection extends MongoDbProjection2 {
 	public void handleEvent(Event event) {
 		if (event.getAggregateRootId().equalsIgnoreCase(
 				customer.getAggreagetRootId())) {
-			System.out.println(" a :" + event.getAggregateRootId() + "  "
-					+ event);
 			version = event.getJournalid();
 			events.add(event);
 			mutate(event);
@@ -88,6 +86,14 @@ public class CustomerProjection extends MongoDbProjection2 {
 		return true;
 	}
 
+	public boolean changeYear(Integer newYear) {
+		CustomerEvent event = CustomerEvent.generateCustomerEvent(
+				customer.getAggreagetRootId(), CustomerAggregate.YEAR,
+				customer.getCustomerYear(), newYear);
+		apply(event);
+		return true;
+	}
+
 	public void mutate(Event event) {
 		if (event instanceof CustomerEvent) {
 			mutateCustomerEvent(event);
@@ -96,7 +102,13 @@ public class CustomerProjection extends MongoDbProjection2 {
 
 	public void mutateCustomerEvent(Event event) {
 		CustomerEvent customerEvent = (CustomerEvent) event;
-		customer.setCustomerName((String) customerEvent.getNewValue());
+		if (customerEvent.getChangeKey().equalsIgnoreCase(
+				CustomerAggregate.NAME)) {
+			customer.setCustomerName((String) customerEvent.getNewValue());
+		} else if (customerEvent.getChangeKey().equalsIgnoreCase(
+				CustomerAggregate.YEAR)) {
+			customer.setCustomerYear((Integer) customerEvent.getNewValue());
+		}
 	}
 
 	public void apply(Event event) {
@@ -121,18 +133,38 @@ public class CustomerProjection extends MongoDbProjection2 {
 		}
 	}
 
+	public static boolean changeAttribute(ActorRef projection,
+			String methodName, Object newValue) {
+		Boolean result;
+		try {
+			result = Asker.askProjection(projection, methodName, newValue)
+					.single(Boolean.class);
+			return result;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException("Error when asking projection " + e);
+		}
+	}
+
+	public static boolean changeCustomerName(ActorRef projection,
+			String customerValue) {
+		return changeAttribute(projection, "changeName", customerValue);
+	}
+
+	public static boolean changeCustomerYear(ActorRef projection, int newYear) {
+		return changeAttribute(projection, "changeYear", newYear);
+	}
+
 	public static List<Event> askEvents(ActorRef projection) {
 		try {
-			return Asker.askProjection(projection, "getEvents")
-					.list(Event.class);
+			return Asker.askProjection(projection, "getEvents").list(
+					Event.class);
 		} catch (Exception e) {
 			throw new RuntimeException("Error when asking projection " + e);
 		}
 	}
 
 	public static void takeSnapshot(ActorRef projection) {
-		// CustomerAggregate customer = CustomerProjection
-		// .askCustomerAggregate(projection);
 		projection.tell(new TakeSnapshot(), null);
 	}
 

@@ -2,6 +2,7 @@ package com.domain.myapp.model;
 
 public class CustomerAggregate {
 	public static final String NAME = "name";
+	public static final String YEAR = "year";
 	private String aggreagetRootId;
 	private String customerName;
 	private int customerYear;

@@ -69,7 +69,7 @@ public class MongoClient2 {
 				EventStore.mkProps(mongodbJournal), "eventStore");
 		System.out.println("..........................");
 		ActorRef customerAggregate = actorSystem.actorOf(
-				CustomerProjection.mkProps(eventStore, mongoClient, "3"),
+				CustomerProjection.mkProps(eventStore, mongoClient, "1"),
 				"Customer");
 		System.out.println("///////////////////////");
 		// Boolean single = Asker.askProjection(customerAggregate, "changeName",
@@ -78,8 +78,10 @@ public class MongoClient2 {
 		// CustomerAggregate customer = CustomerProjection
 		// .askCustomerAggregate(customerAggregate);
 		System.out.println("------------------");
-		Boolean single = Asker.askProjection(customerAggregate, "changeName",
-				"nihao3").single(Boolean.class);
+		// Boolean single = Asker.askProjection(customerAggregate, "changeName",
+		// "崔江宁1").single(Boolean.class);
+		// CustomerProjection.changeCustomerName(customerAggregate, "崔江宁3");
+		CustomerProjection.changeCustomerYear(customerAggregate, 1);
 		// CustomerProjection.takeSnapshot(customerAggregate);
 		// System.out.println(customer);
 		// Future<Object> formStatus = ask(customerAggregate,
@@ -92,7 +94,7 @@ public class MongoClient2 {
 	public static void main(String[] args) throws Exception {
 		MongoClient2 client = new MongoClient2();
 		client.setUp();
-		// client.testSendingIncompleteEvent();
-		client.addIDs();
+		client.testSendingIncompleteEvent();
+		// client.addIDs();
 	}
 }

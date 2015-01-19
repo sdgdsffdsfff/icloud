@@ -11,7 +11,7 @@ public class CustomerEvent extends Event {
 	private String aggregateType = AggregateType.Customer_AGGREGATE;
 
 	private Object oldValue;
-	private Object NewValue;
+	private Object newValue;
 	private String changeKey;
 
 	public CustomerEvent(String aggregateRootId) {
@@ -51,11 +51,11 @@ public class CustomerEvent extends Event {
 	}
 
 	public Object getNewValue() {
-		return NewValue;
+		return newValue;
 	}
 
 	public void setNewValue(Object newValue) {
-		NewValue = newValue;
+		this.newValue = newValue;
 	}
 
 	public String getChangeKey() {
@@ -78,7 +78,7 @@ public class CustomerEvent extends Event {
 	public String toString() {
 		return "CustomerEvent [aggregateRootId=" + aggregateRootId
 				+ ", aggregateType=" + aggregateType + ", oldValue=" + oldValue
-				+ ", NewValue=" + NewValue + ", changeKey=" + changeKey
+				+ ", newValue=" + newValue + ", changeKey=" + changeKey
 				+ ", getCreated()=" + getCreated() + ", getJournalid()="
 				+ getJournalid() + "]";
 	}

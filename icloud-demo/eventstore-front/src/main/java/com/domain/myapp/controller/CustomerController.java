@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.domain.myapp.model.CustomerAggregate;
 import com.domain.myapp.model.CustomerID;
 import com.domain.myapp.service.CustomerService;
+import com.icloud.framework.util.ICloudUtils;
 
 @Controller
 @RequestMapping("/customer")
@@ -58,6 +59,24 @@ public class CustomerController {
 		model.addObject("customer", customer);
 		model.addObject("events", events);
 		return model;
+	}
+
+	@RequestMapping("/changeAttr")
+	public String changeAttr(String aid, String changeKey, String changeValue) {
+		if (ICloudUtils.isNotNull(changeValue)
+				&& ICloudUtils.isNotNull(changeKey)) {
+			if (changeKey.equalsIgnoreCase("0")) {
+				if (ICloudUtils.isNotNull(changeValue)) {
+					this.customerService.changeCustomerName(aid, changeValue);
+				}
+			} else if (changeKey.equalsIgnoreCase("1")) {
+				int value = ICloudUtils.parseInt(changeValue);
+				if (value != -1) {
+					this.customerService.changeCustomerYear(aid, value);
+				}
+			}
+		}
+		return "redirect:/customer/viewCustomer?aid=" + aid;
 	}
 
 	@RequestMapping("/addCustomer")

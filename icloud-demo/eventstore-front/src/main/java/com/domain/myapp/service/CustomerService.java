@@ -73,4 +73,14 @@ public class CustomerService {
 		ActorRef customerAggregate = getCustomerProjection(aid);
 		return CustomerProjection.askEvents(customerAggregate);
 	}
+
+	public void changeCustomerName(String aid, String changeValue) {
+		ActorRef customerAggregate = getCustomerProjection(aid);
+		CustomerProjection.changeCustomerName(customerAggregate, changeValue);
+	}
+
+	public void changeCustomerYear(String aid, int year) {
+		ActorRef customerAggregate = getCustomerProjection(aid);
+		CustomerProjection.changeCustomerYear(customerAggregate, year);
+	}
 }
