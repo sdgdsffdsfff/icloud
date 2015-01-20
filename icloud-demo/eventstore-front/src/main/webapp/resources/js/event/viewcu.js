@@ -1,4 +1,4 @@
-function jianliSn(aid) {
+function jianliSn(aid, version) {
 	$.layer({
 		shade : [ 0 ],
 		area : [ 'auto', 'auto' ],
@@ -8,7 +8,8 @@ function jianliSn(aid) {
 			type : 4,
 			btn : [ '确定', '取消' ],
 			yes : function() {
-				location.href = basepath + "/customer/takesn";
+				location.href = basepath + "/customer/takesn?aid=" + aid
+						+ "&version=" + version;
 			},
 			no : function() {
 

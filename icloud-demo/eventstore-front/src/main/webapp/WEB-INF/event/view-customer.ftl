@@ -1,7 +1,7 @@
 <#import "/icloud/icloud-main-container.ftl" as imc/>
 <@imc.mainContainer current = "" jsFiles=['layer/layer.min.js','event/viewcu.js'] cssFiles=[""]>
  <h1 class="au-title">
-   <span><a href="${basepath}/customer/listCustomers">返回列表</a>&nbsp;&nbsp; 用户详情 &nbsp;&nbsp;&nbsp;<a href="#" onclick="jianliSn('${customer.aggreagetRootId}');">建立快照</a></span>
+   <span><a href="${basepath}/customer/listCustomers">返回列表</a>&nbsp;&nbsp; 用户详情 &nbsp;&nbsp;&nbsp;<a href="#" onclick="jianliSn('${customer.aggreagetRootId}','${customer.version}');">建立快照</a></span>
    </h1>
    <div class="au-block clearfix"/>
    <p>
@@ -9,7 +9,7 @@
    <p>
    	&nbsp;&nbsp;&nbsp;&nbsp;版本:${customer.version!""}&nbsp;&nbsp;&nbsp;&nbsp;姓名:${customer.customerName!""}&nbsp;&nbsp;&nbsp;&nbsp;年龄:${customer.customerYear!""}
    <p>
-   <form action="${basepath}/customer/changeAttr">
+   <form action="${basepath}/customer/changeAttr" type="post">
    <input type="hidden" name="aid" value="${customer.aggreagetRootId!""}"/>
    <select name="changeKey">
    <option value="0">修改名字</option>

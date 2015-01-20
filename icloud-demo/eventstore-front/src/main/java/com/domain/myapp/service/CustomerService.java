@@ -92,5 +92,6 @@ public class CustomerService {
 	public CustomerAggregate getSN(String aid) {
 		ActorRef customerAggregate = getCustomerProjection(aid);
 		return CustomerProjection.getSN(customerAggregate);
+//		return null;
 	}
 }
