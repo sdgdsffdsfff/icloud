@@ -78,8 +78,8 @@ public class MongoClient2 {
 		// CustomerAggregate customer = CustomerProjection
 		// .askCustomerAggregate(customerAggregate);
 		System.out.println("------------------");
-		// Boolean single = Asker.askProjection(customerAggregate, "changeName",
-		// "崔江宁1").single(Boolean.class);
+		Boolean single = Asker.askProjection(customerAggregate, "changeName",
+				"崔江宁1").single(Boolean.class);
 		// CustomerProjection.changeCustomerName(customerAggregate, "崔江宁3");
 		// CustomerProjection.changeCustomerYear(customerAggregate, 1);
 		CustomerProjection.takeSnapshot(customerAggregate);

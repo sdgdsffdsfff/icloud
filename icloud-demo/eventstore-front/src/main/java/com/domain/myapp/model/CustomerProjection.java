@@ -8,6 +8,7 @@ import no.ks.eventstore2.Event;
 import no.ks.eventstore2.Handler;
 import no.ks.eventstore2.TakeSnapshot;
 import no.ks.eventstore2.ask.Asker;
+import no.ks.eventstore2.eventstore.CustomerTakeSnapshot;
 import no.ks.eventstore2.projection.MongoDbProjection2;
 import no.ks.eventstore2.projection.Subscriber;
 
@@ -185,6 +186,12 @@ public class CustomerProjection extends MongoDbProjection2 {
 		CustomerAggregate customer = CustomerProjection
 				.askCustomerAggregate(projection);
 		projection.tell(new TakeSnapshot(), null);
+	}
+
+	public static void takeSnapshot(ActorRef projection, int jid) {
+		CustomerAggregate customer = CustomerProjection
+				.askCustomerAggregate(projection);
+		projection.tell(new CustomerTakeSnapshot(jid), null);
 	}
 
 	@Override
