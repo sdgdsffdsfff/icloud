@@ -1,7 +1,7 @@
 <#import "/icloud/icloud-main-container.ftl" as imc/>
 <@imc.mainContainer current = "" jsFiles=['layer/layer.min.js','event/viewcu.js'] cssFiles=[""]>
  <h1 class="au-title">
-   <span><a href="${basepath}/customer/listCustomers">返回列表</a>&nbsp;&nbsp; 用户详情 &nbsp;&nbsp;&nbsp;<a href="#" onclick="jianliSn('${customer.aggreagetRootId}','${customer.version}');">建立快照</a></span>
+   <span><a href="${basepath}/customer/listCustomers">返回列表</a>&nbsp;&nbsp; 用户详情 &nbsp;&nbsp;&nbsp;<a href="#" onclick="jianliSn('${customer.aggreagetRootId}','${customer.version!"0"}');">建立快照</a></span>
    </h1>
    <div class="au-block clearfix"/>
    <p>
