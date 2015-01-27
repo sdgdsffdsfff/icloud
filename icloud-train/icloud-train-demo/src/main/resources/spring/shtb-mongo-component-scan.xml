@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 自定义morphia，在初始化时扫描mongo entities 并且加上索引 -->
+	<bean id="shtbDatastoreFactory" class="com.icloud.mongo.morphia.DataStoreFactory"
+		init-method="init">
+		<property name="packagePaths">
+			<list>
+				<value>com.cninfo.shtb.mongo.entity</value>
+				<value>com.cninfo.media.mongo.entity</value>
+			</list>
+		</property>
+		 <property name="optionsBuilder" ref="defaultMongoOptionsBuilder" />
+	</bean>
+
+	<bean id="defaultMongoOptionsBuilder" class="com.icloud.mongo.TZMongoClientOptionsBuilder"
+		p:maxConnectionIdleTime="${maxConnectionIdleTime}"
+		p:maxConnectionLifeTime="${maxConnectionLifeTime}" p:maxWaitTime="${maxWaitTime}"
+		p:connectTimeout="${connectTimeout}" p:cursorFinalizerEnabled="${cursorFinalizerEnabled}"
+		p:socketTimeout="${socketTimeout}" p:socketKeepAlive="${socketKeepAlive}"
+		p:alwaysUseMBeans="${alwaysUseMBeans}" p:minConnectionsPerHost="${minConnectionsPerHost}"
+		p:connectionsPerHost="${connectionsPerHost}"
+		p:threadsAllowedToBlockForConnectionMultiplier="${threadsAllowedToBlockForConnectionMultiplier}" />
+
+	<bean id="shtbDatastore" name="shtbDatastore" factory-bean="shtbDatastoreFactory"
+		factory-method="createDatastore">
+		<constructor-arg value="${shtb.mongodb.uri}" type="java.lang.String" />
+	</bean>
+
+	<context:component-scan base-package="com.cninfo.shtb.member.dao" />
+	<context:component-scan base-package="com.cninfo.shtb.mongo.service" />
+	<context:component-scan base-package="com.cninfo.media.dao" />
+	
+</beans>

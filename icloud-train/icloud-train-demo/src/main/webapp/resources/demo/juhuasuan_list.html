@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>必有股票-可能是最懂股票的网站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <link rel="stylesheet" href="../css/icloud/icloud_reset.css" media="all" />
+    <link rel="stylesheet" href="../css/icloud/icloud.css" media="screen" />
+    <link rel="stylesheet" href="../css/icloud/stock.css" media="screen" />
+    <link rel="stylesheet" href="../css/icloud/icloud_usercenter.css" media="screen" />
+    <script type="text/javascript" src="../js/common/jquery.min.js"></script>
+    <!--[if IE]>
+    <script src="../js/common/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../js/common/echarts-plain-map.js"></script>
+    <script type="text/javascript" src="../js/icloud/icloud.js"></script>
+    <script type="text/javascript" src="../js/icloud/menu.js"></script>
+    <script type="text/javascript" src="../js/icloud/exampledata.js"></script>
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <header class="main-header">
+            <div class="header-wrapper" />
+            <div class="main-menu">
+                <a class="logo" href="/">
+                    <h1>必有股票</h1>
+                </a>
+                <nav class="main-nav">
+                    <ul class="clearfix">
+                        <li class="first active">
+                            <a herf="#">上海股票</a>
+                        </li>
+                        <li>
+                            <a herf="#">深圳股票</a>
+                        </li>
+                        <li>
+                            <a herf="#">历史记录</a>
+                        </li>
+                    </ul>
+                </nav>
+                <nav class="main-links">
+                    <ul class="clearfix">
+                        <li class="first">
+                            <a href="#">注册</a>
+                        </li>
+                        <li>
+                            <a href="#">登录</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </header>
+
+        <section class="main-body clearfix">
+            <aside class="us-nav">
+                <nav>
+                    <h3>用户中心</h3>
+                    <div class="us-bind">
+                        <a href="#">手机已绑定</a>&#12288;
+                        <a class="text1" href="#">
+                            <i class="ucnav_03"></i>邮箱未绑定</a>
+                    </div>
+                    <dl>
+                        <dt>
+                            <i class="ucnav_07"></i>订单管理</dt>
+                        <dd>
+                            <a href="#">当日所有订单</a>
+                        </dd>
+                        <dd>
+                            <a href="#">国内机票订单</a>
+                        </dd>
+                        <dd>
+                            <a href="#">国际机票订单</a>
+                        </dd>
+                        <dd>
+                            <a href="#">酒店订单</a>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            <i class="ucnav_10"></i>询价单管理</dt>
+                        <dd>
+                            <a href="#">国内机票询价单</a>
+                        </dd>
+                        <dd>
+                            <a href="#">国际机票询价单</a>
+                        </dd>
+                        <dd>
+                            <a href="#">酒店询价单</a>
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt>
+                            <i class="ucnav_12"></i>电子钱包</dt>
+                        <dd>
+                            <a href="#">账户信息</a>
+                        </dd>
+                        <dd>
+                            <a href="#">账户充值</a>
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt>
+                            <i class="ucnav_15"></i>票据管理</dt>
+                        <dd>
+                            <a href="#">行程单</a>
+                        </dd>
+                        <dd>
+                            <a href="#">发票</a>
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt>
+                            <i class="ucnav_17"></i>统计报表</dt>
+                        <dd>
+                            <a href="#">财务报表</a>
+                        </dd>
+                        <dd>
+                            <a href="#">机票业务</a>
+                        </dd>
+                        <dd>
+                            <a href="#">酒店业务</a>
+                        </dd>
+                        <dd>
+                            <a href="#">分销业务</a>
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt>
+                            <i class="ucnav_19"></i>分销商管理</dt>
+                        <dd>
+                            <a href="#">分销商管理</a>
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt>
+                            <i class="ucnav_22"></i>账户资料</dt>
+                        <dd>
+                            <a class="current" href="#">信息维护</a>
+                        </dd>
+                        <dd>
+                            <a href="#">消息设置</a>
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt>
+                            <i class="ucnav_26"></i>我的工具</dt>
+                        <dd>
+                            <a class="ic-j" href="#">
+                                <i class="ucnav_29"></i>常旅客管理</a>
+                        </dd>
+                        <dd>
+                            <a class="ic-j" href="#">
+                                <i class="ucnav_32"></i>短消息</a>
+                        </dd>
+                    </dl>
+                </nav>
+            </aside>
+            <main class="us-content">
+        <h1 class="us-title">国内机票询价单</h1>
+        <div class="us-body">
+            <div class="tab_item">
+                <section class="us-query clearfix" style=" padding-top:15px; padding-bottom:5px;">
+                    <table class="us-query-table">
+                        <tr>
+                            <th>询价单编号：</th>
+                            <td><input id="" type="text" name="" style="width:115px;"></td>
+                            <th>提交日期：</th>
+                            <td>
+                                <input id="" value="2013-08-08" type="text" name="" style="width:73px;">
+                                <em> - </em>
+                                <input id="" value="2013-08-08" type="text" name="" style="width:73px;">
+                            </td>
+                            <th>询价单状态：</th>
+                            <td>
+                                <select data-role="dropdownlist" style="width:120px" id="" name="">
+                                    <option value="">全部</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>询价类型：</th>
+                            <td>
+                                <select data-role="dropdownlist" style="width:120px" id="" name="">
+                                    <option value="">全部</option>
+                                    <option value="">团队</option>
+                                    <option value="">公务机</option>
+                                </select>
+                            </td>
+                            <th>PNR码：</th>
+                            <td><input id="" type="text" name="" style="width:170px;"></td>
+                            <th>旅客姓名：</th>
+                            <td><input id="" type="text" name="" style="width:115px;"></td>
+                        </tr>
+                    </table>
+                    <a class="adaptiveButton brightRed_btn">
+                        <span class="left"></span>
+                        <span class="center center_1">搜&nbsp;索</span>
+                        <span class="right"></span>
+                    </a>
+                </section>
+                <section class="usResult">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>询价单编号</th>
+                                <th>提交时间</th>
+                                <th>询价类型</th>
+                                <th>PNR</th>
+                                <th>出发日期</th>
+                                <th>询价单状态</th>
+                                <th>关联订单编号</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td><a class="text1" href="#">030312103112261</a></td>
+                            <td>2013-08-14</td>
+                            <td>团队</td>
+                            <td> </td>
+                            <td>2013-08-14</td>
+                            <td>受理中</td>
+                            <td></td>
+                        </tr>
+                        <tr class="currentList">
+                            <td><a class="text1" href="#">030312103112261</a></td>
+                            <td>2013-08-14</td>
+                            <td>公务机</td>
+                            <td>JZ4W50</td>
+                            <td>2013-08-14 </td>
+                            <td>取消</td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td><a class="text1" href="#">030312103112261</a></td>
+                            <td>2013-08-14</td>
+                            <td>公务机</td>
+                            <td> </td>
+                            <td>2013-08-14</td>
+                            <td>完成</td>
+                            <td><a class="text1" href="#">030312103112261</a></td>
+                        </tr>
+                        <tr>
+                            <td><a class="text1" href="#">030312103112261</a></td>
+                            <td>2013-08-14</td>
+                            <td>团队</td>
+                            <td> </td>
+                            <td>2013-08-14</td>
+                            <td>受理中</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><a class="text1" href="#">030312103112261</a></td>
+                            <td>2013-08-14</td>
+                            <td>团队</td>
+                            <td> </td>
+                            <td>2013-08-14</td>
+                            <td>受理中</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><a class="text1" href="#">030312103112261</a></td>
+                            <td>2013-08-14</td>
+                            <td>团队</td>
+                            <td> </td>
+                            <td>2013-08-14</td>
+                            <td>受理中</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><a class="text1" href="#">030312103112261</a></td>
+                            <td>2013-08-14</td>
+                            <td>团队</td>
+                            <td> </td>
+                            <td>2013-08-14</td>
+                            <td>受理中</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><a class="text1" href="#">030312103112261</a></td>
+                            <td>2013-08-14</td>
+                            <td>团队</td>
+                            <td> </td>
+                            <td>2013-08-14</td>
+                            <td>受理中</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><a class="text1" href="#">030312103112261</a></td>
+                            <td>2013-08-14</td>
+                            <td>团队</td>
+                            <td> </td>
+                            <td>2013-08-14</td>
+                            <td>受理中</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><a class="text1" href="#">030312103112261</a></td>
+                            <td>2013-08-14</td>
+                            <td>团队</td>
+                            <td> </td>
+                            <td>2013-08-14</td>
+                            <td>受理中</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><a class="text1" href="#">030312103112261</a></td>
+                            <td>2013-08-14</td>
+                            <td>团队</td>
+                            <td> </td>
+                            <td>2013-08-14</td>
+                            <td>受理中</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><a class="text1" href="#">030312103112261</a></td>
+                            <td>2013-08-14</td>
+                            <td>团队</td>
+                            <td> </td>
+                            <td>2013-08-14</td>
+                            <td>受理中</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><a class="text1" href="#">030312103112261</a></td>
+                            <td>2013-08-14</td>
+                            <td>团队</td>
+                            <td> </td>
+                            <td>2013-08-14</td>
+                            <td>受理中</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><a class="text1" href="#">030312103112261</a></td>
+                            <td>2013-08-14</td>
+                            <td>团队</td>
+                            <td> </td>
+                            <td>2013-08-14</td>
+                            <td>受理中</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><a class="text1" href="#">030312103112261</a></td>
+                            <td>2013-08-14</td>
+                            <td>团队</td>
+                            <td> </td>
+                            <td>2013-08-14</td>
+                            <td>受理中</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><a class="text1" href="#">030312103112261</a></td>
+                            <td>2013-08-14</td>
+                            <td>团队</td>
+                            <td> </td>
+                            <td>2013-08-14</td>
+                            <td>受理中</td>
+                            <td></td>
+                        </tr>
+                         <tr>
+                            <td><a class="text1" href="#">030312103112261</a></td>
+                            <td>2013-08-14</td>
+                            <td>团队</td>
+                            <td> </td>
+                            <td>2013-08-14</td>
+                            <td>受理中</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><a class="text1" href="#">030312103112261</a></td>
+                            <td>2013-08-14</td>
+                            <td>团队</td>
+                            <td> </td>
+                            <td>2013-08-14</td>
+                            <td>受理中</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </section>
+            </div>
+                <div class="pagination clearfix">
+                    <ul>
+                         <li><a href="#">上一页</a></li>
+                         <li><a href="#">1</a></li>
+                         <li><a href="#">2</a></li>
+                         <li><a href="#" class="present">3</a></li>
+                         <li><a href="#">4</a></li>
+                         <li><a href="#">5</a></li>
+                         <li> <span>...</span> </li>
+                         <li><a href="#">60</a></li>
+                         <li><a href="#">下一页</a></li>
+                    </ul>
+                    <div>
+                       <span>共<em>132</em>条记录 &nbsp;&nbsp;&nbsp;共14页</span> 
+                    </div>
+                </div>
+                <div style="clear:both;"></div>
+        </div>
+    </main>
+        </section>
+
+        <div class="clear"></div>
+        <footer class="main-footer">
+            <center>
+                <a href="#">关于必有</a>
+                <i class="bar">|</i>
+                <a href="#">联系方式</a>
+                <i class="bar">|</i>
+                <a href="#">问题反馈</a>
+            </center>
+            <center>
+                Copyright &copy; 2014 必有网 All Rights Reserved.
+            </center>
+            <center class="copyright">
+                提示：投资有风险，入行需谨慎。
+            </center>
+        </footer>
+    </div>
+</body>
+<script type="text/javascript">
+    $(function() {
+        $(".btn_edit").click(function() {
+            $("#tbl_mainBusinessContactInfo :text").removeClass("disabled").prop("readonly", false);
+            $(this).hide();
+            $(".btn_save").show();
+        });
+        $(".btn_save").click(function() {
+            $("#tbl_mainBusinessContactInfo :text").addClass("disabled").prop("readonly", true);
+            $(this).hide();
+            $(".btn_edit").show();
+        });
+    })
+</script>
+
+</html>
