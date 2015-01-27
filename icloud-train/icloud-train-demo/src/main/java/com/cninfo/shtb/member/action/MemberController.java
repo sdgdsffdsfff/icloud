@@ -9,10 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cninfo.shtb.mongo.entity.Member;
 import com.cninfo.shtb.mongo.service.IMemberService;
+import com.google.gson.Gson;
 
 @Controller
 @RequestMapping("/member")
@@ -33,4 +35,28 @@ public class MemberController {
 		// return "nihao";
 	}
 
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	@ResponseBody
+	public String getAll2() {
+		List<Member> members = this.memberService.getAll();
+		
+		return new Gson().toJson(members);
+		// ModelAndView model = new ModelAndView("member/listMembers");
+		// model.addObject("members", members);
+		// return model;
+		// return "nihao";
+	}
+
+
+	@RequestMapping(value = "/test2", method = RequestMethod.GET)
+	@ResponseBody
+	public String getAll3() {
+		List<Member> members = this.memberService.getAll();
+		
+		return new Gson().toJson(members);
+		// ModelAndView model = new ModelAndView("member/listMembers");
+		// model.addObject("members", members);
+		// return model;
+		// return "nihao";
+	}
 }
