@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 29, 2015 9:21:11 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.icloud.stock.model.Paper" table="paper" catalog="icloud">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="title" type="string">
+            <column name="title" length="1000" />
+        </property>
+        <property name="content" type="string">
+            <column name="content" length="65535" />
+        </property>
+        <property name="originTitle" type="string">
+            <column name="origin_title" length="1000" />
+        </property>
+        <property name="originUrl" type="string">
+            <column name="origin_url" length="1000" />
+        </property>
+        <property name="originWebsite" type="string">
+            <column name="origin_website" length="1000" />
+        </property>
+        <property name="channel" type="string">
+            <column name="channel" length="100" />
+        </property>
+        <property name="count" type="java.lang.Integer">
+            <column name="count" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="update_time" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>

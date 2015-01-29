@@ -50,5 +50,7 @@
 		<mapping resource="model/TaobaoConstant.hbm.xml" />
 		<mapping resource="model/MarketingChannel.hbm.xml" />
 		<mapping resource="model/MarketingEmail.hbm.xml" />
+		<mapping resource="model/Paper.hbm.xml" />
+		<mapping resource="model/UserFriend.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>
