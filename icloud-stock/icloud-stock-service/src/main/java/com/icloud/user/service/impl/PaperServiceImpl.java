@@ -1,5 +1,7 @@
 package com.icloud.user.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -20,6 +22,12 @@ public class PaperServiceImpl extends SqlBaseService<Paper> implements
 	protected IHibernateBaseDao<Paper> getDao() {
 		// TODO Auto-generated method stub
 		return paperDao;
+	}
+
+	@Override
+	public List<Paper> findMetaList(int start, int limit) {
+		// TODO Auto-generated method stub
+		return paperDao.findMetaList(start, limit);
 	}
 
 }

@@ -36,6 +36,19 @@ public class Paper implements java.io.Serializable {
 		this.createTime = createTime;
 		this.updateTime = updateTime;
 	}
+	
+	public Paper(int id, String title, String originTitle, String originUrl,
+			String originWebsite, String channel, Integer count,
+			Date createTime, Date updateTime) {
+		this.title = title;
+		this.originTitle = originTitle;
+		this.originUrl = originUrl;
+		this.originWebsite = originWebsite;
+		this.channel = channel;
+		this.count = count;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+	}
 
 	public Integer getId() {
 		return this.id;

@@ -18,9 +18,9 @@ public class PaperImporter {
 
 	public void importPaper() {
 		Paper paper = new Paper();
-		paper.setTitle("苏宁云商大幅上调全年业绩");
+		paper.setTitle("苏宁云商大幅上调全年业绩233");
 		paper.setContent(content);
-		paper.setOriginTitle("苏宁云商大幅上调全年业绩");
+		paper.setOriginTitle("苏宁云商大幅上调全年业绩2");
 		paper.setOriginUrl("http://tech.qq.com/a/20150130/079081.htm");
 		paper.setChannel(ChannelEnum.TECH.getChannelName());
 		paper.setCount(0);

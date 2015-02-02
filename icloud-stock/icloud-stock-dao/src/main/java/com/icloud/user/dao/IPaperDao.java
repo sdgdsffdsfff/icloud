@@ -1,5 +1,7 @@
 package com.icloud.user.dao;
 
+import java.util.List;
+
 import com.icloud.dao.StockBaseDao;
 import com.icloud.stock.model.Paper;
 
@@ -15,5 +17,7 @@ public interface IPaperDao extends StockBaseDao<Paper> {
 
 	public static final String CREATETIME = "createTime";
 	public static final String UPDATETIME = "updateTime";
+
+	List<Paper> findMetaList(int start, int limit);
 
 }
