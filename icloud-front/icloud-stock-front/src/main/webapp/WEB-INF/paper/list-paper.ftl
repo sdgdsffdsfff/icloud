@@ -6,7 +6,7 @@
  <div class="wxapi_index_container">
       <ul class="label_box lbox_close wxapi_index_list">
      	<#list pagination.data as paper>
-        <li class="label_item wxapi_index_item"><a class="label_inner" href="#menu-basic">${paper.title}</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="${basepath}/paper/reader/${paper.id}">${paper.title}(${paper.count})</a></li>
         </#list>
       </ul>
     </div>

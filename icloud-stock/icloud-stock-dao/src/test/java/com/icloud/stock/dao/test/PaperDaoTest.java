@@ -22,7 +22,7 @@ public class PaperDaoTest {
 	public void testFindMetaList() {
 		List<Paper> list = paperDao.findMetaList(0, 1);
 		for (Paper paper : list) {
-			System.out.println(paper.toString());
+			System.out.println(paper.toString() + "  " + paper.getId());
 		}
 	}
 

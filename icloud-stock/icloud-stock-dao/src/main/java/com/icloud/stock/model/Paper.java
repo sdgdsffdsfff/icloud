@@ -40,6 +40,8 @@ public class Paper implements java.io.Serializable {
 	public Paper(int id, String title, String originTitle, String originUrl,
 			String originWebsite, String channel, Integer count,
 			Date createTime, Date updateTime) {
+		super();
+		this.id = id;
 		this.title = title;
 		this.originTitle = originTitle;
 		this.originUrl = originUrl;
