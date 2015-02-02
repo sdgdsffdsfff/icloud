@@ -18,11 +18,12 @@ public class MemberDaoTest extends BaseDaoTest {
 
 	@Test
 	public void saveMember() {
-		for (int i = 0; i < 100000; i++) {
+		for (int i = 0; i < 2; i++) {
 			Member member = new Member();
 			member.setPassWord("sssss" + i);
 			member.setUserName("cuijiangning" + i);
-			member.setChineseName("崔江宁" + i);
+//			member.setChineseName("崔江宁" + i);
+			member.setOld(2);
 			this.memberDao.saveEntity(member);
 		}
 	}

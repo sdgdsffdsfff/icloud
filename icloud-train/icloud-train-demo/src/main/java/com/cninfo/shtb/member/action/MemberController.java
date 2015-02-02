@@ -39,7 +39,7 @@ public class MemberController {
 	@ResponseBody
 	public String getAll2() {
 		List<Member> members = this.memberService.getAll();
-		
+
 		return new Gson().toJson(members);
 		// ModelAndView model = new ModelAndView("member/listMembers");
 		// model.addObject("members", members);
@@ -47,16 +47,15 @@ public class MemberController {
 		// return "nihao";
 	}
 
-
 	@RequestMapping(value = "/test2", method = RequestMethod.GET)
-	@ResponseBody
-	public String getAll3() {
-		List<Member> members = this.memberService.getAll();
-		
-		return new Gson().toJson(members);
-		// ModelAndView model = new ModelAndView("member/listMembers");
+	// @ResponseBody
+	public ModelAndView getAll3() {
+		// List<Member> members = this.memberService.getAll();
+		//
+		// return new Gson().toJson(members);
+		ModelAndView model = new ModelAndView("member/w2");
 		// model.addObject("members", members);
-		// return model;
+		return model;
 		// return "nihao";
 	}
 }

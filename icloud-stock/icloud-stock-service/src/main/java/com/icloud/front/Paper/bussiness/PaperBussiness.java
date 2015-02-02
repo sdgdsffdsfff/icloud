@@ -1,0 +1,22 @@
+package com.icloud.front.Paper.bussiness;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.icloud.stock.model.Paper;
+import com.icloud.user.service.IPaperService;
+
+@Service("paperBussiness")
+public class PaperBussiness {
+	@Resource(name = "paperService")
+	protected IPaperService paperService;
+
+	public Paper getPaper(int id) {
+		return this.paperService.getById(id);
+	}
+
+	public void addPaper(Paper paper) {
+		this.paperService.save(paper);
+	}
+}

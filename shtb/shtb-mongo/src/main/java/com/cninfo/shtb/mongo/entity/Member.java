@@ -15,8 +15,19 @@ public class Member extends BaseEntity {
 	private String key = Double.toString(Math.random());
 	@Indexed
 	private String userName;
+	@Indexed
 	private String passWord;
 	private String chineseName;
+
+	private int old;
+
+	public int getOld() {
+		return old;
+	}
+
+	public void setOld(int old) {
+		this.old = old;
+	}
 
 	public String getUserName() {
 		return userName;

@@ -3,12 +3,11 @@ package com.icloud.stock.ctx;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.icloud.front.Paper.bussiness.PaperBussiness;
 import com.icloud.front.juhuasuan.bussiness.JuhuasuanStatBusiness;
 import com.icloud.front.marketing.bussiness.MarketingBusiness;
 import com.icloud.stock.service.ICategoryService;
 import com.icloud.stock.service.ICategoryStockService;
-import com.icloud.stock.service.IMarketingChannelService;
-import com.icloud.stock.service.IMarketingEmailService;
 import com.icloud.stock.service.IStockDateHistoryService;
 import com.icloud.stock.service.IStockDetailService;
 import com.icloud.stock.service.IStockDivinePriceService;
@@ -55,6 +54,10 @@ public class BeansUtil {
 
 	public static MarketingBusiness getMarketingBusiness() {
 		return (MarketingBusiness) app.getBean("marketingBusiness");
+	}
+
+	public static PaperBussiness getPaperBussiness() {
+		return (PaperBussiness) app.getBean("paperBussiness");
 	}
 
 }

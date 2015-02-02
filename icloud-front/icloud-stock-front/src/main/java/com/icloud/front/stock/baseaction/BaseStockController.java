@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.framework.util.ICloudUtils;
+import com.icloud.front.Paper.bussiness.PaperBussiness;
 import com.icloud.front.common.utils.ICloudUserContextHolder;
 import com.icloud.front.common.utils.WebEnv;
 import com.icloud.front.juhuasuan.bussiness.JuhuasuanBussiness;
@@ -59,6 +60,9 @@ public class BaseStockController {
 
 	@Resource(name = "marketingBusiness")
 	protected MarketingBusiness marketingBusiness;
+
+	@Resource(name = "paperBussiness")
+	protected PaperBussiness paperBussiness;
 
 	protected static Gson gson = new Gson();
 

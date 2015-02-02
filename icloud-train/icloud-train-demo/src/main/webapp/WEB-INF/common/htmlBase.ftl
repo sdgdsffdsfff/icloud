@@ -11,7 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="shortcut icon" href="${basepath}/resources/images/icloud/favicon.ico" />
 	<link rel="stylesheet" href="${basepath}/resources/css/icloud/icloud_reset.css?v=1" />
-	<link rel="stylesheet" href="${basepath}/resources/css/icloud/icloud.css?v=1" />
+	<link rel="stylesheet" href="${basepath}/resources/css/icloud/icloud.css?v=3" />
 	<link rel="stylesheet" href="${basepath}/resources/css/icloud/jquery.bigautocomplete.css?v=1" />
 
 	<#list cssFiles as css>
