@@ -1,0 +1,8 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+dependencies {
+    compile libraries.cucumber_java 
+    compile libraries.junit
+    compile libraries.cucumber_junit
+}

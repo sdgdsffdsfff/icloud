@@ -83,6 +83,10 @@ ext {
 
     // curator
     curator:                'com.netflix.curator:curator-recipes:1.2.5',
+   
+    //cucumber
+    cucumber_java:	    'info.cukes:cucumber-java:1.2.0',
+    cucumber_junit:	    'info.cukes:cucumber-junit:1.2.0',
 
     // cxf
     cxf:                    'org.apache.cxf:cxf-bundle:2.7.5',
