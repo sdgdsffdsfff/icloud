@@ -14,7 +14,7 @@
 				<value>com.cninfo.media.mongo.entity</value>
 			</list>
 		</property>
-		 <property name="optionsBuilder" ref="defaultMongoOptionsBuilder" />
+		<property name="optionsBuilder" ref="defaultMongoOptionsBuilder" />
 	</bean>
 
 	<bean id="defaultMongoOptionsBuilder" class="com.icloud.mongo.TZMongoClientOptionsBuilder"
@@ -32,7 +32,8 @@
 	</bean>
 
 	<context:component-scan base-package="com.cninfo.shtb.member.dao" />
+	<context:component-scan base-package="com.info.shtb.member.factory" />
 	<context:component-scan base-package="com.cninfo.shtb.mongo.service" />
 	<context:component-scan base-package="com.cninfo.media.dao" />
-	
+
 </beans>

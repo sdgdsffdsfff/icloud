@@ -4,4 +4,6 @@ import com.cninfo.shtb.basedao.IShbtMongoBaseDao;
 import com.cninfo.shtb.mongo.entity.Account;
 
 public interface IAccountDao extends IShbtMongoBaseDao<Account> {
+
+	public Account getByUserId(int usrId);
 }

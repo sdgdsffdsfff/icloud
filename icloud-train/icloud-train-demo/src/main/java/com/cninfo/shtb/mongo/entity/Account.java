@@ -13,8 +13,8 @@ public class Account extends BaseEntity {
 	@Indexed
 	private String userName;
 	@Indexed
-	private String userId;
-	private float money;
+	private int userId;
+	private int money;
 
 	public String getUserName() {
 		return userName;
@@ -24,19 +24,19 @@ public class Account extends BaseEntity {
 		this.userName = userName;
 	}
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
-	public float getMoney() {
+	public int getMoney() {
 		return money;
 	}
 
-	public void setMoney(float money) {
+	public void setMoney(int money) {
 		this.money = money;
 	}
 
