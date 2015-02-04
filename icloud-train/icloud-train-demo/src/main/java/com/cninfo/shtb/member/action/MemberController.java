@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cninfo.shtb.member.domain.AccountAggregate;
+import com.cninfo.shtb.member.vo.AccountVO;
 import com.cninfo.shtb.mongo.entity.Member;
+import com.cninfo.shtb.mongo.service.IAccountService;
 import com.cninfo.shtb.mongo.service.IMemberService;
 import com.google.gson.Gson;
 
@@ -23,6 +26,9 @@ public class MemberController {
 
 	@Resource(name = "shtb_MemberService")
 	protected IMemberService memberService;
+
+	@Resource(name = "shtb_AccountService")
+	protected IAccountService accountService;
 
 	@RequestMapping(value = "/getAll", method = RequestMethod.GET)
 	// @ResponseBody
@@ -57,5 +63,13 @@ public class MemberController {
 		// model.addObject("members", members);
 		return model;
 		// return "nihao";
+	}
+
+	@RequestMapping(value = "/getAccountForUserId", method = RequestMethod.GET)
+	@ResponseBody
+	public String getAccountService(int userId) {
+		AccountAggregate account = accountService.getAccount(userId);
+		AccountVO accountVO = AccountVO.convertAccountVO(account);
+		return new Gson().toJson(accountVO);
 	}
 }

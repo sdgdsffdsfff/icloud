@@ -1,3 +1,5 @@
 dependencies {
+	compile project(':icloud-common:framework')
 	compile libraries.rhino
+	compile libraries.webdriver
 }

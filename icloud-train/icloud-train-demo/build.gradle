@@ -3,10 +3,12 @@ apply plugin: 'eclipse'
 dependencies {
   compile project(':icloud-front:icloud-common-front')
   compile project(':icloud-common:framework-search')
-  
+  compile project(':icloud-common:framework-spiderbrowser')
+   
   compile libraries.cucumber_java 
   compile libraries.junit
   compile libraries.cucumber_junit
   compile libraries.cucumber_spring
   compile libraries.spring_test
+
 }
