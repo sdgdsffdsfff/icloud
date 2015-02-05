@@ -37,12 +37,6 @@ public class SalaryScenario {
 	@Given("^the employee management system is initialized with the following data$")
 	public void the_employee_management_system_is_initialized_with_the_following_data(
 			final List<Employee> employees) throws Throwable {
-		List<Member> list = memberService.getAll();
-		for (Member member : list) {
-			System.out.println(member.toString());
-		}
-		System.out
-				.println("the_employee_management_system_is_initialized_with_the_following_data");
 		salaryManager = new SalaryManager(employees);
 	}
 
