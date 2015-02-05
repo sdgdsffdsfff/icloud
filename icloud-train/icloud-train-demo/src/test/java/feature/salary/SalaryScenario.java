@@ -5,10 +5,6 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
-import com.cninfo.shtb.mongo.entity.Member;
-import com.cninfo.shtb.mongo.service.IMemberService;
 import com.cninfo.shtb.salary.Employee;
 import com.cninfo.shtb.salary.SalaryManager;
 
@@ -19,9 +15,6 @@ import cucumber.annotation.en.Then;
 import cucumber.annotation.en_au.When;
 
 public class SalaryScenario {
-	@Resource(name = "shtb_MemberService")
-	protected IMemberService memberService;
-
 	SalaryManager salaryManager = null;
 
 	@Before(value = { "@manageFeature" })

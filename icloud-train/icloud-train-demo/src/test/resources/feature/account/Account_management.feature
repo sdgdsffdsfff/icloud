@@ -19,5 +19,7 @@ Feature: AccountFeature
     
    Examples:
      | fromId  | toId    | money | fromTotal | toTotal  |
-     | 1       |   2     |  2000 | 58000       |  64000   |
+     | 1       |   2     |  2000 | 58000     |  64000   |
+     | 3       |   4     |  1000 | 54000     |  71000   |
+     | 5       |   6     |  3000 | 53000     |  65000   |
         
