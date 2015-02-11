@@ -55,6 +55,7 @@ public class AccountAggregate extends BaseEntity {
 		this.accountDao.updateAndAppend(account2);
 	}
 
+	
 	public boolean transfer(AccountAggregate toAccountAggregate, int money) {
 		if (!ICloudUtils.isNotNull(toAccountAggregate))
 			return false;

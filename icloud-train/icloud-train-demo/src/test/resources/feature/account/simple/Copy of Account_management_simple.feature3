@@ -1,0 +1,11 @@
+Feature: 转账业务
+
+  Scenario: 从帐户A给帐户B转账
+    Given 初始化帐户系统，以下是初始化数据
+      | userId  | userName  | money    |
+      | 1       | mark      | 6000     |
+      | 2       | ball      | 6200     |
+      
+      
+    When userId 为 1的帐户, 给 userId 为 2的帐户转100元 
+    Then userId 为 1的帐户的余额应该是5900元，userId 为 2的余额应该是6300元

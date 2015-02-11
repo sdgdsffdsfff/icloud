@@ -42,6 +42,7 @@ public class AccountScenario {
 			int toId) throws Throwable {
 		this.accountService.transfer(fromId, toId, money);
 	}
+	
 
 	@Then("^account id (\\d+)'s money is (\\d+), account id (\\d+)'s money is (\\d+)$")
 	public void account_id_s_money_is_account_id_s_money_is(int fromId,
