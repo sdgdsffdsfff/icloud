@@ -1,0 +1,12 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+group = 'com.icloud.insurance'
+version = "1.0-SNAPSHOT"
+
+jar {
+ baseName =  'icloud-insurance-common'
+}
+dependencies {
+    
+}

@@ -104,6 +104,10 @@ ext {
     // dozer
     dozer:                  'net.sf.dozer:dozer:5.4.0',
 
+    // drools
+    drools_compiler:	    'org.drools:drools-compiler:5.4.0.Final',
+    drools_spring:	    'org.drools:drools-spring:5.4.0.Final',
+    drools_core:	    'org.drools:drools-core:5.4.0.Final',
     /* E */
 
     // easymock

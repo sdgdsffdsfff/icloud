@@ -10,5 +10,9 @@ dependencies {
   compile libraries.cucumber_junit
   compile libraries.cucumber_spring
   compile libraries.spring_test
+  
+  compile libraries.drools_core
+  compile libraries.drools_spring
+  compile libraries.drools_compiler
 
 }

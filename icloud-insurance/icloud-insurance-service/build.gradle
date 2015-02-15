@@ -1,0 +1,17 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+group = 'com.icloud.insurance'
+version = "1.0-SNAPSHOT"
+
+jar {
+ baseName =  'icloud-insurance-common'
+}
+dependencies {
+    compile project(':icloud-common:framework-dao-base')
+	compile project(':icloud-insurance:icloud-insurance-common')
+
+	compile libraries.httpclient
+	compile libraries.mysql_connector
+	compile libraries.javassist
+}

@@ -1,0 +1,576 @@
+@charset "utf-8";
+
+/* 重置页面头部*/
+.chief {
+	border-bottom: 1px solid #e1e1e1;
+	background: #f8f8f8;
+	padding-top: 10px;
+}
+
+.chief h3 {
+	width: 10%;
+	font-size: 14px;
+	font-weight: bold;
+	color: #f1634c;
+	border-bottom: 2px solid #f1634c;
+	padding: 0 0 10px 10px;
+	margin-bottom: -1px;
+	margin-left: 10px;
+}
+
+.regist {
+	border: 1px solid #e1e1e1;
+	color: #636363;
+	background: #fff;
+}
+/**register  start**/
+.message {
+	width: 75%;
+	margin: 20px auto;
+}
+
+.message h3 {
+	font-size: 14px;
+	font-weight: bold;
+	padding-bottom: 7px;
+	border-bottom: 1px dashed #e1e1e1;
+}
+
+.mes_tab {
+	margin-top: 15px;
+}
+
+.mes_tab td {
+	line-height: 30px;
+	padding: 5px 0;
+}
+
+.mes_tab input {
+	width: 270px;
+	height: 25px;
+	border: 1px solid #abadb3;
+	line-height: 25px;
+	padding-left: 3px;
+}
+
+.mes_tab td:first-child {
+	text-align: right;
+	padding-right: 15px;
+	font-size: 14px;
+}
+
+.mes_tab i {
+	color: #ff0000;
+}
+
+.mes_tab em {
+	color: #9d9d9d;
+	margin-left: 10px;
+}
+
+.mes_tab label {
+	margin-right: 30px;
+}
+
+.mes_tab label input {
+	width: auto;
+	border: 0;
+	vertical-align: middle;
+}
+
+.mes_tab select {
+	width: 132px;
+	margin-right: 5px;
+	height: 25px;
+	line-height: 25px;
+}
+
+.mes_tab textarea {
+	width: 530px;
+	height: 80px;
+	padding: 3px;
+}
+/**register  end**/
+
+/** successful start**/
+.successful {
+	margin: 130px 0 0;
+	color: #636363;
+	text-align: center;
+}
+
+.successful h3 {
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 36px;
+}
+
+.successful h3 em {
+	width: 36px;
+	height: 36px;
+	display: inline-block;
+	background: url(../../images/icloud/succeed.png) no-repeat left center;
+	vertical-align: middle;
+}
+
+.successful div {
+	margin: 15px 0;
+}
+
+.successful ul {
+	margin-left: 447px;
+}
+
+.successful ul li {
+	float: left;
+	margin-right: 20px;
+}
+
+.successful ul li a {
+	text-decoration: underline;
+	color: inherit;
+}
+
+.successful ul li a:hover {
+	color: #e52c48;
+}
+/** successful end**/
+
+/** title start*/
+.title {
+	background-color: #f8f8f8;
+	border-bottom: 1px solid #e1e1e1;
+	padding: 0 15px;
+	color: #f1634c;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.title strong {
+	padding: 0 25px 0 10px;
+	line-height: 40px;
+	font-weight: bold;
+	display: inline-block;
+	border-bottom: 2px solid #f1634c;
+	position: relative;
+	top: 1px;
+}
+/** title end*/
+
+/** find_password start*/
+.find_password {
+	width: 550px;
+	margin: 40px auto;
+	color: #636363;
+}
+
+.find_password li {
+	padding: 10px 0px;
+	line-height: 20px;
+}
+
+.find_password label div {
+	float: left;
+	width: 145px;
+	text-align: right;
+	padding: 0 10px 0 0;
+}
+
+.find_password p {
+	padding: 5px 0;
+}
+/** find_password end*/
+
+/** us-nav start**/
+.us-bind {
+	padding: 10px;
+}
+
+.us-bind a {
+	padding: 3px 0;
+}
+
+.us-nav a {
+	color: #505050;
+}
+
+.us-nav dd a {
+	display: block;
+	padding: 10px 30px;
+}
+
+.us-nav dd a:hover {
+	text-decoration: underline;
+}
+
+.us-nav .current {
+	color: #fff;
+	background-color: #F1634C;
+}
+
+.us-nav .text1 {
+	color: #e94749;
+}
+
+.us-nav i {
+	margin-right: 5px;
+	vertical-align: text-bottom;
+	display: inline-block;
+	background: url(../../images/icloud/ucnavs.png) no-repeat;
+}
+
+.us-nav dt i {
+	width: 16px;
+}
+
+.us-nav .ic-j {
+	padding-left: 15px;
+}
+
+.us-nav .ic-j i {
+	vertical-align: middle;
+}
+
+.us-nav {
+	float: left;
+	width: 180px;
+	background-color: #F8F8F8;
+	color: #505050;
+	border: 1px solid #E1E1E1;
+}
+
+.us-nav dt {
+	background-color: #EAEAEA;
+	padding: 10px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.us-nav h3 {
+	font-weight: bold;
+	font-size: 16px;
+	background-color: #EAEAEA;
+	padding: 10px;
+	border-bottom: 2px solid #F1634C;
+}
+
+.us-content {
+	float: left;
+	width: 778px;
+	margin-left: 20px;
+}
+
+.us-body {
+	
+}
+/** us end*/
+
+/** us-content start */
+.us-content {
+	float: left;
+	width: 788px;
+	margin-left: 10px;
+}
+
+.us-body {
+	border: 1px solid #E1E1E1;
+	width: 100%;
+	background-color: #fff;
+}
+
+.us-title {
+	font-size: 14px;
+	font-weight: bold;
+	color: #505050;
+	border-bottom: 1px solid #E1E1E1;
+	padding: 10px 5px;
+	margin-bottom: 10px;
+	width: 100%;
+}
+/** us-content end */
+
+/* tab切换 */
+.tab_change {
+	width: 100%;
+	background: #f8f8f8;
+	border-bottom: 1px solid #e1e1e1;
+}
+
+.tab_change li {
+	float: left;
+	padding: 10px 0;
+	font-size: 14px;
+	font-weight: bold;
+	color: #636363;
+}
+
+.tab_change li em {
+	float: left;
+	min-width: 65px;
+	text-align: center;
+	padding: 0 15px;
+	font-weight: bold;
+	border-left: 1px solid #e1e1e1;
+	margin-left: -1px;
+}
+/**  modifyPayPw**/
+.modifyPayPw {
+	padding: 10px 0 10px 5px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #e1e1e1;
+	font-size: 14px;
+	font-weight: bold;
+	color: #505050;
+}
+
+.modifyPayPw_tab {
+	margin-top: 30px;
+	color: #636363;
+}
+
+.modifyPayPw_tab td {
+	line-height: 40px;
+}
+
+.modifyPayPw_tab td input {
+	width: 160px;
+	line-height: 22px;
+	height: 22px;
+}
+
+.modifyPayPw_tab td:first-child {
+	text-align: right;
+}
+
+.usRightContent {
+	border: 1px solid #e1e1e1;
+	background-color: #fff;
+}
+
+.usRightContent {
+	border: 1px solid #e1e1e1;
+	background-color: #fff;
+}
+
+.amendPwSucceed,.amendPwDefeated {
+	padding: 25px;
+	background: #fafadb;
+	font-size: 16px;
+	font-weight: bold;
+	color: #636363;
+	line-height: 36px;
+	border: 1px solid #dcc791;
+	margin-bottom: 10px;
+}
+
+.amendPwSucceed em {
+	width: 36px;
+	height: 36px;
+	display: inline-block;
+	background: url(../../images/icloud/succeed.png) no-repeat;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+
+.amendPwDefeated em {
+	width: 36px;
+	height: 36px;
+	display: inline-block;
+	background: url(../../images/icloud/wrong.png) no-repeat;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+/**user successful*/
+.usersuccessful {
+	color: #636363;
+	background: url('../..//images/icloud/succeed.png') no-repeat 20px 50%
+		#FAFADB;
+	line-height: 64px;
+	height: 64px;
+	padding-left: 65px;
+	font-size: 16px;
+	font-weight: bold;
+}
+/** 信息维护*/
+.tabPanel {
+	padding: 12px
+}
+
+.tabPanel td,.addstaff td {
+	padding: 5px 0;
+	height: 30px;
+	color: #636363
+}
+
+.us-content input[type=text].disabled {
+	border: none
+}
+
+.btn_modifyPassword {
+	color: #CF6B00;
+	padding-left: 10px;
+	text-decoration: none
+}
+/** i.ucnav start **/
+i.ucnav_03 {
+	background-position: 0 0;
+	width: 12px;
+	height: 12px;
+}
+
+i.ucnav_07 {
+	background-position: 0 -62px;
+	width: 17px;
+	height: 17px;
+}
+
+i.ucnav_10 {
+	background-position: 0 -129px;
+	width: 17px;
+	height: 15px;
+}
+
+i.ucnav_12 {
+	background-position: 0 -194px;
+	width: 16px;
+	height: 15px;
+}
+
+i.ucnav_15 {
+	background-position: 0 -259px;
+	width: 16px;
+	height: 13px;
+}
+
+i.ucnav_17 {
+	background-position: 0 -322px;
+	width: 16px;
+	height: 14px;
+}
+
+i.ucnav_19 {
+	background-position: 0 -386px;
+	width: 14px;
+	height: 15px;
+}
+
+i.ucnav_22 {
+	background-position: 0 -451px;
+	width: 15px;
+	height: 16px;
+}
+
+i.ucnav_26 {
+	background-position: 0 -517px;
+	width: 14px;
+	height: 14px;
+}
+
+i.ucnav_29 {
+	background-position: 0 -581px;
+	width: 34px;
+	height: 33px;
+}
+
+i.ucnav_32 {
+	background-position: 0 -664px;
+	width: 34px;
+	height: 33px;
+}
+
+i.ico_tuifeipiaoguiding {
+	background-position: 0 -720px;
+	width: 34px;
+	height: 33px;
+}
+
+i.ico_shengcangguidign {
+	background-position: 0 -760px;
+	width: 34px;
+	height: 33px;
+}
+/*****************************组织架构***********************************/
+#addRoleContainer td{padding:5px 0}
+.role li{border-bottom:1px dashed #ccc;padding-bottom:5px;margin-bottom:10px}
+.role li div{padding:10px 0 0 17px}
+.role label{min-width:80px;display:inline-block;padding-bottom:5px}
+
+
+.usResult th{
+    line-height:20px;
+    background-color:#F8F8F8;
+    border-bottom:1px solid #E4E4E4;
+    padding:10px 5px;
+    color:#404040;
+    text-align: left;
+}
+.usResult td{
+    line-height:20px;
+    color:#636363;
+    padding:13px 3px;
+    border-bottom:1px dashed #E4E4E4;
+}
+
+.usResult{
+    padding:10px;
+    padding-bottom:0;
+}
+/****** us-query**/
+.us-query{
+    padding:20px 10px;
+}
+.us-query .brightRed_btn{
+    margin-top:15px;
+}
+.us-query-table{
+    float:left;
+}
+.us-query-table s{
+    display:inline-block;
+    width:18px;
+    text-align:center;
+}
+.us-query-table th{
+    white-space: nowrap;
+    color:#636363;
+    text-align:right;
+    padding:5px 0;
+}
+.us-query-table td{
+    padding:5px 0;
+    padding-right:20px;
+}
+.us-query-table .statusList label{
+	padding:0 3px 3px;
+	width:80px;
+	display:inline-block;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	color:#636363;
+}
+
+/* 通用翻页*/
+.pagination,.paging{ margin:10px 0;}
+.pagination div,.paging div{ float:right; height:30px; line-height:30px;}
+.pagination div em,.paging div em{ color:#e94749; font-weight:bold;}
+.pagination ul,.paging ul{ margin:0 10px 0 5px; float:right;}
+.pagination ul li,.paging ul li{ float:left; margin-left:10px;}
+.pagination ul li a,.paging ul li a{ display:inline-block; padding:5px 8px; border:1px solid #ccd5de; color:#e94749;}
+.pagination ul li a:hover,.pagination .present,.paging .present{ color:#fff; text-decoration:none; cursor:pointer; background:#e94749; border:1px solid #e94749;}
+.pagination ul li span,.paging ul li span{ color:#e94749;}
+.pagination .disabled{ color:#ccd5de;}
+.pagination .disabled:hover{ color:#ccd5de; background:none; border:1px solid #ccd5de; cursor:default;}
+.paging ul li a:hover{ background:#f6f6f6; text-decoration:none; color:#e94749;}
+.paging .present:hover{ background:#e94749; color:#fff;}
+
+.usResult table{ width:100%;}
+
+/** i ucnav end */
+input[type=text],input[type=password] {
+	border: 1px solid #ABADB3;
+	height: 23px;
+	width: 134px;
+	padding: 0 2px;
+	line-height: 23px \9;
+}
