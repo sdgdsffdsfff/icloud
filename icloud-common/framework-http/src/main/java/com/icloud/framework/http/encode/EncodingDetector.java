@@ -10,8 +10,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.ibm.icu.text.CharsetDetector;
-import com.ibm.icu.text.CharsetMatch;
 import com.icloud.framework.core.util.TZUtil;
 import com.icloud.framework.http.HttpContent;
 
@@ -24,7 +22,7 @@ public class EncodingDetector {
 	private static final HashSet<String> DETECTABLES = new HashSet<String>();
 //	private static final int MIN_LENGTH = 4;
 	private int minConfidence;
-	private CharsetDetector detector;
+//	private CharsetDetector detector;
 	private List<EncodingClue> clues;
 
 	static {
@@ -46,37 +44,37 @@ public class EncodingDetector {
 
 	public EncodingDetector() {
 		this.minConfidence = -1;
-		this.detector = new CharsetDetector();
+//		this.detector = new CharsetDetector();
 		this.clues = new ArrayList<EncodingClue>();
 	}
 
-	public void autoDetectClues(HttpContent content, boolean filter) {
-		byte[] data = content.getContent();
-
-		if (data.length > 4) {
-			CharsetMatch[] matches = (CharsetMatch[]) null;
-			try {
-				this.detector.enableInputFilter(filter);
-				if (data.length > 4) {
-					this.detector.setText(data);
-					matches = this.detector.detectAll();
-				}
-			} catch (Exception e) {
-				this.LOG.debug(TZUtil.stringifyException(e));
-			}
-
-			if (matches != null) {
-				for (CharsetMatch match : matches) {
-					System.out.println(match.getName() + ":"
-							+ match.getConfidence());
-				}
-
-			}
-
-		}
-
-		addClue(parseCharacterEncoding(content.getContentType()), "header");
-	}
+//	public void autoDetectClues(HttpContent content, boolean filter) {
+//		byte[] data = content.getContent();
+//
+//		if (data.length > 4) {
+//			CharsetMatch[] matches = (CharsetMatch[]) null;
+//			try {
+//				this.detector.enableInputFilter(filter);
+//				if (data.length > 4) {
+//					this.detector.setText(data);
+//					matches = this.detector.detectAll();
+//				}
+//			} catch (Exception e) {
+//				this.LOG.debug(TZUtil.stringifyException(e));
+//			}
+//
+//			if (matches != null) {
+//				for (CharsetMatch match : matches) {
+//					System.out.println(match.getName() + ":"
+//							+ match.getConfidence());
+//				}
+//
+//			}
+//
+//		}
+//
+//		addClue(parseCharacterEncoding(content.getContentType()), "header");
+//	}
 
 	public void addClue(String value, String source, int confidence) {
 		if ((value == null) || ("".equals(value))) {

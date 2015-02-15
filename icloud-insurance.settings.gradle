@@ -1,2 +1,3 @@
 include 'icloud-insurance:icloud-insurance-common'
 include 'icloud-insurance:icloud-insurance-service'
+include 'icloud-insurance:icloud-insurance-generate'

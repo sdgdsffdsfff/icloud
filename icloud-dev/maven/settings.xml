@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+ 
+    <servers>
+        <server>
+            <id>repo-iss</id>
+            <username>deployment</username>
+            <password>deployment123</password>
+        </server>
+    </servers>
+ 
+    <mirrors>
+        <!-- osc镜像 -->
+        <mirror>
+            <!-- 镜像所有远程仓库，但不包括指定的仓库 -->
+            <id>mirror-osc</id>
+            <mirrorOf>external:*,!repo-osc-thirdparty,!repo-iss</mirrorOf>
+            <url>http://maven.oschina.net/content/groups/public/</url>
+        </mirror>
+    </mirrors>
+ 
+    <profiles>
+        <profile>
+            <id>profile-default</id>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <url>http://localhost:8082/nexus/content/groups/public</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>repo-osc-thirdparty</id>
+                    <url>http://localhost:8082/nexus/content/groups/public</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>central</id>
+                    <url>http://localhost:8082/nexus/content/groups/public</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+ 
+    <activeProfiles>
+        <activeProfile>profile-default</activeProfile>
+        <!--<activeProfile>profile-iss</activeProfile>-->
+    </activeProfiles>
+ 
+<!--
+    <proxies>
+        <proxy>
+            <active>true</active>
+            <protocol>http</protocol>
+            <host>10.10.204.160</host>
+            <port>80</port>
+        </proxy>
+    </proxies>
+-->
+</settings>
