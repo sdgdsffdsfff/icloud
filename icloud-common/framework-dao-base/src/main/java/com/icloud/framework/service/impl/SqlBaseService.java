@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.icloud.framework.dao.hibernate.HiberanateEnum.OperationEnum;
 import com.icloud.framework.dao.hibernate.IHibernateBaseDao;
 import com.icloud.framework.service.ISqlBaseService;
@@ -37,11 +39,13 @@ public abstract class SqlBaseService<T> implements ISqlBaseService<T> {
 		return t;
 	}
 
+	@Transactional
 	public void save(Collection entities) {
 		this.baseDao.save(entities);
 	}
 
 	@Override
+	@Transactional
 	public void delete(T t) {
 		// TODO Auto-generated method stub
 		this.baseDao.delete(t);
@@ -54,6 +58,7 @@ public abstract class SqlBaseService<T> implements ISqlBaseService<T> {
 	}
 
 	@Override
+	@Transactional
 	public void deleteById(Integer id) {
 		// TODO Auto-generated method stub
 		this.baseDao.deleteById(id);
@@ -66,6 +71,7 @@ public abstract class SqlBaseService<T> implements ISqlBaseService<T> {
 	}
 
 	@Override
+	@Transactional
 	public void deteleteAll() {
 		// TODO Auto-generated method stub
 		this.baseDao.deteleteAll();

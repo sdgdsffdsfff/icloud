@@ -9,4 +9,5 @@
 	default-autowire="byName" default-lazy-init="true">
 	<import resource="classpath*:/spring/icloud-insurance-service-scan.xml" />
 	<import resource="classpath*:/spring/icloud-insurance-service-placeholder.xml" />
+	<import resource="classpath*:/spring/icloud-insurance-service-transaction.xml" />
 </beans>

@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.icloud.framework.dao.hibernate.IHibernateBaseDao;
 import com.icloud.framework.logger.ri.RequestIdentityLogger;
@@ -57,6 +58,7 @@ public class UserService extends SqlBaseService<User> {
 				paramNames, values, null, true));
 	}
 
+	@Transactional
 	public void resetPassword(User user) {
 		if (ICloudUtils.isNotNull(user)) {
 			String password = StringEncoder.encrypt(user.getUserName()
@@ -70,6 +72,7 @@ public class UserService extends SqlBaseService<User> {
 		}
 	}
 
+	@Transactional
 	public void modifyBaseInfo(RegisterUser registerUser, User user) {
 		if (ICloudUtils.isNotNull(user) && ICloudUtils.isNotNull(registerUser)) {
 			logger.info("start to update: {}", registerUser);
@@ -95,9 +98,14 @@ public class UserService extends SqlBaseService<User> {
 		return initSex == 0 ? "男" : "女";
 	}
 
+	@Transactional
 	public User addUser(String userName, String password) {
 		if (ICloudUtils.isNotNull(userName) && ICloudUtils.isNotNull(password)) {
 			password = StringEncoder.encrypt(password);// 加密
+			User user = new User();
+			user.setUserName(userName);
+			user.setUserPassword(password);
+			return this.save(user);
 		}
 		return null;
 	}
@@ -118,6 +126,7 @@ public class UserService extends SqlBaseService<User> {
 	 * @param user
 	 * @return
 	 */
+	@Transactional
 	public User addUser(RegisterUser registerUser, String coming,
 			User fatherUser) {
 		if (ICloudUtils.isNotNull(registerUser)) {
@@ -198,6 +207,7 @@ public class UserService extends SqlBaseService<User> {
 		return null;
 	}
 
+	@Transactional
 	public void updatePassword(User user, String password) {
 		if (ICloudUtils.isNotNull(user) && ICloudUtils.isNotNull(password)) {
 			logger.info("start to update : userName={},password={}",
