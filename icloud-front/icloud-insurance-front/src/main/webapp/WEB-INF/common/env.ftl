@@ -5,4 +5,4 @@
 <#-- properties -->
 <#global basepath = req.contextPath/>
 <#global host="${getEnv('server.path.blog.buuyuu')}" />
-<#global defaultTitle="必有股票-可能是最懂股票的网站" />
+<#global defaultTitle="必有保险-最强大的互联网保险平台" />

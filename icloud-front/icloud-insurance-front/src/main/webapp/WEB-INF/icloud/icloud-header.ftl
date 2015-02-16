@@ -6,18 +6,8 @@
        <nav class="main-nav">
          <ul class="clearfix">
          	<li <#if current=="行情">class="first active"</#if>><a href="${basepath}/stock/stockMenu">行情</a></li>
-         	<li <#if current=="爬虫数据">class="first active"</#if>><a href="${basepath}/stock/openMenus">爬虫数据</a></li>
-         	<li <#if current=="短链接">class="first active"</#if>><a href="${basepath}/usertb/tbList">短链接</a></li>
             </ul>
        </nav>
-       <div class="search">
-       	
-         <input id="quick-search" class="quick-search" name="stockCode" type="text" autocomplete="off" placeholder="搜索 股票" class="typeahead">
-         
-         <span class="icon">
-            <i></i>
-          </span>
-       </div>
        <nav class="main-links">
           <ul class="clearfix">
           <#if !(currentUserInfo())?? >
