@@ -1,6 +1,6 @@
 <#import "/icloud/icloud-main-container.ftl" as imc/>
 <#import "/user/user-template/user-center-menus.ftl" as ucm/>
-<@imc.mainContainer current="行情"  jsFiles=['common/jquery.validate.js','common/messages_cn.js','icloud/register.js'] cssFiles=['icloud/icloud_usercenter.css'] >
+<@imc.mainContainer jsFiles=['common/jquery.validate.js','common/messages_cn.js','icloud/register.js'] cssFiles=['icloud/icloud_usercenter.css'] >
 <@ucm.userCenterMenus current="增加成员"/>
 <main class="us-content">
     <h1 class="us-title">会员注册</h1>

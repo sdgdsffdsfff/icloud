@@ -1,5 +1,5 @@
 <#import "/icloud/icloud-main-container.ftl" as imc/>
-<@imc.mainContainer current="行情"  jsFiles=[] cssFiles=['icloud/icloud_usercenter.css'] >
+<@imc.mainContainer jsFiles=[] cssFiles=['icloud/icloud_usercenter.css'] >
 <div class="clearfix">
     <ul class="pull-right process_step">
         <li class="current">
@@ -19,7 +19,7 @@
     </h3>
     <div class="row" style="height:330px;">
         <div class="find_password" style="width:400px;margin:100px auto;">
-            <p>您的重置密码邮件已发送到注册时的账号信息电子邮箱，请登录邮箱查收。</p>
+            <p>您的重置密码邮件已发送到注册时的账号信息电子邮箱，请<a href="${email}">登录邮箱</a>查收。</p>
             <p>(如果收件箱里没有，可以去垃圾箱找找看。)</p>
         </div>
     </div>

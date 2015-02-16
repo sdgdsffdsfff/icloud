@@ -1,5 +1,5 @@
 <#import "/icloud/icloud-main-container.ftl" as imc/>
-<@imc.mainContainer current="行情"  jsFiles=['common/jquery.validate.js','common/messages_cn.js','icloud/register.js'] cssFiles=['icloud/icloud_usercenter.css'] >
+<@imc.mainContainer jsFiles=['common/jquery.validate.js','common/messages_cn.js','icloud/register.js'] cssFiles=['icloud/icloud_usercenter.css'] >
 <div class="regist">
     <!--regist start-->
     <div class="chief">

@@ -10,8 +10,8 @@ import com.icloud.framework.util.ICloudUtils;
 import com.icloud.framework.util.StringEncoder;
 import com.icloud.front.user.pojo.LoginUser;
 import com.icloud.front.user.pojo.RegisterUser;
+import com.icloud.insurance.config.InsuranceConfig;
 import com.icloud.insurance.model.User;
-import com.icloud.stock.config.MailConfig;
 import com.icloud.user.dict.UserConstants;
 
 @Controller
@@ -29,8 +29,7 @@ public class ICloudUserManagerController extends BaseController {
 	public boolean validateUserName(
 			@RequestParam(required = true) String username) {
 		logger.info("{}", username);
-		if (ICloudUtils.isNotNull(this.userService
-				.getUserByUserName(username))) {
+		if (ICloudUtils.isNotNull(this.userService.getUserByUserName(username))) {
 			return false;
 		}
 		return true;
@@ -54,8 +53,7 @@ public class ICloudUserManagerController extends BaseController {
 	public boolean validateTelphone(
 			@RequestParam(required = true) String telphone) {
 		logger.info("{}", telphone);
-		if (ICloudUtils.isNotNull(this.userService
-				.getUserByTelphone(telphone))) {
+		if (ICloudUtils.isNotNull(this.userService.getUserByTelphone(telphone))) {
 			return false;
 		}
 		return true;
@@ -97,25 +95,24 @@ public class ICloudUserManagerController extends BaseController {
 		logger.info("email={}", email);
 		// 发送邮件给该邮箱
 		User user = this.userService.getUserByEmail(email);
+
 		// 重置密码和发送邮件
 		if (ICloudUtils.isNotNull(user)) {
 			/**
 			 * 充值密码
 			 */
-			userService.resetPassword(user);
-			MailConfig
-					.sendFindPassword(
-							email,
-							user.getUserName(),
-							StringEncoder.encrypt(user.getUserPassword()
-									+ SECURE_SEED));
+			// userService.resetPassword(user);
+			String token = userService.getToken(user);
+			InsuranceConfig.sendFindPassword(email, user.getUserName(), token);
 		}
-		return "redirect:/userManager/dofindPassWordStep2success";
+		return "redirect:/userManager/dofindPassWordStep2success?email="
+				+ ICloudUtils.getEmailSite(email);
 	}
 
 	@RequestMapping("/dofindPassWordStep2success")
-	public ModelAndView dofindPassWordStep2success() {
+	public ModelAndView dofindPassWordStep2success(String email) {
 		ModelAndView model = getModelAndView("user/manager/icloud-user-findpwd-step02");
+		model.addObject("email", email);
 		return model;
 	}
 
@@ -124,9 +121,7 @@ public class ICloudUserManagerController extends BaseController {
 			@RequestParam(required = true) String userName,
 			@RequestParam(required = true) String token) {
 		User user = this.userService.getUserByUserName(userName);
-		if (ICloudUtils.isNotNull(user)
-				&& StringEncoder.encrypt(user.getUserPassword() + SECURE_SEED)
-						.equalsIgnoreCase(token)) {
+		if (ICloudUtils.isNotNull(user) && userService.checkToken(user, token)) {
 			ModelAndView model = getModelAndView("user/manager/icloud-user-findpwd-step03");
 			model.addObject("userName", userName);
 			model.addObject("token", token);
@@ -148,9 +143,7 @@ public class ICloudUserManagerController extends BaseController {
 					.getUsername());
 			if (ICloudUtils.isNotNull(user)) {
 				if (ICloudUtils.isNotNull(user.getUserPassword())
-						&& StringEncoder.encrypt(
-								user.getUserPassword() + SECURE_SEED)
-								.equalsIgnoreCase(registerUser.getToken())) {
+						&& userService.checkToken(user, registerUser.getToken())){
 					this.userService.updatePassword(user,
 							registerUser.getPassword());
 					return "redirect:/userManager/dofindPassWordStep4";

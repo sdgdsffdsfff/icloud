@@ -148,6 +148,7 @@ public class ICloudUtils {
 		System.out.println(getRandom(2));
 		System.out.println(getRandom(2));
 		System.out.println(getRandom(2));
+		System.out.println(getEmailSite("ciujiangning08@163.com"));
 	}
 
 	public static boolean isSame(String name, String name2) {
@@ -176,6 +177,16 @@ public class ICloudUtils {
 	 */
 	public static int getRandom(int size) {
 		return Math.abs(random.nextInt()) % size;
+	}
+
+	public static String getEmailSite(String email) {
+		if (ICloudUtils.isNotNull(email)) {
+			int index = email.indexOf("@");
+			if (index != -1) {
+				return "http://mail." + email.substring(index+1);
+			}
+		}
+		return null;
 	}
 
 }

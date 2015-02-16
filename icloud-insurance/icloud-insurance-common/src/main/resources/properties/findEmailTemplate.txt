@@ -1,0 +1,13 @@
+<html>
+   <head>
+      <title>找回密码</title>
+   </head>
+   <body>
+     <center>
+        <a href=\"http://www.buuyuu.com\">必有网www.buuyuu.com</a>
+     </center>
+     <p>请点击以下链接进行重置密码，谢谢您的关注
+     <p><a href="$url">$url</a>
+     <p>多谢您的支持，<a href="http://www.buuyuu.com">必有网</a>的发展离不开您的关注
+   </body>
+</html>

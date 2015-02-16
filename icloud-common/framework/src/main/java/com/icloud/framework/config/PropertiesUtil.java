@@ -2,6 +2,7 @@ package com.icloud.framework.config;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.Resource;
 
 import com.icloud.framework.core.util.StringUtil;
+import com.icloud.framework.util.FileUtils;
 
 public class PropertiesUtil {
 	private static Logger logger = LoggerFactory
@@ -68,6 +70,39 @@ public class PropertiesUtil {
 
 	public static int getPropertyForInt(String filePath, String key) {
 		return Integer.parseInt(getProperty(filePath, key));
+	}
+
+	public static String getContent(String filePath) {
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext();
+
+		Resource rc = ctx.getResource("/" + filePath);
+
+		InputStream input = null;
+		try {
+			input = rc.getInputStream();
+		} catch (IOException e1) {
+			logger.error(e1.getLocalizedMessage());
+			e1.printStackTrace();
+			return null;
+		}
+		if (input != null) {
+			try {
+				String str = FileUtils.readContent(input);
+				return str;
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				try {
+					input.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+		}
+		return null;
 	}
 
 	public static String getProperty(String filePath, String key) {

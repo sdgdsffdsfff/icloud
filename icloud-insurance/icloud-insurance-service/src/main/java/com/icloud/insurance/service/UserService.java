@@ -227,4 +227,24 @@ public class UserService extends SqlBaseService<User> {
 		return null;
 	}
 
+	public String getToken(User user) {
+		if (ICloudUtils.isNotNull(user)
+				&& ICloudUtils.isNotNull(user.getUserEmail())
+				&& ICloudUtils.isNotNull(user.getUserName())
+				&& ICloudUtils.isNotNull(user.getUserPassword())) {
+			return StringEncoder.encrypt(user.getUserEmail() + "###"
+					+ user.getUserName() + "###" + user.getUserPassword());
+		}
+		return null;
+	}
+
+	public boolean checkToken(User user, String token) {
+		if (ICloudUtils.isNotNull(token)) {
+			String token2 = getToken(user);
+			if (token.equals(token2))
+				return true;
+		}
+
+		return false;
+	}
 }

@@ -1,12 +1,5 @@
-<#macro htmlBase title keywords="股票行情,交易,研究报告" description="股票股价,行情,新闻,财报,数据" jsFiles=[] cssFiles=[] emedObjects=[]>
+<#macro htmlBase title="${defaultTitle}" keywords="${defaultKeywords}" description="${defaultDescription}" jsFiles=[] cssFiles=[] emedObjects=[]>
 <#assign staticHost=host>
- <#if (currentUserInfo())??>
-<#global taobaohost="${currentUserInfo().taobaoUrl!''}" />
-<#global taobaohosthref="${currentUserInfo().taobaohosthref!''}" />
-<#else>
-<#global taobaohost="${getEnv('server.path.taobao.buuyuu')}" />
-<#global taobaohosthref="${getEnv('href.path.taobao.buuyuu')}" />
-</#if>
 <#escape x as x?html>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,16 +13,13 @@
 	<link rel="shortcut icon" href="${basepath}/resources/images/icloud/favicon.ico" />
 	<link rel="stylesheet" href="${basepath}/resources/css/icloud/icloud_reset.css?v=${getStaticResourceVersion()}" />
 	<link rel="stylesheet" href="${basepath}/resources/css/icloud/icloud.css?v=${getStaticResourceVersion()}" />
-	<link rel="stylesheet" href="${basepath}/resources/css/icloud/jquery.bigautocomplete.css?v=${getStaticResourceVersion()}" />
-
+	
 	<#list cssFiles as css>
 		<link rel="stylesheet" href="${basepath}/resources/css/${css}?v=${getStaticResourceVersion()}" />
 	</#list>
 	<#-- js -->
 	<script type="text/javascript" src="${basepath}/resources/js/common/jquery.min.js?v=${getStaticResourceVersion()}"></script>
-	<script type="text/javascript" src="${basepath}/resources/js/common/jquery.bigautocomplete.js?v=${getStaticResourceVersion()}"></script>
 	<script type="text/javascript" src="${basepath}/resources/js/icloud/icloud.js?v=${getStaticResourceVersion()}"></script>
-	<script type="text/javascript" src="${basepath}/resources/js/icloud/autocomplete.js?v=${getStaticResourceVersion()}"></script>
 	<!--[if IE]>
 	<script src="${staticHost}/resources/js/common/html5.js?v=${getStaticResourceVersion()}"></script>
 	<![endif]-->

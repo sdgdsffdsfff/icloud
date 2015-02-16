@@ -1,4 +1,4 @@
-<#macro htmlBase title keywords="股票行情,交易,研究报告" description="股票股价,行情,新闻,财报,数据" jsFiles=[] cssFiles=[] emedObjects=[]>
+<#macro htmlBase title="${defaultTitle}" keywords="${defaultKeywords}" description="${defaultDescription}" jsFiles=[] cssFiles=[] emedObjects=[]>
 <#assign staticHost=host>
 <#escape x as x?html>
 <!DOCTYPE html>

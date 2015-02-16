@@ -26,12 +26,6 @@ public class ICloudUserController extends BaseController {
 		return model;
 	}
 
-	// @RequestMapping("/icloudLogin")
-	// public ModelAndView icloudLogin() {
-	// ModelAndView model = getModelAndView("user/manager/icloud-user-login");
-	// return model;
-	// }
-
 	@RequestMapping("/icloudLogout")
 	public String icloudLogout(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -43,7 +37,7 @@ public class ICloudUserController extends BaseController {
 
 	@RequestMapping("/myHome")
 	public ModelAndView myHome() {
-		return getModelAndView("user/myspace/icloud-user-stocklist");
+		return getModelAndView("user/myspace/icloud-user-home");
 	}
 
 	@RequestMapping("/baseUserInfo")
@@ -118,38 +112,6 @@ public class ICloudUserController extends BaseController {
 			}
 		}
 		return "redirect:/user/modifyPassword?result=failure";
-	}
-
-	@RequestMapping("/registerView")
-	public ModelAndView registerView() {
-		ModelAndView model = getModelAndView("user/myspace/icloud-user-register-view");
-		return model;
-	}
-
-	@RequestMapping("/doRegisterUser")
-	public String doRegisterUser(RegisterUser registerUser) {
-		if (!ICloudUtils.isNotNull(registerUser)) {
-			return ERROR_URL;
-		}
-		User ownUser = this.userService
-				.getUserByUserInfo(ICloudUserContextHolder.get());
-		logger.info("start to register, {}", registerUser.toString());
-		User user = this.userService.addUser(registerUser,
-				UserConstants.COMMING.COM_COMMING.getName(), ownUser);
-		if (ICloudUtils.isNotNull(user)) {
-			logger.info("success to register, {}", registerUser.toString());
-			return "redirect:/user/registersuccess";
-		} else {
-			logger.info("fail to register, {}", registerUser.toString());
-			return ERROR_URL;
-		}
-	}
-
-	@RequestMapping("/registersuccess")
-	public ModelAndView registersuccess() {
-		ModelAndView model = getModelAndView("user/myspace/icloud-user-register-view");
-		model.addObject("successModifyUserInfo", true);
-		return model;
 	}
 
 	

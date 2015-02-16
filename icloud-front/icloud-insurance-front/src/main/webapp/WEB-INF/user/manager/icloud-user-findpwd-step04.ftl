@@ -1,5 +1,5 @@
 <#import "/icloud/icloud-main-container.ftl" as imc/>
-<@imc.mainContainer current="行情"  jsFiles=[] cssFiles=['icloud/icloud_usercenter.css'] >
+<@imc.mainContainer jsFiles=[] cssFiles=['icloud/icloud_usercenter.css'] >
 <div class="clearfix">
     <ul class="pull-right process_step">
         <li>
