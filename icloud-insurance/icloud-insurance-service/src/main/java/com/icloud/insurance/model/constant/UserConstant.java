@@ -14,9 +14,13 @@ public class UserConstant {
 	public static final String CHINANAME = "chinaName";
 	public static final String FATHERID = "fatherId";
 	public static final String LEVEL = "level";
-	public static final String PROMOTION = "promotion";
 	public static final String OPEN = "open";
-	public static final String REDIRECTURL = "redirectUrl";
-	public static final String FATHERNAME = "fatherName";
+
+	public final static int SUPER_USER = 0;
+	public final static int NORMAL_USER = 1;
+	public final static int POXY_USER = 2;
+
+	public final static int OPEN_USER_OPER = 1;
+	public final static int CLOSE_USER_OPER = 0;
 
 }

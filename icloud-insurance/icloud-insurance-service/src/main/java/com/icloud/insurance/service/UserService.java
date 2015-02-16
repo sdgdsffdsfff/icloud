@@ -19,7 +19,6 @@ import com.icloud.front.user.pojo.UserInfo;
 import com.icloud.insurance.dao.UserDao;
 import com.icloud.insurance.model.User;
 import com.icloud.insurance.model.constant.UserConstant;
-import com.icloud.user.dict.UserConstants;
 import com.icloud.user.util.UserUtils;
 
 @Service("userService")
@@ -151,7 +150,6 @@ public class UserService extends SqlBaseService<User> {
 						&& !ICloudUtils
 								.isNotNull(getUserByTelphone(registerUser
 										.getTelphone()))) {
-
 					User user = new User();
 					user.setCreateTime(new Date());
 					user.setLastUpdateTime(user.getCreateTime());
@@ -164,13 +162,8 @@ public class UserService extends SqlBaseService<User> {
 							.getUsersex()));
 					user.setUserTel(registerUser.getTelphone());
 					user.setQq(registerUser.getQq());
-					if (ICloudUtils.isNotNull(fatherUser)) {
-						user.setFatherId(fatherUser.getId());
-						user.setOpen(1);
-						user.setLevel(fatherUser.getLevel() + 1);
-						user.setPromotion(1);
-						user.setFatherName(fatherUser.getUserName());
-					}
+					user.setOpen(UserConstant.OPEN_USER_OPER);
+					user.setLevel(UserConstant.NORMAL_USER);
 					return this.save(user);
 				}
 			}
@@ -184,22 +177,10 @@ public class UserService extends SqlBaseService<User> {
 			if (ICloudUtils.isNotNull(user)
 					&& user.getUserName().equalsIgnoreCase(info.getUserName())) {
 				info.setEmail(user.getUserEmail());
-				if (user.getLevel() == UserConstants.USER_LEVEL_LIMIT
-						|| user.getPromotion() == 0) {
-					info.setAddUser(false);
-				} else {
-					info.setAddUser(true);
-				}
 				if (user.getOpen() == 1) {
 					info.setOpen(true);
 				} else {
 					info.setOpen(false);
-				}
-				if (user.getLevel() == UserConstants.SUPER_USER
-						|| user.getLevel() == 1) {
-					info.setUrlOper(true);
-				} else {
-					info.setUrlOper(false);
 				}
 				return info;
 			}

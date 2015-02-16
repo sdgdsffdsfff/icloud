@@ -25,8 +25,7 @@ public class UserInfoPo extends UserInfo {
 	private long lastDayValidCount;
 
 	public void setAddUser(User user) {
-		if (user.getLevel() == UserConstants.USER_LEVEL_LIMIT
-				|| user.getPromotion() == 0) {
+		if (user.getLevel() == UserConstants.USER_LEVEL_LIMIT) {
 			this.setAddUser(false);
 		} else {
 			this.setAddUser(true);
@@ -61,23 +60,7 @@ public class UserInfoPo extends UserInfo {
 				po.setStatusId(0);
 				po.setStatusOp("启用帐号");
 			}
-			if (user.getPromotion() == 1
-					&& user.getLevel() < UserConstants.USER_LEVEL_LIMIT) {
-				po.setPromotion("正常代理");
-				po.setPromotionId(1);
-				po.setPromotionOp("取消代理");
-			} else if (user.getPromotion() == 1
-					&& user.getLevel() >= UserConstants.USER_LEVEL_LIMIT) {
-				po.setPromotion("不能代理");
-				po.setPromotionId(-1);
-			} else {
-				po.setPromotion("取消代理");
-				po.setPromotionId(0);
-				po.setPromotionOp("加入代理");
-			}
 
-			po.setFatherId(user.getFatherId());
-			po.setFatherName(user.getFatherName());
 			return po;
 		}
 		return null;
