@@ -9,9 +9,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icloud.framework.util.ICloudUtils;
-import com.icloud.front.user.bussiness.UserAdminBusiness;
 import com.icloud.front.user.pojo.UserInfo;
 import com.icloud.front.user.utils.ICloudMemberUtils;
+import com.icloud.insurance.service.UserService;
 
 /**
  * @comment
@@ -21,8 +21,8 @@ import com.icloud.front.user.utils.ICloudMemberUtils;
 public class LogOnInterCeptor implements HandlerInterceptor {
 	private String redirectUrl = null;
 
-	@Resource(name = "userAdminBusiness")
-	protected UserAdminBusiness userAdminBusiness;
+	@Resource(name = "userService")
+	protected UserService userService;
 
 	public void setRedirectUrl(String redirectUrl) {
 
@@ -38,7 +38,7 @@ public class LogOnInterCeptor implements HandlerInterceptor {
 		Cookie cookie = ICloudMemberUtils.getCookie(request, response);
 		UserInfo info = ICloudMemberUtils.getUserInfoFromToken(cookie
 				.getValue());
-		info = userAdminBusiness.fillUserInfo(info);
+		info = userService.fillUserInfo(info);
 		if (!ICloudUtils.isNotNull(info)) { // 如果没有登陆，返回登陆页面
 			response.sendRedirect(request.getContextPath() + "/" + redirectUrl);
 			return false;

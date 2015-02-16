@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 27, 2014 7:04:04 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.icloud.insurance.model.User" table="user" catalog="icloud">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="userName" type="string">
+            <column name="user_name" length="100" />
+        </property>
+        <property name="userPassword" type="string">
+            <column name="user_password" length="100" />
+        </property>
+        <property name="userTel" type="string">
+            <column name="user_tel" length="100" />
+        </property>
+        <property name="userEmail" type="string">
+            <column name="user_email" length="100" />
+        </property>
+        <property name="userComing" type="string">
+            <column name="user_coming" length="100" />
+        </property>
+        <property name="userSex" type="string">
+            <column name="user_sex" length="100" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" />
+        </property>
+        <property name="lastUpdateTime" type="timestamp">
+            <column name="last_update_time" length="19" />
+        </property>
+        <property name="qq" type="string">
+            <column name="qq" length="100" />
+        </property>
+        <property name="chinaName" type="string">
+            <column name="china_name" length="100" />
+        </property>
+        <property name="fatherId" type="java.lang.Integer">
+            <column name="father_id" />
+        </property>
+        <property name="level" type="java.lang.Integer">
+            <column name="level" />
+        </property>
+        <property name="promotion" type="java.lang.Integer">
+            <column name="promotion" />
+        </property>
+        <property name="open" type="java.lang.Integer">
+            <column name="open" />
+        </property>
+        <property name="redirectUrl" type="string">
+            <column name="`redirect-url`" length="1000" />
+        </property>
+        <property name="fatherName" type="string">
+            <column name="father_name" length="300" />
+        </property>
+    </class>
+</hibernate-mapping>

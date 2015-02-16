@@ -8,16 +8,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.framework.util.StringEncoder;
-import com.icloud.front.stock.baseaction.BaseStockController;
 import com.icloud.front.user.pojo.LoginUser;
 import com.icloud.front.user.pojo.RegisterUser;
+import com.icloud.insurance.model.User;
 import com.icloud.stock.config.MailConfig;
-import com.icloud.stock.model.User;
 import com.icloud.user.dict.UserConstants;
 
 @Controller
 @RequestMapping("/userManager")
-public class ICloudUserManagerController extends BaseStockController {
+public class ICloudUserManagerController extends BaseController {
 
 	@RequestMapping("/registerView")
 	public ModelAndView registerView() {
@@ -30,7 +29,7 @@ public class ICloudUserManagerController extends BaseStockController {
 	public boolean validateUserName(
 			@RequestParam(required = true) String username) {
 		logger.info("{}", username);
-		if (ICloudUtils.isNotNull(this.userAdminBusiness
+		if (ICloudUtils.isNotNull(this.userService
 				.getUserByUserName(username))) {
 			return false;
 		}
@@ -42,7 +41,7 @@ public class ICloudUserManagerController extends BaseStockController {
 	public boolean validateEmail(@RequestParam(required = true) String email,
 			String requiredTrue) {
 		logger.info("{}", email);
-		if (ICloudUtils.isNotNull(this.userAdminBusiness.getUserByEmail(email))) {
+		if (ICloudUtils.isNotNull(this.userService.getUserByEmail(email))) {
 			// return false;
 			return ICloudUtils.isNotNull(requiredTrue) ? true : false;
 		}
@@ -55,7 +54,7 @@ public class ICloudUserManagerController extends BaseStockController {
 	public boolean validateTelphone(
 			@RequestParam(required = true) String telphone) {
 		logger.info("{}", telphone);
-		if (ICloudUtils.isNotNull(this.userAdminBusiness
+		if (ICloudUtils.isNotNull(this.userService
 				.getUserByTelphone(telphone))) {
 			return false;
 		}
@@ -68,7 +67,7 @@ public class ICloudUserManagerController extends BaseStockController {
 			return ERROR_URL;
 		}
 		logger.info("start to register, {}", registerUser.toString());
-		User user = this.userAdminBusiness.addUser(registerUser,
+		User user = this.userService.addUser(registerUser,
 				UserConstants.COMMING.COM_COMMING.getName(), null);
 		if (ICloudUtils.isNotNull(user)) {
 			logger.info("success to register, {}", registerUser.toString());
@@ -97,13 +96,13 @@ public class ICloudUserManagerController extends BaseStockController {
 		// 查找这个用户
 		logger.info("email={}", email);
 		// 发送邮件给该邮箱
-		User user = this.userAdminBusiness.getUserByEmail(email);
+		User user = this.userService.getUserByEmail(email);
 		// 重置密码和发送邮件
 		if (ICloudUtils.isNotNull(user)) {
 			/**
 			 * 充值密码
 			 */
-			userAdminBusiness.resetPassword(user);
+			userService.resetPassword(user);
 			MailConfig
 					.sendFindPassword(
 							email,
@@ -124,7 +123,7 @@ public class ICloudUserManagerController extends BaseStockController {
 	public ModelAndView dofindPassWordStep3(
 			@RequestParam(required = true) String userName,
 			@RequestParam(required = true) String token) {
-		User user = this.userAdminBusiness.getUserByUserName(userName);
+		User user = this.userService.getUserByUserName(userName);
 		if (ICloudUtils.isNotNull(user)
 				&& StringEncoder.encrypt(user.getUserPassword() + SECURE_SEED)
 						.equalsIgnoreCase(token)) {
@@ -145,14 +144,14 @@ public class ICloudUserManagerController extends BaseStockController {
 				&& ICloudUtils.isNotNull(registerUser.getConfirm_password())
 				&& registerUser.getPassword().equalsIgnoreCase(
 						registerUser.getConfirm_password())) {
-			User user = this.userAdminBusiness.getUserByUserName(registerUser
+			User user = this.userService.getUserByUserName(registerUser
 					.getUsername());
 			if (ICloudUtils.isNotNull(user)) {
 				if (ICloudUtils.isNotNull(user.getUserPassword())
 						&& StringEncoder.encrypt(
 								user.getUserPassword() + SECURE_SEED)
 								.equalsIgnoreCase(registerUser.getToken())) {
-					this.userAdminBusiness.updatePassword(user,
+					this.userService.updatePassword(user,
 							registerUser.getPassword());
 					return "redirect:/userManager/dofindPassWordStep4";
 				}

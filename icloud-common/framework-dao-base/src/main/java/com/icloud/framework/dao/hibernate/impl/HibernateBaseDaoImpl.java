@@ -60,7 +60,7 @@ public class HibernateBaseDaoImpl<T> extends HibernateDaoSupport implements
 	}
 
 	@Override
-	public List findAll() {
+	public List<T> findAll() {
 		// TODO Auto-generated method stub
 		return (getHibernateTemplate().find("from " + domainClass.getName()
 				+ " x"));

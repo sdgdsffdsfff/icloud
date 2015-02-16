@@ -7,7 +7,7 @@
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"
 	default-autowire="byName">
 
-	<bean id="stockSessionFactory"
+	<bean id="insuranceSessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<property name="configLocation" value="classpath:hibernate/hibernate.cfg.xml">
 		</property>

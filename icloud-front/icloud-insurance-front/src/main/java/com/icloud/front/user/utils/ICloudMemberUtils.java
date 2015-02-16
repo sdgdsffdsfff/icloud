@@ -4,13 +4,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.icloud.framework.config.PropertiesUtil;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.common.utils.MemberAuthUtils;
 import com.icloud.front.user.pojo.LoginUser;
 import com.icloud.front.user.pojo.UserInfo;
+import com.icloud.insurance.model.User;
 import com.icloud.stock.config.ICloudConfig;
-import com.icloud.stock.model.User;
 
 public class ICloudMemberUtils {
 	private static final String GUSTER_PREFIX = "guster";

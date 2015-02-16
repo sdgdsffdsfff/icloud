@@ -8,5 +8,7 @@ jar {
  baseName =  'icloud-insurance-common'
 }
 dependencies {
-    
+  compile project(':icloud-common:framework-logger')
+  compile project(':icloud-stock:icloud-stock-common')
+  compile libraries.dozer
 }

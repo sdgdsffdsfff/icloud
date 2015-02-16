@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icloud.framework.util.ICloudUtils;
-import com.icloud.front.stock.baseaction.BaseStockController;
 import com.icloud.front.user.pojo.LoginUser;
 import com.icloud.front.user.utils.ICloudMemberUtils;
-import com.icloud.stock.model.User;
+import com.icloud.insurance.model.User;
 
 /**
  * @comment
@@ -20,7 +19,7 @@ import com.icloud.stock.model.User;
  */
 @Controller
 @RequestMapping("/facade")
-public class FacadeUserController extends BaseStockController {
+public class FacadeUserController extends BaseController {
 	@RequestMapping("/icloudLogin")
 	public ModelAndView icloudLogin() {
 		ModelAndView model = getModelAndView("user/manager/icloud-user-login");
@@ -44,7 +43,7 @@ public class FacadeUserController extends BaseStockController {
 		if (ICloudUtils.isNotNull(loginUser)) {
 			logger.info("{}", loginUser.toString());
 		}
-		User user = this.userAdminBusiness.getUser(loginUser);
+		User user = this.userService.getUser(loginUser);
 		if (ICloudUtils.isNotNull(user)) {
 			/**
 			 * 加入cookie,并且下次自动登录
