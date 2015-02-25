@@ -29,7 +29,7 @@ body {
 .main-menu {
     position: relative;
     margin: 0 auto;
-    width: 1024px;
+    width: 90%;
 }
 /** main link  */
 
@@ -159,7 +159,8 @@ body {
 
 .main-body {
 /*    top: 82px;*/
-    width: 1024px;
+/*    width: 1024px;*/
+    width: 90%;
     margin: 10px auto;
     height: auto;
     min-height: 350px;
@@ -483,4 +484,12 @@ input[type=radio] {
 }
 .currentState a {
     color: #f1634c;
+}
+
+.subform {
+    margin-top:10px;
+    width: 30%;
+    height: 350px;
+    border: 1px solid #E1E1E1;
+    background-color: #fff;
 }
