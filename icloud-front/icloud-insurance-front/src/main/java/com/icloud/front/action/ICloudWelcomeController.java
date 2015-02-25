@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ICloudWelcomeController {
 	@RequestMapping("/index")
-	public String helloWorld() {
+	public String index() {
 		/**
 		 * 入口
 		 */
-		return "forward:/stock/stockMenu";
+		return "forward:/facade/icloudLogin";
 	}
 }

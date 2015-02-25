@@ -237,6 +237,7 @@
 	background-color: #F8F8F8;
 	color: #505050;
 	border: 1px solid #E1E1E1;
+	position: absolute;
 }
 
 .us-nav dt {
@@ -254,12 +255,6 @@
 	border-bottom: 2px solid #F1634C;
 }
 
-.us-content {
-	float: left;
-	width: 778px;
-	margin-left: 20px;
-}
-
 .us-body {
 	
 }
@@ -267,9 +262,8 @@
 
 /** us-content start */
 .us-content {
-	float: left;
-	width: 788px;
-	margin-left: 10px;
+
+	margin-left: 190px;
 }
 
 .us-body {
