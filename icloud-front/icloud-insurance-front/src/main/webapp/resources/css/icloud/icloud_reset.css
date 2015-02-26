@@ -1,184 +1,409 @@
 html {
-	font-size: 100%;
-	-webkit-text-size-adjust: 100%;
-	-ms-text-size-adjust: 100%;
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
 }
 
-body, div, ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, pre, code,
-	form, fieldset, legend, input, select, button, textarea, p, blockquote,
-	iframe, table, th, td, article, aside, details, figcaption, figure,
-	footer, header, hgroupd, nav, section {
-	margin: 0;
-	padding: 0;
-	outline-style: none;
+body,
+div,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+select,
+button,
+textarea,
+p,
+blockquote,
+iframe,
+table,
+th,
+td,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroupd,
+nav,
+section {
+    margin: 0;
+    padding: 0;
+    outline-style: none;
 }
 
-article, aside, details, figcaption, figure, footer, header, hgroupd,
-	nav, section {
-	display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroupd,
+nav,
+section {
+    display: block;
 }
 
-audio, canvas, video {
-	display: inline-block;
-	*display: inline;
-	*zoom: 1;
+audio,
+canvas,
+video {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
 }
 
-audio
-
-
-:not
-
- 
-
-(
-[
-controls
-]
-
- 
-
-)
-{
-display
-
-
-:
-
- 
-
-none
-
-
-;
-}
-.video embed, .video object, .video iframe {
-	width: 100%;
-	height: auto;
+audio:not ( [ controls]) {
+    display: none;
 }
 
-input, select, textarea {
-	font-family: Arial, Helvetica, sans-serif;
+.video embed,
+.video object,
+.video iframe {
+    width: 100%;
+    height: auto;
+}
+
+input,
+select,
+textarea {
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 a {
-	color: #0088cc;
-	text-decoration: none;
+    color: #0088cc;
+    text-decoration: none;
 }
 
-a:hover, a:focus {
-	color: #005580;
-	text-decoration: none;
+a:hover,
+a:focus {
+    color: #005580;
+    text-decoration: none;
 }
 
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
-fieldset, img {
-	border: 0;
+fieldset,
+img {
+    border: 0;
 }
 
-address, caption, cite, code, dfn, em, strong, th, var {
-	font-style: normal;
-	font-weight: normal;
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+    font-style: normal;
+    font-weight: normal;
 }
 
-ol, ul {
-	list-style: none;
+ol,
+ul {
+    list-style: none;
 }
 
-caption, th {
-	text-align: center;
+caption,
+th {
+    text-align: center;
 }
 
-h1, h2, h3, h4, h5, h6 {
-	font-size: 100%;
-	font-weight: normal;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+    font-weight: normal;
 }
 
-q:before, q:after {
-	content: '';
+q:before,
+q:after {
+    content: '';
 }
 
-abbr, acronym {
-	border: 0;
-	font-variant: normal;
+abbr,
+acronym {
+    border: 0;
+    font-variant: normal;
 }
 
 sup {
-	vertical-align: text-top;
+    vertical-align: text-top;
 }
 
 sub {
-	vertical-align: text-bottom;
+    vertical-align: text-bottom;
 }
 
 img {
-	vertical-align: middle;
-	border: 0;
-	-ms-interpolation-mode: bicubic;
-	max-width: 100%;
+    vertical-align: middle;
+    border: 0;
+    -ms-interpolation-mode: bicubic;
+    max-width: 100%;
 }
 
-.clearfix:before, .clearfix:after {
-	content: "";
-	display: table;
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
 }
 
 .clearfix:after {
-	clear: both;
+    clear: both;
 }
 
 .clearfix {
-	*zoom: 1;
+    *zoom: 1;
 }
 
 hr {
-	margin: 0;
-	border: none;
-	height: 0;
-	-moz-box-sizing: content-box;
-	box-sizing: content-box;
+    margin: 0;
+    border: none;
+    height: 0;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
 }
 
 i {
-	font-style: normal;
+    font-style: normal;
 }
 
 .k-window-titlebar {
-	background: #f7f7f7;
-	border-bottom: 1px solid #e0e0e0;
+    background: #f7f7f7;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .k-resize-handle {
-	background-color: #cccccc;
+    background-color: #cccccc;
 }
 
 .k-resize-se {
-	width: 6px;
+    width: 6px;
 }
 
 .redFont {
-	color: #c00;
+    color: #c00;
 }
-
 /*校验提示*/
+
 .error {
-	color: #c00;
+    color: #c00;
 }
 
 label.error {
-	color: #c00;
-	font-size: 100%;
-	font-variant: small-caps;
-	width: 308px;
-	display: none;
-	padding: 3px 0px 0px 5px;
-	clear: both;
+    color: #c00;
+    font-size: 100%;
+    font-variant: small-caps;
+    width: 308px;
+    display: none;
+    padding: 3px 0px 0px 5px;
+    clear: both;
 }
 
 label label.error {
-	margin-left: 0px;
+    margin-left: 0px;
 }
+/**统一风格**/
+
+.main-low-margin {
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col-md-4 {
+    width: 33.33333333333333%;
+}
+
+.col-md-8 {
+    width: 66.66666666666666%;
+}
+
+.col-md-1,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-10,
+.col-md-11 {
+    float: left;
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 40px;
+}
+
+h1 {
+    padding-top: 30px;
+    color: #fff;
+    font-weight: 800;
+}
+
+h5 {
+    padding-bottom: 30px;
+}
+
+h4 {
+    margin-top: 4px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+
+h1 small,
+h2 small,
+h3 small,
+h4 small,
+h5 small,
+h6 small,
+.h1 small,
+.h2 small,
+.h3 small,
+.h4 small,
+.h5 small,
+.h6 small,
+h1 .small,
+h2 .small,
+h3 .small,
+h4 .small,
+h5 .small,
+h6 .small,
+.h1 .small,
+.h2 .small,
+.h3 .small,
+.h4 .small,
+.h5 .small,
+.h6 .small {
+    font-weight: normal;
+    line-height: 1;
+    color: #999999;
+}
+
+h1,
+h2,
+h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+h1 small,
+h2 small,
+h3 small,
+h1 .small,
+h2 .small,
+h3 .small {
+    font-size: 65%;
+}
+
+h4,
+h5,
+h6 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h4 small,
+h5 small,
+h6 small,
+h4 .small,
+h5 .small,
+h6 .small {
+    font-size: 75%;
+}
+
+h1,
+.h1 {
+    font-size: 36px;
+}
+
+h2,
+.h2 {
+    font-size: 30px;
+}
+
+h3,
+.h3 {
+    font-size: 24px;
+}
+
+h4,
+.h4 {
+    font-size: 18px;
+}
+
+h5,
+.h5 {
+    font-size: 14px;
+}
+
+h6,
+.h6 {
+    font-size: 12px;
+}
+
+p {
+    line-height: 30px;
+    margin-bottom: 23px;
+}
+/**统一风格**/
