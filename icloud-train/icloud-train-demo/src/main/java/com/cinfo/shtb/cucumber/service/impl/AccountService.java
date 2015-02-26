@@ -24,4 +24,5 @@ public class AccountService implements IAccountService {
 	public AccountAggregate getAccountAggregate(int userId) {
 		return userMap.get(userId);
 	}
+
 }
