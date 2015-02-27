@@ -9,8 +9,12 @@
     <link rel="stylesheet" href="../../css/icloud/icloud.css" media="screen" />
     <link rel="stylesheet" href="../../css/icloud/icloud_usercenter.css" media="screen" />
     <link rel="stylesheet" href="../../css/icloud/insurance.css" media="screen" />
-    <link href="../../css/slides-slidesJS-3/examples/playing/css/slider_insurance.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../../js/sliders/themes/default/default.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../js/sliders/nivo-slider.css" type="text/css" media="screen" />
     <script type="text/javascript" src="../../js/common/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/sliders/jquery.nivo.slider.js"></script>
+    
     <!--[if IE]>
     <script src="../js/common/html5.js"></script>
     <![endif]-->
@@ -44,17 +48,20 @@
                 </nav>
             </div>
         </header>
-        <div id="slides">
-            <img  src="../../images/thirdparty/slider/images/1.jpg" alt="" />
-          
 
-            <img   src="../../images/thirdparty/slider/images/2.jpg" alt="" />
-           
-            <img   src="../../images/thirdparty/slider/images/1.jpg" alt="" />
-            
-             <img  src="../../images/thirdparty/slider/images/2.jpg" alt="" />
-            
+        <div class="slider-wrapper theme-default">
+            <div id="slider" class="nivoSlider">
+                <img src="../../images/thirdparty/slider/images/1.jpg" data-thumb="../../images/thirdparty/slider/images/1.jpg" alt="" />
+                <a href="http://dev7studios.com"><img src="../../images/thirdparty/slider/images/2.jpg" data-thumb="../../images/thirdparty/slider/images/2.jpgg" alt="" title="This is an example of a caption" />
+                </a>
+                <img src="../../images/thirdparty/slider/images/1.jpg" data-thumb="../../images/thirdparty/slider/images/1.jpg" alt="" data-transition="slideInLeft" />
+                <img src="../../images/thirdparty/slider/images/2.jpg" data-thumb="../../images/thirdparty/slider/images/2.jpg" alt="" title="#htmlcaption" />
+            </div>
+            <div id="htmlcaption" class="nivo-html-caption">
+                <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
+            </div>
         </div>
+
         <div class="clear clearfix"></div>
         <footer class="main-footer">
             <center>
@@ -72,22 +79,10 @@
             </center>
         </footer>
     </div>
-    <script src="../../css/slides-slidesJS-3/examples/playing/js/jquery.slides.min.js"></script>
-    <!-- CUSTOM SCRIPT-->
-    <script>
-        $(document).ready(function () {
-            $('#slides').slidesjs({
-                width: 940,
-                height: 528,
-                play: {
-                    active: true,
-                    auto: true,
-                    interval: 3000,
-                    swap: true
-                }
-            });
-        });
-    </script>
 </body>
-
+<script type="text/javascript">
+    $(window).load(function() {
+        $('#slider').nivoSlider();
+    });
+    </script>
 </html>
