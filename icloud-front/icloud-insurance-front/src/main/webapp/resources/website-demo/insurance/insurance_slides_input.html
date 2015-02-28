@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="../../css/icloud/icloud_reset.css" media="all" />
     <link rel="stylesheet" href="../../css/icloud/icloud.css" media="screen" />
     <link rel="stylesheet" href="../../css/icloud/icloud_usercenter.css" media="screen" />
+    <link rel="stylesheet" href="../../js/jqueryUI/jquery-ui.css" media="screen" />
+
     <script type="text/javascript" src="../../js/common/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/jqueryUI/jquery-ui.js"></script>
     <link rel="stylesheet" href="../../css/icloud/insurance.css" media="screen" />
     <!--[if IE]>
     <script src="../js/common/html5.js"></script>
@@ -45,7 +48,42 @@
         </header>
 
         <section class="main-body clearfix">
-            
+            <div class="subform">
+                <p>
+                    <label for="amount">Minimum number of bedrooms:</label>
+                    <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                </p>
+                <div id="slider-range-max"></div>
+            </div>
+            <div class="subform">
+                <p>
+                    <label for="amount">Price range:</label>
+                    <input type="text" id="amount-range" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                </p>
+                <div id="slider-range"></div>
+            </div>
+
+            <div class="subform">
+                <form id="reservation">
+                    <label for="minbeds">Minimum number of beds</label>
+                    <select name="minbeds" id="minbeds">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                    </select>
+                </form>
+            </div>
+
+            <div class="subform">
+                <form id="reservation2">
+                    <label for="minbeds222">Minimum number of beds</label>
+                    <input type="text" id="input-text" />
+                    <div id="slider-input"></div>
+                </form>
+            </div>
         </section>
 
         <div class="clear"></div>
@@ -66,5 +104,69 @@
         </footer>
     </div>
 </body>
+<script>
+    $(function () {
+        $("#slider-range-max").slider({
+            range: "max",
+            min: 0,
+            max: 1000,
+            value: 100,
+            // step: 50,
+            slide: function (event, ui) {
+                $("#amount").val(ui.value);
+            }
+        });
+        $("#amount").val($("#slider-range-max").slider("value"));
+
+        $("#slider-range").slider({
+            range: true,
+            min: 0,
+            max: 500,
+            values: [75, 300],
+            slide: function (event, ui) {
+                $("#amount-range").val("$" + ui.values[0] + " - $" + ui.values[1]);
+            }
+        });
+        $("#amount-range").val("$" + $("#slider-range").slider("values", 0) +
+            " - $" + $("#slider-range").slider("values", 1));
+
+
+        var select = $("#minbeds");
+        var slider = $("<div id='slider-minbeds'></div>").insertAfter(select).slider({
+            min: 1,
+            max: 6,
+            range: "min",
+            value: select[0].selectedIndex + 1,
+            slide: function (event, ui) {
+                select[0].selectedIndex = ui.value - 1;
+            }
+        });
+        $("#minbeds").change(function () {
+            slider.slider("value", this.selectedIndex + 1);
+        });
+
+        $("#slider-input").slider({
+            range: "max",
+            min: 0,
+            max: 10,
+            value: 4,
+            slide: function (event, ui) {
+                $("#input-text").val(ui.value);
+            }
+        });
+        $("#input-text").val($("#slider-input").slider("value"));
+        $('#input-text').bind('input propertychange', function () {
+            var val = $("#input-text").val();
+            if (!isNaN(val) && val >= 0 && val <= 10) {
+                $("#slider-input").slider("value", val);
+            }else{
+                val = 0;
+                $("#slider-input").slider("value", val);
+                $("#input-text").val(val);
+            }
+        });
+
+    });
+</script>
 
 </html>

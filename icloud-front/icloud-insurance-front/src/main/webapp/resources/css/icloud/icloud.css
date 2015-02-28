@@ -2,6 +2,7 @@ body {
     background: #fff;
     font-size: 12px;
 }
+
 .main-wrapper {
     position: absolute;
     width: 100%;
@@ -10,8 +11,9 @@ body {
 /** header */
 
 .main-header {
-/*    position: fixed;*/
-/*    z-index: 100;*/
+    /*    position: fixed;*/
+    /*    z-index: 100;*/
+    
     width: 100%;
     margin: 0 auto;
     height: 75px;
@@ -20,12 +22,14 @@ body {
     z-index: 100;
     background: #e04628;
 }
+
 .header-wrapper {
     position: absolute;
     width: 100%;
     height: 28px;
     background: #f5f5f5 no-repeat;
 }
+
 .main-menu {
     position: relative;
     margin: 0 auto;
@@ -39,6 +43,7 @@ body {
     right: 0;
     top: 2px;
 }
+
 .main-links li {
     position: relative;
     float: left;
@@ -47,12 +52,15 @@ body {
     margin-right: 2px;
     z-index: 2;
 }
+
 .main-links .first {
     background: none;
 }
+
 .main-links a {
     color: #6d6d6d;
 }
+
 .main-links a:hover {
     text-decoration: none;
     color: #e52c48;
@@ -67,6 +75,7 @@ body {
     display: block;
     background: url(../../images/icloud/landing_logo.png) no-repeat;
 }
+
 .logo h1 {
     display: none;
 }
@@ -79,14 +88,17 @@ body {
     top: 30px;
     left: 155px;
 }
+
 .main-nav li {
     width: 90px;
     float: left;
     margin-right: 5px;
 }
+
 .main-nav .first {
     background: none;
 }
+
 .main-nav a {
     width: 94px;
     display: block;
@@ -98,12 +110,14 @@ body {
     z-index: 1;
     font-weight: 700;
 }
+
 .main-nav a:hover {
     text-decoration: none;
     background-color: #c53418;
     color: #fff;
     font-weight: bold;
 }
+
 .main-nav .active a {
     background-color: #c53418;
     position: relative;
@@ -111,6 +125,7 @@ body {
     font-weight: bold;
     color: #fff;
 }
+
 .search {
     width: 240px;
     z-index: 100;
@@ -118,6 +133,7 @@ body {
     right: 0;
     top: 30px;
 }
+
 .search .quick-search {
     border: none;
     border-radius: 0;
@@ -134,12 +150,14 @@ body {
     outline: 0;
     -webkit-appearance: none;
 }
+
 .search .icon {
     width: 20px;
     height: 20px;
     top: 20px;
     right: 0;
 }
+
 .search span.icon {
     position: absolute;
     display: inline-block;
@@ -149,6 +167,7 @@ body {
     right: 6px;
     cursor: pointer;
 }
+
 .search .icon i {
     background: url('../../images/icloud/style/icon_search.png') no-repeat;
     width: 18px;
@@ -158,14 +177,16 @@ body {
 /** main body */
 
 .main-body {
-/*    top: 82px;*/
-/*    width: 1024px;*/
+    /*    top: 82px;*/
+    /*    width: 1024px;*/
+    
     width: 90%;
     margin: 10px auto;
     height: auto;
     min-height: 350px;
     position: relative;
 }
+
 .clear {
     both: clear;
 }
@@ -179,16 +200,20 @@ body {
     border-top: 1px solid #CACACA;
     margin-top: 25px;
 }
+
 .main-footer center {
     margin-top: 10px;
 }
+
 .main-footer a {
     color: inherit;
 }
+
 .main-footer a:hover {
     text-decoration: none;
     color: #e52c48;
 }
+
 .main-footer .bar {
     margin: 0 5px;
 }
@@ -212,18 +237,22 @@ body {
     padding-right: 20px;
     position: relative;
 }
+
 .hyper-link:hover .hyper-text {
     display: block;
 }
+
 .hyper-link:hover .arrow-down {
     z-index: 4;
     background-position: 0 -4px;
 }
+
 .hyper-link:hover u {
     position: relative;
     z-index: 4;
     color: #6d6d6d;
 }
+
 .hyper-text {
     padding-top: 25px;
     color: #6d6d6d;
@@ -237,16 +266,19 @@ body {
     box-shadow: 0 2px 3px 0px #ccc;
     white-space: nowrap;
     z-index: 3;
-    width:100%;
-    min-width:80px;
+    width: 100%;
+    min-width: 80px;
 }
+
 .hyper-link u {
     color: #6d6d6d;
 }
+
 .hyper-text a {
     display: block;
     padding: 8px 15px;
 }
+
 .hyper-text a:hover {
     text-decoration: none;
     background-color: #F2F2F2;
@@ -270,6 +302,7 @@ body {
     cursor: pointer;
     height: auto;
 }
+
 .backToTop:hover {
     background-color: #c6c6c6;
     color: #777;
@@ -287,16 +320,19 @@ body {
     width: 100%;
     min-height: 17px;
 }
+
 .au-title span {
     float: left;
     height: 26px;
     padding-right: 10px;
     border-bottom: 2px solid #f1634c;
 }
+
 .au-block {
     color: #333333;
     padding-top: 20px;
 }
+
 .au-block p {
     line-height: 30px;
     text-indent: 2em;
@@ -307,6 +343,7 @@ s,
 u {
     text-decoration: none;
 }
+
 .hidetext {
     white-space: nowrap;
     text-indent: 100%;
@@ -314,10 +351,12 @@ u {
     *line-height: 100em;
     overflow: hidden;
 }
+
 hr {
     margin: 20px 0;
     border-bottom: 1px solid #ddd;
 }
+
 input {
     color: #666;
 }
@@ -327,6 +366,7 @@ input {
     color: #666666;
     background: url(../../images/icloud/style/loading.gif) no-repeat 5px 50%;
 }
+
 .loading,
 .pass,
 .warn,
@@ -334,6 +374,7 @@ input {
 .unrecognize {
     padding: 20px 20px 20px 50px;
     /*font-weight: bold;*/
+    
     font-size: 14px;
     background-color: #ffffff;
 }
@@ -346,6 +387,7 @@ input {
     width: 100%;
     left: 0;
 }
+
 #loader {
     font-family: Tahoma, Helvetica, sans;
     font-size: 11.5px;
@@ -359,67 +401,224 @@ input {
     text-align: left;
     z-index: 2;
 }
+
 strong,
 b {
     font-weight: bold;
 }
 /* 通用button*/
-.adaptiveButton{display:inline-block;vertical-align:middle; cursor:pointer;}
-.adaptiveButton:hover{ text-decoration:none;}
-.adaptiveButton .center{padding: 0 30px; color:#ffffff;}
-.adaptiveButton .center_1{padding:0 20px;}
-.adaptiveButton .center_2{padding:0 10px;}
-.brightRed_btn  span,.bigDisabled_btn span{float:left; height:35px; line-height:35px;}
-.brightRed_btn .left{background:url('../../images/icloud/big_btn.png') 0 0 no-repeat;width:5px}
-.brightRed_btn .center{background:url("../../images/icloud/big_btn.png") 0 -40px repeat-x;}
-.brightRed_btn .right{background:url('../../images/icloud/big_btn.png') 0 -80px no-repeat;width:5px}
-.brightRed_btn:hover .left{background:url('../../images/icloud/big_btn.png') 0 -120px no-repeat;}
-.brightRed_btn:hover .center{background:url("../../images/icloud/big_btn.png") 0 -160px repeat-x;}
-.brightRed_btn:hover .right{background:url('../../images/icloud/big_btn.png') 0 -200px no-repeat;}
 
-.brightRed_btn.medium  span{float:left; height:31px; line-height:31px;}
-.brightRed_btn.medium .left{background:url('../../images/icloud/medium_btn.png') 0 -82px no-repeat;width:3px}
-.brightRed_btn.medium .center{background:url("../../images/icloud/medium_btn.png") 0 0 repeat-x;}
-.brightRed_btn.medium .right{background:url('../../images/icloud/medium_btn.png') 0 -41px no-repeat;width:3px}
-.brightRed_btn.medium  span{float:left; height:30px; line-height:30px;}
-.brightRed_btn.medium .left{background:url('../../images/icloud/medium_btn.png') 0 -80px no-repeat;width:3px}
-.brightRed_btn.medium .center{background:url("../../images/icloud/medium_btn.png") 0 0 repeat-x;}
-.brightRed_btn.medium .right{background:url('../../images/icloud/medium_btn.png') 0 -40px no-repeat;width:3px}
-.brightRed_btn.medium:hover .left{background:url('../../images/icloud/medium_btn.png') 0 -200px no-repeat;}
-.brightRed_btn.medium:hover .center{background:url("../../images/icloud/medium_btn.png") 0 -120px repeat-x;}
-.brightRed_btn.medium:hover .right{background:url('../../images/icloud/medium_btn.png') 0 -160px no-repeat;}
+.adaptiveButton {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
 
-.brightOrange_btn  span{float:left; height:35px; line-height:35px;}
-.brightOrange_btn .left{background:url('../../images/icloud/big_btn.png') 0 -680px no-repeat;width:5px}
-.brightOrange_btn .center{background:url("../../images/icloud/big_btn.png") 0 -720px repeat-x;}
-.brightOrange_btn .right{background:url('../../images/icloud/big_btn.png') 0 -760px no-repeat;width:5px}
-.brightOrange_btn:hover .left{background:url('../../images/icloud/big_btn.png') 0 -800px no-repeat;}
-.brightOrange_btn:hover .center{background:url("../../images/icloud/big_btn.png") 0 -840px repeat-x;}
-.brightOrange_btn:hover .right{background:url('../../images/icloud/big_btn.png') 0 -880px no-repeat;}
+.adaptiveButton:hover {
+    text-decoration: none;
+}
 
-.mediumDisabled_btn  span{float:left; height:30px; line-height:30px;}
+.adaptiveButton .center {
+    padding: 0 30px;
+    color: #ffffff;
+}
 
-.mediumOrange_btn  span{float:left; height:30px; line-height:30px;}
-.mediumOrange_btn .left{background:url('../../images/icloud/big_btn.png') 0 -240px no-repeat;width:5px}
-.mediumOrange_btn .center{background:url("../../images/icloud/big_btn.png") 0 -275px repeat-x;}
-.mediumOrange_btn .right{background:url('../../images/icloud/big_btn.png') 0 -310px no-repeat;width:5px}
-.mediumOrange_btn:hover .left{background:url('../../images/icloud/big_btn.png') 0 -345px no-repeat;}
-.mediumOrange_btn:hover .center{background:url("../../images/icloud/big_btn.png") 0 -380px repeat-x;}
-.mediumOrange_btn:hover .right{background:url('../../images/icloud/big_btn.png') 0 -416px no-repeat;}
+.adaptiveButton .center_1 {
+    padding: 0 20px;
+}
 
-.bigDisabled_btn .left{background:url('../../images/icloud/big_btn.png') 0 -451px no-repeat;width:5px}
-.bigDisabled_btn .center{background:url("../../images/icloud/big_btn.png") 0 -491px repeat-x;}
-.bigDisabled_btn .right{background:url('../../images/icloud/big_btn.png') 0 -531px no-repeat;width:5px}
+.adaptiveButton .center_2 {
+    padding: 0 10px;
+}
 
-.mediumDisabled_btn .left{background:url('../../images/icloud/big_btn.png') 0 -571px no-repeat;width:5px}
-.mediumDisabled_btn .center{background:url("../../images/icloud/big_btn.png") 0 -606px repeat-x;}
-.mediumDisabled_btn .right{background:url('../../images/icloud/big_btn.png') 0 -641px no-repeat;width:5px}
+.brightRed_btn span,
+.bigDisabled_btn span {
+    float: left;
+    height: 35px;
+    line-height: 35px;
+}
 
+.brightRed_btn .left {
+    background: url('../../images/icloud/big_btn.png') 0 0 no-repeat;
+    width: 5px
+}
+
+.brightRed_btn .center {
+    background: url("../../images/icloud/big_btn.png") 0 -40px repeat-x;
+}
+
+.brightRed_btn .right {
+    background: url('../../images/icloud/big_btn.png') 0 -80px no-repeat;
+    width: 5px
+}
+
+.brightRed_btn:hover .left {
+    background: url('../../images/icloud/big_btn.png') 0 -120px no-repeat;
+}
+
+.brightRed_btn:hover .center {
+    background: url("../../images/icloud/big_btn.png") 0 -160px repeat-x;
+}
+
+.brightRed_btn:hover .right {
+    background: url('../../images/icloud/big_btn.png') 0 -200px no-repeat;
+}
+
+.brightRed_btn.medium span {
+    float: left;
+    height: 31px;
+    line-height: 31px;
+}
+
+.brightRed_btn.medium .left {
+    background: url('../../images/icloud/medium_btn.png') 0 -82px no-repeat;
+    width: 3px
+}
+
+.brightRed_btn.medium .center {
+    background: url("../../images/icloud/medium_btn.png") 0 0 repeat-x;
+}
+
+.brightRed_btn.medium .right {
+    background: url('../../images/icloud/medium_btn.png') 0 -41px no-repeat;
+    width: 3px
+}
+
+.brightRed_btn.medium span {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+}
+
+.brightRed_btn.medium .left {
+    background: url('../../images/icloud/medium_btn.png') 0 -80px no-repeat;
+    width: 3px
+}
+
+.brightRed_btn.medium .center {
+    background: url("../../images/icloud/medium_btn.png") 0 0 repeat-x;
+}
+
+.brightRed_btn.medium .right {
+    background: url('../../images/icloud/medium_btn.png') 0 -40px no-repeat;
+    width: 3px
+}
+
+.brightRed_btn.medium:hover .left {
+    background: url('../../images/icloud/medium_btn.png') 0 -200px no-repeat;
+}
+
+.brightRed_btn.medium:hover .center {
+    background: url("../../images/icloud/medium_btn.png") 0 -120px repeat-x;
+}
+
+.brightRed_btn.medium:hover .right {
+    background: url('../../images/icloud/medium_btn.png') 0 -160px no-repeat;
+}
+
+.brightOrange_btn span {
+    float: left;
+    height: 35px;
+    line-height: 35px;
+}
+
+.brightOrange_btn .left {
+    background: url('../../images/icloud/big_btn.png') 0 -680px no-repeat;
+    width: 5px
+}
+
+.brightOrange_btn .center {
+    background: url("../../images/icloud/big_btn.png") 0 -720px repeat-x;
+}
+
+.brightOrange_btn .right {
+    background: url('../../images/icloud/big_btn.png') 0 -760px no-repeat;
+    width: 5px
+}
+
+.brightOrange_btn:hover .left {
+    background: url('../../images/icloud/big_btn.png') 0 -800px no-repeat;
+}
+
+.brightOrange_btn:hover .center {
+    background: url("../../images/icloud/big_btn.png") 0 -840px repeat-x;
+}
+
+.brightOrange_btn:hover .right {
+    background: url('../../images/icloud/big_btn.png') 0 -880px no-repeat;
+}
+
+.mediumDisabled_btn span {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+}
+
+.mediumOrange_btn span {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+}
+
+.mediumOrange_btn .left {
+    background: url('../../images/icloud/big_btn.png') 0 -240px no-repeat;
+    width: 5px
+}
+
+.mediumOrange_btn .center {
+    background: url("../../images/icloud/big_btn.png") 0 -275px repeat-x;
+}
+
+.mediumOrange_btn .right {
+    background: url('../../images/icloud/big_btn.png') 0 -310px no-repeat;
+    width: 5px
+}
+
+.mediumOrange_btn:hover .left {
+    background: url('../../images/icloud/big_btn.png') 0 -345px no-repeat;
+}
+
+.mediumOrange_btn:hover .center {
+    background: url("../../images/icloud/big_btn.png") 0 -380px repeat-x;
+}
+
+.mediumOrange_btn:hover .right {
+    background: url('../../images/icloud/big_btn.png') 0 -416px no-repeat;
+}
+
+.bigDisabled_btn .left {
+    background: url('../../images/icloud/big_btn.png') 0 -451px no-repeat;
+    width: 5px
+}
+
+.bigDisabled_btn .center {
+    background: url("../../images/icloud/big_btn.png") 0 -491px repeat-x;
+}
+
+.bigDisabled_btn .right {
+    background: url('../../images/icloud/big_btn.png') 0 -531px no-repeat;
+    width: 5px
+}
+
+.mediumDisabled_btn .left {
+    background: url('../../images/icloud/big_btn.png') 0 -571px no-repeat;
+    width: 5px
+}
+
+.mediumDisabled_btn .center {
+    background: url("../../images/icloud/big_btn.png") 0 -606px repeat-x;
+}
+
+.mediumDisabled_btn .right {
+    background: url('../../images/icloud/big_btn.png') 0 -641px no-repeat;
+    width: 5px
+}
 /** pull right**/
 
 .pull-right {
     float: right;
 }
+
 .pull-left {
     float: left;
 }
@@ -431,6 +630,7 @@ b {
     color #e1e1e1;
     position: relative;
 }
+
 .process_step li {
     color: #c8c8c8;
     margin: 0 75px 0 0;
@@ -439,11 +639,13 @@ b {
     position: relative;
     top: 2px;
 }
+
 .process_step .txt {
     padding: 5px 0;
     font-size: 16px;
     font-weight: bold;
 }
+
 .process_step .current {
     color: #4bae10;
     border-bottom: 2px solid #4bae10;
@@ -458,6 +660,7 @@ b {
 input {
     color: #666;
 }
+
 .normal_txt,
 .large_txt {
     border: 1px solid #bbb;
@@ -465,14 +668,17 @@ input {
     height: 23px;
     font-size: 12px;
 }
+
 input[type=text] {
     text-indent: 3px;
 }
+
 input[type=checkbox],
 input[type=radio] {
     margin-right: 3px;
     vertical-align: text-bottom;
 }
+
 .currentState {
     background: #fff;
     border-top: 2px solid #f1634c;
@@ -482,38 +688,42 @@ input[type=radio] {
     margin: -1px 0 -1px -1px;
     font-weight: bold;
 }
+
 .currentState a {
     color: #f1634c;
 }
 
 .subform {
-    margin-top:10px;
-    width: 30%;
+    margin-top: 10px;
+    width: 32%;
     height: 350px;
     border: 1px solid #E1E1E1;
     background-color: #fff;
+    float: left;
+    margin-right: 4px;
 }
 /** subcontent start*/
+
 .subcontent {
     width: 100%;
-	margin: 40px auto;
-	color: #636363;
+    margin: 40px auto;
+    color: #636363;
 }
 
 .subcontent li {
-	padding: 10px 0px;
-	line-height: 20px;
+    padding: 10px 0px;
+    line-height: 20px;
 }
 
 .subcontent label div {
-	float: left;
-	width: 30%;
-	text-align: right;
-	padding: 0 10px 0 0;
+    float: left;
+    width: 30%;
+    text-align: right;
+    padding: 0 10px 0 0;
 }
 
 .subcontent p {
-	padding: 5px 0;
+    padding: 5px 0;
 }
 /** subcontent end*/
 
