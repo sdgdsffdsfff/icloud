@@ -16,6 +16,7 @@ import com.icloud.framework.util.StringEncoder;
 import com.icloud.front.user.pojo.LoginUser;
 import com.icloud.front.user.pojo.RegisterUser;
 import com.icloud.front.user.pojo.UserInfo;
+import com.icloud.insurance.annonation.SystemControllerLog;
 import com.icloud.insurance.dao.UserDao;
 import com.icloud.insurance.model.User;
 import com.icloud.insurance.model.constant.UserConstant;
@@ -34,7 +35,9 @@ public class UserService extends SqlBaseService<User> {
 		return userDao;
 	}
 
+	@SystemControllerLog(description = "nihao")
 	public User getUserByUserName(String userName) {
+		System.out.println("int mne ");
 		return ICloudUtils.getFirstElement(this.userDao.findByProperty(
 				UserConstant.USERNAME, userName));
 	}

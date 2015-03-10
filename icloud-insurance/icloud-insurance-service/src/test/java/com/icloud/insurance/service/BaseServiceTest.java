@@ -10,4 +10,9 @@ public class BaseServiceTest extends BaseTest {
 	@Test
 	public void addUsers() {
 	}
+
+	@Test
+	public void readAOP() {
+		userService.getUserByUserName("nihao");
+	}
 }

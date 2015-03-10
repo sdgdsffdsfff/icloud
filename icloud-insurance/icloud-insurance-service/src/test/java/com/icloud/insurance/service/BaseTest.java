@@ -25,4 +25,6 @@ public class BaseTest {
 			System.out.println(user.getChinaName());
 		}
 	}
+
+
 }

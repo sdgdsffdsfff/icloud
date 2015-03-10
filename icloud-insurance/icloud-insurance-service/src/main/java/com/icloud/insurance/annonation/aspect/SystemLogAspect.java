@@ -2,36 +2,29 @@ package com.icloud.insurance.annonation.aspect;
 
 import java.lang.reflect.Method;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.icloud.insurance.annonation.SystemControllerLog;
-import freemarker.template.utility.DateUtil;
 
 @Aspect
 @Component
 public class SystemLogAspect {
-	// 注入Service用于把日志保存数据库
-	// @Resource
-	// private LogService logService;
-	// 本地异常日志记录对象
 	private static final Logger logger = LoggerFactory
 			.getLogger(SystemLogAspect.class);
 
 	// Controller层切点
-	@Pointcut("@annotation(com.annotation.SystemControllerLog)")
+	@Pointcut("@annotation(com.icloud.insurance.annonation.SystemControllerLog)")
 	public void controllerAspect() {
+		System.out.println("-----");
 	}
 
 	/**
@@ -42,49 +35,29 @@ public class SystemLogAspect {
 	 */
 	@Before("controllerAspect()")
 	public void doBefore(JoinPoint joinPoint) {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
-				.getRequestAttributes()).getRequest();
-		HttpSession session = request.getSession();
-		// 请求的IP
-		String ip = request.getRemoteAddr();
-		try {
-			// *========控制台输出=========*//
-			System.out.println("=====前置通知开始=====");
-			System.out.println("请求方法:"
-					+ (joinPoint.getTarget().getClass().getName() + "."
-							+ joinPoint.getSignature().getName() + "()"));
-			System.out.println("方法描述:"
-					+ getControllerMethodDescription(joinPoint));
-			System.out.println("请求IP:" + ip);
-			
-			System.out.println("=====前置通知结束=====");
-		} catch (Exception e) {
-			// 记录本地异常日志
-			logger.error("==前置通知异常==");
-			logger.error("异常信息:{}", e.getMessage());
+		Object[] args = joinPoint.getArgs();
+		for (Object ob : args) {
+			System.out.println(ob);
 		}
+		System.out.println("before");
+
 	}
+	
+//	@Around("controllerAspect()")
+//    public void around(ProceedingJoinPoint pjp) throws Throwable{
+//		System.out.println("已经记录下操作日志@Around 方法执行前");
+//        pjp.proceed();
+//        System.out.println("已经记录下操作日志@Around 方法执行后");
+//    }
 
-	/**
-	 * 异常通知 用于拦截service层记录异常日志
-	 * 
-	 * @param joinPoint
-	 * @param e
-	 */
-	@AfterThrowing(pointcut = "serviceAspect()", throwing = "e")
-	public void doAfterThrowing(JoinPoint joinPoint, Throwable e) {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
-				.getRequestAttributes()).getRequest();
-		HttpSession session = request.getSession();
-		String ip = request.getRemoteAddr();
-		// 获取用户请求方法的参数并序列化为JSON格式字符串
-		
-		/* ==========记录本地异常日志========== */
-		logger.error("异常方法:{}异常代码:{}异常信息:{}参数:{}", joinPoint.getTarget()
-				.getClass().getName()
-				+ joinPoint.getSignature().getName(), e.getClass().getName(),
-				e.getMessage(),1234);
-
+	// 配置后置通知,使用在方法aspect()上注册的切入点
+	@After("controllerAspect()")
+	public void after(JoinPoint joinPoint) {
+		Object[] args = joinPoint.getArgs();
+		for (Object ob : args) {
+			System.out.println(ob);
+		}
+		System.out.println("after");
 	}
 
 	/**
