@@ -1,6 +1,6 @@
 package com.icloud.insurance.model;
 
-// Generated 2015-2-16 16:20:21 by Hibernate Tools 3.4.0.CR1
+// Generated 2015-3-12 15:18:54 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 

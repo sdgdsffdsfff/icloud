@@ -34,10 +34,8 @@ public class UserService extends SqlBaseService<User> {
 	protected IHibernateBaseDao<User> getDao() {
 		return userDao;
 	}
-
-	@SystemControllerLog(description = "nihao")
+	
 	public User getUserByUserName(String userName) {
-		System.out.println("int mne ");
 		return ICloudUtils.getFirstElement(this.userDao.findByProperty(
 				UserConstant.USERNAME, userName));
 	}
@@ -228,7 +226,6 @@ public class UserService extends SqlBaseService<User> {
 			if (token.equals(token2))
 				return true;
 		}
-
 		return false;
 	}
 }

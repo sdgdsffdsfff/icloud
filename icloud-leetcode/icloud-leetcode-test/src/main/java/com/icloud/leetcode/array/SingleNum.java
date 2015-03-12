@@ -37,6 +37,6 @@ public class SingleNum {
 		SingleNum num = new SingleNum();
 		int[] A = { 2, 3, 2, 3, 4 };
 		// System.out.println(num.singleNumber(A));
-		num.print(2000, 120, 2);
+		num.print(2000, 12, 6);
 	}
 }

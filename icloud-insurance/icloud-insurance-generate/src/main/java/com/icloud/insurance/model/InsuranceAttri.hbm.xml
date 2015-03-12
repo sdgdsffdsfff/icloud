@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-3-12 15:18:54 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.icloud.insurance.model.InsuranceAttri" table="insurance_attri" catalog="insurance">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="category" type="string">
+            <column name="category" length="20" />
+        </property>
+        <property name="attributeName" type="string">
+            <column name="attribute_name" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

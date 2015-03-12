@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-3-12 15:18:54 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.icloud.insurance.model.InsuranceProduct" table="insurance_product" catalog="insurance">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="insuranceName" type="string">
+            <column name="insurance_name" length="500" />
+        </property>
+        <property name="insuranceCompany" type="string">
+            <column name="insurance_company" length="100" />
+        </property>
+        <property name="simpleDescription" type="string">
+            <column name="simple_description" length="65535" />
+        </property>
+        <property name="safeguardTime" type="java.lang.Integer">
+            <column name="safeguard_time" />
+        </property>
+    </class>
+</hibernate-mapping>

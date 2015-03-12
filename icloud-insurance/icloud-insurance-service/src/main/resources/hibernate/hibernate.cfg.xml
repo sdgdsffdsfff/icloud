@@ -31,5 +31,9 @@
 		<property name="connection.autocommit">true</property>
 		
 		<mapping resource="model/User.hbm.xml" />
+		<mapping resource="model/InsuranceAttri.hbm.xml" />
+		<mapping resource="model/InsuranceNumber.hbm.xml" />
+		<mapping resource="model/InsuranceObject.hbm.xml" />
+		<mapping resource="model/InsuranceProduct.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

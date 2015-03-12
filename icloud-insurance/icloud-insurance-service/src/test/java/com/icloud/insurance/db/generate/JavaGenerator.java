@@ -6,6 +6,6 @@ public class JavaGenerator {
 	public static void main(String[] args) throws ClassNotFoundException,
 			IOException {
 		JavaCodeGenerator.generateConstant("com.icloud.insurance.model",
-				"com.icloud.insurance.model.constant");
+				"com.icloud.insurance.model.constant2");
 	}
 }
