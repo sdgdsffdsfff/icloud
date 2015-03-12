@@ -2,6 +2,9 @@ package com.icloud.insurance.domain;
 
 import java.util.Date;
 
+import org.dozer.DozerBeanMapper;
+
+import com.cninfo.shtb.member.domain.AccountAggregate;
 import com.icloud.insurance.model.InsuranceProduct;
 
 public class InsuranceAggregate {
@@ -16,7 +19,9 @@ public class InsuranceAggregate {
 	private String lastUpdateUserName;
 
 	public InsuranceAggregate(InsuranceProduct product) {
-		
+		DozerBeanMapper mapper = new DozerBeanMapper();
+		AccountAggregate accountAggregate = (AccountAggregate) mapper.map(
+				account, AccountAggregate.class);
 	}
 
 	public Integer getId() {

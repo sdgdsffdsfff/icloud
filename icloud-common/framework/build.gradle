@@ -53,5 +53,6 @@ dependencies {
 	compile libraries.poi_ooxml
 	compile libraries.poi_scratchpad
 	compile libraries.fastjson
+	compile libraries.dozer
 	
 }

@@ -8,6 +8,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+import org.dozer.DozerBeanMapper;
+
+import com.icloud.insurance.domain.AccountAggregate;
+
 public class ICloudUtils {
 	private static Random random = new Random();
 
@@ -183,10 +187,15 @@ public class ICloudUtils {
 		if (ICloudUtils.isNotNull(email)) {
 			int index = email.indexOf("@");
 			if (index != -1) {
-				return "http://mail." + email.substring(index+1);
+				return "http://mail." + email.substring(index + 1);
 			}
 		}
 		return null;
 	}
 
+	public static  <T> T dozerCopy(T dest,Object srcObject){
+		DozerBeanMapper mapper = new DozerBeanMapper();
+		return (destClass) mapper.map(
+				srcObject, T.class);
+	}
 }
