@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2015-3-12 15:18:54 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2015-3-12 15:54:57 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.icloud.insurance.model.InsuranceProduct" table="insurance_product" catalog="insurance">
         <id name="id" type="java.lang.Integer">
@@ -19,6 +19,18 @@
         </property>
         <property name="safeguardTime" type="java.lang.Integer">
             <column name="safeguard_time" />
+        </property>
+        <property name="crateTime" type="timestamp">
+            <column name="crate_time" length="19" />
+        </property>
+        <property name="lastUpdateTime" type="timestamp">
+            <column name="last_update_time" length="19" />
+        </property>
+        <property name="lastUpdateUserId" type="java.lang.Integer">
+            <column name="last_update_userId" />
+        </property>
+        <property name="lastUpdateUserName" type="string">
+            <column name="last_update_userName" length="100" />
         </property>
     </class>
 </hibernate-mapping>

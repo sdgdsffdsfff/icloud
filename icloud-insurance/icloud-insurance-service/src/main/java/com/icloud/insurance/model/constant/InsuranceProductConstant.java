@@ -6,5 +6,9 @@ public class InsuranceProductConstant {
 	public static final String INSURANCECOMPANY = "insuranceCompany";
 	public static final String SIMPLEDESCRIPTION = "simpleDescription";
 	public static final String SAFEGUARDTIME = "safeguardTime";
+	public static final String CRATETIME = "crateTime";
+	public static final String LASTUPDATETIME = "lastUpdateTime";
+	public static final String LASTUPDATEUSERID = "lastUpdateUserId";
+	public static final String LASTUPDATEUSERNAME = "lastUpdateUserName";
 
 }
