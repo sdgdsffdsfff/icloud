@@ -10,8 +10,6 @@ import java.util.Random;
 
 import org.dozer.DozerBeanMapper;
 
-import com.icloud.insurance.domain.AccountAggregate;
-
 public class ICloudUtils {
 	private static Random random = new Random();
 
@@ -193,9 +191,9 @@ public class ICloudUtils {
 		return null;
 	}
 
-	public static  <T> T dozerCopy(T dest,Object srcObject){
+	public static <T> T dozerCopy(T dest, Object srcObject) {
+		// return dest;
 		DozerBeanMapper mapper = new DozerBeanMapper();
-		return (destClass) mapper.map(
-				srcObject, T.class);
+		return (T) mapper.map(srcObject, dest.getClass());
 	}
 }

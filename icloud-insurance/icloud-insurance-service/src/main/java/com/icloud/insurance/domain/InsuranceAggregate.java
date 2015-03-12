@@ -2,9 +2,7 @@ package com.icloud.insurance.domain;
 
 import java.util.Date;
 
-import org.dozer.DozerBeanMapper;
-
-import com.cninfo.shtb.member.domain.AccountAggregate;
+import com.icloud.framework.util.ICloudUtils;
 import com.icloud.insurance.model.InsuranceProduct;
 
 public class InsuranceAggregate {
@@ -18,10 +16,18 @@ public class InsuranceAggregate {
 	private Integer lastUpdateUserId;
 	private String lastUpdateUserName;
 
-	public InsuranceAggregate(InsuranceProduct product) {
-		DozerBeanMapper mapper = new DozerBeanMapper();
-		AccountAggregate accountAggregate = (AccountAggregate) mapper.map(
-				account, AccountAggregate.class);
+	public InsuranceAggregate() {
+		// DozerBeanMapper mapper = new DozerBeanMapper();
+		// new InsuranceAggregate()
+		// InsuranceAggregate aggreate = ICloudUtils.dozerCopy(this, product);
+		// System.out.println(aggreate);
+		// AccountAggregate accountAggregate = (AccountAggregate) mapper.map(
+		// account, AccountAggregate.class);
+	}
+
+	public void init(InsuranceProduct product) {
+		InsuranceAggregate aggreate = ICloudUtils.dozerCopy(this, product);
+		System.out.println(aggreate);
 	}
 
 	public Integer getId() {
@@ -96,4 +102,22 @@ public class InsuranceAggregate {
 		this.lastUpdateUserName = lastUpdateUserName;
 	}
 
+	@Override
+	public String toString() {
+		return "InsuranceAggregate [id=" + id + ", insuranceName="
+				+ insuranceName + ", insuranceCompany=" + insuranceCompany
+				+ ", simpleDescription=" + simpleDescription
+				+ ", safeguardTime=" + safeguardTime + ", crateTime="
+				+ crateTime + ", lastUpdateTime=" + lastUpdateTime
+				+ ", lastUpdateUserId=" + lastUpdateUserId
+				+ ", lastUpdateUserName=" + lastUpdateUserName + "]";
+	}
+
+	public static void main(String[] args) {
+		InsuranceProduct product = new InsuranceProduct();
+		product.setId(10);
+		InsuranceAggregate aggreate = new InsuranceAggregate();
+		aggreate.init(product);
+
+	}
 }
