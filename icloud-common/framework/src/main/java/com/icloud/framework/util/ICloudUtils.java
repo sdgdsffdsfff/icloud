@@ -192,7 +192,6 @@ public class ICloudUtils {
 	}
 
 	public static <T> T dozerCopy(T dest, Object srcObject) {
-		// return dest;
 		DozerBeanMapper mapper = new DozerBeanMapper();
 		return (T) mapper.map(srcObject, dest.getClass());
 	}

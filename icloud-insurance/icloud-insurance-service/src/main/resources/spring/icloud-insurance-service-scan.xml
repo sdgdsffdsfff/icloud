@@ -7,7 +7,9 @@
 		http://www.springframework.org/schema/aop    				http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
 	<context:component-scan base-package="com.icloud.insurance.service" />
 	<context:component-scan base-package="com.icloud.insurance.dao" />
+	<context:component-scan base-package="com.icloud.insurance.domain.service" />
 	<!-- 激活自动代理功能 -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<context:component-scan base-package="com.icloud.insurance.annonation.aspect" />
+
 </beans>

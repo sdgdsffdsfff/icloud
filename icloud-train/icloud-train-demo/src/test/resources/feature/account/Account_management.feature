@@ -12,6 +12,7 @@ Feature: AccountFeature
       | 6       | dannie    | 62000    |
       | 7       | okry      | 51000    |
       | 8       | maoz      | 66500    |
+      
  
   Scenario Outline: transfer
     When account id <fromId> transfer <money> to account id <toId> 
@@ -22,4 +23,5 @@ Feature: AccountFeature
      | 1       |   2     |  2000 | 58000     |  64000   |
      | 3       |   4     |  1000 | 54000     |  71000   |
      | 5       |   6     |  3000 | 53000     |  65000   |
+     
         

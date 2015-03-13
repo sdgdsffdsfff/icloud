@@ -10,5 +10,6 @@ public class InsuranceProductConstant {
 	public static final String LASTUPDATETIME = "lastUpdateTime";
 	public static final String LASTUPDATEUSERID = "lastUpdateUserId";
 	public static final String LASTUPDATEUSERNAME = "lastUpdateUserName";
+	public static final String INSURANCESTATUS = "insuranceStatus";
 
 }
