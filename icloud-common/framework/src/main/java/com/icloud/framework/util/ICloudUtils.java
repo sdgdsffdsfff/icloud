@@ -11,6 +11,7 @@ import java.util.Random;
 import org.dozer.DozerBeanMapper;
 
 public class ICloudUtils {
+	public static final int DEFAULT_INT_VALUE = -1;
 	private static Random random = new Random();
 
 	public static <T> boolean isEmpty(Collection<T> collection) {

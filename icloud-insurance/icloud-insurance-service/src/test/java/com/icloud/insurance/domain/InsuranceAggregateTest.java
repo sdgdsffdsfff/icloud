@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.icloud.insurance.domain.model.InsuranceAggregate;
+import com.icloud.insurance.domain.model.UnderwritingAge;
 import com.icloud.insurance.domain.service.InsuranceAggregateService;
 import com.icloud.insurance.model.InsuranceProduct;
 import com.icloud.insurance.service.BaseTest;
@@ -32,9 +33,19 @@ public class InsuranceAggregateTest extends BaseTest {
 
 	@Test
 	public void InsuranceAggregateLoadingTest() {
+		InsuranceAggregate insuranceAggregate = getInsuranceAggreate();
+		UnderwritingAge underwritingAge = new UnderwritingAge();
+		underwritingAge.setEndAge(34);
+		underwritingAge.setStartAge(1);
+		insuranceAggregate.setUnderwritingAge(underwritingAge);
+		insuranceAggregate.updateUnderwritingAge();
+		System.out.println(insuranceAggregate);
+	}
+
+	private InsuranceAggregate getInsuranceAggreate() {
 		InsuranceAggregate insuranceAggregate = insuranceAggregateService
 				.getInsuranceAggregateById(1);
-		System.out.println(insuranceAggregate);
+		return insuranceAggregate;
 	}
 
 }

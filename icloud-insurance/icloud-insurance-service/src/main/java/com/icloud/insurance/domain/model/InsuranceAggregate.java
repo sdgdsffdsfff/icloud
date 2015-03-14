@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.insurance.model.InsuranceProduct;
+import com.icloud.insurance.service.InsuranceNumberService;
 
 public class InsuranceAggregate {
 	private Integer id;
@@ -16,14 +17,48 @@ public class InsuranceAggregate {
 	private Integer lastUpdateUserId;
 	private String lastUpdateUserName;
 
+	/**
+	 * private 承保年龄
+	 */
+	private UnderwritingAge underwritingAge;
+	private InsuranceNumberService insuranceNumberService;
+	private boolean lazyLoading = true;
+
 	public InsuranceAggregate() {
 	}
 
 	public static InsuranceAggregate convertInsuranceAggregateFromInsuranceProduct(
-			InsuranceProduct product) {
+			InsuranceProduct product,
+			InsuranceNumberService insuranceNumberService, boolean lazyLoading) {
 		InsuranceAggregate aggreate = new InsuranceAggregate();
 		aggreate = ICloudUtils.dozerCopy(aggreate, product);
+		aggreate.setInsuranceNumberService(insuranceNumberService);
+		aggreate.setLazyLoading(lazyLoading);
 		return aggreate;
+	}
+
+	public static InsuranceAggregate convertInsuranceAggregateFromInsuranceProduct(
+			InsuranceProduct product,
+			InsuranceNumberService insuranceNumberService) {
+		return convertInsuranceAggregateFromInsuranceProduct(product,
+				insuranceNumberService, true);
+	}
+
+	public void updateUnderwritingAge() {
+		this.insuranceNumberService.saveUnderwritingAge(this.id,
+				underwritingAge);
+	}
+
+	public UnderwritingAge getUnderwritingAge() {
+		if (!ICloudUtils.isNotNull(underwritingAge) && lazyLoading) {
+			loadingUnderwritingAge();
+		}
+		return this.underwritingAge;
+	}
+
+	private void loadingUnderwritingAge() {
+		this.underwritingAge = this.insuranceNumberService
+				.getUnderwritingAge(this.id);
 	}
 
 	public Integer getId() {
@@ -96,6 +131,27 @@ public class InsuranceAggregate {
 
 	public void setLastUpdateUserName(String lastUpdateUserName) {
 		this.lastUpdateUserName = lastUpdateUserName;
+	}
+
+	public void setUnderwritingAge(UnderwritingAge underwritingAge) {
+		this.underwritingAge = underwritingAge;
+	}
+
+	public InsuranceNumberService getInsuranceNumberService() {
+		return insuranceNumberService;
+	}
+
+	public void setInsuranceNumberService(
+			InsuranceNumberService insuranceNumberService) {
+		this.insuranceNumberService = insuranceNumberService;
+	}
+
+	public boolean isLazyLoading() {
+		return lazyLoading;
+	}
+
+	public void setLazyLoading(boolean lazyLoading) {
+		this.lazyLoading = lazyLoading;
 	}
 
 	@Override
