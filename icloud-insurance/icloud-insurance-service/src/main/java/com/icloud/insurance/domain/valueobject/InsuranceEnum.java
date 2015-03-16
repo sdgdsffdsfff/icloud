@@ -9,7 +9,7 @@ public class InsuranceEnum {
 	 */
 	public enum SystemMenuEnum {
 		INSURANCECATEGORY("00001", "保险类别"), SAFEGUARDAGE("00002", "保障年龄"), SAFEGUARDTIME(
-				"00003", "保障期限");
+				"00003", "保障期限"), SUITEPEOPLE("00004", "适合人群");
 		private String uuid;
 		private String name;
 

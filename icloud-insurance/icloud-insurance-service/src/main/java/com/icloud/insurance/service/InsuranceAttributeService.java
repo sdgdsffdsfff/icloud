@@ -62,4 +62,14 @@ public class InsuranceAttributeService extends
 		return getInsuranceAttributeIdFromUUID(SystemMenuEnum.SAFEGUARDAGE
 				.getUuid());
 	}
+
+	public int getSafeGuardTimeKey() {
+		return getInsuranceAttributeIdFromUUID(SystemMenuEnum.SAFEGUARDTIME
+				.getUuid());
+	}
+
+	public int getSuitePeopleKey() {
+		return getInsuranceAttributeIdFromUUID(SystemMenuEnum.SUITEPEOPLE
+				.getUuid());
+	}
 }

@@ -4,21 +4,21 @@
 <!-- Generated 2015-3-12 15:18:54 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.icloud.insurance.model.InsuranceObject" table="insurance_object" catalog="insurance">
-        <id name="id" type="java.lang.Integer">
+       <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
         <property name="insuranceId" type="java.lang.Integer">
             <column name="insurance_id" />
         </property>
-        <property name="insuranceKey" type="string">
-            <column name="insurance_key" length="500" />
+        <property name="insuranceKey" type="java.lang.Integer">
+            <column name="insurance_key" />
         </property>
         <property name="insuranceOrder" type="java.lang.Integer">
             <column name="insurance_order" />
         </property>
         <property name="insuranceValue" type="string">
-            <column name="insurance_value" length="100" />
+            <column name="insurance_value" length="65535" />
         </property>
     </class>
 </hibernate-mapping>

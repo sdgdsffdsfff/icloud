@@ -8,6 +8,7 @@ import com.icloud.framework.util.ICloudUtils;
 import com.icloud.insurance.domain.model.InsuranceAggregate;
 import com.icloud.insurance.model.InsuranceProduct;
 import com.icloud.insurance.service.InsuranceNumberService;
+import com.icloud.insurance.service.InsuranceObjectService;
 import com.icloud.insurance.service.InsuranceProductService;
 
 @Service("insuranceAggregateService")
@@ -16,6 +17,8 @@ public class InsuranceAggregateService {
 	protected InsuranceProductService insuranceProductService;
 	@Resource(name = "insuranceNumberService")
 	protected InsuranceNumberService insuranceNumberService;
+	@Resource(name = "insuranceObjectService")
+	protected InsuranceObjectService insuranceObjectService;
 
 	/**
 	 * 存储元数据
@@ -30,22 +33,17 @@ public class InsuranceAggregateService {
 		product = this.insuranceProductService.save(product);
 		return InsuranceAggregate
 				.convertInsuranceAggregateFromInsuranceProduct(product,
-						insuranceNumberService);
+						insuranceNumberService, insuranceObjectService);
 	}
 
 	public InsuranceAggregate getInsuranceAggregateById(int id,
 			boolean lazyLoading) {
 		InsuranceProduct product = insuranceProductService.getById(id);
 		if (ICloudUtils.isNotNull(product)) {
-			// if (lazyLoading) {
-			// return InsuranceAggregate
-			// .convertInsuranceAggregateFromInsuranceProduct(product,
-			// insuranceNumberService);
-			// } else {
 			return InsuranceAggregate
 					.convertInsuranceAggregateFromInsuranceProduct(product,
-							insuranceNumberService, lazyLoading);
-			// }
+							insuranceNumberService, insuranceObjectService,
+							lazyLoading);
 		}
 		return null;
 	}

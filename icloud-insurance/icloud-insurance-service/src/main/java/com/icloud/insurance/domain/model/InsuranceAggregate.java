@@ -5,6 +5,7 @@ import java.util.Date;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.insurance.model.InsuranceProduct;
 import com.icloud.insurance.service.InsuranceNumberService;
+import com.icloud.insurance.service.InsuranceObjectService;
 import com.icloud.insurance.util.InsuranceUtil;
 
 public class InsuranceAggregate {
@@ -26,8 +27,10 @@ public class InsuranceAggregate {
 	 * private baseinfo
 	 */
 	private InsuranceBaseInfo insuranceBaseInfo;
-	
+
 	private InsuranceNumberService insuranceNumberService;
+	private InsuranceObjectService InsuranceObjectService;
+
 	private boolean lazyLoading = true;
 
 	public InsuranceAggregate() {
@@ -35,7 +38,8 @@ public class InsuranceAggregate {
 
 	public static InsuranceAggregate convertInsuranceAggregateFromInsuranceProduct(
 			InsuranceProduct product,
-			InsuranceNumberService insuranceNumberService, boolean lazyLoading) {
+			InsuranceNumberService insuranceNumberService,
+			InsuranceObjectService InsuranceObjectService, boolean lazyLoading) {
 		InsuranceAggregate aggreate = new InsuranceAggregate();
 		aggreate = ICloudUtils.dozerCopy(aggreate, product);
 		aggreate.setInsuranceNumberService(insuranceNumberService);
@@ -52,9 +56,10 @@ public class InsuranceAggregate {
 
 	public static InsuranceAggregate convertInsuranceAggregateFromInsuranceProduct(
 			InsuranceProduct product,
-			InsuranceNumberService insuranceNumberService) {
+			InsuranceNumberService insuranceNumberService,
+			InsuranceObjectService InsuranceObjectService) {
 		return convertInsuranceAggregateFromInsuranceProduct(product,
-				insuranceNumberService, true);
+				insuranceNumberService, InsuranceObjectService, true);
 	}
 
 	public void updateUnderwritingAge() {
@@ -69,9 +74,21 @@ public class InsuranceAggregate {
 		return this.underwritingAge;
 	}
 
+	public InsuranceBaseInfo getInsuranceBaseInfo() {
+		if (!ICloudUtils.isNotNull(insuranceBaseInfo) && lazyLoading) {
+			loadingInsuranceBaseInfo();
+		}
+		return this.insuranceBaseInfo;
+	}
+
 	private void loadingUnderwritingAge() {
 		this.underwritingAge = this.insuranceNumberService
 				.getUnderwritingAge(this.id);
+	}
+
+	private void loadingInsuranceBaseInfo() {
+		this.insuranceBaseInfo = this.InsuranceObjectService
+				.getInsuranceBaseInfo(this.id);
 	}
 
 	public Integer getId() {
