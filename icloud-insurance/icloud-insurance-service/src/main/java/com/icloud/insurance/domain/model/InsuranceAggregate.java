@@ -5,6 +5,7 @@ import java.util.Date;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.insurance.model.InsuranceProduct;
 import com.icloud.insurance.service.InsuranceNumberService;
+import com.icloud.insurance.util.InsuranceUtil;
 
 public class InsuranceAggregate {
 	private Integer id;
@@ -34,7 +35,14 @@ public class InsuranceAggregate {
 		aggreate = ICloudUtils.dozerCopy(aggreate, product);
 		aggreate.setInsuranceNumberService(insuranceNumberService);
 		aggreate.setLazyLoading(lazyLoading);
+		if (!lazyLoading) {
+			aggreate.lazyLoading();
+		}
 		return aggreate;
+	}
+
+	private void lazyLoading() {
+		loadingUnderwritingAge();
 	}
 
 	public static InsuranceAggregate convertInsuranceAggregateFromInsuranceProduct(
@@ -111,6 +119,10 @@ public class InsuranceAggregate {
 
 	public Date getLastUpdateTime() {
 		return lastUpdateTime;
+	}
+
+	public String getSafeTimeForString() {
+		return InsuranceUtil.convertTimeToSafeguardTime(this.safeguardTime);
 	}
 
 	public void setLastUpdateTime(Date lastUpdateTime) {

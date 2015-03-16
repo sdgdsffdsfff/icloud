@@ -1,6 +1,7 @@
 package com.icloud.insurance.domain.model;
 
 import com.icloud.framework.util.ICloudUtils;
+import com.icloud.insurance.util.InsuranceUtil;
 
 public class UnderwritingAge {
 	private int startAge = ICloudUtils.DEFAULT_INT_VALUE;
@@ -11,7 +12,6 @@ public class UnderwritingAge {
 	}
 
 	public UnderwritingAge(int startAge, int endAge) {
-
 		this.startAge = startAge;
 		this.endAge = endAge;
 	}
@@ -30,6 +30,10 @@ public class UnderwritingAge {
 
 	public void setEndAge(int endAge) {
 		this.endAge = endAge;
+	}
+
+	public String getUnderwritingAgeForString() {
+		return InsuranceUtil.convertTimeToAge(startAge, endAge);
 	}
 
 	@Override

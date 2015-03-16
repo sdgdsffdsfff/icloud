@@ -33,13 +33,24 @@ public class InsuranceAggregateService {
 						insuranceNumberService);
 	}
 
-	public InsuranceAggregate getInsuranceAggregateById(int id) {
+	public InsuranceAggregate getInsuranceAggregateById(int id,
+			boolean lazyLoading) {
 		InsuranceProduct product = insuranceProductService.getById(id);
 		if (ICloudUtils.isNotNull(product)) {
+			// if (lazyLoading) {
+			// return InsuranceAggregate
+			// .convertInsuranceAggregateFromInsuranceProduct(product,
+			// insuranceNumberService);
+			// } else {
 			return InsuranceAggregate
 					.convertInsuranceAggregateFromInsuranceProduct(product,
-							insuranceNumberService);
+							insuranceNumberService, lazyLoading);
+			// }
 		}
 		return null;
+	}
+
+	public InsuranceAggregate getInsuranceAggregateById(int id) {
+		return getInsuranceAggregateById(id, true);
 	}
 }

@@ -5,12 +5,13 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
-import com.icloud.framework.dao.hibernate.IHibernateBaseDao;
 import com.icloud.framework.dao.hibernate.HiberanateEnum.OperationEnum;
+import com.icloud.framework.dao.hibernate.IHibernateBaseDao;
 import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.framework.service.impl.SqlBaseService;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.insurance.dao.InsuranceNumberDao;
+import com.icloud.insurance.domain.model.InsuranceAggregateValueObject;
 import com.icloud.insurance.domain.model.UnderwritingAge;
 import com.icloud.insurance.model.InsuranceNumber;
 import com.icloud.insurance.model.constant.InsuranceNumberConstant;
@@ -66,10 +67,12 @@ public class InsuranceNumberService extends SqlBaseService<InsuranceNumber> {
 	public UnderwritingAge getUnderwritingAge(Integer productId) {
 		if (ICloudUtils.isNotNull(productId)) {
 			InsuranceNumber firstInsuranceNumber = getInsuranceNumber(
-					productId, 1, 0);
+					productId,
+					InsuranceAggregateValueObject.UNDER_WRITING_AGE_KEY, 0);
 			if (ICloudUtils.isNotNull(firstInsuranceNumber)) {
 				InsuranceNumber endInsuranceNumber = getInsuranceNumber(
-						productId, 1, 1);
+						productId,
+						InsuranceAggregateValueObject.UNDER_WRITING_AGE_KEY, 1);
 				UnderwritingAge age = new UnderwritingAge();
 				age.setStartAge(firstInsuranceNumber.getInsuranceValue());
 				if (ICloudUtils.isNotNull(endInsuranceNumber)) {
@@ -84,11 +87,14 @@ public class InsuranceNumberService extends SqlBaseService<InsuranceNumber> {
 	public void saveUnderwritingAge(Integer productId, UnderwritingAge age) {
 		if (ICloudUtils.isNotNull(productId) && ICloudUtils.isNotNull(age)) {
 			if (age.getStartAge() != ICloudUtils.DEFAULT_INT_VALUE) {
-				saveOrUpdateInsuranceNumber(productId, 1, age.getStartAge(), 0,
-						null);
+				saveOrUpdateInsuranceNumber(productId,
+						InsuranceAggregateValueObject.UNDER_WRITING_AGE_KEY,
+						age.getStartAge(), 0, null);
 				if (age.getEndAge() != ICloudUtils.DEFAULT_INT_VALUE) {
-					saveOrUpdateInsuranceNumber(productId, 1, age.getEndAge(),
-							1, null);
+					saveOrUpdateInsuranceNumber(
+							productId,
+							InsuranceAggregateValueObject.UNDER_WRITING_AGE_KEY,
+							age.getEndAge(), 1, null);
 				}
 			}
 		}

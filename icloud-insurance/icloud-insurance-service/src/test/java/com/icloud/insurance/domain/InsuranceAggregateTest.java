@@ -32,7 +32,7 @@ public class InsuranceAggregateTest extends BaseTest {
 	}
 
 	@Test
-	public void InsuranceAggregateLoadingTest() {
+	public void InsuranceAggregateSaveUnderWritingAge() {
 		InsuranceAggregate insuranceAggregate = getInsuranceAggreate();
 		UnderwritingAge underwritingAge = new UnderwritingAge();
 		underwritingAge.setEndAge(34);
@@ -42,9 +42,18 @@ public class InsuranceAggregateTest extends BaseTest {
 		System.out.println(insuranceAggregate);
 	}
 
+	@Test
+	public void InsuranceAggregateLoadingTest() {
+		InsuranceAggregate insuranceAggregate = getInsuranceAggreate();
+		System.out.println(insuranceAggregate);
+		UnderwritingAge underwritingAge = insuranceAggregate
+				.getUnderwritingAge();
+		System.out.println(underwritingAge.getUnderwritingAgeForString());
+	}
+
 	private InsuranceAggregate getInsuranceAggreate() {
 		InsuranceAggregate insuranceAggregate = insuranceAggregateService
-				.getInsuranceAggregateById(1);
+				.getInsuranceAggregateById(1, false);
 		return insuranceAggregate;
 	}
 
