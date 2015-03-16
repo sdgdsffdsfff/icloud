@@ -14,6 +14,7 @@ import com.icloud.framework.service.impl.SqlBaseService;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.insurance.dao.InsuranceObjectDao;
 import com.icloud.insurance.domain.model.InsuranceBaseInfo;
+import com.icloud.insurance.domain.model.UnderwritingAge;
 import com.icloud.insurance.domain.valueobject.InsuranceAggregateValueObject;
 import com.icloud.insurance.model.InsuranceNumber;
 import com.icloud.insurance.model.InsuranceObject;
@@ -91,6 +92,24 @@ public class InsuranceObjectService extends SqlBaseService<InsuranceObject> {
 			return baseInfo;
 		}
 		return null;
+	}
+
+	public void saveInsuranceBaseInfo(Integer productId,
+			InsuranceBaseInfo insuranceBaseInfo) {
+		if (ICloudUtils.isNotNull(productId)
+				&& ICloudUtils.isNotNull(insuranceBaseInfo)) {
+			if (ICloudUtils.isNotNull(insuranceBaseInfo.getSafeguardTimeDesc())) {
+				saveOrUpdateInsuranceObject(productId,
+						InsuranceAggregateValueObject.SAFEGUARDTIME_KEY,
+						insuranceBaseInfo.getSafeguardTimeDesc(), 0);
+			}
+			if (ICloudUtils.isNotNull(insuranceBaseInfo.getSuitePeopleDesc())) {
+				saveOrUpdateInsuranceObject(productId,
+						InsuranceAggregateValueObject.SUITEPEOPLE_KEY,
+						insuranceBaseInfo.getSafeguardTimeDesc(), 0);
+			}
+		}
+
 	}
 
 }

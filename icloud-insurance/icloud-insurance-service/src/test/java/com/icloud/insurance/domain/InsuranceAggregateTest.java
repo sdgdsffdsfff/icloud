@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.icloud.insurance.domain.model.InsuranceAggregate;
+import com.icloud.insurance.domain.model.InsuranceBaseInfo;
 import com.icloud.insurance.domain.model.UnderwritingAge;
 import com.icloud.insurance.domain.service.InsuranceAggregateService;
 import com.icloud.insurance.domain.valueobject.InsuranceEnum.InsuranceCategoryEnum;
@@ -48,7 +49,18 @@ public class InsuranceAggregateTest extends BaseTest {
 		insuranceAggregate.updateUnderwritingAge();
 		System.out.println(insuranceAggregate);
 	}
-
+	
+	@Test
+	public void InsuranceAggregateSaveBaseInfo() {
+		InsuranceAggregate insuranceAggregate = getInsuranceAggreate();
+		InsuranceBaseInfo insuranceBaseInfo = new InsuranceBaseInfo();
+		insuranceBaseInfo.setSafeguardTimeDesc("自3天后生效");
+		insuranceBaseInfo.setSuitePeopleDesc("一些中等收入家庭");
+		insuranceAggregate.setInsuranceBaseInfo(insuranceBaseInfo);
+		insuranceAggregate.updateInsuranceBaseInfo();
+		System.out.println(insuranceAggregate);
+	}
+	
 	@Test
 	public void InsuranceAggregateLoadingTest() {
 		InsuranceAggregate insuranceAggregate = getInsuranceAggreate();

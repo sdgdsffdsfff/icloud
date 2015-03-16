@@ -39,10 +39,11 @@ public class InsuranceAggregate {
 	public static InsuranceAggregate convertInsuranceAggregateFromInsuranceProduct(
 			InsuranceProduct product,
 			InsuranceNumberService insuranceNumberService,
-			InsuranceObjectService InsuranceObjectService, boolean lazyLoading) {
+			InsuranceObjectService insuranceObjectService, boolean lazyLoading) {
 		InsuranceAggregate aggreate = new InsuranceAggregate();
 		aggreate = ICloudUtils.dozerCopy(aggreate, product);
 		aggreate.setInsuranceNumberService(insuranceNumberService);
+		aggreate.setInsuranceObjectService(insuranceObjectService);
 		aggreate.setLazyLoading(lazyLoading);
 		if (!lazyLoading) {
 			aggreate.lazyLoading();
@@ -67,6 +68,11 @@ public class InsuranceAggregate {
 				underwritingAge);
 	}
 
+	public void updateInsuranceBaseInfo() {
+		this.InsuranceObjectService.saveInsuranceBaseInfo(this.id,
+				this.insuranceBaseInfo);
+	}
+
 	public UnderwritingAge getUnderwritingAge() {
 		if (!ICloudUtils.isNotNull(underwritingAge) && lazyLoading) {
 			loadingUnderwritingAge();
@@ -89,6 +95,10 @@ public class InsuranceAggregate {
 	private void loadingInsuranceBaseInfo() {
 		this.insuranceBaseInfo = this.InsuranceObjectService
 				.getInsuranceBaseInfo(this.id);
+	}
+
+	public void setInsuranceBaseInfo(InsuranceBaseInfo insuranceBaseInfo) {
+		this.insuranceBaseInfo = insuranceBaseInfo;
 	}
 
 	public Integer getId() {
@@ -186,6 +196,15 @@ public class InsuranceAggregate {
 
 	public void setLazyLoading(boolean lazyLoading) {
 		this.lazyLoading = lazyLoading;
+	}
+
+	public InsuranceObjectService getInsuranceObjectService() {
+		return InsuranceObjectService;
+	}
+
+	public void setInsuranceObjectService(
+			InsuranceObjectService insuranceObjectService) {
+		InsuranceObjectService = insuranceObjectService;
 	}
 
 	@Override
