@@ -11,8 +11,8 @@ import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.framework.service.impl.SqlBaseService;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.insurance.dao.InsuranceNumberDao;
-import com.icloud.insurance.domain.model.InsuranceAggregateValueObject;
 import com.icloud.insurance.domain.model.UnderwritingAge;
+import com.icloud.insurance.domain.valueobject.InsuranceAggregateValueObject;
 import com.icloud.insurance.model.InsuranceNumber;
 import com.icloud.insurance.model.constant.InsuranceNumberConstant;
 
@@ -23,6 +23,9 @@ public class InsuranceNumberService extends SqlBaseService<InsuranceNumber> {
 
 	@Resource(name = "insuranceNumberDao")
 	private InsuranceNumberDao insuranceNumberDao;
+
+	@Resource(name = "insuranceAttributeService")
+	private InsuranceAttributeService insuranceAttributeService;
 
 	@Override
 	protected IHibernateBaseDao<InsuranceNumber> getDao() {

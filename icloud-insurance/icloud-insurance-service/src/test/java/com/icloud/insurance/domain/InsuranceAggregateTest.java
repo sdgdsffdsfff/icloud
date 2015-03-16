@@ -8,26 +8,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.icloud.insurance.domain.model.InsuranceAggregate;
 import com.icloud.insurance.domain.model.UnderwritingAge;
 import com.icloud.insurance.domain.service.InsuranceAggregateService;
+import com.icloud.insurance.domain.valueobject.InsuranceEnum.InsuranceCategoryEnum;
+import com.icloud.insurance.domain.valueobject.InsuranceEnum.SystemStatusEnum;
 import com.icloud.insurance.model.InsuranceProduct;
 import com.icloud.insurance.service.BaseTest;
+import com.icloud.insurance.service.InsuranceAttributeService;
 
 public class InsuranceAggregateTest extends BaseTest {
 	@Autowired
 	private InsuranceAggregateService insuranceAggregateService;
+	@Autowired
+	private InsuranceAttributeService insuranceAttributeService;
 
 	@Test
 	public void saveInsuranceProduct() {
 		InsuranceProduct product = new InsuranceProduct();
-		product.setCrateTime(new Date());
 		product.setInsuranceName("中民无忧综合意外基本计划-计划一");
 		product.setInsuranceCompany("中国人寿");
 		product.setSimpleDescription("一款适用少儿、工人、白领人士、中老年阶层的精简、实用的综合意外保障计划。性价比极高的意外险产品。");
 		product.setSafeguardTime(365);
-		product.setCrateTime(new Date());
+		product.setCreateTime(new Date());
 		product.setLastUpdateTime(new Date());
 		product.setLastUpdateUserId(1);
 		product.setLastUpdateUserName("cuijiangning");
-		product.setInsuranceStatus(0);
+		product.setInsuranceStatus(SystemStatusEnum.OK.getStatus());
+		product.setInsuranceCategoryId(insuranceAttributeService
+				.getInsuranceAttributeIdFromUUID(InsuranceCategoryEnum.ACCIDENT_INSURANCE
+						.getUuid()));
 		insuranceAggregateService.saveInsuranceProduct(product);
 	}
 
@@ -35,7 +42,7 @@ public class InsuranceAggregateTest extends BaseTest {
 	public void InsuranceAggregateSaveUnderWritingAge() {
 		InsuranceAggregate insuranceAggregate = getInsuranceAggreate();
 		UnderwritingAge underwritingAge = new UnderwritingAge();
-		underwritingAge.setEndAge(34);
+		underwritingAge.setEndAge(309);
 		underwritingAge.setStartAge(1);
 		insuranceAggregate.setUnderwritingAge(underwritingAge);
 		insuranceAggregate.updateUnderwritingAge();

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-3-16 16:47:03 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.icloud.insurance.model.InsuranceAttribute" table="insurance_attribute" catalog="insurance">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="fatherId" type="java.lang.Integer">
+            <column name="father_id" />
+        </property>
+        <property name="attributeName" type="string">
+            <column name="attribute_name" length="200" />
+        </property>
+        <property name="fatherName" type="string">
+            <column name="father_name" length="200" />
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="status" />
+        </property>
+        <property name="level" type="java.lang.Integer">
+            <column name="level" />
+        </property>
+        <property name="uuid" type="string">
+            <column name="uuid" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -22,6 +22,11 @@ public class InsuranceAggregate {
 	 * private 承保年龄
 	 */
 	private UnderwritingAge underwritingAge;
+	/**
+	 * private baseinfo
+	 */
+	private InsuranceBaseInfo insuranceBaseInfo;
+	
 	private InsuranceNumberService insuranceNumberService;
 	private boolean lazyLoading = true;
 
