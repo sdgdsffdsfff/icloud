@@ -14,11 +14,12 @@ public class InsuranceAggregate {
 	private String insuranceCompany;
 	private String simpleDescription;
 	private Integer safeguardTime;
-	private Date crateTime;
+	private Date createTime;
 	private Date lastUpdateTime;
 	private Integer lastUpdateUserId;
 	private String lastUpdateUserName;
-
+	private Integer insuranceStatus;
+	private Integer insuranceCategoryId;
 	/**
 	 * private 承保年龄
 	 */
@@ -27,6 +28,7 @@ public class InsuranceAggregate {
 	 * private baseinfo
 	 */
 	private InsuranceBaseInfo insuranceBaseInfo;
+	private InsuranceHightLights insuranceHightLights;
 
 	private InsuranceNumberService insuranceNumberService;
 	private InsuranceObjectService InsuranceObjectService;
@@ -52,7 +54,9 @@ public class InsuranceAggregate {
 	}
 
 	private void lazyLoading() {
-		loadingUnderwritingAge();
+		this.loadingUnderwritingAge();
+		this.loadingInsuranceBaseInfo();
+		this.loadingInsuranceHightLights();
 	}
 
 	public static InsuranceAggregate convertInsuranceAggregateFromInsuranceProduct(
@@ -66,6 +70,11 @@ public class InsuranceAggregate {
 	public void updateUnderwritingAge() {
 		this.insuranceNumberService.saveUnderwritingAge(this.id,
 				underwritingAge);
+	}
+
+	public void updateInsuranceHightLights() {
+		this.InsuranceObjectService.saveInsuranceHightLights(this.id,
+				this.insuranceHightLights);
 	}
 
 	public void updateInsuranceBaseInfo() {
@@ -87,6 +96,13 @@ public class InsuranceAggregate {
 		return this.insuranceBaseInfo;
 	}
 
+	public InsuranceHightLights getInsuranceHightLights() {
+		if (!ICloudUtils.isNotNull(insuranceHightLights) && lazyLoading) {
+			loadingInsuranceHightLights();
+		}
+		return this.insuranceHightLights;
+	}
+
 	private void loadingUnderwritingAge() {
 		this.underwritingAge = this.insuranceNumberService
 				.getUnderwritingAge(this.id);
@@ -95,6 +111,11 @@ public class InsuranceAggregate {
 	private void loadingInsuranceBaseInfo() {
 		this.insuranceBaseInfo = this.InsuranceObjectService
 				.getInsuranceBaseInfo(this.id);
+	}
+
+	private void loadingInsuranceHightLights() {
+		this.insuranceHightLights = this.InsuranceObjectService
+				.getInsuranceHightLights(this.id);
 	}
 
 	public void setInsuranceBaseInfo(InsuranceBaseInfo insuranceBaseInfo) {
@@ -141,12 +162,28 @@ public class InsuranceAggregate {
 		this.safeguardTime = safeguardTime;
 	}
 
-	public Date getCrateTime() {
-		return crateTime;
+	public Integer getInsuranceStatus() {
+		return insuranceStatus;
 	}
 
-	public void setCrateTime(Date crateTime) {
-		this.crateTime = crateTime;
+	public void setInsuranceStatus(Integer insuranceStatus) {
+		this.insuranceStatus = insuranceStatus;
+	}
+
+	public Integer getInsuranceCategoryId() {
+		return insuranceCategoryId;
+	}
+
+	public void setInsuranceCategoryId(Integer insuranceCategoryId) {
+		this.insuranceCategoryId = insuranceCategoryId;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 	public Date getLastUpdateTime() {
@@ -207,15 +244,21 @@ public class InsuranceAggregate {
 		InsuranceObjectService = insuranceObjectService;
 	}
 
+	public void setInsuranceHightLights(
+			InsuranceHightLights insuranceHightLights) {
+		this.insuranceHightLights = insuranceHightLights;
+	}
+
 	@Override
 	public String toString() {
 		return "InsuranceAggregate [id=" + id + ", insuranceName="
 				+ insuranceName + ", insuranceCompany=" + insuranceCompany
 				+ ", simpleDescription=" + simpleDescription
-				+ ", safeguardTime=" + safeguardTime + ", crateTime="
-				+ crateTime + ", lastUpdateTime=" + lastUpdateTime
+				+ ", safeguardTime=" + safeguardTime + ", createTime="
+				+ createTime + ", lastUpdateTime=" + lastUpdateTime
 				+ ", lastUpdateUserId=" + lastUpdateUserId
-				+ ", lastUpdateUserName=" + lastUpdateUserName + "]";
+				+ ", lastUpdateUserName=" + lastUpdateUserName
+				+ ", insuranceStatus=" + insuranceStatus
+				+ ", insuranceCategoryId=" + insuranceCategoryId + "]";
 	}
-
 }

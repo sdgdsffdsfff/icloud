@@ -72,4 +72,9 @@ public class InsuranceAttributeService extends
 		return getInsuranceAttributeIdFromUUID(SystemMenuEnum.SUITEPEOPLE
 				.getUuid());
 	}
+
+	public int getProductHightLightsKey() {
+		return getInsuranceAttributeIdFromUUID(SystemMenuEnum.PRODUCTHIGHLIGHTS
+				.getUuid());
+	}
 }

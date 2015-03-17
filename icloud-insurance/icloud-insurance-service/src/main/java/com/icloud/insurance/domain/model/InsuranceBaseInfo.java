@@ -20,4 +20,11 @@ public class InsuranceBaseInfo {
 		this.suitePeopleDesc = suitePeopleDesc;
 	}
 
+	@Override
+	public String toString() {
+		return "InsuranceBaseInfo [safeguardTimeDesc=" + safeguardTimeDesc
+				+ ", suitePeopleDesc=" + suitePeopleDesc + "]";
+	}
+
+	
 }

@@ -1,5 +1,6 @@
 package com.icloud.insurance.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,9 +15,8 @@ import com.icloud.framework.service.impl.SqlBaseService;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.insurance.dao.InsuranceObjectDao;
 import com.icloud.insurance.domain.model.InsuranceBaseInfo;
-import com.icloud.insurance.domain.model.UnderwritingAge;
+import com.icloud.insurance.domain.model.InsuranceHightLights;
 import com.icloud.insurance.domain.valueobject.InsuranceAggregateValueObject;
-import com.icloud.insurance.model.InsuranceNumber;
 import com.icloud.insurance.model.InsuranceObject;
 import com.icloud.insurance.model.constant.InsuranceObjectConstant;
 
@@ -37,8 +37,8 @@ public class InsuranceObjectService extends SqlBaseService<InsuranceObject> {
 		String[] paramNames = { InsuranceObjectConstant.INSURANCEID,
 				InsuranceObjectConstant.INSURANCEKEY };
 		Object[] values = { productId, key };
-		return this.insuranceObjectDao.findByProperty(paramNames, values, null,
-				true);
+		return this.insuranceObjectDao.findByProperty(paramNames, values,
+				InsuranceObjectConstant.INSURANCEORDER, true);
 	}
 
 	public InsuranceObject getInsuranceObject(int productId, int key, int order) {
@@ -106,10 +106,42 @@ public class InsuranceObjectService extends SqlBaseService<InsuranceObject> {
 			if (ICloudUtils.isNotNull(insuranceBaseInfo.getSuitePeopleDesc())) {
 				saveOrUpdateInsuranceObject(productId,
 						InsuranceAggregateValueObject.SUITEPEOPLE_KEY,
-						insuranceBaseInfo.getSafeguardTimeDesc(), 0);
+						insuranceBaseInfo.getSuitePeopleDesc(), 0);
 			}
 		}
 
 	}
 
+	public void saveInsuranceHightLights(Integer productId,
+			InsuranceHightLights insuranceHightLights) {
+		if (ICloudUtils.isNotNull(productId)
+				&& ICloudUtils.isNotNull(insuranceHightLights)) {
+			if (ICloudUtils.isNotNull(insuranceHightLights.getHighlights())) {
+				int i = 0;
+				for (String hightLights : insuranceHightLights.getHighlights()) {
+					saveOrUpdateInsuranceObject(
+							productId,
+							InsuranceAggregateValueObject.PRODUCTHIGHLIGHTS_KEY,
+							hightLights, i++);
+				}
+			}
+		}
+	}
+
+	public InsuranceHightLights getInsuranceHightLights(Integer productId) {
+		if (ICloudUtils.isNotNull(productId)) {
+			InsuranceHightLights insuranceHightLights = new InsuranceHightLights();
+			List<InsuranceObject> list = this.getInsuranceObject(productId,
+					InsuranceAggregateValueObject.PRODUCTHIGHLIGHTS_KEY);
+			if (!ICloudUtils.isEmpty(list)) {
+				List<String> highlights = new ArrayList<String>();
+				insuranceHightLights.setHighlights(highlights);
+				for (InsuranceObject object : list) {
+					highlights.add(object.getInsuranceValue());
+				}
+			}
+			return insuranceHightLights;
+		}
+		return null;
+	}
 }

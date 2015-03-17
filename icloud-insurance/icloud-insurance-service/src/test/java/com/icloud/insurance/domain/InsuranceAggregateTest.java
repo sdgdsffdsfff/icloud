@@ -1,12 +1,15 @@
 package com.icloud.insurance.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.icloud.insurance.domain.model.InsuranceAggregate;
 import com.icloud.insurance.domain.model.InsuranceBaseInfo;
+import com.icloud.insurance.domain.model.InsuranceHightLights;
 import com.icloud.insurance.domain.model.UnderwritingAge;
 import com.icloud.insurance.domain.service.InsuranceAggregateService;
 import com.icloud.insurance.domain.valueobject.InsuranceEnum.InsuranceCategoryEnum;
@@ -49,7 +52,7 @@ public class InsuranceAggregateTest extends BaseTest {
 		insuranceAggregate.updateUnderwritingAge();
 		System.out.println(insuranceAggregate);
 	}
-	
+
 	@Test
 	public void InsuranceAggregateSaveBaseInfo() {
 		InsuranceAggregate insuranceAggregate = getInsuranceAggreate();
@@ -60,7 +63,19 @@ public class InsuranceAggregateTest extends BaseTest {
 		insuranceAggregate.updateInsuranceBaseInfo();
 		System.out.println(insuranceAggregate);
 	}
-	
+
+	@Test
+	public void InsuranceAggregateSaveHightLights() {
+		InsuranceAggregate insuranceAggregate = getInsuranceAggreate();
+		InsuranceHightLights insuranceHightLights = new InsuranceHightLights();
+		insuranceAggregate.setInsuranceHightLights(insuranceHightLights);
+		List<String> list = new ArrayList<String>();
+		list.add("满期返还型");
+		list.add("专保癌症");
+		insuranceHightLights.setHighlights(list);
+		insuranceAggregate.updateInsuranceHightLights();
+	}
+
 	@Test
 	public void InsuranceAggregateLoadingTest() {
 		InsuranceAggregate insuranceAggregate = getInsuranceAggreate();
@@ -68,6 +83,12 @@ public class InsuranceAggregateTest extends BaseTest {
 		UnderwritingAge underwritingAge = insuranceAggregate
 				.getUnderwritingAge();
 		System.out.println(underwritingAge.getUnderwritingAgeForString());
+		InsuranceBaseInfo insuranceBaseInfo = insuranceAggregate
+				.getInsuranceBaseInfo();
+		System.out.println(insuranceBaseInfo);
+		InsuranceHightLights insuranceHightLights = insuranceAggregate
+				.getInsuranceHightLights();
+		System.out.println(insuranceHightLights);
 	}
 
 	private InsuranceAggregate getInsuranceAggreate() {
