@@ -8,8 +8,7 @@ import com.icloud.insurance.service.InsuranceNumberService;
 import com.icloud.insurance.service.InsuranceObjectService;
 import com.icloud.insurance.util.InsuranceUtil;
 
-public class InsuranceAggregate {
-	private Integer id;
+public class InsuranceAggregate extends AggregateRoot {
 	private String insuranceName;
 	private String insuranceCompany;
 	private String simpleDescription;
@@ -28,10 +27,13 @@ public class InsuranceAggregate {
 	 * private baseinfo
 	 */
 	private InsuranceBaseInfo insuranceBaseInfo;
+	/**
+	 * 高亮
+	 */
 	private InsuranceHightLights insuranceHightLights;
 
 	private InsuranceNumberService insuranceNumberService;
-	private InsuranceObjectService InsuranceObjectService;
+	private InsuranceObjectService insuranceObjectService;
 
 	private boolean lazyLoading = true;
 
@@ -73,12 +75,12 @@ public class InsuranceAggregate {
 	}
 
 	public void updateInsuranceHightLights() {
-		this.InsuranceObjectService.saveInsuranceHightLights(this.id,
+		this.insuranceObjectService.saveInsuranceHightLights(this.id,
 				this.insuranceHightLights);
 	}
 
 	public void updateInsuranceBaseInfo() {
-		this.InsuranceObjectService.saveInsuranceBaseInfo(this.id,
+		this.insuranceObjectService.saveInsuranceBaseInfo(this.id,
 				this.insuranceBaseInfo);
 	}
 
@@ -109,25 +111,17 @@ public class InsuranceAggregate {
 	}
 
 	private void loadingInsuranceBaseInfo() {
-		this.insuranceBaseInfo = this.InsuranceObjectService
+		this.insuranceBaseInfo = this.insuranceObjectService
 				.getInsuranceBaseInfo(this.id);
 	}
 
 	private void loadingInsuranceHightLights() {
-		this.insuranceHightLights = this.InsuranceObjectService
+		this.insuranceHightLights = this.insuranceObjectService
 				.getInsuranceHightLights(this.id);
 	}
 
 	public void setInsuranceBaseInfo(InsuranceBaseInfo insuranceBaseInfo) {
 		this.insuranceBaseInfo = insuranceBaseInfo;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getInsuranceName() {
@@ -236,12 +230,12 @@ public class InsuranceAggregate {
 	}
 
 	public InsuranceObjectService getInsuranceObjectService() {
-		return InsuranceObjectService;
+		return insuranceObjectService;
 	}
 
 	public void setInsuranceObjectService(
 			InsuranceObjectService insuranceObjectService) {
-		InsuranceObjectService = insuranceObjectService;
+		this.insuranceObjectService = insuranceObjectService;
 	}
 
 	public void setInsuranceHightLights(
@@ -251,9 +245,9 @@ public class InsuranceAggregate {
 
 	@Override
 	public String toString() {
-		return "InsuranceAggregate [id=" + id + ", insuranceName="
-				+ insuranceName + ", insuranceCompany=" + insuranceCompany
-				+ ", simpleDescription=" + simpleDescription
+		return "InsuranceAggregate [id=" + this.aggregateId
+				+ ", insuranceName=" + insuranceName + ", insuranceCompany="
+				+ insuranceCompany + ", simpleDescription=" + simpleDescription
 				+ ", safeguardTime=" + safeguardTime + ", createTime="
 				+ createTime + ", lastUpdateTime=" + lastUpdateTime
 				+ ", lastUpdateUserId=" + lastUpdateUserId

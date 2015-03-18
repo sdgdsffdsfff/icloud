@@ -1,4 +1,4 @@
-package feature.account;
+package feature.account.mongo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -15,7 +15,8 @@ import cucumber.annotation.After;
 import cucumber.annotation.Before;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
-import cucumber.annotation.en_au.When;
+import cucumber.annotation.en.When;
+
 
 public class AccountScenario {
 	@Resource(name = "shtb_AccountService")
