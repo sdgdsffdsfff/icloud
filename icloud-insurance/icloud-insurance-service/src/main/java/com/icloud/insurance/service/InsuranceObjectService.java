@@ -14,8 +14,8 @@ import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.framework.service.impl.SqlBaseService;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.insurance.dao.InsuranceObjectDao;
-import com.icloud.insurance.domain.model.InsuranceBaseInfo;
-import com.icloud.insurance.domain.model.InsuranceHightLights;
+import com.icloud.insurance.domain.entity.InsuranceBaseInfo;
+import com.icloud.insurance.domain.entity.InsuranceHightLights;
 import com.icloud.insurance.domain.valueobject.InsuranceAggregateValueObject;
 import com.icloud.insurance.model.InsuranceObject;
 import com.icloud.insurance.model.constant.InsuranceObjectConstant;
@@ -74,9 +74,10 @@ public class InsuranceObjectService extends SqlBaseService<InsuranceObject> {
 		return insuranceNumber;
 	}
 
-	public InsuranceBaseInfo getInsuranceBaseInfo(Integer insuranceId) {
-		if (ICloudUtils.isNotNull(insuranceId)) {
-			InsuranceBaseInfo baseInfo = new InsuranceBaseInfo();
+	public InsuranceBaseInfo getInsuranceBaseInfo(Integer insuranceId,
+			InsuranceBaseInfo baseInfo) {
+		if (ICloudUtils.isNotNull(insuranceId)
+				&& ICloudUtils.isNotNull(baseInfo)) {
 			InsuranceObject insuranceObject = this.getInsuranceObject(
 					insuranceId,
 					InsuranceAggregateValueObject.SAFEGUARDTIME_KEY, 0);
@@ -128,9 +129,9 @@ public class InsuranceObjectService extends SqlBaseService<InsuranceObject> {
 		}
 	}
 
-	public InsuranceHightLights getInsuranceHightLights(Integer productId) {
-		if (ICloudUtils.isNotNull(productId)) {
-			InsuranceHightLights insuranceHightLights = new InsuranceHightLights();
+	public InsuranceHightLights getInsuranceHightLights(Integer productId,
+			InsuranceHightLights insuranceHightLights) {
+		if (ICloudUtils.isNotNull(productId)&&ICloudUtils.isNotNull(insuranceHightLights)) {
 			List<InsuranceObject> list = this.getInsuranceObject(productId,
 					InsuranceAggregateValueObject.PRODUCTHIGHLIGHTS_KEY);
 			if (!ICloudUtils.isEmpty(list)) {

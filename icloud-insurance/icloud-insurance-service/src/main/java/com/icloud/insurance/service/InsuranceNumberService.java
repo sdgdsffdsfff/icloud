@@ -11,7 +11,7 @@ import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.framework.service.impl.SqlBaseService;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.insurance.dao.InsuranceNumberDao;
-import com.icloud.insurance.domain.model.UnderwritingAge;
+import com.icloud.insurance.domain.entity.UnderwritingAge;
 import com.icloud.insurance.domain.valueobject.InsuranceAggregateValueObject;
 import com.icloud.insurance.model.InsuranceNumber;
 import com.icloud.insurance.model.constant.InsuranceNumberConstant;
@@ -67,8 +67,9 @@ public class InsuranceNumberService extends SqlBaseService<InsuranceNumber> {
 		return insuranceNumber;
 	}
 
-	public UnderwritingAge getUnderwritingAge(Integer productId) {
-		if (ICloudUtils.isNotNull(productId)) {
+	public UnderwritingAge getUnderwritingAge(Integer productId,
+			UnderwritingAge age) {
+		if (ICloudUtils.isNotNull(productId) && ICloudUtils.isNotNull(age)) {
 			InsuranceNumber firstInsuranceNumber = getInsuranceNumber(
 					productId,
 					InsuranceAggregateValueObject.UNDER_WRITING_AGE_KEY, 0);
@@ -76,7 +77,6 @@ public class InsuranceNumberService extends SqlBaseService<InsuranceNumber> {
 				InsuranceNumber endInsuranceNumber = getInsuranceNumber(
 						productId,
 						InsuranceAggregateValueObject.UNDER_WRITING_AGE_KEY, 1);
-				UnderwritingAge age = new UnderwritingAge();
 				age.setStartAge(firstInsuranceNumber.getInsuranceValue());
 				if (ICloudUtils.isNotNull(endInsuranceNumber)) {
 					age.setEndAge(endInsuranceNumber.getInsuranceValue());

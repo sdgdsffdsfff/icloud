@@ -1,4 +1,4 @@
-package com.icloud.insurance.domain.model;
+package com.icloud.insurance.domain.aggregate;
 
 public class InsuranceCategory {
 	private int categoryId;

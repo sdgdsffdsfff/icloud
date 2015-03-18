@@ -1,7 +1,11 @@
-package com.icloud.insurance.domain.model;
+package com.icloud.framework.domain;
 
 public class AggregateRoot {
 	protected int aggregateId;
+
+	public AggregateRoot(int aggregateId) {
+		this.aggregateId = aggregateId;
+	}
 
 	public int getAggregateId() {
 		return aggregateId;

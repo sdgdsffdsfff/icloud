@@ -5,7 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.icloud.framework.util.ICloudUtils;
-import com.icloud.insurance.domain.model.InsuranceAggregate;
+import com.icloud.insurance.domain.aggregate.InsuranceAggregate;
 import com.icloud.insurance.model.InsuranceProduct;
 import com.icloud.insurance.service.InsuranceNumberService;
 import com.icloud.insurance.service.InsuranceObjectService;

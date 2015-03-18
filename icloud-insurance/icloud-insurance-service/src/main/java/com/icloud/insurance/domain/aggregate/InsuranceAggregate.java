@@ -1,14 +1,21 @@
-package com.icloud.insurance.domain.model;
+package com.icloud.insurance.domain.aggregate;
 
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
+
+import com.icloud.framework.domain.AggregateRoot;
 import com.icloud.framework.util.ICloudUtils;
+import com.icloud.insurance.domain.entity.InsuranceBaseInfo;
+import com.icloud.insurance.domain.entity.InsuranceHightLights;
+import com.icloud.insurance.domain.entity.UnderwritingAge;
 import com.icloud.insurance.model.InsuranceProduct;
 import com.icloud.insurance.service.InsuranceNumberService;
 import com.icloud.insurance.service.InsuranceObjectService;
 import com.icloud.insurance.util.InsuranceUtil;
 
 public class InsuranceAggregate extends AggregateRoot {
+	private int id;
 	private String insuranceName;
 	private String insuranceCompany;
 	private String simpleDescription;
@@ -37,28 +44,34 @@ public class InsuranceAggregate extends AggregateRoot {
 
 	private boolean lazyLoading = true;
 
-	public InsuranceAggregate() {
+	public InsuranceAggregate(int aggregateId, boolean lazyLoading,
+			InsuranceNumberService insuranceNumberService,
+			InsuranceObjectService insuranceObjectService) {
+		super(aggregateId);
+		this.lazyLoading = lazyLoading;
+		this.insuranceNumberService = insuranceNumberService;
+		this.insuranceObjectService = insuranceObjectService;
+		setInit222();
+	}
+
+	@PostConstruct
+	private void setInit222() {
+		insuranceBaseInfo = new InsuranceBaseInfo(this,
+				this.insuranceObjectService, lazyLoading);
+		underwritingAge = new UnderwritingAge(this,
+				this.insuranceNumberService, this.lazyLoading);
+		insuranceHightLights = new InsuranceHightLights(this,
+				insuranceObjectService, lazyLoading);
 	}
 
 	public static InsuranceAggregate convertInsuranceAggregateFromInsuranceProduct(
 			InsuranceProduct product,
 			InsuranceNumberService insuranceNumberService,
 			InsuranceObjectService insuranceObjectService, boolean lazyLoading) {
-		InsuranceAggregate aggreate = new InsuranceAggregate();
-		aggreate = ICloudUtils.dozerCopy(aggreate, product);
-		aggreate.setInsuranceNumberService(insuranceNumberService);
-		aggreate.setInsuranceObjectService(insuranceObjectService);
-		aggreate.setLazyLoading(lazyLoading);
-		if (!lazyLoading) {
-			aggreate.lazyLoading();
-		}
+		InsuranceAggregate aggreate = new InsuranceAggregate(product.getId(),
+				lazyLoading, insuranceNumberService, insuranceObjectService);
+//		aggreate = ICloudUtils.dozerCopy(aggreate, product);
 		return aggreate;
-	}
-
-	private void lazyLoading() {
-		this.loadingUnderwritingAge();
-		this.loadingInsuranceBaseInfo();
-		this.loadingInsuranceHightLights();
 	}
 
 	public static InsuranceAggregate convertInsuranceAggregateFromInsuranceProduct(
@@ -69,55 +82,12 @@ public class InsuranceAggregate extends AggregateRoot {
 				insuranceNumberService, InsuranceObjectService, true);
 	}
 
-	public void updateUnderwritingAge() {
-		this.insuranceNumberService.saveUnderwritingAge(this.id,
-				underwritingAge);
-	}
-
-	public void updateInsuranceHightLights() {
-		this.insuranceObjectService.saveInsuranceHightLights(this.id,
-				this.insuranceHightLights);
-	}
-
-	public void updateInsuranceBaseInfo() {
-		this.insuranceObjectService.saveInsuranceBaseInfo(this.id,
-				this.insuranceBaseInfo);
-	}
-
 	public UnderwritingAge getUnderwritingAge() {
-		if (!ICloudUtils.isNotNull(underwritingAge) && lazyLoading) {
-			loadingUnderwritingAge();
-		}
 		return this.underwritingAge;
 	}
 
 	public InsuranceBaseInfo getInsuranceBaseInfo() {
-		if (!ICloudUtils.isNotNull(insuranceBaseInfo) && lazyLoading) {
-			loadingInsuranceBaseInfo();
-		}
 		return this.insuranceBaseInfo;
-	}
-
-	public InsuranceHightLights getInsuranceHightLights() {
-		if (!ICloudUtils.isNotNull(insuranceHightLights) && lazyLoading) {
-			loadingInsuranceHightLights();
-		}
-		return this.insuranceHightLights;
-	}
-
-	private void loadingUnderwritingAge() {
-		this.underwritingAge = this.insuranceNumberService
-				.getUnderwritingAge(this.id);
-	}
-
-	private void loadingInsuranceBaseInfo() {
-		this.insuranceBaseInfo = this.insuranceObjectService
-				.getInsuranceBaseInfo(this.id);
-	}
-
-	private void loadingInsuranceHightLights() {
-		this.insuranceHightLights = this.insuranceObjectService
-				.getInsuranceHightLights(this.id);
 	}
 
 	public void setInsuranceBaseInfo(InsuranceBaseInfo insuranceBaseInfo) {
@@ -233,6 +203,10 @@ public class InsuranceAggregate extends AggregateRoot {
 		return insuranceObjectService;
 	}
 
+	public InsuranceHightLights getInsuranceHightLights() {
+		return this.insuranceHightLights;
+	}
+
 	public void setInsuranceObjectService(
 			InsuranceObjectService insuranceObjectService) {
 		this.insuranceObjectService = insuranceObjectService;
@@ -241,6 +215,15 @@ public class InsuranceAggregate extends AggregateRoot {
 	public void setInsuranceHightLights(
 			InsuranceHightLights insuranceHightLights) {
 		this.insuranceHightLights = insuranceHightLights;
+	}
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	@Override
@@ -255,4 +238,5 @@ public class InsuranceAggregate extends AggregateRoot {
 				+ ", insuranceStatus=" + insuranceStatus
 				+ ", insuranceCategoryId=" + insuranceCategoryId + "]";
 	}
+
 }
