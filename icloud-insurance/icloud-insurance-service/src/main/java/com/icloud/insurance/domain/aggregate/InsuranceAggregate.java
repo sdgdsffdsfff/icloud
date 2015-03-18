@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.icloud.framework.domain.AggregateRoot;
 import com.icloud.framework.domain.BaseDomainEntity;
+import com.icloud.framework.util.ICloudUtils;
 import com.icloud.insurance.domain.entity.InsuranceBaseInfo;
 import com.icloud.insurance.domain.entity.InsuranceHightLights;
 import com.icloud.insurance.domain.entity.UnderwritingAge;
@@ -78,10 +79,21 @@ public class InsuranceAggregate extends AggregateRoot {
 			InsuranceProduct product,
 			InsuranceNumberService insuranceNumberService,
 			InsuranceObjectService insuranceObjectService, boolean lazyLoading) {
-		InsuranceAggregate aggreate = new InsuranceAggregate(product.getId(),
+		InsuranceAggregate aggregate = new InsuranceAggregate(product.getId(),
 				lazyLoading, insuranceNumberService, insuranceObjectService);
 		// aggreate = ICloudUtils.dozerCopy(aggreate, product);
-		return aggreate;
+		aggregate.setId(product.getId());
+		aggregate.setInsuranceName(product.getInsuranceName());
+		aggregate.setInsuranceCompany(product.getInsuranceCompany());
+		aggregate.setSimpleDescription(product.getSimpleDescription());
+		aggregate.setSafeguardTime(product.getSafeguardTime());
+		aggregate.setCreateTime(product.getCreateTime());
+		aggregate.setLastUpdateTime(product.getLastUpdateTime());
+		aggregate.setLastUpdateUserId(product.getLastUpdateUserId());
+		aggregate.setLastUpdateUserName(product.getLastUpdateUserName());
+		aggregate.setInsuranceStatus(product.getInsuranceStatus());
+		aggregate.setInsuranceCategoryId(product.getInsuranceCategoryId());
+		return aggregate;
 	}
 
 	public static InsuranceAggregate convertInsuranceAggregateFromInsuranceProduct(

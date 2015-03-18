@@ -1,5 +1,7 @@
 package com.icloud.insurance.domain.entity;
 
+import java.util.List;
+
 import com.icloud.framework.domain.AggregateRoot;
 import com.icloud.insurance.domain.InsurnaceBaseDomainEntity;
 import com.icloud.insurance.service.InsuranceObjectService;
@@ -8,6 +10,9 @@ public class InsuranceBaseInfo extends
 		InsurnaceBaseDomainEntity<InsuranceObjectService> {
 	private String safeguardTimeDesc;
 	private String suitePeopleDesc;
+	private List<String> productFeatures;
+	private List<String> tips;
+	private String specRecommend;
 
 	public InsuranceBaseInfo(AggregateRoot root, InsuranceObjectService t) {
 		super(root, t);
@@ -42,16 +47,42 @@ public class InsuranceBaseInfo extends
 		this.suitePeopleDesc = suitePeopleDesc;
 	}
 
+	public List<String> getProductFeatures() {
+		checkLoad();
+		return productFeatures;
+	}
+
+	public void setProductFeatures(List<String> productFeatures) {
+		this.productFeatures = productFeatures;
+	}
+
 	@Override
 	public void saveOrUpdateEntity() {
 		this.baseService.saveInsuranceBaseInfo(
 				this.aggregateRoot.getAggregateId(), this);
 	}
 
+	public List<String> getTips() {
+		return tips;
+	}
+
+	public void setTips(List<String> tips) {
+		this.tips = tips;
+	}
+
+	public String getSpecRecommend() {
+		return specRecommend;
+	}
+
+	public void setSpecRecommend(String specRecommend) {
+		this.specRecommend = specRecommend;
+	}
+
 	@Override
 	public String toString() {
 		return "InsuranceBaseInfo [safeguardTimeDesc=" + safeguardTimeDesc
-				+ ", suitePeopleDesc=" + suitePeopleDesc + "]";
+				+ ", suitePeopleDesc=" + suitePeopleDesc + ", productFeatures="
+				+ productFeatures + "]";
 	}
 
 }

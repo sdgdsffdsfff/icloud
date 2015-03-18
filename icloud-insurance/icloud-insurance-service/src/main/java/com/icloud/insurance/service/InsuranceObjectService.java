@@ -33,12 +33,24 @@ public class InsuranceObjectService extends SqlBaseService<InsuranceObject> {
 		return insuranceObjectDao;
 	}
 
-	public List<InsuranceObject> getInsuranceObject(int productId, int key) {
+	public List<InsuranceObject> getInsuranceObjectList(int productId, int key) {
 		String[] paramNames = { InsuranceObjectConstant.INSURANCEID,
 				InsuranceObjectConstant.INSURANCEKEY };
 		Object[] values = { productId, key };
 		return this.insuranceObjectDao.findByProperty(paramNames, values,
 				InsuranceObjectConstant.INSURANCEORDER, true);
+	}
+
+	public List<String> getInsuranceObjectForString(int productId, int key) {
+		List<InsuranceObject> objects = getInsuranceObjectList(productId, key);
+		if (!ICloudUtils.isEmpty(objects)) {
+			List<String> list = new ArrayList<String>();
+			for (InsuranceObject object : objects) {
+				list.add(object.getInsuranceValue());
+			}
+			return list;
+		}
+		return null;
 	}
 
 	public InsuranceObject getInsuranceObject(int productId, int key, int order) {
@@ -55,23 +67,37 @@ public class InsuranceObjectService extends SqlBaseService<InsuranceObject> {
 
 	public InsuranceObject saveOrUpdateInsuranceObject(int productId, int key,
 			String value, int order) {
-		InsuranceObject insuranceNumber = getInsuranceObject(productId, key,
-				order);
-		if (!ICloudUtils.isNotNull(insuranceNumber)) {
-			insuranceNumber = new InsuranceObject();
-			insuranceNumber.setInsuranceOrder(order);
-			insuranceNumber.setInsuranceValue(value);
-			insuranceNumber.setInsuranceId(productId);
-			insuranceNumber.setInsuranceKey(key);
-			this.insuranceObjectDao.save(insuranceNumber);
-		} else {
-			insuranceNumber.setInsuranceOrder(order);
-			insuranceNumber.setInsuranceValue(value);
-			insuranceNumber.setInsuranceId(productId);
-			insuranceNumber.setInsuranceKey(key);
-			this.insuranceObjectDao.update(insuranceNumber);
+		if (ICloudUtils.isNotNull(value)) {
+			InsuranceObject insuranceNumber = getInsuranceObject(productId,
+					key, order);
+			if (!ICloudUtils.isNotNull(insuranceNumber)) {
+				insuranceNumber = new InsuranceObject();
+				insuranceNumber.setInsuranceOrder(order);
+				insuranceNumber.setInsuranceValue(value);
+				insuranceNumber.setInsuranceId(productId);
+				insuranceNumber.setInsuranceKey(key);
+				this.insuranceObjectDao.save(insuranceNumber);
+			} else {
+				insuranceNumber.setInsuranceOrder(order);
+				insuranceNumber.setInsuranceValue(value);
+				insuranceNumber.setInsuranceId(productId);
+				insuranceNumber.setInsuranceKey(key);
+				this.insuranceObjectDao.update(insuranceNumber);
+			}
+			return insuranceNumber;
 		}
-		return insuranceNumber;
+		return null;
+	}
+
+	private void saveOrUpdateInsuranceObject(Integer productId, int key,
+			List<String> list) {
+		if (ICloudUtils.isNotNull(productId) && ICloudUtils.isNotNull(list)) {
+			int i = 0;
+			for (String value : list) {
+				saveOrUpdateInsuranceObject(productId, key, value, i++);
+			}
+		}
+
 	}
 
 	public InsuranceBaseInfo getInsuranceBaseInfo(Integer insuranceId,
@@ -89,6 +115,17 @@ public class InsuranceObjectService extends SqlBaseService<InsuranceObject> {
 					InsuranceAggregateValueObject.SUITEPEOPLE_KEY, 0);
 			if (ICloudUtils.isNotNull(insuranceObject)) {
 				baseInfo.setSuitePeopleDesc(insuranceObject.getInsuranceValue());
+			}
+
+			List<String> productFeatures = this.getInsuranceObjectForString(
+					insuranceId,
+					InsuranceAggregateValueObject.PORDUCTFEATURES_KEY);
+			baseInfo.setProductFeatures(productFeatures);
+
+			insuranceObject = this.getInsuranceObject(insuranceId,
+					InsuranceAggregateValueObject.PRODUCT_RECOMMEND_KEY, 0);
+			if (ICloudUtils.isNotNull(insuranceObject)) {
+				baseInfo.setSpecRecommend(insuranceObject.getInsuranceValue());
 			}
 			return baseInfo;
 		}
@@ -109,6 +146,15 @@ public class InsuranceObjectService extends SqlBaseService<InsuranceObject> {
 						InsuranceAggregateValueObject.SUITEPEOPLE_KEY,
 						insuranceBaseInfo.getSuitePeopleDesc(), 0);
 			}
+			saveOrUpdateInsuranceObject(productId,
+					InsuranceAggregateValueObject.PORDUCTFEATURES_KEY,
+					insuranceBaseInfo.getProductFeatures());
+			saveOrUpdateInsuranceObject(productId,
+					InsuranceAggregateValueObject.PRODUCTTIPS_KEY,
+					insuranceBaseInfo.getTips());
+			saveOrUpdateInsuranceObject(productId,
+					InsuranceAggregateValueObject.PRODUCT_RECOMMEND_KEY,
+					insuranceBaseInfo.getSpecRecommend(), 0);
 		}
 
 	}
@@ -117,30 +163,19 @@ public class InsuranceObjectService extends SqlBaseService<InsuranceObject> {
 			InsuranceHightLights insuranceHightLights) {
 		if (ICloudUtils.isNotNull(productId)
 				&& ICloudUtils.isNotNull(insuranceHightLights)) {
-			if (ICloudUtils.isNotNull(insuranceHightLights.getHighlights())) {
-				int i = 0;
-				for (String hightLights : insuranceHightLights.getHighlights()) {
-					saveOrUpdateInsuranceObject(
-							productId,
-							InsuranceAggregateValueObject.PRODUCTHIGHLIGHTS_KEY,
-							hightLights, i++);
-				}
-			}
+			saveOrUpdateInsuranceObject(productId,
+					InsuranceAggregateValueObject.PRODUCTHIGHLIGHTS_KEY,
+					insuranceHightLights.getHighlights());
 		}
 	}
 
 	public InsuranceHightLights getInsuranceHightLights(Integer productId,
 			InsuranceHightLights insuranceHightLights) {
-		if (ICloudUtils.isNotNull(productId)&&ICloudUtils.isNotNull(insuranceHightLights)) {
-			List<InsuranceObject> list = this.getInsuranceObject(productId,
+		if (ICloudUtils.isNotNull(productId)
+				&& ICloudUtils.isNotNull(insuranceHightLights)) {
+			List<String> highlights = getInsuranceObjectForString(productId,
 					InsuranceAggregateValueObject.PRODUCTHIGHLIGHTS_KEY);
-			if (!ICloudUtils.isEmpty(list)) {
-				List<String> highlights = new ArrayList<String>();
-				insuranceHightLights.setHighlights(highlights);
-				for (InsuranceObject object : list) {
-					highlights.add(object.getInsuranceValue());
-				}
-			}
+			insuranceHightLights.setHighlights(highlights);
 			return insuranceHightLights;
 		}
 		return null;
