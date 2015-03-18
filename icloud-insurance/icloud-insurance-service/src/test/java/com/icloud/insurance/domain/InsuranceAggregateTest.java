@@ -84,13 +84,13 @@ public class InsuranceAggregateTest extends BaseTest {
 		UnderwritingAge underwritingAge = insuranceAggregate
 				.getUnderwritingAge();
 		System.out.println(underwritingAge);
-		// System.out.println(underwritingAge.getUnderwritingAgeForString());
-		// InsuranceBaseInfo insuranceBaseInfo = insuranceAggregate
-		// .getInsuranceBaseInfo();
-		// System.out.println(insuranceBaseInfo);
-		// InsuranceHightLights insuranceHightLights = insuranceAggregate
-		// .getInsuranceHightLights();
-		// System.out.println(insuranceHightLights);
+		System.out.println(underwritingAge.getUnderwritingAgeForString());
+		InsuranceBaseInfo insuranceBaseInfo = insuranceAggregate
+				.getInsuranceBaseInfo();
+		System.out.println(insuranceBaseInfo);
+		InsuranceHightLights insuranceHightLights = insuranceAggregate
+				.getInsuranceHightLights();
+		System.out.println(insuranceHightLights);
 	}
 
 	@Test

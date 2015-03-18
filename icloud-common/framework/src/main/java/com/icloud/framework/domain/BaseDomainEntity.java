@@ -1,6 +1,5 @@
 package com.icloud.framework.domain;
 
-import javax.annotation.PostConstruct;
 
 public abstract class BaseDomainEntity {
 	protected AggregateRoot aggregateRoot;
@@ -13,7 +12,7 @@ public abstract class BaseDomainEntity {
 		this.lazyLoading = lazyLoading;
 	}
 
-	public void init() {
+	public void loading() {
 		if (lazyLoading) {
 		} else {
 			loadEntity();

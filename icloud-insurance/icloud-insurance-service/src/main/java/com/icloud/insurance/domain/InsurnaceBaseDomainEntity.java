@@ -10,7 +10,6 @@ public abstract class InsurnaceBaseDomainEntity<T> extends BaseDomainEntity {
 			boolean lazyLoading) {
 		super(root, lazyLoading);
 		this.baseService = t;
-		init();
 	}
 
 	public InsurnaceBaseDomainEntity(AggregateRoot root, T t) {

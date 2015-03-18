@@ -6,8 +6,8 @@ import com.icloud.insurance.service.InsuranceObjectService;
 
 public class InsuranceBaseInfo extends
 		InsurnaceBaseDomainEntity<InsuranceObjectService> {
-	private String safeguardTimeDesc = null;
-	private String suitePeopleDesc = null;
+	private String safeguardTimeDesc;
+	private String suitePeopleDesc;
 
 	public InsuranceBaseInfo(AggregateRoot root, InsuranceObjectService t) {
 		super(root, t);

@@ -1,11 +1,11 @@
 package com.icloud.insurance.domain.aggregate;
 
+import java.util.ArrayList;
 import java.util.Date;
-
-import javax.annotation.PostConstruct;
+import java.util.List;
 
 import com.icloud.framework.domain.AggregateRoot;
-import com.icloud.framework.util.ICloudUtils;
+import com.icloud.framework.domain.BaseDomainEntity;
 import com.icloud.insurance.domain.entity.InsuranceBaseInfo;
 import com.icloud.insurance.domain.entity.InsuranceHightLights;
 import com.icloud.insurance.domain.entity.UnderwritingAge;
@@ -51,17 +51,27 @@ public class InsuranceAggregate extends AggregateRoot {
 		this.lazyLoading = lazyLoading;
 		this.insuranceNumberService = insuranceNumberService;
 		this.insuranceObjectService = insuranceObjectService;
-		setInit222();
+		init();
 	}
 
-	@PostConstruct
-	private void setInit222() {
+	private void init() {
 		insuranceBaseInfo = new InsuranceBaseInfo(this,
 				this.insuranceObjectService, lazyLoading);
 		underwritingAge = new UnderwritingAge(this,
 				this.insuranceNumberService, this.lazyLoading);
 		insuranceHightLights = new InsuranceHightLights(this,
 				insuranceObjectService, lazyLoading);
+
+		if (!lazyLoading) {
+			List<BaseDomainEntity> list = new ArrayList<BaseDomainEntity>();
+			list.add(insuranceBaseInfo);
+			list.add(underwritingAge);
+			list.add(insuranceHightLights);
+			for (BaseDomainEntity domainEntity : list) {
+				domainEntity.loading();
+			}
+		}
+
 	}
 
 	public static InsuranceAggregate convertInsuranceAggregateFromInsuranceProduct(
@@ -70,7 +80,7 @@ public class InsuranceAggregate extends AggregateRoot {
 			InsuranceObjectService insuranceObjectService, boolean lazyLoading) {
 		InsuranceAggregate aggreate = new InsuranceAggregate(product.getId(),
 				lazyLoading, insuranceNumberService, insuranceObjectService);
-//		aggreate = ICloudUtils.dozerCopy(aggreate, product);
+		// aggreate = ICloudUtils.dozerCopy(aggreate, product);
 		return aggreate;
 	}
 
@@ -216,7 +226,6 @@ public class InsuranceAggregate extends AggregateRoot {
 			InsuranceHightLights insuranceHightLights) {
 		this.insuranceHightLights = insuranceHightLights;
 	}
-	
 
 	public int getId() {
 		return id;
