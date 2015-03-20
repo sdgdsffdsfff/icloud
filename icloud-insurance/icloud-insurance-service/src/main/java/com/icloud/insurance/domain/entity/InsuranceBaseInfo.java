@@ -6,31 +6,33 @@ import com.icloud.framework.domain.AggregateRoot;
 import com.icloud.insurance.domain.InsurnaceBaseDomainEntity;
 import com.icloud.insurance.service.InsuranceObjectService;
 
-public class InsuranceBaseInfo extends
-		InsurnaceBaseDomainEntity<InsuranceObjectService> {
+public class InsuranceBaseInfo extends InsurnaceBaseDomainEntity {
+	private InsuranceObjectService insuranceObjectService;
 	private String safeguardTimeDesc;
 	private String suitePeopleDesc;
 	private List<String> productFeatures;
 	private List<String> tips;
 	private String specRecommend;
 
-	public InsuranceBaseInfo(AggregateRoot root, InsuranceObjectService t) {
-		super(root, t);
+	public InsuranceBaseInfo(AggregateRoot root,
+			InsuranceObjectService insuranceObjectService, boolean lazyLoading) {
+		super(root, lazyLoading);
+		this.insuranceObjectService = insuranceObjectService;
 	}
 
-	public InsuranceBaseInfo(AggregateRoot root, InsuranceObjectService t,
-			boolean lazyLoading) {
-		super(root, t, lazyLoading);
+	public InsuranceBaseInfo(AggregateRoot root,
+			InsuranceObjectService insuranceObjectService) {
+		this(root, insuranceObjectService, true);
 	}
 
 	@Override
 	public void doLoadEntity() {
-		this.baseService.getInsuranceBaseInfo(
+		this.insuranceObjectService.getInsuranceBaseInfo(
 				this.aggregateRoot.getAggregateId(), this);
 	}
 
 	public String getSafeguardTimeDesc() {
-		checkLoad();
+		// checkLoad();
 		return safeguardTimeDesc;
 	}
 
@@ -48,17 +50,19 @@ public class InsuranceBaseInfo extends
 	}
 
 	public List<String> getProductFeatures() {
-		checkLoad();
+		// checkLoad();
+		System.out.println("nihao -------------");
 		return productFeatures;
 	}
 
 	public void setProductFeatures(List<String> productFeatures) {
+		System.out.println("setProductFeatures");
 		this.productFeatures = productFeatures;
 	}
 
 	@Override
 	public void saveOrUpdateEntity() {
-		this.baseService.saveInsuranceBaseInfo(
+		insuranceObjectService.saveInsuranceBaseInfo(
 				this.aggregateRoot.getAggregateId(), this);
 	}
 

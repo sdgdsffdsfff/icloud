@@ -1,11 +1,10 @@
 package feature.account.mongo;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsEqual.equalTo;
-
 import java.util.List;
 
 import javax.annotation.Resource;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.cninfo.shtb.member.domain.AccountAggregate;
 import com.cninfo.shtb.mongo.entity.Account;
@@ -54,4 +53,5 @@ public class AccountScenario {
 		assertThat(account.getMoney(), equalTo(toMoney));
 	}
 
+	
 }

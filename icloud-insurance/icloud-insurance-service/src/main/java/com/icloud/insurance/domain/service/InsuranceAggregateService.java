@@ -36,6 +36,7 @@ public class InsuranceAggregateService {
 						insuranceNumberService, insuranceObjectService);
 	}
 
+	// @DomainEntityLazyLoad
 	public InsuranceAggregate getInsuranceAggregateById(int id,
 			boolean lazyLoading) {
 		InsuranceProduct product = insuranceProductService.getById(id);

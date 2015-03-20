@@ -6,13 +6,14 @@ import com.icloud.framework.domain.AggregateRoot;
 import com.icloud.insurance.domain.InsurnaceBaseDomainEntity;
 import com.icloud.insurance.service.InsuranceObjectService;
 
-public class InsuranceHightLights extends
-		InsurnaceBaseDomainEntity<InsuranceObjectService> {
+public class InsuranceHightLights extends InsurnaceBaseDomainEntity {
+	private InsuranceObjectService insuranceObjectService;
 	private List<String> highlights;
 
 	public InsuranceHightLights(AggregateRoot root,
 			InsuranceObjectService insuranceObjectService, boolean lazyLoading) {
-		super(root, insuranceObjectService, lazyLoading);
+		super(root, lazyLoading);
+		this.insuranceObjectService = insuranceObjectService;
 	}
 
 	public InsuranceHightLights(AggregateRoot root,
@@ -22,13 +23,13 @@ public class InsuranceHightLights extends
 
 	@Override
 	public void doLoadEntity() {
-		this.baseService.getInsuranceHightLights(
+		this.insuranceObjectService.getInsuranceHightLights(
 				this.aggregateRoot.getAggregateId(), this);
 	}
 
 	@Override
 	public void saveOrUpdateEntity() {
-		baseService.saveInsuranceHightLights(
+		insuranceObjectService.saveInsuranceHightLights(
 				this.aggregateRoot.getAggregateId(), this);
 	}
 

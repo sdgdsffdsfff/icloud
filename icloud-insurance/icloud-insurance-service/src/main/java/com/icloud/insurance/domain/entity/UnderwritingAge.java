@@ -6,14 +6,15 @@ import com.icloud.insurance.domain.InsurnaceBaseDomainEntity;
 import com.icloud.insurance.service.InsuranceNumberService;
 import com.icloud.insurance.util.InsuranceUtil;
 
-public class UnderwritingAge extends
-		InsurnaceBaseDomainEntity<InsuranceNumberService> {
+public class UnderwritingAge extends InsurnaceBaseDomainEntity {
+	private InsuranceNumberService insuranceNumberService;
 	private int startAge = ICloudUtils.DEFAULT_INT_VALUE;
 	private int endAge = ICloudUtils.DEFAULT_INT_VALUE;
 
 	public UnderwritingAge(AggregateRoot root,
 			InsuranceNumberService insuranceNumberService, boolean lazyLoading) {
-		super(root, insuranceNumberService, lazyLoading);
+		super(root, lazyLoading);
+		this.insuranceNumberService = insuranceNumberService;
 	}
 
 	public UnderwritingAge(AggregateRoot root,
@@ -24,18 +25,17 @@ public class UnderwritingAge extends
 	@Override
 	public void doLoadEntity() {
 		// TODO Auto-generated method stub
-		this.baseService.getUnderwritingAge(
+		this.insuranceNumberService.getUnderwritingAge(
 				this.aggregateRoot.getAggregateId(), this);
 	}
 
 	@Override
 	public void saveOrUpdateEntity() {
-		this.baseService.saveUnderwritingAge(
+		this.insuranceNumberService.saveUnderwritingAge(
 				this.aggregateRoot.getAggregateId(), this);
 	}
 
 	public int getStartAge() {
-		this.checkLoad();
 		return startAge;
 	}
 
@@ -44,7 +44,6 @@ public class UnderwritingAge extends
 	}
 
 	public int getEndAge() {
-		this.checkLoad();
 		return endAge;
 	}
 

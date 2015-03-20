@@ -1,12 +1,14 @@
 package com.icloud.insurance.domain.aggregate;
 
-import java.util.ArrayList;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Proxy;
 import java.util.Date;
-import java.util.List;
 
 import com.icloud.framework.domain.AggregateRoot;
-import com.icloud.framework.domain.BaseDomainEntity;
 import com.icloud.framework.util.ICloudUtils;
+import com.icloud.insurance.aop.DomainEntityLazyLoadIntercepter;
+import com.icloud.insurance.aop.ICloudIntercepter;
+import com.icloud.insurance.domain.InsurnaceBaseDomainEntity;
 import com.icloud.insurance.domain.entity.InsuranceBaseInfo;
 import com.icloud.insurance.domain.entity.InsuranceHightLights;
 import com.icloud.insurance.domain.entity.UnderwritingAge;
@@ -47,7 +49,10 @@ public class InsuranceAggregate extends AggregateRoot {
 
 	public InsuranceAggregate(int aggregateId, boolean lazyLoading,
 			InsuranceNumberService insuranceNumberService,
-			InsuranceObjectService insuranceObjectService) {
+			InsuranceObjectService insuranceObjectService)
+			throws NoSuchMethodException, SecurityException,
+			InstantiationException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
 		super(aggregateId);
 		this.lazyLoading = lazyLoading;
 		this.insuranceNumberService = insuranceNumberService;
@@ -55,23 +60,36 @@ public class InsuranceAggregate extends AggregateRoot {
 		init();
 	}
 
-	private void init() {
-		insuranceBaseInfo = new InsuranceBaseInfo(this,
+	private void init() throws NoSuchMethodException, SecurityException,
+			InstantiationException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
+		insuranceBaseInfo = InsurnaceBaseDomainEntity.getInsurance(
+				InsuranceBaseInfo.class, this, InsuranceObjectService.class,
 				this.insuranceObjectService, lazyLoading);
-		underwritingAge = new UnderwritingAge(this,
-				this.insuranceNumberService, this.lazyLoading);
-		insuranceHightLights = new InsuranceHightLights(this,
-				insuranceObjectService, lazyLoading);
 
-		if (!lazyLoading) {
-			List<BaseDomainEntity> list = new ArrayList<BaseDomainEntity>();
-			list.add(insuranceBaseInfo);
-			list.add(underwritingAge);
-			list.add(insuranceHightLights);
-			for (BaseDomainEntity domainEntity : list) {
-				domainEntity.loading();
-			}
-		}
+		underwritingAge = InsurnaceBaseDomainEntity.getInsurance(
+				UnderwritingAge.class, this, InsuranceNumberService.class,
+				this.insuranceNumberService, lazyLoading);
+
+		insuranceHightLights = InsurnaceBaseDomainEntity.getInsurance(
+				InsuranceHightLights.class, this, InsuranceObjectService.class,
+				this.insuranceObjectService, lazyLoading);
+		// // insuranceBaseInfo = new InsuranceBaseInfo(this,
+		// // this.insuranceObjectService, lazyLoading);
+		// underwritingAge = new UnderwritingAge(this,
+		// this.insuranceNumberService, this.lazyLoading);
+		// insuranceHightLights = new InsuranceHightLights(this,
+		// insuranceObjectService, lazyLoading);
+		//
+		// if (!lazyLoading) {
+		// List<BaseDomainEntity> list = new ArrayList<BaseDomainEntity>();
+		// list.add(insuranceBaseInfo);
+		// list.add(underwritingAge);
+		// list.add(insuranceHightLights);
+		// for (BaseDomainEntity domainEntity : list) {
+		// domainEntity.loading();
+		// }
+		// }
 
 	}
 
@@ -79,20 +97,30 @@ public class InsuranceAggregate extends AggregateRoot {
 			InsuranceProduct product,
 			InsuranceNumberService insuranceNumberService,
 			InsuranceObjectService insuranceObjectService, boolean lazyLoading) {
-		InsuranceAggregate aggregate = new InsuranceAggregate(product.getId(),
-				lazyLoading, insuranceNumberService, insuranceObjectService);
-		// aggreate = ICloudUtils.dozerCopy(aggreate, product);
-		aggregate.setId(product.getId());
-		aggregate.setInsuranceName(product.getInsuranceName());
-		aggregate.setInsuranceCompany(product.getInsuranceCompany());
-		aggregate.setSimpleDescription(product.getSimpleDescription());
-		aggregate.setSafeguardTime(product.getSafeguardTime());
-		aggregate.setCreateTime(product.getCreateTime());
-		aggregate.setLastUpdateTime(product.getLastUpdateTime());
-		aggregate.setLastUpdateUserId(product.getLastUpdateUserId());
-		aggregate.setLastUpdateUserName(product.getLastUpdateUserName());
-		aggregate.setInsuranceStatus(product.getInsuranceStatus());
-		aggregate.setInsuranceCategoryId(product.getInsuranceCategoryId());
+		InsuranceAggregate aggregate = null;
+		try {
+			aggregate = new InsuranceAggregate(product.getId(), lazyLoading,
+					insuranceNumberService, insuranceObjectService);
+		} catch (NoSuchMethodException | SecurityException
+				| InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (ICloudUtils.isNotNull(aggregate)) {
+			// aggreate = ICloudUtils.dozerCopy(aggreate, product);
+			aggregate.setId(product.getId());
+			aggregate.setInsuranceName(product.getInsuranceName());
+			aggregate.setInsuranceCompany(product.getInsuranceCompany());
+			aggregate.setSimpleDescription(product.getSimpleDescription());
+			aggregate.setSafeguardTime(product.getSafeguardTime());
+			aggregate.setCreateTime(product.getCreateTime());
+			aggregate.setLastUpdateTime(product.getLastUpdateTime());
+			aggregate.setLastUpdateUserId(product.getLastUpdateUserId());
+			aggregate.setLastUpdateUserName(product.getLastUpdateUserName());
+			aggregate.setInsuranceStatus(product.getInsuranceStatus());
+			aggregate.setInsuranceCategoryId(product.getInsuranceCategoryId());
+		}
 		return aggregate;
 	}
 

@@ -1,4 +1,4 @@
-package com.icloud.insruance.db;
+package com.icloud.insurance.db;
 
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.insurance.domain.valueobject.InsuranceEnum;

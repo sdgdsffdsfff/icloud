@@ -44,7 +44,7 @@ public class InsuranceAggregateTest extends BaseTest {
 
 	@Test
 	public void InsuranceAggregateSaveUnderWritingAge() {
-		InsuranceAggregate insuranceAggregate = getInsuranceAggreate();
+		InsuranceAggregate insuranceAggregate = getInsuranceAggregate();
 		UnderwritingAge underwritingAge = insuranceAggregate
 				.getUnderwritingAge();
 		underwritingAge.setEndAge(309);
@@ -55,7 +55,7 @@ public class InsuranceAggregateTest extends BaseTest {
 
 	@Test
 	public void InsuranceAggregateSaveBaseInfo() {
-		InsuranceAggregate insuranceAggregate = getInsuranceAggreate();
+		InsuranceAggregate insuranceAggregate = getInsuranceAggregate();
 		InsuranceBaseInfo insuranceBaseInfo = insuranceAggregate
 				.getInsuranceBaseInfo();
 		insuranceBaseInfo.setSafeguardTimeDesc("自3天后生效");
@@ -81,7 +81,7 @@ public class InsuranceAggregateTest extends BaseTest {
 
 	@Test
 	public void InsuranceAggregateSaveHightLights() {
-		InsuranceAggregate insuranceAggregate = getInsuranceAggreate();
+		InsuranceAggregate insuranceAggregate = getInsuranceAggregate();
 		InsuranceHightLights insuranceHightLights = insuranceAggregate
 				.getInsuranceHightLights();
 		insuranceAggregate.setInsuranceHightLights(insuranceHightLights);
@@ -94,33 +94,47 @@ public class InsuranceAggregateTest extends BaseTest {
 
 	@Test
 	public void InsuranceAggregateLoadingTest() {
-		InsuranceAggregate insuranceAggregate = getInsuranceAggreate();
+		InsuranceAggregateLoadingTest(false);
+	}
+
+	@Test
+	public void InsuranceAggregateTest() {
+		InsuranceAggregateLoadingTest(true);
+	}
+
+	public void InsuranceAggregateLoadingTest(boolean loading) {
+		InsuranceAggregate insuranceAggregate = getInsuranceAggregate(1,
+				loading);
 		System.out.println(insuranceAggregate);
 		UnderwritingAge underwritingAge = insuranceAggregate
 				.getUnderwritingAge();
-		System.out.println(underwritingAge);
-		System.out.println(underwritingAge.getUnderwritingAgeForString());
-		InsuranceBaseInfo insuranceBaseInfo = insuranceAggregate
-				.getInsuranceBaseInfo();
-		System.out.println(insuranceBaseInfo);
-		InsuranceHightLights insuranceHightLights = insuranceAggregate
-				.getInsuranceHightLights();
-		System.out.println(insuranceHightLights);
+		System.out.println("-----------||||" + underwritingAge.getStartAge());
+		// System.out.println(underwritingAge.getUnderwritingAgeForString());
+		// InsuranceBaseInfo insuranceBaseInfo = insuranceAggregate
+		// .getInsuranceBaseInfo();
+		// System.out.println(insuranceBaseInfo);
+		// InsuranceHightLights insuranceHightLights = insuranceAggregate
+		// .getInsuranceHightLights();
+		// System.out.println(insuranceHightLights);
 	}
 
 	@Test
 	public void testGetInsuranceAggreate() {
-		getInsuranceAggreate();
+		getInsuranceAggregate();
 	}
 
-	public InsuranceAggregate getInsuranceAggreate(int id, boolean flag) {
+	public InsuranceAggregate getInsuranceAggregate(int id, boolean flag) {
 		InsuranceAggregate insuranceAggregate = insuranceAggregateService
 				.getInsuranceAggregateById(id, flag);
 		return insuranceAggregate;
 	}
 
-	public InsuranceAggregate getInsuranceAggreate() {
-		return getInsuranceAggreate(1, false);
+	public InsuranceAggregate getInsuranceAggregate() {
+		return getInsuranceAggregate(1, false);
+	}
+
+	public InsuranceAggregate getInsuranceAggregateNoLoading() {
+		return getInsuranceAggregate(1, true);
 	}
 
 }
