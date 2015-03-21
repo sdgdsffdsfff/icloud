@@ -35,5 +35,6 @@
 		<mapping resource="model/InsuranceNumber.hbm.xml" />
 		<mapping resource="model/InsuranceObject.hbm.xml" />
 		<mapping resource="model/InsuranceProduct.hbm.xml" />
+		<mapping resource="model/MediaFile.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

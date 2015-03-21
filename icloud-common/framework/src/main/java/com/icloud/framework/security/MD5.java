@@ -49,6 +49,10 @@ public class MD5 {
 		return resultSb.toString();
 	}
 
+	public static String byteToMD5Encode(byte[] b) {
+		return MD5Encode(byteArrayToHexString(b));
+	}
+
 	private static String byteToHexString(byte b) {
 		int n = b;
 		if (n < 0)
