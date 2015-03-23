@@ -5,30 +5,32 @@ import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.icloud.insurance.domain.aggregate.InsuranceAggregate;
+import com.icloud.insurance.domain.aggregate.InsuranceCompanyAggregate;
 import com.icloud.insurance.domain.entity.InsuranceBaseInfo;
 import com.icloud.insurance.domain.entity.InsuranceHightLights;
 import com.icloud.insurance.domain.entity.UnderwritingAge;
-import com.icloud.insurance.domain.service.InsuranceAggregateService;
 import com.icloud.insurance.domain.valueobject.InsuranceEnum.InsuranceCategoryEnum;
 import com.icloud.insurance.domain.valueobject.InsuranceEnum.SystemStatusEnum;
 import com.icloud.insurance.model.InsuranceProduct;
 import com.icloud.insurance.service.BaseTest;
-import com.icloud.insurance.service.InsuranceAttributeService;
 
 public class InsuranceAggregateTest extends BaseTest {
-	@Autowired
-	private InsuranceAggregateService insuranceAggregateService;
-	@Autowired
-	private InsuranceAttributeService insuranceAttributeService;
+
+	@Test
+	public void delete() {
+		insuranceAggregateService.deleteAggregate(1);
+	}
 
 	@Test
 	public void saveInsuranceProduct() {
+		InsuranceCompanyAggregate company = this.insuranceCompanyAggregateService
+				.getInsuranceCompanyAggregate(14);
 		InsuranceProduct product = new InsuranceProduct();
 		product.setInsuranceName("中民无忧综合意外基本计划-计划一");
-		product.setInsuranceCompany("中国人寿");
+		product.setInsuranceCompany(company.getCompanyName());
+		product.setInsuranceCompanyId(company.getCompanyId());
 		product.setSimpleDescription("一款适用少儿、工人、白领人士、中老年阶层的精简、实用的综合意外保障计划。性价比极高的意外险产品。");
 		product.setSafeguardTime(365);
 		product.setCreateTime(new Date());
@@ -40,6 +42,7 @@ public class InsuranceAggregateTest extends BaseTest {
 				.getInsuranceAttributeIdFromUUID(InsuranceCategoryEnum.ACCIDENT_INSURANCE
 						.getUuid()));
 		insuranceAggregateService.saveInsuranceProduct(product);
+		InsuranceAggregateSaveBaseInfo(product.getId());
 	}
 
 	@Test
@@ -53,9 +56,10 @@ public class InsuranceAggregateTest extends BaseTest {
 		System.out.println(insuranceAggregate);
 	}
 
-	@Test
-	public void InsuranceAggregateSaveBaseInfo() {
-		InsuranceAggregate insuranceAggregate = getInsuranceAggregate();
+
+	public void InsuranceAggregateSaveBaseInfo(int productId) {
+		InsuranceAggregate insuranceAggregate = getInsuranceAggregate(
+				productId, true);
 		InsuranceBaseInfo insuranceBaseInfo = insuranceAggregate
 				.getInsuranceBaseInfo();
 		insuranceBaseInfo.setSafeguardTimeDesc("自3天后生效");
@@ -130,11 +134,11 @@ public class InsuranceAggregateTest extends BaseTest {
 	}
 
 	public InsuranceAggregate getInsuranceAggregate() {
-		return getInsuranceAggregate(1, false);
+		return getInsuranceAggregate(5, false);
 	}
 
 	public InsuranceAggregate getInsuranceAggregateNoLoading() {
-		return getInsuranceAggregate(1, true);
+		return getInsuranceAggregate(5, true);
 	}
 
 }

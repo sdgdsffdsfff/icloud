@@ -9,8 +9,7 @@ import org.junit.Test;
 import com.icloud.insurance.model.MediaFile;
 
 public class MediaFileServiceTest extends BaseTest {
-	@Resource(name = "mediaFileService")
-	private MediaFileService mediaFileService;
+
 
 	@Test
 	public void findTest() {

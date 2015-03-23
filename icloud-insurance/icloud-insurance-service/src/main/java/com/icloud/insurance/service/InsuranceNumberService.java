@@ -1,5 +1,7 @@
 package com.icloud.insurance.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -14,7 +16,9 @@ import com.icloud.insurance.dao.InsuranceNumberDao;
 import com.icloud.insurance.domain.entity.UnderwritingAge;
 import com.icloud.insurance.domain.valueobject.InsuranceAggregateValueObject;
 import com.icloud.insurance.model.InsuranceNumber;
+import com.icloud.insurance.model.InsuranceObject;
 import com.icloud.insurance.model.constant.InsuranceNumberConstant;
+import com.icloud.insurance.model.constant.InsuranceObjectConstant;
 
 @Service("insuranceNumberService")
 public class InsuranceNumberService extends SqlBaseService<InsuranceNumber> {
@@ -42,6 +46,23 @@ public class InsuranceNumberService extends SqlBaseService<InsuranceNumber> {
 		return ICloudUtils.getFirstElement(this.insuranceNumberDao
 				.findByPropertyNoLazy(paramNames, operations, values, null,
 						true, 0, 2));
+	}
+
+	public List<InsuranceNumber> getInsuranceNumberList(int productId, int key) {
+		String[] paramNames = { InsuranceNumberConstant.INSURANCEID,
+				InsuranceNumberConstant.INSURANCEKEY };
+		Object[] values = { productId, key };
+		return this.insuranceNumberDao.findByProperty(paramNames, values,
+				InsuranceNumberConstant.INSURANCEORDER, true);
+	}
+
+	private void deleteInsuranceNumber(int productId, int key) {
+		List<InsuranceNumber> objects = getInsuranceNumberList(productId, key);
+		if (!ICloudUtils.isEmpty(objects)) {
+			for (InsuranceNumber object : objects) {
+				this.delete(object);
+			}
+		}
 	}
 
 	public InsuranceNumber saveOrUpdateInsuranceNumber(int productId, int key,
@@ -101,5 +122,11 @@ public class InsuranceNumberService extends SqlBaseService<InsuranceNumber> {
 				}
 			}
 		}
+	}
+
+	public void deleteUnderwritingAge(int productId,
+			UnderwritingAge underwritingAge) {
+		this.deleteInsuranceNumber(productId,
+				InsuranceAggregateValueObject.UNDER_WRITING_AGE_KEY);
 	}
 }

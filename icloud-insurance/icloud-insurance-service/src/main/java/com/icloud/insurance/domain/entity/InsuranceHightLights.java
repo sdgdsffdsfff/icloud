@@ -34,7 +34,6 @@ public class InsuranceHightLights extends InsurnaceBaseDomainEntity {
 	}
 
 	public List<String> getHighlights() {
-		checkLoad();
 		return highlights;
 	}
 
@@ -45,6 +44,12 @@ public class InsuranceHightLights extends InsurnaceBaseDomainEntity {
 	@Override
 	public String toString() {
 		return "InsuranceHightLights [highlights=" + highlights + "]";
+	}
+
+	@Override
+	public void deleteEntity() {
+		insuranceObjectService.deleteInsuranceHightLights(
+				this.aggregateRoot.getAggregateId(), this);
 	}
 
 }

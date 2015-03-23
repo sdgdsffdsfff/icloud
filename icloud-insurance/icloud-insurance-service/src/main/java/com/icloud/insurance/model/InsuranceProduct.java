@@ -1,6 +1,6 @@
 package com.icloud.insurance.model;
 
-// Generated 2015-3-16 14:53:36 by Hibernate Tools 3.4.0.CR1
+// Generated 2015-3-23 18:39:35 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 
@@ -12,6 +12,7 @@ public class InsuranceProduct implements java.io.Serializable {
 	private Integer id;
 	private String insuranceName;
 	private String insuranceCompany;
+	private Integer insuranceCompanyId;
 	private String simpleDescription;
 	private Integer safeguardTime;
 	private Date createTime;
@@ -25,12 +26,13 @@ public class InsuranceProduct implements java.io.Serializable {
 	}
 
 	public InsuranceProduct(String insuranceName, String insuranceCompany,
-			String simpleDescription, Integer safeguardTime, Date createTime,
-			Date lastUpdateTime, Integer lastUpdateUserId,
-			String lastUpdateUserName, Integer insuranceStatus,
-			Integer insuranceCategoryId) {
+			Integer insuranceCompanyId, String simpleDescription,
+			Integer safeguardTime, Date createTime, Date lastUpdateTime,
+			Integer lastUpdateUserId, String lastUpdateUserName,
+			Integer insuranceStatus, Integer insuranceCategoryId) {
 		this.insuranceName = insuranceName;
 		this.insuranceCompany = insuranceCompany;
+		this.insuranceCompanyId = insuranceCompanyId;
 		this.simpleDescription = simpleDescription;
 		this.safeguardTime = safeguardTime;
 		this.createTime = createTime;
@@ -63,6 +65,14 @@ public class InsuranceProduct implements java.io.Serializable {
 
 	public void setInsuranceCompany(String insuranceCompany) {
 		this.insuranceCompany = insuranceCompany;
+	}
+
+	public Integer getInsuranceCompanyId() {
+		return this.insuranceCompanyId;
+	}
+
+	public void setInsuranceCompanyId(Integer insuranceCompanyId) {
+		this.insuranceCompanyId = insuranceCompanyId;
 	}
 
 	public String getSimpleDescription() {

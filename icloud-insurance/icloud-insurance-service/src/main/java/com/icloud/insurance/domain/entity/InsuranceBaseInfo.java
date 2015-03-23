@@ -41,7 +41,6 @@ public class InsuranceBaseInfo extends InsurnaceBaseDomainEntity {
 	}
 
 	public String getSuitePeopleDesc() {
-		checkLoad();
 		return suitePeopleDesc;
 	}
 
@@ -50,19 +49,22 @@ public class InsuranceBaseInfo extends InsurnaceBaseDomainEntity {
 	}
 
 	public List<String> getProductFeatures() {
-		// checkLoad();
-		System.out.println("nihao -------------");
 		return productFeatures;
 	}
 
 	public void setProductFeatures(List<String> productFeatures) {
-		System.out.println("setProductFeatures");
 		this.productFeatures = productFeatures;
 	}
 
 	@Override
 	public void saveOrUpdateEntity() {
 		insuranceObjectService.saveInsuranceBaseInfo(
+				this.aggregateRoot.getAggregateId(), this);
+	}
+
+	@Override
+	public void deleteEntity() {
+		insuranceObjectService.deleteInsuranceBaseInfo(
 				this.aggregateRoot.getAggregateId(), this);
 	}
 

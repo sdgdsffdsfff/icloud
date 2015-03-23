@@ -1,6 +1,5 @@
 package com.icloud.framework.domain;
 
-
 public abstract class BaseDomainEntity {
 	protected AggregateRoot aggregateRoot;
 	protected boolean isLoaded;
@@ -35,4 +34,6 @@ public abstract class BaseDomainEntity {
 	public abstract void doLoadEntity();
 
 	public abstract void saveOrUpdateEntity();
+
+	public abstract void deleteEntity();
 }

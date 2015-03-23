@@ -8,5 +8,6 @@ public class InsuranceAttributeConstant {
 	public static final String STATUS = "status";
 	public static final String LEVEL = "level";
 	public static final String UUID = "uuid";
+	public static final String DESCRIPTION = "description";
 
 }

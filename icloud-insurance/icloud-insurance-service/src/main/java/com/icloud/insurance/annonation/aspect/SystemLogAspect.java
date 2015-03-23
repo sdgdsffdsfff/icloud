@@ -24,7 +24,7 @@ public class SystemLogAspect {
 	// Controller层切点
 	@Pointcut("@annotation(com.icloud.insurance.annonation.SystemControllerLog)")
 	public void controllerAspect() {
-		System.out.println("-----");
+		// System.out.println("-----");
 	}
 
 	/**
@@ -37,27 +37,27 @@ public class SystemLogAspect {
 	public void doBefore(JoinPoint joinPoint) {
 		Object[] args = joinPoint.getArgs();
 		for (Object ob : args) {
-			System.out.println(ob);
+			// System.out.println(ob);
 		}
-		System.out.println("before");
+		// System.out.println("before");
 
 	}
-	
-//	@Around("controllerAspect()")
-//    public void around(ProceedingJoinPoint pjp) throws Throwable{
-//		System.out.println("已经记录下操作日志@Around 方法执行前");
-//        pjp.proceed();
-//        System.out.println("已经记录下操作日志@Around 方法执行后");
-//    }
+
+	// @Around("controllerAspect()")
+	// public void around(ProceedingJoinPoint pjp) throws Throwable{
+	// System.out.println("已经记录下操作日志@Around 方法执行前");
+	// pjp.proceed();
+	// System.out.println("已经记录下操作日志@Around 方法执行后");
+	// }
 
 	// 配置后置通知,使用在方法aspect()上注册的切入点
 	@After("controllerAspect()")
 	public void after(JoinPoint joinPoint) {
 		Object[] args = joinPoint.getArgs();
 		for (Object ob : args) {
-			System.out.println(ob);
+			// System.out.println(ob);
 		}
-		System.out.println("after");
+		// System.out.println("after");
 	}
 
 	/**

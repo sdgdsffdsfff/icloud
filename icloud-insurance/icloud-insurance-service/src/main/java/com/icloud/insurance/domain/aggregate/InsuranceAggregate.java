@@ -1,13 +1,10 @@
 package com.icloud.insurance.domain.aggregate;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Proxy;
 import java.util.Date;
 
 import com.icloud.framework.domain.AggregateRoot;
 import com.icloud.framework.util.ICloudUtils;
-import com.icloud.insurance.aop.DomainEntityLazyLoadIntercepter;
-import com.icloud.insurance.aop.ICloudIntercepter;
 import com.icloud.insurance.domain.InsurnaceBaseDomainEntity;
 import com.icloud.insurance.domain.entity.InsuranceBaseInfo;
 import com.icloud.insurance.domain.entity.InsuranceHightLights;
@@ -21,6 +18,7 @@ public class InsuranceAggregate extends AggregateRoot {
 	private int id;
 	private String insuranceName;
 	private String insuranceCompany;
+	private Integer insuranceCompanyId;
 	private String simpleDescription;
 	private Integer safeguardTime;
 	private Date createTime;
@@ -74,23 +72,12 @@ public class InsuranceAggregate extends AggregateRoot {
 		insuranceHightLights = InsurnaceBaseDomainEntity.getInsurance(
 				InsuranceHightLights.class, this, InsuranceObjectService.class,
 				this.insuranceObjectService, lazyLoading);
-		// // insuranceBaseInfo = new InsuranceBaseInfo(this,
-		// // this.insuranceObjectService, lazyLoading);
-		// underwritingAge = new UnderwritingAge(this,
-		// this.insuranceNumberService, this.lazyLoading);
-		// insuranceHightLights = new InsuranceHightLights(this,
-		// insuranceObjectService, lazyLoading);
-		//
-		// if (!lazyLoading) {
-		// List<BaseDomainEntity> list = new ArrayList<BaseDomainEntity>();
-		// list.add(insuranceBaseInfo);
-		// list.add(underwritingAge);
-		// list.add(insuranceHightLights);
-		// for (BaseDomainEntity domainEntity : list) {
-		// domainEntity.loading();
-		// }
-		// }
+	}
 
+	public void deletAllAttribute() {
+		insuranceBaseInfo.deleteEntity();
+		underwritingAge.deleteEntity();
+		insuranceHightLights.deleteEntity();
 	}
 
 	public static InsuranceAggregate convertInsuranceAggregateFromInsuranceProduct(
@@ -112,6 +99,7 @@ public class InsuranceAggregate extends AggregateRoot {
 			aggregate.setId(product.getId());
 			aggregate.setInsuranceName(product.getInsuranceName());
 			aggregate.setInsuranceCompany(product.getInsuranceCompany());
+			aggregate.setInsuranceCompanyId(product.getInsuranceCompanyId());
 			aggregate.setSimpleDescription(product.getSimpleDescription());
 			aggregate.setSafeguardTime(product.getSafeguardTime());
 			aggregate.setCreateTime(product.getCreateTime());
@@ -273,6 +261,14 @@ public class InsuranceAggregate extends AggregateRoot {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Integer getInsuranceCompanyId() {
+		return insuranceCompanyId;
+	}
+
+	public void setInsuranceCompanyId(Integer insuranceCompanyId) {
+		this.insuranceCompanyId = insuranceCompanyId;
 	}
 
 	@Override

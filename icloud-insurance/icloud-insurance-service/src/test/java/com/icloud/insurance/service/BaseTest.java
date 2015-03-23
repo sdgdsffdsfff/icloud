@@ -9,6 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.icloud.insurance.dao.UserDao;
+import com.icloud.insurance.domain.service.InsuranceAggregateService;
+import com.icloud.insurance.domain.service.InsuranceCompanyAggregateService;
 import com.icloud.insurance.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -16,7 +18,19 @@ import com.icloud.insurance.model.User;
 public class BaseTest {
 
 	@Autowired
-	private UserDao userDao;
+	protected UserDao userDao;
+
+	@Autowired
+	protected InsuranceAggregateService insuranceAggregateService;
+	@Autowired
+	protected InsuranceAttributeService insuranceAttributeService;
+	@Autowired
+	protected InsuranceNumberService insuranceNumberService;
+	@Autowired
+	protected MediaFileService mediaFileService;
+
+	@Autowired
+	protected InsuranceCompanyAggregateService insuranceCompanyAggregateService;
 
 	@Test
 	public void readAllCustomer() {
@@ -25,6 +39,5 @@ public class BaseTest {
 			System.out.println(user.getChinaName());
 		}
 	}
-
 
 }

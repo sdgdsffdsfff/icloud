@@ -75,4 +75,19 @@ public class MediaFileService extends SqlBaseService<MediaFile> {
 	public boolean exits(String id) {
 		return !ICloudUtils.isNotNull(this.getByHashId(id));
 	}
+
+	public MediaFile getByFile(File imgFile) {
+		byte[] bytes = null;
+		try {
+			bytes = TZPhotoUtil.getBytesFromFile(imgFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (ICloudUtils.isNotNull(bytes)) {
+			String hashId = MD5.byteToMD5Encode(bytes);
+			return getByHashId(hashId);
+		}
+		return null;
+	}
 }

@@ -22,7 +22,7 @@ public class DomainEntityLazyLoadAspect {
 	// Controller层切点
 	@Pointcut("@annotation(com.icloud.insurance.annonation.DomainEntityLazyLoad)")
 	public void lazyLoadAspect() {
-		System.out.println("-----  --------------------- in lazyLoadAspect()");
+//		System.out.println("-----  --------------------- in lazyLoadAspect()");
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class DomainEntityLazyLoadAspect {
 		for (Object ob : args) {
 			System.out.println(ob);
 		}
-		System.out.println("before-----------------------------------");
+//		System.out.println("before-----------------------------------");
 	}
 
 	// 配置后置通知,使用在方法aspect()上注册的切入点

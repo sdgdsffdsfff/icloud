@@ -41,6 +41,15 @@ public class InsuranceObjectService extends SqlBaseService<InsuranceObject> {
 				InsuranceObjectConstant.INSURANCEORDER, true);
 	}
 
+	private void deleteInsuranceObject(int productId, int key) {
+		List<InsuranceObject> objects = getInsuranceObjectList(productId, key);
+		if (!ICloudUtils.isEmpty(objects)) {
+			for (InsuranceObject object : objects) {
+				this.delete(object);
+			}
+		}
+	}
+
 	public List<String> getInsuranceObjectForString(int productId, int key) {
 		List<InsuranceObject> objects = getInsuranceObjectList(productId, key);
 		if (!ICloudUtils.isEmpty(objects)) {
@@ -156,7 +165,23 @@ public class InsuranceObjectService extends SqlBaseService<InsuranceObject> {
 					InsuranceAggregateValueObject.PRODUCT_RECOMMEND_KEY,
 					insuranceBaseInfo.getSpecRecommend(), 0);
 		}
+	}
 
+	public void deleteInsuranceBaseInfo(int productId,
+			InsuranceBaseInfo insuranceBaseInfo) {
+		if (ICloudUtils.isNotNull(productId)
+				&& ICloudUtils.isNotNull(insuranceBaseInfo)) {
+			this.deleteInsuranceObject(productId,
+					InsuranceAggregateValueObject.SAFEGUARDTIME_KEY);
+			this.deleteInsuranceObject(productId,
+					InsuranceAggregateValueObject.SUITEPEOPLE_KEY);
+			this.deleteInsuranceObject(productId,
+					InsuranceAggregateValueObject.PORDUCTFEATURES_KEY);
+			this.deleteInsuranceObject(productId,
+					InsuranceAggregateValueObject.PRODUCTTIPS_KEY);
+			this.deleteInsuranceObject(productId,
+					InsuranceAggregateValueObject.PRODUCT_RECOMMEND_KEY);
+		}
 	}
 
 	public void saveInsuranceHightLights(Integer productId,
@@ -180,4 +205,11 @@ public class InsuranceObjectService extends SqlBaseService<InsuranceObject> {
 		}
 		return null;
 	}
+
+	public void deleteInsuranceHightLights(int productId,
+			InsuranceHightLights insuranceHightLights) {
+		this.deleteInsuranceObject(productId,
+				InsuranceAggregateValueObject.PRODUCTHIGHLIGHTS_KEY);
+	}
+
 }

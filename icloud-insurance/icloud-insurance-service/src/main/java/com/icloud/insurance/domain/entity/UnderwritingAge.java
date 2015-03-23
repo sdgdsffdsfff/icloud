@@ -61,4 +61,10 @@ public class UnderwritingAge extends InsurnaceBaseDomainEntity {
 				+ "]";
 	}
 
+	@Override
+	public void deleteEntity() {
+		this.insuranceNumberService.deleteUnderwritingAge(
+				this.aggregateRoot.getAggregateId(), this);
+	}
+
 }

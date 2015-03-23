@@ -3,6 +3,7 @@ package com.icloud.insurance.db;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.insurance.domain.valueobject.InsuranceEnum;
 import com.icloud.insurance.domain.valueobject.InsuranceEnum.InsuranceCategoryEnum;
+import com.icloud.insurance.domain.valueobject.InsuranceEnum.InsuranceInfoEnum;
 import com.icloud.insurance.domain.valueobject.InsuranceEnum.SystemMenuEnum;
 import com.icloud.insurance.domain.valueobject.InsuranceEnum.SystemStatusEnum;
 import com.icloud.insurance.model.InsuranceAttribute;
@@ -12,6 +13,42 @@ public class InitDB {
 	public static void init(InsuranceAttributeService insuranceAttributeService) {
 		initSystemMenu(insuranceAttributeService);
 		initInsuranceCategoryEnum(insuranceAttributeService);
+		initInsuranceInfoEnum(insuranceAttributeService);
+	}
+
+	private static void initInsuranceInfoEnum(
+			InsuranceAttributeService insuranceAttributeService) {
+		InsuranceInfoEnum[] values = InsuranceInfoEnum.values();
+		for (InsuranceInfoEnum insuranceInfoEnum : values) {
+			if (insuranceAttributeService.existsUUID(insuranceInfoEnum
+					.getUuid())) {
+				InsuranceAttribute fatherInsuranceAttribute = insuranceAttributeService
+						.getByUUID(insuranceInfoEnum.getFather_uuid());
+				InsuranceAttribute InsuranceAttribute = convertInsuranceAttribute(
+						insuranceInfoEnum, fatherInsuranceAttribute);
+				if (ICloudUtils.isNotNull(InsuranceAttribute)) {
+					insuranceAttributeService.save(InsuranceAttribute);
+				}
+			}
+		}
+
+	}
+
+	private static com.icloud.insurance.model.InsuranceAttribute convertInsuranceAttribute(
+			InsuranceInfoEnum insuranceInfoEnum,
+			InsuranceAttribute fatherInsuranceAttribute) {
+		if (!ICloudUtils.isNotNull(insuranceInfoEnum)
+				|| !ICloudUtils.isNotNull(fatherInsuranceAttribute))
+			return null;
+		InsuranceAttribute insuranceAttribute = new InsuranceAttribute();
+		insuranceAttribute.setAttributeName(insuranceInfoEnum.getName());
+		insuranceAttribute.setFatherId(fatherInsuranceAttribute.getId());
+		insuranceAttribute.setFatherName(fatherInsuranceAttribute
+				.getAttributeName());
+		insuranceAttribute.setStatus(SystemStatusEnum.OK.getStatus());
+		insuranceAttribute.setLevel(fatherInsuranceAttribute.getLevel() + 1);
+		insuranceAttribute.setUuid(insuranceInfoEnum.getUuid());
+		return insuranceAttribute;
 	}
 
 	private static void initInsuranceCategoryEnum(
@@ -31,7 +68,7 @@ public class InitDB {
 		}
 	}
 
-	private static com.icloud.insurance.model.InsuranceAttribute convertInsuranceAttribute(
+	private static InsuranceAttribute convertInsuranceAttribute(
 			InsuranceCategoryEnum insuranceCategoryEnum,
 			InsuranceAttribute fatherInsuranceAttribute) {
 		if (!ICloudUtils.isNotNull(insuranceCategoryEnum)
@@ -74,4 +111,5 @@ public class InitDB {
 		InsuranceAttribute.setUuid(systemMenuEnum.getUuid());
 		return InsuranceAttribute;
 	}
+
 }

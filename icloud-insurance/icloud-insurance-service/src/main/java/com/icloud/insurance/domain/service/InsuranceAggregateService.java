@@ -7,18 +7,12 @@ import org.springframework.stereotype.Service;
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.insurance.domain.aggregate.InsuranceAggregate;
 import com.icloud.insurance.model.InsuranceProduct;
-import com.icloud.insurance.service.InsuranceNumberService;
-import com.icloud.insurance.service.InsuranceObjectService;
 import com.icloud.insurance.service.InsuranceProductService;
 
 @Service("insuranceAggregateService")
-public class InsuranceAggregateService {
+public class InsuranceAggregateService extends BaseService {
 	@Resource(name = "insuranceProductService")
 	protected InsuranceProductService insuranceProductService;
-	@Resource(name = "insuranceNumberService")
-	protected InsuranceNumberService insuranceNumberService;
-	@Resource(name = "insuranceObjectService")
-	protected InsuranceObjectService insuranceObjectService;
 
 	/**
 	 * 存储元数据
@@ -36,7 +30,6 @@ public class InsuranceAggregateService {
 						insuranceNumberService, insuranceObjectService);
 	}
 
-	// @DomainEntityLazyLoad
 	public InsuranceAggregate getInsuranceAggregateById(int id,
 			boolean lazyLoading) {
 		InsuranceProduct product = insuranceProductService.getById(id);
@@ -51,5 +44,15 @@ public class InsuranceAggregateService {
 
 	public InsuranceAggregate getInsuranceAggregateById(int id) {
 		return getInsuranceAggregateById(id, true);
+	}
+
+	public void deleteAggregate(int id) {
+		InsuranceAggregate insuranceAggregate = getInsuranceAggregateById(id);
+		if (ICloudUtils.isNotNull(insuranceAggregate)) {
+			insuranceAggregate.deletAllAttribute();
+			InsuranceProduct product = insuranceProductService.getById(id);
+			this.insuranceProductService.delete(product);
+		}
+
 	}
 }
