@@ -1,24 +1,30 @@
 package com.icloud.ehcache.test;
 
-import javax.annotation.Resource;
-
 import net.sf.ehcache.Cache;
-import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.icloud.ehcache.client.EhcacheClient;
 
 public class CacheTest extends BaseTest {
-	@Resource(name = "cacheManager")
-	private EhCacheCacheManager cacheManager;
+	@Autowired
+	private Cache cache;
 
 	@Test
-	public void set() {
-		CacheManager cacheManager2 = cacheManager.getCacheManager();
-		Cache cache = (Cache) cacheManager2.getCache("com.icloud.MethodCache");
+	public void saveAndgetTest() {
+		String key = "hello";
+		String value = "world";
+		EhcacheClient.getInstance().save(key, value);
+		Object obj = EhcacheClient.getInstance().get(key);
+		Assert.assertEquals(value, obj);
+		System.out.println(obj);
+	}
 
+	@Test
+	public void autoSaveAndgetTest() {
 		String key = "hello";
 		String value = "world";
 		cache.put(new Element(key, value));

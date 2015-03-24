@@ -16,9 +16,7 @@ import com.icloud.insurance.dao.InsuranceNumberDao;
 import com.icloud.insurance.domain.entity.UnderwritingAge;
 import com.icloud.insurance.domain.valueobject.InsuranceAggregateValueObject;
 import com.icloud.insurance.model.InsuranceNumber;
-import com.icloud.insurance.model.InsuranceObject;
 import com.icloud.insurance.model.constant.InsuranceNumberConstant;
-import com.icloud.insurance.model.constant.InsuranceObjectConstant;
 
 @Service("insuranceNumberService")
 public class InsuranceNumberService extends SqlBaseService<InsuranceNumber> {

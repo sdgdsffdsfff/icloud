@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.icloud.framework.dao.hibernate.IHibernateBaseDao;
@@ -64,6 +65,7 @@ public class MediaFileService extends SqlBaseService<MediaFile> {
 		return null;
 	}
 
+	@Cacheable(value = "menuCache", key = "'UserMenuKey'+#id")
 	public MediaFile getByHashId(String id) {
 		if (ICloudUtils.isNotNull(id)) {
 			return ICloudUtils.getFirstElement(this.findByProperies(
