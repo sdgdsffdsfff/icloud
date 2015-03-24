@@ -1,0 +1,9 @@
+
+dependencies {
+	compile project(':icloud-common:framework')
+	
+	testCompile libraries.spring_test
+
+	compile libraries.ehcache
+	compile libraries.ehcache_web
+}

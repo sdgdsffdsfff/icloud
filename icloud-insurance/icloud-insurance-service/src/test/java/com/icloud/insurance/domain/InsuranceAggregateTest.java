@@ -26,7 +26,7 @@ public class InsuranceAggregateTest extends BaseTest {
 	@Test
 	public void saveInsuranceProduct() {
 		InsuranceCompanyAggregate company = this.insuranceCompanyAggregateService
-				.getInsuranceCompanyAggregate(14);
+				.getInsuranceCompanyAggregate(25);
 		InsuranceProduct product = new InsuranceProduct();
 		product.setInsuranceName("中民无忧综合意外基本计划-计划一");
 		product.setInsuranceCompany(company.getCompanyName());

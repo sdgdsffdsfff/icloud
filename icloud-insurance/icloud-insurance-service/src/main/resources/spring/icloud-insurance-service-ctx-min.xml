@@ -10,4 +10,5 @@
 	<import resource="classpath*:/spring/icloud-insurance-service-scan.xml" />
 	<import resource="classpath*:/spring/icloud-insurance-service-placeholder.xml" />
 	<import resource="classpath*:/spring/icloud-insurance-service-transaction.xml" />
+	<import resource="classpath*:spring/framework-ehcache-ctx-min.xml" />
 </beans>

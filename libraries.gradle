@@ -122,6 +122,7 @@ ext {
 
     // ehcache
     ehcache:                'net.sf.ehcache:ehcache-core:2.6.5',
+    ehcache_web:	    'net.sf.ehcache:ehcache-web:2.0.4',
 
     /* F */
 

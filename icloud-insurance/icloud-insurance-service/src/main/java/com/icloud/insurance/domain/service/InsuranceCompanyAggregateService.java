@@ -14,8 +14,7 @@ import com.icloud.insurance.model.MediaFile;
 public class InsuranceCompanyAggregateService extends BaseService {
 	public InsuranceCompanyAggregate getInsuranceCompanyAggregate(
 			int aggregateId) {
-		InsuranceAttribute insuranceAttribute = this.insuranceAttributeService
-				.getById(aggregateId);
+		InsuranceAttribute insuranceAttribute = this.insuranceAttributeService.getInsuranceCompany(aggregateId);
 		return InsuranceCompanyAggregate.convertInsuranceCompanyAggregate(
 				insuranceAttribute, this.insuranceAttributeService);
 	}

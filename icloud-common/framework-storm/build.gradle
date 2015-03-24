@@ -8,7 +8,7 @@ buildscript {
 }
 
 version = "1.0-SNAPSHOT"
-group = 'com.travelzen'
+group = 'com.icloud'
 
 jar {
 	baseName =  "framework-storm"

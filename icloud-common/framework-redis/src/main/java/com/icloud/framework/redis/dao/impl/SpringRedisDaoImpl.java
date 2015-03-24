@@ -1,7 +1,7 @@
 /**
  * Aug 29, 2012
  */
-package com.icloud.framework.redis.test.dao.impl;
+package com.icloud.framework.redis.dao.impl;
 
 import java.io.Serializable;
 
@@ -14,7 +14,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Repository;
 
-import com.icloud.framework.redis.test.dao.SpringRedisDao;
+import com.icloud.framework.redis.dao.SpringRedisDao;
 
 /**
  * 

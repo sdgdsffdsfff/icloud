@@ -9,5 +9,7 @@ dependencies {
 	compile libraries.json_lib
 	compile libraries.gson
 	compile libraries.pinyin4j
+	compile libraries.ehcache
+	compile libraries.ehcache_web
 
 }

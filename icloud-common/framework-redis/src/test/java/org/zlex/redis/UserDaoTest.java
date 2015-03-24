@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.icloud.framework.redis.test.dao.SpringRedisDao;
+import com.icloud.framework.redis.dao.SpringRedisDao;
 
 public class UserDaoTest {
 	private ApplicationContext app;

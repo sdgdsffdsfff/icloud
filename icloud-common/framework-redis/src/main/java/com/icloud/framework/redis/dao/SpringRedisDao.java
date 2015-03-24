@@ -1,7 +1,7 @@
 /**
  * Aug 29, 2012
  */
-package com.icloud.framework.redis.test.dao;
+package com.icloud.framework.redis.dao;
 
 import java.io.Serializable;
 
