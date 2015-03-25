@@ -1,46 +1,24 @@
 package com.icloud.insurance.bo;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import com.icloud.framework.util.ICloudUtils;
 import com.icloud.front.user.pojo.UserInfo;
 import com.icloud.insurance.model.User;
 import com.icloud.user.dict.UserConstants;
+import com.icloud.user.util.UserUtils;
 
 public class UserInfoPo extends UserInfo {
 	private String status;
-	private String promotion;
-	private String fatherName;
-	private Integer fatherId;
-	private Integer promotionId;
 	private Integer statusId;
 	private String statusOp;
-	private String promotionOp;
-	private long lastDayCount;
-	private long currentDayCount;
-	private long currentDayValidCount;
-	private long lastDayValidCount;
-
-	public void setAddUser(User user) {
-		if (user.getLevel() == UserConstants.USER_LEVEL_LIMIT) {
-			this.setAddUser(false);
-		} else {
-			this.setAddUser(true);
-		}
-	}
-
-	public static List<Integer> getUserIds(Collection<UserInfoPo> list) {
-		if (ICloudUtils.isEmpty(list)) {
-			return null;
-		}
-		List<Integer> ins = new ArrayList<Integer>();
-		for (UserInfoPo po : list) {
-			ins.add(po.getUserId());
-		}
-		return ins;
-	}
+	private String userType;
+	private String qq;
+	private String sex;
+	private Date createTime;
+	private String chineseName;
 
 	public static UserInfoPo convertUser(User user) {
 		if (ICloudUtils.isNotNull(user)) {
@@ -48,7 +26,6 @@ public class UserInfoPo extends UserInfo {
 			po.setUserId(user.getId());
 			po.setUserName(user.getUserName());
 			po.setEmail(user.getUserEmail());
-			po.setAddUser(user);
 			po.setLevel(user.getLevel());
 			if (user.getOpen() == 1) {
 				po.setStatus("正常");
@@ -59,7 +36,12 @@ public class UserInfoPo extends UserInfo {
 				po.setStatusId(0);
 				po.setStatusOp("启用帐号");
 			}
-
+			po.setUserType(UserConstants.UserType.getById(user.getLevel())
+					.getUserType());
+			po.setQq(user.getQq());
+			po.setCreateTime(user.getCreateTime());
+			po.setSex(UserUtils.getUserSex(user.getUserSex()));
+			po.setChineseName(user.getChinaName());
 			return po;
 		}
 		return null;
@@ -71,38 +53,6 @@ public class UserInfoPo extends UserInfo {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public String getPromotion() {
-		return promotion;
-	}
-
-	public void setPromotion(String promotion) {
-		this.promotion = promotion;
-	}
-
-	public String getFatherName() {
-		return fatherName;
-	}
-
-	public void setFatherName(String fatherName) {
-		this.fatherName = fatherName;
-	}
-
-	public Integer getFatherId() {
-		return fatherId;
-	}
-
-	public void setFatherId(Integer fatherId) {
-		this.fatherId = fatherId;
-	}
-
-	public Integer getPromotionId() {
-		return promotionId;
-	}
-
-	public void setPromotionId(Integer promotionId) {
-		this.promotionId = promotionId;
 	}
 
 	public Integer getStatusId() {
@@ -121,44 +71,57 @@ public class UserInfoPo extends UserInfo {
 		this.statusOp = statusOp;
 	}
 
-	public String getPromotionOp() {
-		return promotionOp;
+	public String getUserType() {
+		return userType;
 	}
 
-	public void setPromotionOp(String promotionOp) {
-		this.promotionOp = promotionOp;
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 
-	public long getLastDayCount() {
-		return lastDayCount;
+	public String getQq() {
+		return qq;
 	}
 
-	public void setLastDayCount(long lastDayCount) {
-		this.lastDayCount = lastDayCount;
+	public void setQq(String qq) {
+		this.qq = qq;
 	}
 
-	public long getCurrentDayCount() {
-		return currentDayCount;
+	public String getSex() {
+		return sex;
 	}
 
-	public void setCurrentDayCount(long currentDayCount) {
-		this.currentDayCount = currentDayCount;
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
-	public long getCurrentDayValidCount() {
-		return currentDayValidCount;
+	public Date getCreateTime() {
+		return createTime;
 	}
 
-	public void setCurrentDayValidCount(long currentDayValidCount) {
-		this.currentDayValidCount = currentDayValidCount;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
-	public long getLastDayValidCount() {
-		return lastDayValidCount;
+	public String getChineseName() {
+		return chineseName;
 	}
 
-	public void setLastDayValidCount(long lastDayValidCount) {
-		this.lastDayValidCount = lastDayValidCount;
+	public void setChineseName(String chineseName) {
+		this.chineseName = chineseName;
+	}
+
+	public static List<UserInfoPo> converUser(List<User> users) {
+		if (ICloudUtils.isEmpty(users)) {
+			return null;
+		}
+		List<UserInfoPo> list = new ArrayList<UserInfoPo>();
+		UserInfoPo po = null;
+		for (User user : users) {
+			po = convertUser(user);
+			list.add(po);
+		}
+		return list;
 	}
 
 }

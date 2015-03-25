@@ -3,13 +3,13 @@
 <div class="us-body">
             <div class="tab_item">
                 <section class="us-query clearfix" style=" padding-top:15px; padding-bottom:5px;">
-                <form action="${basepath}/usertb/tbList" method="post" id="searchBeanForm">
+                <form action="${basepath}/super/userList" method="post" id="searchBeanForm">
                     <table class="us-query-table">
                         <tr>
                             <th>用户名称：</th>
-                            <td><input id="userName" type="text" name="name" style="width:115px;" <#if urlBean??>value="${urlBean.name!""}"</#if>></td>
+                            <td><input id="userName" type="text" name="userName" style="width:115px;" <#if urlBean??>value="${urlBean.name!""}"</#if>></td>
                             <th>用户ID：</th>
-                            <td><input id="userId" type="text" name="name" style="width:115px;" <#if urlBean??>value="${urlBean.name!""}"</#if>></td>
+                            <td><input id="userId" type="text" name="userId" style="width:115px;" <#if urlBean??>value="${urlBean.name!""}"</#if>></td>
                         </tr>
                     </table>
                     <a class="adaptiveButton brightRed_btn" id="searchBeanButton">
@@ -19,16 +19,17 @@
                     </a>
                 </form>
                 </section>
-                <section class="usResult" id="juhuasuanItem">
+                <section class="usResult" id="userItem">
                     <table>
                         <thead>
                             <tr>
-                                <th>链接名称</th>
-                                <th>淘宝链接</th>
-                                <th>转换链接</th>
-                                <th>链接类型</th>
-                                <th>链接状态</th>
-                                <th>修改日期</th>
+                                <th>用户ID</th>
+                                <th>用户名</th>
+                                <th>用户类型</th>
+                                <th>用户邮箱</th>
+                                <th>qq</th>
+                                <th>用户性别</th>
+                                <th>创建日期</th>
                                 <th>操作</th>
                             </tr>
                         </thead>

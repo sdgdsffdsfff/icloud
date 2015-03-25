@@ -68,14 +68,14 @@ public class UserInfo {
 	}
 
 	public boolean isSuper() {
-		if (this.level == UserConstants.SUPER_USER)
+		if (this.level == UserConstants.UserType.SUPER_USER.getId())
 			return true;
 		return false;
 	}
 
 	public boolean isProxy() {
-		if (this.level == UserConstants.SUPER_USER
-				|| this.level == UserConstants.POXY_USER) {
+		if (this.level == UserConstants.UserType.SUPER_USER.getId()
+				|| this.level == UserConstants.UserType.POXY_USER.getId()) {
 			return true;
 		}
 		return false;

@@ -1,6 +1,7 @@
 package com.icloud.insurance.service;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -8,6 +9,7 @@ import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.icloud.framework.core.wrapper.Pagination;
 import com.icloud.framework.dao.hibernate.IHibernateBaseDao;
 import com.icloud.framework.logger.ri.RequestIdentityLogger;
 import com.icloud.framework.service.impl.SqlBaseService;
@@ -16,6 +18,8 @@ import com.icloud.framework.util.StringEncoder;
 import com.icloud.front.user.pojo.LoginUser;
 import com.icloud.front.user.pojo.RegisterUser;
 import com.icloud.front.user.pojo.UserInfo;
+import com.icloud.front.user.pojo.UserQueryBean;
+import com.icloud.insurance.bo.UserInfoPo;
 import com.icloud.insurance.dao.UserDao;
 import com.icloud.insurance.model.User;
 import com.icloud.insurance.model.constant.UserConstant;
@@ -164,7 +168,7 @@ public class UserService extends SqlBaseService<User> {
 					user.setUserTel(registerUser.getTelphone());
 					user.setQq(registerUser.getQq());
 					user.setOpen(UserConstants.OPEN_USER_OPER);
-					user.setLevel(UserConstants.NORMAL_USER);
+					user.setLevel(UserConstants.UserType.NORMAL_USER.getId());
 					return this.save(user);
 				}
 			}
@@ -227,5 +231,59 @@ public class UserService extends SqlBaseService<User> {
 				return true;
 		}
 		return false;
+	}
+
+	public Pagination<UserInfoPo> queryUserList(int pageNo, int limit) {
+		Pagination<UserInfoPo> pagination = Pagination.getInstance(pageNo,
+				limit);
+		long count = this.count();
+		pagination.setTotalItemCount(count);
+		List<User> resultList = this.findAll(pagination.getStart(),
+				pagination.getPageSize());
+		pagination.setData(UserInfoPo.converUser(resultList));
+		pagination.build();
+		return pagination;
+	}
+
+	public Pagination<UserInfoPo> queryUserListByUserId(String userId,
+			int pageNo, int limit) {
+		int id = ICloudUtils.parseInt(userId, -1);
+		Pagination<UserInfoPo> pagination = Pagination.getInstance(pageNo,
+				limit);
+		long count = this.countByProperties(UserConstant.ID, id);
+		pagination.setTotalItemCount(count);
+		List<User> resultList = this.findByProperties(UserConstant.ID, id,
+				pagination.getStart(), pagination.getPageSize());
+		pagination.setData(UserInfoPo.converUser(resultList));
+		pagination.build();
+		return pagination;
+	}
+
+	public Pagination<UserInfoPo> queryUserListByUserName(String userName,
+			int pageNo, int limit) {
+		Pagination<UserInfoPo> pagination = Pagination.getInstance(pageNo,
+				limit);
+		long count = this.countByProperties(UserConstant.USERNAME, userName);
+		pagination.setTotalItemCount(count);
+		List<User> resultList = this.findByProperties(UserConstant.USERNAME,
+				userName, pagination.getStart(), pagination.getPageSize());
+		pagination.setData(UserInfoPo.converUser(resultList));
+		pagination.build();
+		return pagination;
+	}
+
+	public Pagination<UserInfoPo> queryUserList(UserQueryBean userBean) {
+		if (ICloudUtils.isNotNull(userBean)) {
+			if (ICloudUtils.isNotNull(userBean.getUserId())) {
+				return queryUserListByUserId(userBean.getUserId(),
+						userBean.getPageNo(), userBean.getLimit());
+			}
+			if (ICloudUtils.isNotNull(userBean.getUserName())) {
+				return queryUserListByUserName(userBean.getUserName(),
+						userBean.getPageNo(), userBean.getLimit());
+			}
+		}
+		return queryUserList(userBean.getPageNo(), userBean.getLimit());
+
 	}
 }
