@@ -33,7 +33,26 @@
                                 <th>操作</th>
                             </tr>
                         </thead>
+                        <#if pagination.data??>
+                         <#list pagination.data as userInfo>
+                         <tr>
+                            <td>${userInfo.userId}</td>
+                            <td>${userInfo.userName!""}</td>
+                            <td>${userInfo.userType!""}</td>
+                            <td>${userInfo.email!""}</td>
+                            <td>${userInfo.qq!""}</td>
+                            <td>${userInfo.sex!""}</td>
+                            <td>${userInfo.createTime?string('yyyy-MM-dd HH:mm')}</td>
+                            <td><a href="javascript:void(0)" onclick="pauseUser('${userInfo.userId}','${userInfo.statusId}');">${userInfo.statusOp}</a>&nbsp;&nbsp;
+                            <#if userInfo.promotionOp??>
+                            <a href="javascript:void(0)" onclick="promoteUser('${userInfo.userId}','${userInfo.promotionId}');">${userInfo.promotionOp}</a>
+                            </#if>
+                            </td>
+                        </tr> 
+                         </#list>
+                         </#if>
                     </table>
+                    <span>没有数据</span>
                 </section>
             </div>
         </div>
