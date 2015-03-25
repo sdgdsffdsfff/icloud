@@ -10,7 +10,6 @@ import com.icloud.insurance.model.User;
 import com.icloud.user.dict.UserConstants;
 
 public class UserInfoPo extends UserInfo {
-	private String level;
 	private String status;
 	private String promotion;
 	private String fatherName;
@@ -50,7 +49,7 @@ public class UserInfoPo extends UserInfo {
 			po.setUserName(user.getUserName());
 			po.setEmail(user.getUserEmail());
 			po.setAddUser(user);
-			po.setLevel(user.getLevel() + "级代理");
+			po.setLevel(user.getLevel());
 			if (user.getOpen() == 1) {
 				po.setStatus("正常");
 				po.setStatusId(1);
@@ -64,14 +63,6 @@ public class UserInfoPo extends UserInfo {
 			return po;
 		}
 		return null;
-	}
-
-	public String getLevel() {
-		return level;
-	}
-
-	public void setLevel(String level) {
-		this.level = level;
 	}
 
 	public String getStatus() {

@@ -8,12 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icloud.framework.util.ICloudUtils;
-import com.icloud.front.common.utils.ICloudUserContextHolder;
 import com.icloud.front.user.pojo.LoginUser;
-import com.icloud.front.user.pojo.RegisterUser;
 import com.icloud.front.user.utils.ICloudMemberUtils;
 import com.icloud.insurance.model.User;
-import com.icloud.user.dict.UserConstants;
 
 /**
  * @comment

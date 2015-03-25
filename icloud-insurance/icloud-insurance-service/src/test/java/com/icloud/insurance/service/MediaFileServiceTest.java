@@ -10,7 +10,6 @@ import com.icloud.insurance.model.MediaFile;
 
 public class MediaFileServiceTest extends BaseTest {
 
-
 	@Test
 	public void findTest() {
 		// List<MediaFile> list = this.mediaFileService.findAll();
@@ -30,8 +29,10 @@ public class MediaFileServiceTest extends BaseTest {
 
 	@Test
 	public void fileTest() {
-		String id = "916dfa45610e606ec79a2cb1a14a4387";
+		String id = "c45585ce0cfa1f537edbd7970ccbaa94";
 		MediaFile file = mediaFileService.getByHashId(id);
 		System.out.println(file.getFileName());
+		file = mediaFileService.getByHashId(id);
+		System.out.println(file.getFileName() + "2222222");
 	}
 }

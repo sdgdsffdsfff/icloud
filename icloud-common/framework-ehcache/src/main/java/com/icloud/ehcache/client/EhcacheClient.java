@@ -33,7 +33,7 @@ public class EhcacheClient {
 		EhCacheCacheManager ehCacheManager = (EhCacheCacheManager) app
 				.getBean("cacheManager");
 		cacheManager = ehCacheManager.getCacheManager();
-		cache = cacheManager.getCache("com.icloud.MethodCache");
+		cache = cacheManager.getCache("com.icloud.singleIcloudCache");
 	}
 
 	public void save(String key, Object value) {

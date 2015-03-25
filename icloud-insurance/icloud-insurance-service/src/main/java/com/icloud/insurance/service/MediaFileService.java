@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -65,13 +66,19 @@ public class MediaFileService extends SqlBaseService<MediaFile> {
 		return null;
 	}
 
-	@Cacheable(value = "menuCache", key = "'UserMenuKey'+#id")
+	@Cacheable(value = "com.icloud.icloudCache", key = "'image'+#id")
 	public MediaFile getByHashId(String id) {
+		System.out.println("no cache");
 		if (ICloudUtils.isNotNull(id)) {
 			return ICloudUtils.getFirstElement(this.findByProperies(
 					MediaFileConstant.FILEHASHID, id));
 		}
 		return null;
+	}
+
+	@CacheEvict(value = "com.icloud.icloudCache", key = "'image'+#file.getFileHashId()")
+	public void delete(MediaFile file) {
+		this.deleteById(file.getId());
 	}
 
 	public boolean exits(String id) {

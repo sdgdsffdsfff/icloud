@@ -16,10 +16,10 @@ import com.icloud.framework.util.StringEncoder;
 import com.icloud.front.user.pojo.LoginUser;
 import com.icloud.front.user.pojo.RegisterUser;
 import com.icloud.front.user.pojo.UserInfo;
-import com.icloud.insurance.annonation.SystemControllerLog;
 import com.icloud.insurance.dao.UserDao;
 import com.icloud.insurance.model.User;
 import com.icloud.insurance.model.constant.UserConstant;
+import com.icloud.user.dict.UserConstants;
 import com.icloud.user.util.UserUtils;
 
 @Service("userService")
@@ -34,7 +34,7 @@ public class UserService extends SqlBaseService<User> {
 	protected IHibernateBaseDao<User> getDao() {
 		return userDao;
 	}
-	
+
 	public User getUserByUserName(String userName) {
 		return ICloudUtils.getFirstElement(this.userDao.findByProperty(
 				UserConstant.USERNAME, userName));
@@ -163,8 +163,8 @@ public class UserService extends SqlBaseService<User> {
 							.getUsersex()));
 					user.setUserTel(registerUser.getTelphone());
 					user.setQq(registerUser.getQq());
-					user.setOpen(UserConstant.OPEN_USER_OPER);
-					user.setLevel(UserConstant.NORMAL_USER);
+					user.setOpen(UserConstants.OPEN_USER_OPER);
+					user.setLevel(UserConstants.NORMAL_USER);
 					return this.save(user);
 				}
 			}

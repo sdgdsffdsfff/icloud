@@ -8,4 +8,5 @@
 	<context:component-scan base-package="com.icloud.front.action" />
 	<context:component-scan base-package="com.icloud.front.user.action" />
 	<context:component-scan base-package="com.icloud.front.foundation.action" />
+	<context:component-scan base-package="com.icloud.front.insurance.action" />
 </beans>

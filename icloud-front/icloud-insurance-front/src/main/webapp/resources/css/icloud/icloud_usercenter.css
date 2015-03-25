@@ -263,6 +263,7 @@
 /** us-content start */
 .us-content {
 	margin-left: 190px;
+	min-height: 410px;
 }
 
 .us-body {
@@ -345,7 +346,7 @@
 	background-color: #fff;
 }
 
-.amendPwSucceed,.amendPwDefeated {
+.amendPwSucceed, .amendPwDefeated {
 	padding: 25px;
 	background: #fafadb;
 	font-size: 16px;
@@ -389,7 +390,7 @@
 	padding: 12px
 }
 
-.tabPanel td,.addstaff td {
+.tabPanel td, .addstaff td {
 	padding: 5px 0;
 	height: 30px;
 	color: #636363
@@ -483,84 +484,160 @@ i.ico_shengcangguidign {
 	height: 33px;
 }
 /*****************************组织架构***********************************/
-#addRoleContainer td{padding:5px 0}
-.role li{border-bottom:1px dashed #ccc;padding-bottom:5px;margin-bottom:10px}
-.role li div{padding:10px 0 0 17px}
-.role label{min-width:80px;display:inline-block;padding-bottom:5px}
-
-
-.usResult th{
-    line-height:20px;
-    background-color:#F8F8F8;
-    border-bottom:1px solid #E4E4E4;
-    padding:10px 5px;
-    color:#404040;
-    text-align: left;
-}
-.usResult td{
-    line-height:20px;
-    color:#636363;
-    padding:13px 3px;
-    border-bottom:1px dashed #E4E4E4;
+#addRoleContainer td {
+	padding: 5px 0
 }
 
-.usResult{
-    padding:10px;
-    padding-bottom:0;
+.role li {
+	border-bottom: 1px dashed #ccc;
+	padding-bottom: 5px;
+	margin-bottom: 10px
+}
+
+.role li div {
+	padding: 10px 0 0 17px
+}
+
+.role label {
+	min-width: 80px;
+	display: inline-block;
+	padding-bottom: 5px
+}
+
+.usResult th {
+	line-height: 20px;
+	background-color: #F8F8F8;
+	border-bottom: 1px solid #E4E4E4;
+	padding: 10px 5px;
+	color: #404040;
+	text-align: left;
+}
+
+.usResult td {
+	line-height: 20px;
+	color: #636363;
+	padding: 13px 3px;
+	border-bottom: 1px dashed #E4E4E4;
+}
+
+.usResult {
+	padding: 10px;
+	padding-bottom: 0;
 }
 /****** us-query**/
-.us-query{
-    padding:20px 10px;
+.us-query {
+	padding: 20px 10px;
 }
-.us-query .brightRed_btn{
-    margin-top:15px;
+
+.us-query .brightRed_btn {
+	margin-top: 1px;
 }
-.us-query-table{
-    float:left;
+
+.us-query-table {
+	float: left;
 }
-.us-query-table s{
-    display:inline-block;
-    width:18px;
-    text-align:center;
+
+.us-query-table s {
+	display: inline-block;
+	width: 18px;
+	text-align: center;
 }
-.us-query-table th{
-    white-space: nowrap;
-    color:#636363;
-    text-align:right;
-    padding:5px 0;
+
+.us-query-table th {
+	white-space: nowrap;
+	color: #636363;
+	text-align: right;
+	padding: 5px 0;
 }
-.us-query-table td{
-    padding:5px 0;
-    padding-right:20px;
+
+.us-query-table td {
+	padding: 5px 0;
+	padding-right: 20px;
 }
-.us-query-table .statusList label{
-	padding:0 3px 3px;
-	width:80px;
-	display:inline-block;
-	overflow:hidden;
-	text-overflow:ellipsis;
-	white-space:nowrap;
-	color:#636363;
+
+.us-query-table .statusList label {
+	padding: 0 3px 3px;
+	width: 80px;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: #636363;
 }
 
 /* 通用翻页*/
-.pagination,.paging{ margin:10px 0;}
-.pagination div,.paging div{ float:right; height:30px; line-height:30px;}
-.pagination div em,.paging div em{ color:#e94749; font-weight:bold;}
-.pagination ul,.paging ul{ margin:0 10px 0 5px; float:right;}
-.pagination ul li,.paging ul li{ float:left; margin-left:10px;}
-.pagination ul li a,.paging ul li a{ display:inline-block; padding:5px 8px; border:1px solid #ccd5de; color:#e94749;}
-.pagination ul li a:hover,.pagination .present,.paging .present{ color:#fff; text-decoration:none; cursor:pointer; background:#e94749; border:1px solid #e94749;}
-.pagination ul li span,.paging ul li span{ color:#e94749;}
-.pagination .disabled{ color:#ccd5de;}
-.pagination .disabled:hover{ color:#ccd5de; background:none; border:1px solid #ccd5de; cursor:default;}
-.paging ul li a:hover{ background:#f6f6f6; text-decoration:none; color:#e94749;}
-.paging .present:hover{ background:#e94749; color:#fff;}
+.pagination, .paging {
+	margin: 10px 0;
+}
 
-.usResult table{ width:100%;}
+.pagination div, .paging div {
+	float: right;
+	height: 30px;
+	line-height: 30px;
+}
+
+.pagination div em, .paging div em {
+	color: #e94749;
+	font-weight: bold;
+}
+
+.pagination ul, .paging ul {
+	margin: 0 10px 0 5px;
+	float: right;
+}
+
+.pagination ul li, .paging ul li {
+	float: left;
+	margin-left: 10px;
+}
+
+.pagination ul li a, .paging ul li a {
+	display: inline-block;
+	padding: 5px 8px;
+	border: 1px solid #ccd5de;
+	color: #e94749;
+}
+
+.pagination ul li a:hover, .pagination .present, .paging .present {
+	color: #fff;
+	text-decoration: none;
+	cursor: pointer;
+	background: #e94749;
+	border: 1px solid #e94749;
+}
+
+.pagination ul li span, .paging ul li span {
+	color: #e94749;
+}
+
+.pagination .disabled {
+	color: #ccd5de;
+}
+
+.pagination .disabled:hover {
+	color: #ccd5de;
+	background: none;
+	border: 1px solid #ccd5de;
+	cursor: default;
+}
+
+.paging ul li a:hover {
+	background: #f6f6f6;
+	text-decoration: none;
+	color: #e94749;
+}
+
+.paging .present:hover {
+	background: #e94749;
+	color: #fff;
+}
+
+.usResult table {
+	width: 100%;
+}
 
 /** i ucnav end */
-input[type=text],input[type=password] {
+input[type=text], input[type=password] {
 	border: 1px solid #ABADB3;
 	height: 23px;
 	width: 134px;

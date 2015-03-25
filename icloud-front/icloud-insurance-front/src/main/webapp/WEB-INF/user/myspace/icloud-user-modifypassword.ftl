@@ -1,9 +1,5 @@
-<#import "/icloud/icloud-main-container.ftl" as imc/>
-<#import "/user/user-template/user-center-menus.ftl" as ucm/>
-<@imc.mainContainer jsFiles=['common/jquery.validate.js','common/messages_cn.js','user/updatepwd.js'] cssFiles=['icloud/icloud_usercenter.css'] >
-<@ucm.userCenterMenus current="密码管理"/>
-<main class="us-content">
-    <h3 class="modifyPayPw">密码管理</h3>
+<#import "/user/user-template/icloud-user-base-template.ftl" as iubt/>
+<@iubt.baseHtml current="密码管理" jsFiles=['common/jquery.validate.js','common/messages_cn.js','user/updatepwd.js'] cssFiles=[] >
     <#if (successModifyPw)??>
     <h2 class="amendPwSucceed">
         <em></em>密码修改成功！</h2>
@@ -51,5 +47,4 @@
         </table>
     </div>
     </form>
-</main>
-</@imc.mainContainer>
+</@iubt.baseHtml>

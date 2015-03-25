@@ -1,9 +1,5 @@
-<#import "/icloud/icloud-main-container.ftl" as imc/>
-<#import "/user/user-template/user-center-menus.ftl" as ucm/>
-<@imc.mainContainer jsFiles=['common/jquery.validate.js','common/messages_cn.js','user/userinfomanager.js'] cssFiles=['icloud/icloud_usercenter.css'] >
-<@ucm.userCenterMenus current="信息维护"/>
-<main class="us-content">
-    <h1 class="us-title">信息维护</h1>
+<#import "/user/user-template/icloud-user-base-template.ftl" as iubt/>
+<@iubt.baseHtml current="信息维护" jsFiles=['common/jquery.validate.js','common/messages_cn.js','user/userinfomanager.js'] cssFiles=[] >
     <div class="us-body">
         <aside>
             <ul class="tab_change clearfix">
@@ -102,5 +98,4 @@
             </form>
         </div>
     </div>
-</main>
-</@imc.mainContainer>
+</@iubt.baseHtml>

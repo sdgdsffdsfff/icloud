@@ -17,6 +17,8 @@
 	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"
 		p:cacheManager-ref="cacheManagerFactory" />
 
-	<bean id="methodCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
-		p:cacheManager-ref="cacheManagerFactory" p:cacheName="com.icloud.MethodCache" />
+
+	<bean id="icloudCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
+		p:cacheManager-ref="cacheManagerFactory" p:cacheName="com.icloud.icloudCache" />
+		 
 </beans>

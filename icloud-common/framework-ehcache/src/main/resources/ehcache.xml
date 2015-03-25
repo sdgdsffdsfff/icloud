@@ -4,7 +4,11 @@
 		overflowToDisk="true" timeToIdleSeconds="500" timeToLiveSeconds="1000"
 		diskPersistent="false" diskExpiryThreadIntervalSeconds="120" />
 
-	<cache name="com.icloud.MethodCache" maxElementsInMemory="10"
+	<cache name="com.icloud.icloudCache" maxElementsInMemory="10"
+		eternal="false" timeToIdleSeconds="200" timeToLiveSeconds="300"
+		overflowToDisk="true" />
+
+	<cache name="com.icloud.singleIcloudCache" maxElementsInMemory="10"
 		eternal="false" timeToIdleSeconds="200" timeToLiveSeconds="300"
 		overflowToDisk="true" />
 </ehcache>  

@@ -1,6 +1,5 @@
 <#import "/icloud/icloud-main-container.ftl" as imc/>
 <#import "/user/user-template/user-center-menus.ftl" as ucm/>
-
 <#import "/icloud/pageView.ftl" as pView/>
 <@imc.mainContainer current="短链接"  jsFiles=['layer/layer.min.js','user/userop.js'] cssFiles=['icloud/icloud_usercenter.css',"icloud/stock.css"] >
 <@ucm.userCenterMenus current="成员名单"/>

@@ -40,6 +40,9 @@ public class LogOnInterCeptor implements HandlerInterceptor {
 				.getValue());
 		info = userService.fillUserInfo(info);
 		if (!ICloudUtils.isNotNull(info)) { // 如果没有登陆，返回登陆页面
+			/**
+			 * 检查权限，这个地方需要权限处理，注意
+			 */
 			response.sendRedirect(request.getContextPath() + "/" + redirectUrl);
 			return false;
 		}
