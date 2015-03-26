@@ -2,6 +2,7 @@ package com.icloud.front.insurance.action;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icloud.framework.core.wrapper.PageView;
@@ -32,6 +33,7 @@ public class SuperManagerController extends BaseController {
 		if (!ICloudUtils.isNotNull(userBean)) {
 			userBean = new UserQueryBean();
 		}
+		model.addObject("userBean", userBean);
 		Pagination<UserInfoPo> pagination = this.userService
 				.queryUserList(userBean);
 		if (ICloudUtils.isNotNull(pagination)) {
@@ -40,6 +42,18 @@ public class SuperManagerController extends BaseController {
 			model.addObject("pageView", pageView);
 		}
 		return model;
+	}
+
+	@RequestMapping("/changeUserType")
+	@ResponseBody
+	public boolean changeUserType(String userId, String opId) {
+		logger.info("{} to {}", userId, opId);
+		if (ICloudUtils.isNotNull(userId) && ICloudUtils.isNotNull(opId)) {
+			int uId = ICloudUtils.parseInt(userId, -1);
+			int oId = ICloudUtils.parseInt(opId, -1);
+			this.userService.changeUserType(uId, oId);
+		}
+		return true;
 	}
 
 }

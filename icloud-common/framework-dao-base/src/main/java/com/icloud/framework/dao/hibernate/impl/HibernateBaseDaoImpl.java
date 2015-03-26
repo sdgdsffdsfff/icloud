@@ -119,8 +119,9 @@ public class HibernateBaseDaoImpl<T> extends HibernateDaoSupport implements
 
 	public long countByProperty(String paramname, Object value) {
 		String hql = "select count(*) from " + domainClass.getName()
-				+ " as model where model." + paramname + "=" + value;
-		return count(hql);
+				+ " as model where model." + paramname + " = ?";// + value;
+		Object[] objects = { value };
+		return count(hql, objects);
 	}
 
 	public List<T> findByPropertyNoLazy(final String hql, final int start,

@@ -20,6 +20,8 @@ import com.icloud.insurance.service.UserService;
  */
 public class LogOnInterCeptor implements HandlerInterceptor {
 	private String redirectUrl = null;
+	private String denyUrl = null;
+	private String[] proxys = null;
 
 	@Resource(name = "userService")
 	protected UserService userService;
@@ -27,6 +29,10 @@ public class LogOnInterCeptor implements HandlerInterceptor {
 	public void setRedirectUrl(String redirectUrl) {
 
 		this.redirectUrl = redirectUrl;
+	}
+
+	public void setDenyUrl(String denyUrl) {
+		this.denyUrl = denyUrl;
 	}
 
 	/**
@@ -45,8 +51,21 @@ public class LogOnInterCeptor implements HandlerInterceptor {
 			 */
 			response.sendRedirect(request.getContextPath() + "/" + redirectUrl);
 			return false;
+		} else {
+			if (info.isSuper()) {
+				return true;
+			} else {
+				String requestUrl = request.getServletPath();
+				if (DenyUtils.isIllegal(info, requestUrl)) {
+					return true;
+				} else {
+					response.sendRedirect(request.getContextPath() + "/"
+							+ denyUrl);
+					return false;
+				}
+			}
 		}
-		return true;
+		// return true;
 	}
 
 	@Override

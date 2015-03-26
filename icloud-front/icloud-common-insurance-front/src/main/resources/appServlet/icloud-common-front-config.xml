@@ -80,13 +80,16 @@
 					<bean class="com.icloud.front.common.freemarker.DigitalGetter"></bean>
 				</entry>
 				<entry key="getPageUrl">
-					<bean class="com.icloud.front.common.freemarker.PageUrlGetter"></bean>
+					<bean class="com.icloud.front.common.freemarker.StockPageUrlGetter"></bean>
 				</entry>
 				<entry key="currentUserInfo">
 					<bean class="com.icloud.front.common.freemarker.CurrentUserInfoGetter"></bean>
 				</entry>
 				<entry key="selectValues">
 					<bean class="com.icloud.front.common.freemarker.SelectValuesGetter"></bean>
+				</entry>
+				<entry key="staticValues">
+					<bean class="com.icloud.front.common.freemarker.StaticValuesGetter"></bean>
 				</entry>
 				<entry key="stringUtils">
 					<bean class="com.icloud.front.common.freemarker.StringUtilsGetter"></bean>
@@ -120,12 +123,8 @@
 			<mvc:mapping path="/user/*" />
 			<mvc:mapping path="/usertb/*" />
 			<mvc:mapping path="/userpt/*" />
-			<mvc:mapping path="/super/*" />
-			<mvc:mapping path="/proxy/*" />
-			<mvc:mapping path="/insurance/*" />
 			<bean class="com.icloud.front.common.interceptor.LogOnInterCeptor">
 				<property name="redirectUrl" value="facade/icloudLogin"></property>
-				<property name="denyUrl" value="/user/error"></property>
 			</bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

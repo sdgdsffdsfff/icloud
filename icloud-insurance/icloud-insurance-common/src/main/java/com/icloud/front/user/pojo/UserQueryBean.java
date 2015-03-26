@@ -3,8 +3,9 @@ package com.icloud.front.user.pojo;
 public class UserQueryBean {
 	private String userId;
 	private String userName;
+	private String userType;
 	private int pageNo;
-	private int limit = 40;
+	private int limit = 3;
 
 	public String getUserId() {
 		return userId;
@@ -37,5 +38,14 @@ public class UserQueryBean {
 	public void setLimit(int limit) {
 		this.limit = limit;
 	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+	
 
 }

@@ -11,9 +11,10 @@ import com.icloud.user.dict.UserConstants;
 import com.icloud.user.util.UserUtils;
 
 public class UserInfoPo extends UserInfo {
-	private String status;
-	private Integer statusId;
-	private String statusOp;
+	private String upGrade;
+	private int upGradeId;
+	private String downGrade;
+	private int downGradeId;
 	private String userType;
 	private String qq;
 	private String sex;
@@ -27,17 +28,24 @@ public class UserInfoPo extends UserInfo {
 			po.setUserName(user.getUserName());
 			po.setEmail(user.getUserEmail());
 			po.setLevel(user.getLevel());
-			if (user.getOpen() == 1) {
-				po.setStatus("正常");
-				po.setStatusId(1);
-				po.setStatusOp("暂停运行");
-			} else {
-				po.setStatus("暂停服务");
-				po.setStatusId(0);
-				po.setStatusOp("启用帐号");
-			}
 			po.setUserType(UserConstants.UserType.getById(user.getLevel())
 					.getUserType());
+			if (po.isSuper()) {
+				po.setUpGrade("转中介");
+				po.setUpGradeId(UserConstants.UserType.POXY_USER.getId());
+				po.setDownGrade("转普通");
+				po.setDownGradeId(UserConstants.UserType.NORMAL_USER.getId());
+			} else if (po.isProxy()) {
+				po.setUpGrade("升管理员");
+				po.setUpGradeId(UserConstants.UserType.SUPER_USER.getId());
+				po.setDownGrade("转普通");
+				po.setDownGradeId(UserConstants.UserType.NORMAL_USER.getId());
+			} else {
+				po.setUpGrade("升管理员");
+				po.setUpGradeId(UserConstants.UserType.SUPER_USER.getId());
+				po.setDownGrade("转中介");
+				po.setDownGradeId(UserConstants.UserType.POXY_USER.getId());
+			}
 			po.setQq(user.getQq());
 			po.setCreateTime(user.getCreateTime());
 			po.setSex(UserUtils.getUserSex(user.getUserSex()));
@@ -47,28 +55,36 @@ public class UserInfoPo extends UserInfo {
 		return null;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getUpGrade() {
+		return upGrade;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setUpGrade(String upGrade) {
+		this.upGrade = upGrade;
 	}
 
-	public Integer getStatusId() {
-		return statusId;
+	public String getDownGrade() {
+		return downGrade;
 	}
 
-	public void setStatusId(Integer statusId) {
-		this.statusId = statusId;
+	public int getUpGradeId() {
+		return upGradeId;
 	}
 
-	public String getStatusOp() {
-		return statusOp;
+	public void setUpGradeId(int upGradeId) {
+		this.upGradeId = upGradeId;
 	}
 
-	public void setStatusOp(String statusOp) {
-		this.statusOp = statusOp;
+	public int getDownGradeId() {
+		return downGradeId;
+	}
+
+	public void setDownGradeId(int downGradeId) {
+		this.downGradeId = downGradeId;
+	}
+
+	public void setDownGrade(String downGrade) {
+		this.downGrade = downGrade;
 	}
 
 	public String getUserType() {

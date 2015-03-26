@@ -1,4 +1,5 @@
 include 'icloud-front:icloud-common-front'
+include 'icloud-front:icloud-common-insurance-front'
 include 'icloud-front:icloud-common-security'
 include 'icloud-front:icloud-stock-front'
 include 'icloud-front:icloud-insurance-front'

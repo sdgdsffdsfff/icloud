@@ -1,5 +1,6 @@
 package com.icloud.insurance.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +25,7 @@ import com.icloud.insurance.dao.UserDao;
 import com.icloud.insurance.model.User;
 import com.icloud.insurance.model.constant.UserConstant;
 import com.icloud.user.dict.UserConstants;
+import com.icloud.user.dict.UserConstants.UserType;
 import com.icloud.user.util.UserUtils;
 
 @Service("userService")
@@ -187,6 +189,7 @@ public class UserService extends SqlBaseService<User> {
 				} else {
 					info.setOpen(false);
 				}
+				info.setLevel(user.getLevel());
 				return info;
 			}
 		}
@@ -247,13 +250,21 @@ public class UserService extends SqlBaseService<User> {
 
 	public Pagination<UserInfoPo> queryUserListByUserId(String userId,
 			int pageNo, int limit) {
-		int id = ICloudUtils.parseInt(userId, -1);
+		String[] params = { UserConstant.ID };
+		Object[] values = { ICloudUtils.parseInt(userId, -1) };
+		return queryUserList(params, values, pageNo, limit);
+	}
+
+	public Pagination<UserInfoPo> queryUserList(String[] params,
+			Object[] values, int pageNo, int limit) {
+
 		Pagination<UserInfoPo> pagination = Pagination.getInstance(pageNo,
 				limit);
-		long count = this.countByProperties(UserConstant.ID, id);
+		long count = this.countByProperty(params, values);
 		pagination.setTotalItemCount(count);
-		List<User> resultList = this.findByProperties(UserConstant.ID, id,
-				pagination.getStart(), pagination.getPageSize());
+		List<User> resultList = this.findByProperty(params, values,
+				UserConstant.ID, true, pagination.getStart(),
+				pagination.getPageSize());
 		pagination.setData(UserInfoPo.converUser(resultList));
 		pagination.build();
 		return pagination;
@@ -261,29 +272,46 @@ public class UserService extends SqlBaseService<User> {
 
 	public Pagination<UserInfoPo> queryUserListByUserName(String userName,
 			int pageNo, int limit) {
-		Pagination<UserInfoPo> pagination = Pagination.getInstance(pageNo,
-				limit);
-		long count = this.countByProperties(UserConstant.USERNAME, userName);
-		pagination.setTotalItemCount(count);
-		List<User> resultList = this.findByProperties(UserConstant.USERNAME,
-				userName, pagination.getStart(), pagination.getPageSize());
-		pagination.setData(UserInfoPo.converUser(resultList));
-		pagination.build();
-		return pagination;
+		String[] params = { UserConstant.USERNAME };
+		Object[] values = { userName };
+		return queryUserList(params, values, pageNo, limit);
 	}
 
 	public Pagination<UserInfoPo> queryUserList(UserQueryBean userBean) {
 		if (ICloudUtils.isNotNull(userBean)) {
+			List<String> params = new ArrayList<String>();
+			List<Object> values = new ArrayList<Object>();
 			if (ICloudUtils.isNotNull(userBean.getUserId())) {
-				return queryUserListByUserId(userBean.getUserId(),
-						userBean.getPageNo(), userBean.getLimit());
+				params.add(UserConstant.ID);
+				values.add(ICloudUtils.parseInt(userBean.getUserId(), -1));
 			}
-			if (ICloudUtils.isNotNull(userBean.getUserName())) {
-				return queryUserListByUserName(userBean.getUserName(),
+			if (ICloudUtils.isNotNull(userBean.getUserId())) {
+				params.add(UserConstant.USERNAME);
+				values.add(ICloudUtils.parseInt(userBean.getUserName(), -1));
+			}
+			if (ICloudUtils.isNotNull(userBean.getUserType())) {
+				if (-1 != ICloudUtils.parseInt(userBean.getUserType(), -1)) {
+					params.add(UserConstant.LEVEL);
+					values.add(ICloudUtils.parseInt(userBean.getUserType(), -1));
+				}
+			}
+			if (params.size() > 0) {
+				String[] a = new String[params.size()];
+				return queryUserList(params.toArray(a), values.toArray(),
 						userBean.getPageNo(), userBean.getLimit());
 			}
 		}
 		return queryUserList(userBean.getPageNo(), userBean.getLimit());
 
+	}
+	
+	@Transactional
+	public void changeUserType(int uId, int oId) {
+		User user = this.getById(uId);
+		UserType userType = UserConstants.UserType.getById(oId);
+		if (ICloudUtils.isNotNull(user)) {
+			user.setLevel(userType.getId());
+			this.update(user);
+		}
 	}
 }

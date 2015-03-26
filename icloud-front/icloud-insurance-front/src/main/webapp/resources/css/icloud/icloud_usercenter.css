@@ -644,3 +644,52 @@ input[type=text], input[type=password] {
 	padding: 0 2px;
 	line-height: 23px \9;
 }
+/** 翻页 **/
+.pageList {
+	display: block;
+}
+
+.pager-wrapper {
+	overflow: hidden;
+	zoom: 1;
+	padding: 20px 0;
+}
+
+.pageList ul.pager {
+	float: right;
+}
+
+.pageList ul.pager li {
+	float: left;
+	margin: 0 0 0 8px;
+	padding: 0;
+	font-size: 15px;
+	line-height: 22px;
+	border: none;
+	position: relative;
+	text-align: center;
+}
+
+.pageList ul.pager li a {
+	display: inline-block;
+	width: 22px;
+	height: 30px;
+	color: #646464;
+	padding: 4px 10px;
+}
+
+.pageList ul.pager li.last a, .pageList ul.pager li.next a {
+	display: inline-block;
+	background: #e4e4e4;
+	width: 40px;
+	height: 30px;
+	padding: 0;
+	font-size: 12px;
+	padding: 4px 10px;
+}
+
+.pageList ul.pager li a:hover, .pageList ul.pager li.active a {
+	text-decoration: none;
+	color: #0055A2;
+	background-color: #f8f8f8;
+}

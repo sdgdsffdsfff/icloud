@@ -81,4 +81,10 @@ public class UserInfo {
 		return false;
 	}
 
+	public boolean isNormal() {
+		if (this.level == UserConstants.UserType.NORMAL_USER.getId())
+			return true;
+		return false;
+	}
+
 }
